@@ -14,10 +14,8 @@ public class WowController {
 		return new ModelAndView("pdh-view/home");
 	}
 	
-	@GetMapping("join")
-	public ModelAndView join(VO vo) {
-		ModelAndView mv = new ModelAndView("pdh-view/pdh");
-		mv.addObject("70만원 키보드", 사고싶은 키보드)
-		return mv;
-	}
+	/*
+	 * @GetMapping("join") public ModelAndView join(VO vo) { ModelAndView mv = new
+	 * ModelAndView("pdh-view/pdh"); mv.addObject("70만원 키보드", 사고싶은 키보드) return mv; }
+	 */
 }
