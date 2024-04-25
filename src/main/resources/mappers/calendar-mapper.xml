@@ -3,9 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="jeju">
+<mapper namespace="calendar">
+	<!-- 전체보기 -->
+	<select id="cal_list" resultType="cvo4">
+		select * from Calendar_table order by c_idx
+	</select>
+	<!-- 삭제 -->
     <delete id="delete" parameterType="String">
-    	delete from calendar where c_idx=#{c_idx}
+    	delete from Calendar_table where c_idx=#{c_idx}
     </delete>
 </mapper>
 

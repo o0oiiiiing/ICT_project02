@@ -12,11 +12,11 @@
 	</settings>
 
 	<typeAliases>
-		<!-- <typeAlias type="com.ict.jeju.dao.CalendarVO" alias="cvo" /> -->
+		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO4" alias="cvo4" />
 	</typeAliases>
 
 	<mappers>
-		<!-- <mapper resource="mappers/calendar-mapper.xml" /> -->
+		<mapper resource="mappers/calendar-mapper.xml" />
 	</mappers>
 
 </configuration>

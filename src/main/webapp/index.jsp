@@ -9,5 +9,6 @@
 <body>
 	<h1>안녕</h1>
 	<a href="home">박다현</a>
+	<a href="wyyhome">원유영</a>
 </body>
 </html>
