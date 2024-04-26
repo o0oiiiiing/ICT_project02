@@ -13,10 +13,13 @@
 
 	<typeAliases>
 		<!-- <typeAlias type="com.ict.jeju.dao.CalendarVO" alias="cvo" /> -->
+		<typeAlias type="com.ict.jeju.ygh.dao.BoardVO" alias="bovo"/>
+		<typeAlias type="com.ict.jeju.ygh.dao.ReportVO" alias="revo"/>
 	</typeAliases>
 
 	<mappers>
 		<!-- <mapper resource="mappers/calendar-mapper.xml" /> -->
+		<mapper resource="mappers/board-mapper.xml" />
 	</mappers>
 
 </configuration>

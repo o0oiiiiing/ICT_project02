@@ -1,0 +1,14 @@
+#board_detail>tr {
+		
+	    text-align:center;
+	    padding:4px 10px;
+	    background-color: #F6F6F6;
+	}
+	
+#board_detail>th {
+		width:120px;
+	    text-align:center;
+	    padding:4px 10px;
+	    background-color: #B2CCFF;
+	}
+	
