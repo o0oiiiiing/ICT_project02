@@ -27,6 +27,20 @@ public class SignDAO {
 		return -1;
 	}
 	
+	public String getIdDoubleChk(String u_id) {
+		try {
+			int res = sqlSessionTemplate.selectOne("user.idchk", u_id);
+			if (res >0) {
+				return "0";
+			} 
+			return "1";
+		} catch (Exception e) {
+			System.out.println("dao id chk err : "+e);
+		}
+		return null;
+	}
+	
+	
 	
 	
 }

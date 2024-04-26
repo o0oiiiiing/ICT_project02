@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -88,7 +90,7 @@ public class SignController {
 	
 	// 카카오 로그인 -> 재발급받아야합니다 돌아가긴함
 	@RequestMapping("kakaologin.do")
-	public ModelAndView KakaoLogin(HttpServletRequest request) {
+	public ModelAndView KakaoLogin(HttpServletRequest request, UserVO userVO) {
 		String code = request.getParameter("code");
 		String reqURL = "https://kauth.kakao.com/oauth/token";
 		try {
@@ -136,7 +138,7 @@ public class SignController {
 	
 	// 네이버로그인 -> 재발급받아서해야됨 제꺼아니에요, 로그인안되욧
 	@RequestMapping("naverlogin.do")
-	public ModelAndView NaverLogin(HttpServletRequest request) {
+	public ModelAndView NaverLogin(HttpServletRequest request, UserVO userVO) {
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 		String reqURL = "https://nid.naver.com/oauth2.0/token";
@@ -195,13 +197,21 @@ public class SignController {
 	public ModelAndView getJoinOK(UserVO userVO) {
 		String c_pwd = passwordEncoder.encode(userVO.getU_pwd());
 		userVO.setU_pwd(c_pwd);
-		
 		int res = signService.getJoinOK(userVO);
+		
 		if (res > 0) {
 			return new ModelAndView("redirect:mainsub.do");
 		}
 		return null;
 	}
+
+	@RequestMapping(value = "id_doublechk.do", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String getIdDoubleChk(@RequestParam("u_id") String u_id) {
+		String result = signService.getIdDoubleChk(u_id);
+		return result;
+	}
+
 
 	// 비밀번호 찾기 이메일인증
 	@PostMapping("email_send_ok.do")
@@ -218,7 +228,7 @@ public class SignController {
                 sb.append(randomNum);
                 randomNum = sb.toString();
 			}
-			// 발급받은 비번을 DB에 저장해야되는데 아직못함 ㅈㅅ
+			// 발급받은 비번을 DB에 저장해야되는데 아직못함
 			
 			mailService.sendEmail(randomNum, u_email);
 			return new ModelAndView("lsh_view/findpwd");
@@ -227,7 +237,6 @@ public class SignController {
 		}
 		return null;
 	}
-	
 	
 	
 	
