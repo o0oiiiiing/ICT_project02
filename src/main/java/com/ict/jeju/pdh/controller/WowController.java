@@ -10,10 +10,15 @@ import com.ict.jeju.pdh.dao.VO;
 public class WowController {
 
 	@GetMapping("home")
-	public ModelAndView home (){
+	public ModelAndView home() {
 		return new ModelAndView("pdh-view/home");
 	}
-	
+
+	@GetMapping("detail")
+	public ModelAndView detail() {
+		return new ModelAndView("pdh-view/detail");
+	}
+
 	/*
 	 * @GetMapping("join") public ModelAndView join(VO vo) { ModelAndView mv = new
 	 * ModelAndView("pdh-view/pdh"); mv.addObject("70만원 키보드", 사고싶은 키보드) return mv; }

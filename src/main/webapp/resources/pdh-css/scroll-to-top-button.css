@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#scrollToTopButton {
+	display: none; /* 처음에는 숨겨둔다. */
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 99;
+	background-color: white;
+	border: none;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	line-height: 60px;
+	font-size: 16px;
+	cursor: pointer;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#scrollToTopButton:hover {
+	color: white;
+	background-color: #E7E7E7;
+}
