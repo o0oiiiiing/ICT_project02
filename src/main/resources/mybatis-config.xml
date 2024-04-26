@@ -12,11 +12,17 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.ict.jeju.lsh.dao.UserVO" alias="userVO"/>
+		<!-- <typeAlias type="com.ict.jeju.dao.CalendarVO" alias="cvo" /> -->
+		<typeAlias type="com.ict.jeju.ygh.dao.BoardVO" alias="bovo"/>
+		<typeAlias type="com.ict.jeju.ygh.dao.ReportVO" alias="revo"/>
+    <typeAlias type="com.ict.jeju.lsh.dao.UserVO" alias="userVO"/>
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mappers/user-mapper.xml" />
+		<!-- <mapper resource="mappers/calendar-mapper.xml" /> -->
+		<mapper resource="mappers/board-mapper.xml" />
+    <mapper resource="mappers/user-mapper.xml" />
+
 	</mappers>
 
 </configuration>

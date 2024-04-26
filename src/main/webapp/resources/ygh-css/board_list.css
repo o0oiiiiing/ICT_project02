@@ -1,0 +1,119 @@
+#board table {
+	width: 500px;
+	margin: 10px auto 50px;
+}
+
+.tab_bar {
+	background-color: lightgray;
+	width: 800px;
+	margin: 0 auto;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 20px;
+	padding: 5px;
+}
+
+.tab_bar a {
+	cursor: pointer;
+}
+
+#board_t {
+	display: none;
+}
+
+#board_t table {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 20px;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+
+#board>h1 {
+	width: 800px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+#board_t table caption {
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+#board_t table th {
+	text-align: center;
+	border-top: 1px solid black;
+	padding: 4px 10px;
+}
+
+#board_t table td {
+	text-align: center;
+	border-top: 1px solid lightgray;
+	padding: 4px 10px;
+}
+
+#board_t .no {
+	width: 15%
+}
+
+#board_t .subject {
+	width: 30%
+}
+
+#board_t .writer {
+	width: 20%
+}
+
+#board_t .reg {
+	width: 20%
+}
+
+/* paging */
+#board_t table tfoot {
+	text-align: center;
+}
+
+#board_t table tfoot ol.paging {
+	list-style: none;
+	display: inline-block; /* 가운데 정렬을 위해 인라인 블록으로 설정 */
+	padding: 0; /* 리스트의 패딩 제거 */
+}
+
+#board_t table tfoot ol.paging li {
+	display: inline;
+	margin-right: 8px;
+}
+
+#board_t table tfoot ol.paging li a {
+	display: inline;
+	padding: 3px 7px;
+	color: black;
+	font-weight: bold;
+}
+
+#board_t table tfoot ol.paging li a:hover {
+	background: lightgray;
+	color: white;
+	font-weight: bold;
+}
+
+#board_t .disable {
+	display: inline;
+	padding: 3px 7px;
+	color: black;
+}
+
+#board_t .now {
+	display: inline;
+	padding: 3px 7px;
+	background: lightgray;
+	color: white;
+	font-weight: bold;
+}
