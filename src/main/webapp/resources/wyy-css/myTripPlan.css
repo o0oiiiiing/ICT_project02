@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.myTripPlan {
+	margin: 0 auto;
+	text-align: center;
+	width: 1200px;
+}
+
+.myTrip_profile {
+	width: 750px;
+	display: flex;
+	margin: 30px auto;
+	background-color: #d9d9d9;
+}
+
+.myTrip_profile_content {
+	text-align: left;
+	margin-left: 40px;
+}
+
+#map {
+	width: 1200px;
+	height: 500px;
+	margin: 0 auto;
+}
+
+.myTripLikeTrip {
+	display: flex;
+	margin-top: 20px;
+	font-size: 22px;
+}
+
+.myTrip:hover, .likeTrip:hover {
+	font-weight: bold;
+	border-style: none;
+	background-color: white;
+}
+
+.myTrip, .likeTrip {
+	border-style: none;
+	color: black;
+	background-color: white;
+}
+.likeTripDetail{
+	display: none;
+}
+.myTripDetail {
+	 display: flex;
+    align-items: center; 
+    margin: 0 auto;
+    width: 1200px;
+}
+.detail_calendar, .detail_calList{
+	/* margin: 0 100px; */
+}
+.calList_content{
+	background-color: lightblue;
+	border-bottom: 1px solid lightgray;
+	width: 700px;
+}
+.likeTrip_content{
+	width: 400px;
+	height: 400px;
+	margin-top: 30px;
+	float: left;
+}
+
+.likeTrip_Image{
+	width: 70%;
+	height: 70%;
+}

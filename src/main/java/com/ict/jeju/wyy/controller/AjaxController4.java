@@ -64,5 +64,15 @@ public class AjaxController4 {
 		int result = calendarService4.calDelete(c_idx);
 		return String.valueOf(result);
 	}
+	
+	// 캘린더 일정 저장
+/*
+ 	@RequestMapping(value ="calSave", produces = "application/json; charset=utf-8")
 
+	@ResponseBody
+	public String calSave(@RequestParam("u_idx") String u_idx, @RequestParam("contentsid") String contentsid) {
+		int result = calendarService4.calSave(u_idx, contentsid);
+		return String.valueOf(result);
+	}
+	 */
 }

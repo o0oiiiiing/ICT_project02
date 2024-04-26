@@ -10,5 +10,6 @@
 	<h1>안녕ㅇㅇ</h1>
 	<a href="myTripPlan">나의 여행페이지</a>
 	<a href="calendar">캘린더페이지</a>
+	<a href="addCalList">캘린더일정추가</a>
 </body>
 </html>

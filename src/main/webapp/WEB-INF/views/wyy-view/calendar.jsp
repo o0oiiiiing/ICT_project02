@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <link href='resources/wyy-css/main.css' rel='stylesheet' />
+
 <style>
 body {
 	margin: 40px 10px;
@@ -36,8 +39,8 @@ body {
 			navLinks : true,
 			selectable : true,
 			selectMirror : true,
-			// 빈 캘린더 클릭했을 때(일정추가 나중에 하면 등록..) 
-			/* select : function(arg) {
+			// 빈 캘린더 클릭했을 때 
+	/*		 select : function(arg) {
 				var title = prompt('일정 제목:');
 				if (title) {
 					calendar.addEvent({
@@ -47,7 +50,9 @@ body {
 					});
 				}
 				calendar.unselect();
-			}, */
+			},
+			*/
+			
 			eventClick : function(arg) {
 				console.log("Clicked event ID:", arg.event.id);
 				if (confirm('일정을 삭제하시겠습니까?')) {
@@ -74,6 +79,13 @@ body {
 			},
 			editable : true,
 			dayMaxEvents : true,
+			// 화면에 일정이름+일정내용 출력
+			eventContent: function(arg) {
+   				 var content =
+        			'<p><strong>' + arg.event.title + '</strong></p>' +
+        			'<p>' + (arg.event.extendedProps.vi_title || '') + '</p>';
+    			return { html: content };
+			},
 			// 처음 들어갔을때 일정 list
 			events : function(info, successCallback, failureCallback) {
 				$.ajax({
@@ -81,14 +93,17 @@ body {
 					method : "POST",
 					dataType : "json",
 					success : function(data) {
+						console.log(data);
 						var events = data.map(function(item) {
 							return {
 								title : item.c_title,
 								start : item.c_start,
 								end : item.c_end,
-								c_idx : item.c_idx 
+								c_idx : item.c_idx,
+								vi_title : item.vi_title
 							};
 						});
+							console.log("Mapped events:", events);
 						// FullCalendar에 이벤트 객체 배열 전달
 						successCallback(events);
 					},
@@ -98,13 +113,15 @@ body {
 				});
 			}
 		});
-
 		calendar.render();
-	});
+	});	
+		
 </script>
 <title>Insert title here</title>
 </head>
 <body>
 	<div id='calendar'></div>
+	
+
 </body>
 </html>

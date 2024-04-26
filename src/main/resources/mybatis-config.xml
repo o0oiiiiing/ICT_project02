@@ -13,6 +13,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO4" alias="cvo4" />
+		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
 	</typeAliases>
 
 	<mappers>
