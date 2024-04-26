@@ -10,13 +10,15 @@
 		<!-- MyBatis에서 캐싱기능 종료 -->
 		<setting name="cacheEnabled" value="false" />
 	</settings>
-
+	
 	<typeAliases>
 		<!-- <typeAlias type="com.ict.jeju.dao.CalendarVO" alias="cvo" /> -->
+		<typeAlias type="com.ict.jeju.chm.dao.CategoryVO" alias="caVO" />
 	</typeAliases>
 
 	<mappers>
 		<!-- <mapper resource="mappers/calendar-mapper.xml" /> -->
+		<mapper resource="mappers/category-mapper.xml"/>
 	</mappers>
 
 </configuration>
