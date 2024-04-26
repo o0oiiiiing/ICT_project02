@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+    <select id="login" parameterType="userVO" resultType="userVO">
+    	SELECT * FROM User_table WHERE u_id = #{u_id}
+    </select>
+    
+    <insert id="join" parameterType="userVO">
+    	INSERT INTO User_table(u_id, u_pwd, u_name, u_email, u_phone, u_addr, u_regdate)
+    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_phone}, #{u_addr}, sysdate())
+    </insert>
+    
+</mapper>
+
