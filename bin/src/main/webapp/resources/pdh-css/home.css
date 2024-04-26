@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'EF_jejudoldam';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.title {
+	font-family: 'EF_jejudoldam';
+	font-size: 60px;
+}
+
+.a_tag {
+	text-decoration: none;
+}
+
+.nav {
+	font-family: 'GmarketSansMedium';
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
+	margin: 
+}
+
+.nav_list{
+	line-height: 60px;
+}
