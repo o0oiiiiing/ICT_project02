@@ -1,54 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-	.myTripPlan{
-		margin: 0 auto;
-		text-align: center;
-		width: 1500px;
-	}
-	.myTrip_profile{
-		width: 750px;
-		display: flex;
-		margin: 30px auto ;
-		background-color: #d9d9d9;
-		
-	}
-	.myTrip_profile_content{
-		text-align: left;
-		margin-left: 40px;
-	}
-	#map{
-		width:1200px;
-		height:500px;
-		margin: 0 auto;"
-	}
-	.myTripLikeTrip{
-		display: flex;
-		margin-left: 150px;
-		margin-top: 20px;
-    	font-size: 22px;
-	}
-	.myTrip:hover, .likeTrip:hover{
-		font-weight: bold;
-		border-style: none;
-		background-color: white;
-	}
-	.myTrip, .likeTrip{
-		border-style: none;
-		color: black;
-		background-color: white;
-	}
-	.myTripDetail, .likeTripDetail {
-        display: none;
-    }
+
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
+<link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
 <script type="text/javascript">
 // 지도 api
 $(document).ready(function() {
@@ -113,34 +77,80 @@ $(document).ready(function() {
         $(".myTripDetail").hide();    
     });
 });
+
+// 캘린더 일정추가 
+	function addCalList(){
+		location.href="addCalList";
+	}
 </script>
 <title>나의 여행</title>
 </head>
 <body>
-<div class="myTripPlan">
-	<h2>나의 여행</h2>
-	<hr>
-	<div class="myTrip_profile">
-		<img src="resources/common-image/profile.png" width="150px" height="150px" style="margin:10px">
-		<div class="myTrip_profile_content">
-			<p>$(이름) 님&nbsp;<button onclick="/" >정보수정</button></p>
-			<p>나의 여행일정 ($값)</p>
-			<p>나의 리뷰 ($값)</p>
-			<p>좋아요한 여행지 ($값)</p>
+	<div class="myTripPlan">
+		<h2>나의 여행</h2>
+		<hr>
+		<div class="myTrip_profile">
+			<img src="resources/common-image/profile.png" width="150px"
+				height="150px" style="margin: 10px">
+			<div class="myTrip_profile_content">
+				<p>
+					$(이름) 님&nbsp;
+					<button onclick="/">정보수정</button>
+				</p>
+				<p>나의 여행일정 ($값)</p>
+				<p>나의 리뷰 ($값)</p>
+				<p>좋아요한 여행지 ($값)</p>
+			</div>
 		</div>
-	</div>
-	<div id="map" ></div>
-	<div class="myTripLikeTrip">
-		<button class="myTrip" onclick="/">나의 여행일정</button>&nbsp;|&nbsp;
-		<button class="likeTrip" onclick="/">좋아요한 여행지</button>
-	</div>
+		<div id="map"></div>
+		<div class="myTripLikeTrip">
+			<button class="myTrip" onclick="/">나의 여행일정</button>
+			&nbsp;|&nbsp;
+			<button class="likeTrip" onclick="/">좋아요한 여행지</button>
+			<br>
+		</div>
 		<div class="myTripDetail">
-			<p>여행일정내용~</p>
+			<div class="detail_calendar">
+				<iframe src="calendar" width="500px" height="500px" frameborder="0"></iframe>
+			</div>
+			<div class="detail_calList">
+				<c:choose>
+					<c:when test="${empty list}">
+						<h3>여행일정이 없습니다.</h3>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="k" items="${list}" varStatus="vs">
+							<div class="calList_content">
+								<p>${k.vi_title}</p>
+								<p>${k.vi_address}</p>
+								<p>${k.vi_phoneno}</p>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+
+			</div>
 		</div>
 		<div class="likeTripDetail">
-			<p>좋아요내용~</p>
+			<div class="detail_likeTrip">
+				<c:choose>
+					<c:when test="${empty like_list}">
+						<h3>좋아요한 여행지가 없습니다.</h3>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="k" items="${like_list}" varStatus="vs">
+							<div class="likeTrip_content">
+								<img src="${k.vi_image}" class="likeTrip_Image"/>
+								<p>${k.vi_value}</p>
+								<p>여행 이름 : ${k.vi_title}</p>
+								<button onclick="addCalList()">일정 추가</button>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
-	<div id="content"></div>
-</div>	
+		<div id="content"></div>
+	</div>
 </body>
 </html>
