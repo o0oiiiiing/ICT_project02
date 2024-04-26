@@ -1,0 +1,40 @@
+#repwd_wrap {
+	width: 400px;
+	/* position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); */
+	margin: 0 auto;
+	margin-bottom: 200px;
+}
+
+#repwd_wrap>form>h1 {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+}
+
+#repwd_wrap>form input[type="password"] {
+	width: 98%;
+	height: 40px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#repwd_ok {
+	width: 49%;
+	margin-top: 20px;
+	margin-right: 7px;
+	height: 40px;
+	font-size: 15px;
+	float: left;
+}
+
+#repwd_no {
+	width: 49%;
+	margin-top: 20px;
+	height: 40px;
+	font-size: 15px;
+
+}
