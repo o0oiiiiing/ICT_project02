@@ -21,4 +21,10 @@ public class SignServiceImpl implements SignService {
 		return signDAO.getJoinOK(userVO);
 	}
 	
+	@Override
+	public String getIdDoubleChk(String u_id) {
+		return signDAO.getIdDoubleChk(u_id);
+	}
+	
+	
 }

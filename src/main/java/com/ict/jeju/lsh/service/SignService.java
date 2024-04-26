@@ -5,5 +5,6 @@ import com.ict.jeju.lsh.dao.UserVO;
 public interface SignService {
 	public UserVO getLoginOK(UserVO userVO);
 	public int getJoinOK(UserVO userVO);
+	public String getIdDoubleChk(String u_id);
 	
 }

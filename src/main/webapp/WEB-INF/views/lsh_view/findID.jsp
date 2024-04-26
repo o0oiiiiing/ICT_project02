@@ -8,8 +8,8 @@
 		<title>아이디 찾기</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
-			function findID_go(f) {
-				f.action="findID_go.do";
+			function findID_ok(f) {
+				f.action="findID_ok.do";
 				f.submit();
 			}
 		</script>
@@ -27,13 +27,13 @@
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" name="u_name" placeholder="이름을 입력하세요">
+									<input type="text"  name="u_id" placeholder="아이디를 입력하세요">
 								</td>
 								<td>
-									<input type="email" name="u_email" placeholder="이메일을 입력하세요"  pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
+									<input type="email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
 								</td>
 								<td>
-									<input type="submit" value="아이디 찾기" onclick="findID_go(this.form)">
+									<input type="submit" value="아이디 찾기" onclick="findID_ok(this.form)">
 								</td>
 							</tr>
 						</tbody>

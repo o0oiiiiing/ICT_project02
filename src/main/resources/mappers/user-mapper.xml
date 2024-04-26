@@ -8,10 +8,16 @@
     	SELECT * FROM User_table WHERE u_id = #{u_id}
     </select>
     
+    <!-- 비밀번호 확인작업 미완 -->
     <insert id="join" parameterType="userVO">
-    	INSERT INTO User_table(u_id, u_pwd, u_name, u_email, u_phone, u_addr, u_regdate)
-    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_phone}, #{u_addr}, sysdate())
+    	INSERT INTO User_table(u_id, u_pwd, u_name, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
+    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_phone}, #{u_postcode}, #{u_detail_addr}, #{u_detail_addr2}, #{u_addr}, #{u_gender}, 0, sysdate())
     </insert>
+    
+    <select id="idchk" parameterType="String" resultType="int">
+ 	   	SELECT COUNT(*) FROM User_table WHERE u_id = #{u_id}
+    </select>
+    
     
 </mapper>
 

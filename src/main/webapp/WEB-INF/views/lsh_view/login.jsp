@@ -9,10 +9,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
-				if (f.u_id.value === '' || f.u_pwd.value === '' ){
+				if (f.id.value === '' || f.pwd.value === '' ){
 		            alert("다시 입력하세요");
 		            return;
-		    	} 
+		    	}
 				f.action="login_ok.do";
 				f.submit();
 			}
@@ -31,10 +31,10 @@
 						<tbody class="login_body">
 							<tr>
 								<td>
-									<input type="text" name="u_id" placeholder="아이디" required>
+									<input type="text"  id="id" name="u_id" placeholder="아이디" required>
 								</td>
 								<td>
-									<input type="password" name="u_pwd" placeholder="비밀번호" required>
+									<input type="password" id="pwd" name="u_pwd" placeholder="비밀번호" required>
 								</td>
 								<td>
 									<input type="hidden" name="u_idx" value="${u_idx}" >
