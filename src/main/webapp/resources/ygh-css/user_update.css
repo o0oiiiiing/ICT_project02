@@ -1,0 +1,33 @@
+#update_wrap {
+	width: 400px;
+	/* position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); */
+	margin: 0 auto;
+	margin-bottom: 200px;
+}
+
+#update_wrap>form>h1 {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+}
+
+#update_ok {
+	width: 49%;
+	margin-top: 20px;
+	margin-right: 7px;
+	height: 40px;
+	font-size: 15px;
+	float: left;
+}
+
+#repwd_go {
+	width: 49%;
+	margin-top: 20px;
+	height: 40px;
+	font-size: 15px;
+
+}

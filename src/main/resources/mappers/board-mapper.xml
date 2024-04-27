@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board_table">
+	<select id="count" resultType="int">
+		select count(*) from Board_table
+	</select>
+	
+	<select id="board_list" resultType="bovo" parameterType="Map">
+		select * from Board_table limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="board_detail" resultType="bovo" parameterType="String">
+		select * from Board_table where bo_idx = #{bo_idx}
+	</select>
+	
+	
+	<select id="count2" resultType="int">
+		select count(*) from Report_table
+	</select>
+	
+	<select id="report_list" resultType="revo" parameterType="Map">
+		select * from Report_table limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="report_detail" resultType="revo" parameterType="String">
+		select * from Report_table where report_idx = #{report_idx}
+	</select>
+</mapper>
+

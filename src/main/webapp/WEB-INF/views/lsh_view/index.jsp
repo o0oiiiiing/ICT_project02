@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>안녕ㅇㅇ</h1>
+	<h1>메인페이지라고생각하고</h1>
 </body>
 </html>
