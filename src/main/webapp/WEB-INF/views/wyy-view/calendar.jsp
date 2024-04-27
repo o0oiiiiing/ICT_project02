@@ -30,9 +30,11 @@ body {
 
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			headerToolbar : {
-				left : 'prev,next today',
+				left : 'prev,next',
 				center : 'title',
-				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+				right : 'today'
+				/* right : 'dayGridMonth' */
+				/* ,timeGridWeek,timeGridDay */
 			},
 			// 오늘날짜로 출력 (풀캘린더는 2024-04-24 이런형식으로 해야함.)
 			initialDate : new Date().toISOString().split('T')[0],
