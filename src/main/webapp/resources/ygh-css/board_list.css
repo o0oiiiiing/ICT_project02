@@ -13,9 +13,6 @@
 	padding: 5px;
 }
 
-.tab_bar a {
-	cursor: pointer;
-}
 
 #board_t {
 	display: none;

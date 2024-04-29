@@ -28,5 +28,15 @@
 	<select id="report_detail" resultType="revo" parameterType="String">
 		select * from Report_table where report_idx = #{report_idx}
 	</select>
+	
+	
+	<update id="lev_update" parameterType="Map">
+		update Board_table set lev=lev+1 where groups=#{groups} and lev >= #{lev}
+	</update>
+	
+	<insert id="ans_insert" parameterType="bovo">
+		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate)
+		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate())
+	</insert>
 </mapper>
 

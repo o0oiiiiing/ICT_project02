@@ -1,6 +1,7 @@
 package com.ict.jeju.ygh.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,16 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public ReportVO getReportDetail(String report_idx) {
 		return jejuDAO5.getReportDetail(report_idx);
+	}
+	
+	@Override
+	public int getLevUpdate(Map<String, Integer> map) {
+		return jejuDAO5.getLevUpdate(map);
+	}
+
+	@Override
+	public int getAnsInsert(BoardVO bovo) {
+		return jejuDAO5.getAnsInsert(bovo);
 	}
 
 }

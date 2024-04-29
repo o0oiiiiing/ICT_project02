@@ -73,4 +73,22 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
+	public int getLevUpdate(Map<String, Integer> map) {
+		try {
+			return sqlSessionTemplate.update("Board_table.lev_update", map);
+		} catch (Exception e) {
+			System.out.println(e); 
+		}
+		return -1;
+	}
+
+	public int getAnsInsert(BoardVO bovo) {
+		try {
+			return sqlSessionTemplate.insert("Board_table.ans_insert", bovo);
+		} catch (Exception e) {
+			System.out.println(e); 
+		}
+		return -1;
+	}
 }
