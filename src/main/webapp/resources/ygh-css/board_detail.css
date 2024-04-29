@@ -1,14 +1,18 @@
-#board_detail>tr {
-		
-	    text-align:center;
-	    padding:4px 10px;
-	    background-color: #F6F6F6;
-	}
-	
-#board_detail>th {
-		width:120px;
-	    text-align:center;
-	    padding:4px 10px;
-	    background-color: #B2CCFF;
-	}
-	
+#board_detail table {
+	width: 500px;
+	margin: 0 auto;
+	border: 1px solid lightgray;
+}
+
+#board_detail table tr {
+	text-align: center;
+	padding: 4px 10px;
+	background-color: #F6F6F6;
+}
+
+#board_detail table th {
+	width: 120px;
+	text-align: center;
+	padding: 4px 10px;
+	background-color: #B2CCFF;
+}

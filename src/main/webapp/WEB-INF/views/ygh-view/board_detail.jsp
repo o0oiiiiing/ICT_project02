@@ -7,51 +7,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 여행(관리자)</title>
-<link href="<c:url value="/resources/ygh-css/board_detail.css"/>"
-	rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
+<script type="text/javascript">
+	function admin_list(f) {
+		f.action="admin_list.do";
+		f.submit();
+	}
+	
+	function board_ans_write(f) {
+		f.action="board_ans_write.do";
+		f.submit();
+	}
+
+</script>
 </head>
 <body>
-<div id="board_detail">
 	<form method="post">
-		<table width="700">
-			<tbody>
-				<tr>
-					<th bgcolor="#B2EBF4">제목</th>
-					<td>${bovo.bo_title}</td>
-				</tr>
+		<div id="board_detail">
+			<table>
+				<tbody>
+					<tr>
+						<th>제목</th>
+						<td>${bovo.bo_title}</td>
+					</tr>
 
-				<tr>
-					<th bgcolor="#B2EBF4">작성자</th>
-					<td>${bovo.bo_writer}</td>
-				</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${bovo.bo_writer}</td>
+					</tr>
 
-				<tr>
-					<th bgcolor="#B2EBF4">날짜</th>
-					<td>${bovo.bo_regdate.substring(0,10)}</td>
-				</tr>
+					<tr>
+						<th>날짜</th>
+						<td>${bovo.bo_regdate.substring(0,10)}</td>
+					</tr>
 
-				<tr>
-					<th bgcolor="#B2EBF4">내용</th>
-					<td>
-						<%-- <pre>${bovo.content}</pre> --%> <textarea rows="10" cols="60"
-							id="content" name="content">${bovo.bo_content}</textarea>
-					</td>
-				</tr>
+					<tr>
+						<th>내용</th>
+						<td>
+							<%-- <pre>${bovo.content}</pre> --%> <textarea rows="10"
+								cols="60" id="content" name="content" readonly>${bovo.bo_content}</textarea>
+						</td>
+					</tr>
 
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="2">
-						<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-						<input type="hidden" value="${cPage}" name="cPage"> 
-						<input type="button" value="목록" onclick="board_list(this.form)" /> 
-						<input type="button" value="답글" onclick="ans_write(this.form)" /> 
-						<input type="button" value="삭제" onclick="board_delete(this.form)" /></td>
-				</tr>
-			</tfoot>
-		</table>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">
+							<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+							<input type="hidden" value="${cPage}" name="cPage"> 
+							<input type="button" value="목록" onclick="admin_list(this.form)" /> 
+							<input type="button" value="답글" onclick="board_ans_write(this.form)" /> 
+							<input type="button" value="삭제" onclick="board_delete(this.form)" />
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</form>
-</div>
 
 
 </body>
