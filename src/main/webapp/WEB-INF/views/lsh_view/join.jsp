@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>회원가입</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -72,7 +73,7 @@
 				let clickAll = document.getElementById('click_all');
 				let clickItem = document.querySelectorAll('.click_item');
 				let allChecked = true;
-				// .chk_item 체크박스 중 하나라도 언체크이면 전체동의 체크박스도 해제
+				// .click_item 체크박스 중 하나라도 해제되면 전체 해제
 				clickItem.forEach(function(item) {
 					if (! item.checked) {
 						allChecked = false;
@@ -82,23 +83,33 @@
 			}
 			
 			// 유효성검사
-			// 이메일 타입도 해야함, 안되어있음
 			function join_ok(f) {
 				if (f.u_id === '' || f.u_pwd === '' || f.u_pwdchk === '' || f.u_name === '' || f.u_birth === '' || 
 						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detali_addr === '') {
 					alert("필수 항목을 입력하세요.");
 					return false;
-				} else if (! f.click_1.checked || f.click_2.checked) {
-					alert("필수 이용 약관에 동의해주세요.");
+				} else if (! f.click_1.checked) {
+					alert("필수 이용 약관1에 동의해주세요.");
+					f.click_1.focus();
+					return false;
+				} else if (! f.click_2.checked) {
+					alert("필수 이용 약관2에 동의해주세요.");
+					f.click_2.focus();
 					return false;
 				} else if (! idChk) {
 					alert("아이디 중복 확인을 해주세요.");
+					f.idChk.focus();
 			        return false;
 				} else if (f.u_birth.value.length !== 6) {
 					alert("생년월일 6자리를 입력하세요.");
+					f.u_birth.focus();
 					return false;
 				} else if (f.u_phone.value.length !== 11) {
-					alert("전화번호는  '-'을 제외한 11자리로 입력하세요");
+					alert("전화번호는  '-'을 제외한 11자리로 입력하세요.");
+					f.u_phone.focus();
+					return false;
+				} else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$/.test(f.u_email.value)) {
+					alert("이메일 형식을 확인하세요.");
 					return false;
 				}
 				f.action = "join_ok.do";
@@ -193,7 +204,8 @@
 								
 								<td>
 									<label>이메일</label>
-									<input type="text" id="u_email" name="u_email" required />
+									<input type="email" id="u_email" name="u_email" required 
+										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"/>
 								</td>
 								
 								<td>
@@ -205,9 +217,9 @@
 									<label>주소</label>
 									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호">
 									<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-									<input type="text" id="u_addr" name="u_addr">
+									<input type="text" id="u_addr" name="u_addr" readonly>
 									<input type="text" id="u_detali_addr" name="u_detali_addr" placeholder="상세주소1">
-									<input type="text" id="u_detali_addr2" name="u_detali_addr2" placeholder="상세주소2">
+									<input type="text" id="u_detali_addr2" name="u_detali_addr2" placeholder="상세주소2" readonly>
 								</td>
 							</tr>
 						</tbody>
@@ -225,7 +237,7 @@
 		
 						<tr>
 							<td>
-								<p>[필수] 이용약관 동의</p> 
+								<p>[필수] 이용약관1 동의</p> 
 								<div class="terms_box">
 									<p>필수 동의임</p> 
 								</div>
@@ -235,7 +247,7 @@
 						</tr>
 						<tr>
 							<td>
-								<p>[필수] 개인정보 수집 동의</p>
+								<p>[필수] 이용약관2 동의</p>
 								<div class="terms_box">
 									<p>필수 동의임</p>
 								</div>

@@ -5,20 +5,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>아이디 찾기</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function findID_ok(f) {
-				if (f.u_name.value === '') {
-					alert("이름을 입력하세요");
-					f.u_name.focus();
-					return false;
-				} else if (f.u_email.value === '') {
-					alert("이메일을 입력하세요");
-					f.u_email.focus();
-					return false;
-				}
 				f.action="findID_ok.do";
 				f.submit();
 			}
@@ -37,19 +27,23 @@
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
+									<input type="text"  name="u_id" placeholder="아이디를 입력하세요">
 								</td>
 								<td>
-									<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
-										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
+									<input type="email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
 								</td>
 								<td>
-									<input type="button" value="아이디 찾기" onclick="findID_ok(this.form)">
+									<input type="submit" value="아이디 찾기" onclick="findID_ok(this.form)">
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</form>
+			</div>
+			
+			<div>
+				<p>아이디 찾기 결과</p>
+				<input type="text" name="u_id" value="${userVO.u_id}">
 			</div>
 			
 			<div>
