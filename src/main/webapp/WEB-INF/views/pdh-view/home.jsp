@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -26,11 +28,11 @@
 		<ul class="nav">
 			<li>
 				<h1 class="title">
-					<a href="" class="a_tag">제주여행</a>
+					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
 			<li class="nav_list"><a href="detail" class="a_tag">관광지</a></li>
-			<li class="nav_list">음식</li>
+			<li class="nav_list"><a href="map_practice" class="a_tag">음식</a></li>
 			<li class="nav_list">숙박</li>
 			<li class="nav_list">쇼핑</li>
 			<li class="nav_list">축제/행사</li>
@@ -119,20 +121,7 @@
 		</div>
 	</div>
 
-	<footer>
-		<div class="footer-container">
-			<h1 class="footer-title">제주여행</h1>
-			<ul class="footer">
-				<li>개인정보 처리방침</li>
-				<li>|</li>
-				<li>개인위치정보 처리방침</li>
-				<li>|</li>
-				<li>위치기반서비스 이용약관</li>
-				<li>|</li>
-				<li>틀린정보신고</li>
-			</ul>
-		</div>
-	</footer>
+	<%@ include file="../common/footer.jsp"%>
 
 	<div>
 		<button id="scrollToTopButton">

@@ -90,7 +90,15 @@
 	line-height: 50px;
 }
 
-.icon {
+.search-icon {
+	color: white;
+	background-color: transparent;
+	border: none;
+	font-size: 23px;
+	line-height: 22px;
+}
+
+.delete-icon {
 	color: white;
 	background-color: transparent;
 	border: none;
@@ -137,4 +145,119 @@
 	font-size: 60px;
 	margin-top: 430px;
 	margin-left: 84%;
+}
+
+.icons {
+	margin: 90px auto 60px auto;
+	width: 60%;
+	table-layout: fixed;
+}
+
+.icons-section {
+	width: 100%;
+}
+
+.icons-detail {
+	font-family: 'GmarketSansLight';
+	color: #868686;
+}
+
+.icons-number {
+	font-family: 'GmarketSansMedium';
+	color: #FFBB36;
+}
+
+.icons-section td {
+	text-align: center;
+	padding-bottom: 10px;
+	border-radius: 50px;
+}
+
+.border-right {
+	border-right: 2px solid #D9D9D9;
+}
+
+.no-border-right {
+	border: none;
+}
+
+.icons-button {
+	border: none;
+	font-family: 'GmarketSansMedium';
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	font-size: 15px;
+}
+
+.icon {
+	color: #868686;
+	background-color: transparent;
+	border: none;
+	font-size: 60px;
+}
+
+.vertical_line {
+	color: #D9D9D9;
+	font-size: 60px;
+}
+
+.detail-section {
+	width: 80%;
+	margin: 0 auto 50px auto;
+}
+
+.detail-section__bar {
+	display: flex;
+	justify-content: space-between;
+	background-color: #F4F4F4;
+	height: 60px;
+	border-radius: 50px;
+}
+
+.detail-title {
+	line-height: 63px;
+	padding-left: 30px;
+	font-family: 'GmarketSansMedium';
+	font-size: 20px;
+}
+
+.expand_icon {
+	line-height: 63px;
+	font-size: 30px;
+	padding-right: 30px;
+}
+
+#map {
+	width: 90%;
+	height: 500px;
+	margin: 10px auto;
+}
+
+.qa_title {
+	font-family: 'GmarketSansMedium';
+	width: 90%;
+	font-size: 25px;
+	margin: 30px auto 10px auto;
+}
+
+.qa_table {
+	width: 90%;
+	margin: 10px auto;
+}
+
+.qa_table thead {
+	border-top: 3px solid #909090;
+	border-bottom: 2px solid #D9D9D9;
+}
+
+.qa_table tr {
+	border: 1px solid #D9D9D9;
+	font-family: 'NanumSquare';
+	font-size: 18px;
+}
+
+.qa_table td {
+	border: 1px solid #D9D9D9;
+	text-align: center;
 }
