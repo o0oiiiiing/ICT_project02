@@ -85,12 +85,11 @@ $(document).ready(function() {
 			         	
 			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
 			            var markerImages = {
-			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',
-			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',
-			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',
-			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'
+			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
+			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
+			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
+			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식
+			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
 			         // 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
@@ -108,20 +107,16 @@ $(document).ready(function() {
     						}
     						return markers;
 						}
+						
+			         	// 선언
+			            const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
+			            const markers = {};
 
-			            // 카테고리별 마커 배열 선언
-			            var placeMarkers = [];
-			            var shopMarkers = [];
-			            var bedMarkers = [];
-			            var eatMarkers = [];
-			            var festivalMarkers = [];
-
-			            // 카테고리별 마커를 생성하고 지도에 표시
-			            placeMarkers = createMarkers('c1', data.filter(function(item) { return item.vi_category === 'c1'; }));
-			            shopMarkers = createMarkers('c2', data.filter(function(item) { return item.vi_category === 'c2'; }));
-			            bedMarkers = createMarkers('c3', data.filter(function(item) { return item.vi_category === 'c3'; }));
-			            eatMarkers = createMarkers('c4', data.filter(function(item) { return item.vi_category === 'c4'; }));
-			            festivalMarkers = createMarkers('c5', data.filter(function(item) { return item.vi_category === 'c5'; }));
+			            // 각 카테고리에 대한 마커를 생성하고 지도에 표시
+			            categories.forEach(category => {
+			                markers[category] = createMarkers(category, data.filter(item => item.vi_category === category));
+			            });
+			            
 			        }
 			    });
 			});
