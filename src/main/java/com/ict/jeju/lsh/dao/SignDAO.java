@@ -1,5 +1,7 @@
 package com.ict.jeju.lsh.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,7 +31,7 @@ public class SignDAO {
 	
 	public String getIdDoubleChk(String u_id) {
 		try {
-			int res = sqlSessionTemplate.selectOne("user.idchk", u_id);
+			int res = sqlSessionTemplate.selectOne("user.id_chk", u_id);
 			if (res >0) {
 				return "0";
 			} 
@@ -40,6 +42,23 @@ public class SignDAO {
 		return null;
 	}
 	
+	public int getChgPwd(UserVO userVO) {
+		try {
+			return sqlSessionTemplate.update("user.chgpwd", userVO);
+		} catch (Exception e) {
+			System.out.println("dao ch pwd err : "+e);
+		}
+		return -1;
+	}
+	
+	public List<UserVO> getFindIdChk(UserVO userVO) {
+		try {
+			return sqlSessionTemplate.selectList("user.find_id", userVO);
+		} catch (Exception e) {
+			System.out.println("dao find id err : "+e);
+		}
+		return null;
+	}
 	
 	
 	

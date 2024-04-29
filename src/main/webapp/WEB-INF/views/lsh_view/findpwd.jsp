@@ -5,8 +5,15 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>비밀번호 찾기</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			let msg = "${msg}";
+			if (msg !== "") {
+				alert(msg);
+			}
+		</script>
 	</head>
 	<body>
 		<section>
@@ -27,7 +34,7 @@
 									<input type="email" name="u_email" placeholder="이메일을 입력하세요" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
 								</td>
 								<td>
-									<input type="submit" value="임시 비밀번호 발급">
+									<input type="submit" value="임시 비밀번호 발급 받기">
 								</td>
 							</tr>
 						</tbody>

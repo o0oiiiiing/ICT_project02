@@ -5,16 +5,22 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>로그인</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
-				if (f.id.value === '' || f.pwd.value === '' ){
-		            alert("다시 입력하세요");
-		            return;
-		    	}
+				if (f.u_id.value === '' || f.u_pwd.value === '') {
+					alert("다시 입력하세요");
+					return;
+				}
 				f.action="login_ok.do";
 				f.submit();
+			}
+			// 경고창
+			let msg = "${msg}";
+			if (msg !== "") {
+			    alert(msg);
 			}
 		</script>
 	</head>
@@ -31,13 +37,12 @@
 						<tbody class="login_body">
 							<tr>
 								<td>
-									<input type="text"  id="id" name="u_id" placeholder="아이디" required>
+									<input type="text"  id="u_id" name="u_id" placeholder="아이디" required>
 								</td>
 								<td>
-									<input type="password" id="pwd" name="u_pwd" placeholder="비밀번호" required>
+									<input type="password" id="u_pwd" name="u_pwd" placeholder="비밀번호" required>
 								</td>
 								<td>
-									<input type="hidden" name="u_idx" value="${u_idx}" >
 									<input type="button" value="로그인" onclick="login_ok(this.form)">
 								</td>
 							</tr>
@@ -47,8 +52,18 @@
 					<div class="anyitems_box">
 						<a href="findID_go.do">아이디 찾기</a> | 
 						<a href="findpwd_go.do">비밀번호 찾기</a> &nbsp;&nbsp;&nbsp;
-						<a href="join_go.do">회원가입</a> 
-						<a href="logout_go.do">로그아웃</a> 
+						<a href="join_go.do">회원가입</a>
+						<c:choose>
+							<c:when test="${loginChk == 'ok'}">
+								${userVO.u_name}님 환영합니다.
+
+								<!-- 몰루?????? 안됨 -->
+								<c:if test="${admin == 'ok' }">
+									<span>관리자님 환영합니다</span>
+								</c:if>
+								<a href="logout_go.do">로그아웃</a> 
+							</c:when>
+						</c:choose>
 					</div>
 					
 					<div class="sns_login_box">

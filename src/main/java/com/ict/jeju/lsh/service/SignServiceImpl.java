@@ -1,5 +1,7 @@
 package com.ict.jeju.lsh.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,14 @@ public class SignServiceImpl implements SignService {
 		return signDAO.getIdDoubleChk(u_id);
 	}
 	
+	@Override
+	public int getChgPwd(UserVO userVO) {
+		return signDAO.getChgPwd(userVO);
+	}
+	
+	@Override
+	public List<UserVO> getFindIdChk(UserVO userVO) {
+		return signDAO.getFindIdChk(userVO);
+	}
 	
 }
