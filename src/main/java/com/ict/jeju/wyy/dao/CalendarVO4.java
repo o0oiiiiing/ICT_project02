@@ -1,10 +1,16 @@
 package com.ict.jeju.wyy.dao;
 
 public class CalendarVO4 {
-	private String c_idx, c_title, c_content, c_start, c_end,c_status;
+	private String c_idx, c_title, c_start, c_end,c_status;
 	private String u_idx, u_name;
-	private String contentsid, vi_title, vi_image, vi_value, vi_address, vi_phoneno;
+	private String contentsid, vi_title, vi_image, vi_value, vi_address, vi_phoneno, vi_category;
 	
+	public String getVi_category() {
+		return vi_category;
+	}
+	public void setVi_category(String vi_category) {
+		this.vi_category = vi_category;
+	}
 	public String getVi_phoneno() {
 		return vi_phoneno;
 	}
@@ -66,12 +72,7 @@ public class CalendarVO4 {
 	public void setC_title(String c_title) {
 		this.c_title = c_title;
 	}
-	public String getC_content() {
-		return c_content;
-	}
-	public void setC_content(String c_content) {
-		this.c_content = c_content;
-	}
+
 	public String getC_start() {
 		return c_start;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.wyy.dao.CalendarVO4;
@@ -22,6 +23,8 @@ public class JejuController4 {
 	public ModelAndView wyyHome() {
 		return new ModelAndView("wyy-view/index");
 	}
+	
+	// 나의여행일정 추가한 리스트 / 좋아요한 리스트
 	@RequestMapping("myTripPlan")
 	public ModelAndView myTripPlan(String u_idx) {
 		ModelAndView mv = new ModelAndView("wyy-view/myTripPlan");
@@ -35,6 +38,18 @@ public class JejuController4 {
 		}
 		return null;
 	}
+	
+	// 캘린더 일정 추가하기
+	@RequestMapping("calSave")
+	public ModelAndView saveCal(CalendarVO4 cvo4){
+		int result = calendarService4.saveCal(cvo4);
+		System.out.println(result);
+		if (result>0) {
+			return new ModelAndView("redirect:myTripPlan");
+		}
+		return new ModelAndView("wyy-view/error");
+	}
+	
 	@RequestMapping("calendar")
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
@@ -42,5 +57,9 @@ public class JejuController4 {
 	@RequestMapping("addCalList")
 	public ModelAndView modal() {
 		return new ModelAndView("wyy-view/calendar_modal");
+	}
+	@RequestMapping("calendar_add")
+	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {
+		return new ModelAndView("wyy-view/calendar_add");
 	}
 }

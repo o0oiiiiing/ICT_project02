@@ -9,14 +9,10 @@
 
 </style>
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
 
-<script type="text/javascript">
-	
-</script>
 <script type="text/javascript">
 // 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
 $(document).ready(function() {
@@ -32,11 +28,21 @@ $(document).ready(function() {
     });
 });
 
-// 캘린더 일정추가 
-	function addCalList(){
-		location.href="addCalList";
-	}
 </script>
+<style type="text/css">
+.calList_contentAll{
+	float: left;
+	display: flex;
+}
+
+.calList_content{
+	background-color: lightblue;
+	border-bottom: 1px solid lightgray;
+	width: 400px;
+	margin: 10px;
+}
+
+</style>
 <title>나의 여행</title>
 </head>
 <body>
@@ -58,7 +64,7 @@ $(document).ready(function() {
 		</div>
 		<!-- 카카오 지도 -->
 		<div id="map"></div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	9b1dad637e1ccb6b94f973b276b012bd"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 			    $.ajax({
@@ -66,44 +72,59 @@ $(document).ready(function() {
 			        method: "post",
 			        dataType: "json",
 			        success: function(data) {
-			            var mapContainer = document.getElementById('map'); // 지도를 표시할 div  
+			        	// 지도를 표시할 div  
+			            var mapContainer = document.getElementById('map');
+			            
 			            var mapOption = { 
-			                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			                level: 3 // 지도의 확대 레벨
+			            	// 지도의 중심좌표 -> 한라산으로 지정(제일 가운데인듯)
+			                center: new kakao.maps.LatLng(33.36132, 126.54195), 
+			                level: 10 // 지도의 확대 레벨
 			            };
 	
-			            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			         
-			            for (var i = 0; i < data.length; i++) {
-			                var marker = new kakao.maps.Marker({
-			                    map: map, // 마커를 표시할 지도
-			                    position: new kakao.maps.LatLng(data[i].latitude, data[i].longitude), // 마커를 표시할 위치
-			                    title : data[i].title // 마커의 타이틀
-			                });
-			            }
-	
-			            // 마커 이미지의 이미지 주소입니다
-			            var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+			            var map = new kakao.maps.Map(mapContainer, mapOption);
+			         	
+			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
+			            var markerImages = {
+			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',
+			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',
+			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 
+			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',
+			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',
+			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'
+			            	};
 			            
-			            for (var i = 0; i < positions.length; i ++) {
-			                
-			                // 마커 이미지의 이미지 크기 입니다
-			                var imageSize = new kakao.maps.Size(24, 35); 
-			                
-			                // 마커 이미지를 생성합니다    
-			                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-			                
-			                // 마커를 생성합니다
-			                var marker = new kakao.maps.Marker({
-			                    map: map, // 마커를 표시할 지도
-			                    position: positions[i].latlng, // 마커를 표시할 위치
-			                    title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			                    image : markerImage // 마커 이미지 
-			                });
-			            }
-			        } // success 콜백 함수 괄호
-			    }); // $.ajax 함수 괄호
-			}); // $(document).ready 함수 괄호
+			         // 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
+			            function createMarkers(category, positions) {
+    						var markers = [];
+    						var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
+    						for (var i = 0; i < positions.length; i++) {
+        						var marker = new kakao.maps.Marker({
+            						map: map,
+            						position: new kakao.maps.LatLng(positions[i].vi_latitude, positions[i].vi_longitude),
+            						title: positions[i].vi_title,
+            						image: markerImage
+        						});
+        						markers.push(marker);
+    						}
+    						return markers;
+						}
+
+			            // 카테고리별 마커 배열 선언
+			            var placeMarkers = [];
+			            var shopMarkers = [];
+			            var bedMarkers = [];
+			            var eatMarkers = [];
+			            var festivalMarkers = [];
+
+			            // 카테고리별 마커를 생성하고 지도에 표시
+			            placeMarkers = createMarkers('c1', data.filter(function(item) { return item.vi_category === 'c1'; }));
+			            shopMarkers = createMarkers('c2', data.filter(function(item) { return item.vi_category === 'c2'; }));
+			            bedMarkers = createMarkers('c3', data.filter(function(item) { return item.vi_category === 'c3'; }));
+			            eatMarkers = createMarkers('c4', data.filter(function(item) { return item.vi_category === 'c4'; }));
+			            festivalMarkers = createMarkers('c5', data.filter(function(item) { return item.vi_category === 'c5'; }));
+			        }
+			    });
+			});
 		</script>
 		<div class="myTripLikeTrip">
 			<button class="myTrip" onclick="/">나의 여행일정</button>
@@ -113,7 +134,7 @@ $(document).ready(function() {
 		</div>
 		<div class="myTripDetail">
 			<div class="detail_calendar">
-				<iframe src="calendar" width="500px" height="500px" frameborder="0"></iframe>
+				<iframe src="calendar" width="700px" height="700px" frameborder="0"></iframe>
 			</div>
 			<div class="detail_calList">
 				<c:choose>
@@ -123,9 +144,11 @@ $(document).ready(function() {
 					<c:otherwise>
 						<c:forEach var="k" items="${list}" varStatus="vs">
 							<div class="calList_content">
+								<img src="${k.vi_image }" style="width: 130px; height: 130px;">
 								<p>${k.vi_title}</p>
 								<p>${k.vi_address}</p>
 								<p>${k.vi_phoneno}</p>
+								<button onclick="location.href='calendar_add?contentsid=${k.contentsid}'">일정 추가</button>
 							</div>
 						</c:forEach>
 					</c:otherwise>
@@ -145,7 +168,7 @@ $(document).ready(function() {
 								<img src="${k.vi_image}" class="likeTrip_Image"/>
 								<p>${k.vi_value}</p>
 								<p>여행 이름 : ${k.vi_title}</p>
-								<button onclick="addCalList()">일정 추가</button>
+								<button onclick="location.href='calendar_add?contentsid=${k.contentsid}'">일정 추가</button>
 							</div>
 						</c:forEach>
 					</c:otherwise>

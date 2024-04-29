@@ -26,15 +26,15 @@ $(document).ready(function() {
     // 저장 버튼 눌렀을 때
     $("#saveChanges").click(function() {
     var eventData = {
-        title: $("#title").val(),
-        start: $("#start").val(),
-        end: $("#end").val()
+        c_title: $("#title").val(),
+        c_start: $("#start").val(),
+        c_end: $("#end").val()
     };
-
+	console.log(eventData);
     if (
-        eventData.title == "" ||
-        eventData.start == "" ||
-        eventData.end == ""
+        eventData.c_title == "" ||
+        eventData.c_start == "" ||
+        eventData.c_end == ""
     ) {
         alert("입력하지 않은 값이 있습니다.");
     } else if ($("#start").val() > $("#end").val()) {
@@ -44,6 +44,7 @@ $(document).ready(function() {
             url: "calSave",  // 서버의 처리 URL
             method: "POST",
             data: eventData,  // 전송할 데이터
+            contentType: "application/json",
             dataType: "json",
             success: function(response) {
                 if (response.success) {
@@ -61,6 +62,7 @@ $(document).ready(function() {
 });
 });
 </script>
+
 </head>
 <body>
 		<!-- 일정추가 모달.. 부트스트랩 -->
@@ -81,7 +83,7 @@ $(document).ready(function() {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal" id="cancelChanges">취소</button>
-					<button type="button" class="btn btn-primary" id="saveChanges">
+					<button type="button" class="btn btn-primary" id="saveChanges" >
 						추가</button>
 				</div>
 			</div>

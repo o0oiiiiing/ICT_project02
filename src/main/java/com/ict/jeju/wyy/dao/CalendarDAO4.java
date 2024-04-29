@@ -14,7 +14,7 @@ public class CalendarDAO4 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	//전체 보기
+	// 캘린더 전체 보기
 	public List<CalendarVO4> calList() {
 		try {
 			return sqlSessionTemplate.selectList("calendar.cal_list");
@@ -32,20 +32,7 @@ public class CalendarDAO4 {
 		}
 		return 0;
 	}
-/*	
-	//저장
-	public int calSave(String u_idx, String contentsid) {
-		try {
-			Map<String, String> map = new HashMap<>();
-			map.put("u_idx", u_idx);
-			map.put("contentsid", contentsid);
-			return sqlSessionTemplate.insert("calendar.insert", map);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-*/	
+
 	// 리스트
 	public List<CalendarVO4> myTripPlan(String u_idx) {
 		try {
@@ -64,6 +51,26 @@ public class CalendarDAO4 {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	// 지도 전체보기
+	public List<VisitJejuVO4> myTripMap() {
+		try {
+			return sqlSessionTemplate.selectList("calendar.map_list");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 캘린더 일정 추가
+	public int saveCal(CalendarVO4 cvo4) {
+		try {
+			return sqlSessionTemplate.insert("calendar.save_cal", cvo4);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 	
