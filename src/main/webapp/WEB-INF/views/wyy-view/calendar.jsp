@@ -41,22 +41,9 @@ body {
 			navLinks : true,
 			selectable : true,
 			selectMirror : true,
-			// 빈 캘린더 클릭했을 때 
-	/*		 select : function(arg) {
-				var title = prompt('일정 제목:');
-				if (title) {
-					calendar.addEvent({
-						title : title,
-						start : arg.start,
-						end : arg.end
-					});
-				}
-				calendar.unselect();
-			},
-			*/
 			
+			// 일정 삭제
 			eventClick : function(arg) {
-				console.log("Clicked event ID:", arg.event.id);
 				if (confirm('일정을 삭제하시겠습니까?')) {
 					$.ajax({
 						url : "calDelete",
@@ -70,7 +57,7 @@ body {
 							if (data == "0") {
 								alert("삭제 실패");
 							} else if (data == "1") {
-								arg.event.remove(); // 이벤트 삭제
+								arg.event.remove();
 							}
 						},
 						error : function() {
@@ -97,15 +84,17 @@ body {
 					success : function(data) {
 						console.log(data);
 						var events = data.map(function(item) {
+							var endDate = new Date(item.c_end);
+						    // 종료일에 1초 추가(풀캘린더는 00:00:00 시간은 해당 날짜로 안쳐줌..)
+						    endDate.setSeconds(endDate.getSeconds() + 1);
 							return {
 								title : item.c_title,
 								start : item.c_start,
-								end : item.c_end,
+								end : endDate,
 								c_idx : item.c_idx,
 								vi_title : item.vi_title
 							};
 						});
-							console.log("Mapped events:", events);
 						// FullCalendar에 이벤트 객체 배열 전달
 						successCallback(events);
 					},
