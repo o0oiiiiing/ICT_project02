@@ -19,6 +19,11 @@ public class WowController {
 		return new ModelAndView("pdh-view/detail");
 	}
 
+	@GetMapping("map_practice")
+	public ModelAndView map_practice() {
+		return new ModelAndView("pdh-view/map_practice");
+	}
+
 	/*
 	 * @GetMapping("join") public ModelAndView join(VO vo) { ModelAndView mv = new
 	 * ModelAndView("pdh-view/pdh"); mv.addObject("70만원 키보드", 사고싶은 키보드) return mv; }
