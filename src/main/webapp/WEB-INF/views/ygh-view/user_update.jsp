@@ -9,6 +9,7 @@
 <title>회원정보수정</title>
 <link href="<c:url value="/resources/ygh-css/user_update.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/pdh-css/home.css"/>" rel='stylesheet' />
+<link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 	function repwd_go() {
 		location.href = "repwd_go.do";

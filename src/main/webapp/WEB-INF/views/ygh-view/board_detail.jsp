@@ -44,24 +44,18 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<%-- <pre>${bovo.content}</pre> --%> <textarea rows="10"
-								cols="60" id="content" name="content" readonly>${bovo.bo_content}</textarea>
+							<%-- <pre>${bovo.content}</pre> --%> 
+							<textarea rows="10" cols="60" id="content" name="content" readonly style="margin: 5px;">${bovo.bo_content}</textarea>
 						</td>
 					</tr>
 
 				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="2">
-							<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-							<input type="hidden" value="${cPage}" name="cPage"> 
-							<input type="button" value="목록" onclick="admin_list(this.form)" /> 
-							<input type="button" value="답글" onclick="board_ans_write(this.form)" /> 
-							<input type="button" value="삭제" onclick="board_delete(this.form)" />
-						</td>
-					</tr>
-				</tfoot>
 			</table>
+			<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+			<input type="hidden" value="${cPage}" name="cPage"> 
+			<input type="button" value="목록" onclick="admin_list(this.form)" /> 
+			<input type="button" value="답글" onclick="board_ans_write(this.form)" /> 
+			<input type="button" value="삭제" onclick="board_delete(this.form)" />
 		</div>
 	</form>
 
