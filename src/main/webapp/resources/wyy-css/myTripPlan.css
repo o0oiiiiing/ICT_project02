@@ -41,18 +41,24 @@
 	color: black;
 	background-color: white;
 }
-.likeTripDetail{
-	display: none;
-}
+
 .myTripDetail {
 	 display: flex;
     align-items: center; 
     margin: 0 auto;
     width: 1200px;
 }
-.detail_calendar, .detail_calList{
-	/* margin: 0 100px; */
+
+.likeTripDetail{
+	 display: flex;
+    align-items: center; 
+    margin: 0 auto;
+    width: 1200px;
 }
+.detail_calendar {
+display: none;
+}
+
 
 .likeTrip_content{
 	width: 300px;
