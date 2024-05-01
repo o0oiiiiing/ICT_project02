@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.service.CalendarService4;
 
 @Controller
@@ -28,12 +29,12 @@ public class JejuController4 {
 	@RequestMapping("myTripPlan")
 	public ModelAndView myTripPlan(String u_idx) {
 		ModelAndView mv = new ModelAndView("wyy-view/myTripPlan");
-		List<CalendarVO4> list = calendarService4.myTripPlan(u_idx);
 		List<LikeVO> like_list = calendarService4.myTripLike(u_idx);
-		if (list != null) {
+		List<UserVO4> u_list = calendarService4.myTripUser(u_idx);
+		if (like_list != null) {
 			mv.addObject("u_idx", u_idx);
-			mv.addObject("list", list);
 			mv.addObject("like_list", like_list);
+			mv.addObject("u_list", u_list);
 			return mv;
 		}
 		return null;
@@ -54,10 +55,11 @@ public class JejuController4 {
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
 	}
-	@RequestMapping("addCalList")
-	public ModelAndView modal() {
-		return new ModelAndView("wyy-view/calendar_modal");
+	@RequestMapping("test01")
+	public ModelAndView test01() {
+		return new ModelAndView("wyy-view/lightbox");
 	}
+	
 	@RequestMapping("calendar_add")
 	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {
 		return new ModelAndView("wyy-view/calendar_add");

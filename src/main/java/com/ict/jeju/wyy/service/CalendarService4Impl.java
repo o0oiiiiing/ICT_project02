@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ict.jeju.wyy.dao.CalendarDAO4;
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO4;
 
 
@@ -27,12 +28,6 @@ public class CalendarService4Impl implements CalendarService4{
 	public int calDelete(String c_idx) {
 		return cdao4.calDelete(c_idx);
 	}
-
-	//나의여행 리스트
-	@Override
-	public List<CalendarVO4> myTripPlan(String u_idx) {
-		return cdao4.myTripPlan(u_idx);
-	}
 	
 	// 나의 여행 좋아요 리스트
 	@Override
@@ -40,6 +35,12 @@ public class CalendarService4Impl implements CalendarService4{
 		return cdao4.myTripLike(u_idx);
 	}
 	
+	// 나의 여행 유저 리스트
+	@Override
+	public List<UserVO4> myTripUser(String u_idx) {
+		return cdao4.myTripUser(u_idx);
+	}
+
 	// 지도 보기
 	@Override
 	public List<VisitJejuVO4> myTripMap() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO4;
 
 public interface CalendarService4 {
@@ -14,11 +15,11 @@ public interface CalendarService4 {
 	// 삭제
 	public int calDelete(String c_idx);
 	
-	// 나의여행 추가한 리스트
-	public List<CalendarVO4> myTripPlan(String u_idx);
-	
 	//나의여행 좋아요 리스트
 	public List<LikeVO> myTripLike(String u_idx);
+	
+	// 나의 여행 유저 리스트
+	public List<UserVO4> myTripUser(String u_idx);
 	
 	// 지도 전체보기
 	public List<VisitJejuVO4> myTripMap();

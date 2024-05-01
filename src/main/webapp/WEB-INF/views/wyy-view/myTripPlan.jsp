@@ -9,6 +9,7 @@
 
 </style>
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
+<link href="resources/common-css/reset.css" rel="stylesheet" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -29,43 +30,7 @@ $(document).ready(function() {
 });
 
 </script>
-<style type="text/css">
-.calList_contentAll{
-	float: left;
-	display: flex;
-}
-
-.calList_content{
-	background-color: lightblue;
-	border-bottom: 1px solid lightgray;
-	width: 400px;
-	margin: 10px;
-}
-
-</style>
-<title>나의 여행</title>
-</head>
-<body>
-	<div class="myTripPlan">
-		<h2>나의 여행</h2>
-		<hr>
-		<div class="myTrip_profile">
-			<img src="resources/common-image/profile.png" width="150px"
-				height="150px" style="margin: 10px">
-			<div class="myTrip_profile_content">
-				<p>
-					$(이름) 님&nbsp;
-					<button onclick="/">정보수정</button>
-				</p>
-				<p>나의 여행일정 ($값)</p>
-				<p>나의 리뷰 ($값)</p>
-				<p>좋아요한 여행지 ($값)</p>
-			</div>
-		</div>
-		<!-- 카카오 지도 -->
-		<div id="map"></div>
-		
-		<script type="text/javascript">
+<script type="text/javascript">
 			$(document).ready(function() {
 			    $.ajax({
 			        url: "myTripMap",
@@ -121,6 +86,31 @@ $(document).ready(function() {
 			    });
 			});
 		</script>
+<style type="text/css">
+
+
+</style>
+<title>나의 여행</title>
+</head>
+<body>
+	<div class="myTripPlan">
+		<h2>나의 여행</h2>
+		<hr>
+		<div class="myTrip_profile">
+			<img src="resources/common-image/profile.png" width="150px"
+				height="150px" style="margin: 10px">
+			<div class="myTrip_profile_content">
+			<c:forEach var="k" items="${u_list}" varStatus="vs">
+					<p>${k.u_name} 님&nbsp;<button onclick="/">정보수정</button></p>
+					<p>나의 여행일정 ($값)</p>
+					<p>나의 리뷰 ($값)</p>
+					<p>좋아요한 여행지 ${k.like_active}</p>
+			</c:forEach>
+			</div>
+		</div>
+		<!-- 카카오 지도 -->
+		<div id="map"></div>
+			
 		<div class="myTripLikeTrip">
 			<button class="myTrip" onclick="/">나의 여행일정</button>
 			&nbsp;|&nbsp;
@@ -129,26 +119,7 @@ $(document).ready(function() {
 		</div>
 		<div class="myTripDetail">
 			<div class="detail_calendar">
-				<iframe src="calendar" width="700px" height="700px" frameborder="0"></iframe>
-			</div>
-			<div class="detail_calList">
-				<c:choose>
-					<c:when test="${empty list}">
-						<h3>여행일정이 없습니다.</h3>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="k" items="${list}" varStatus="vs">
-							<div class="calList_content">
-								<img src="${k.vi_image }" style="width: 130px; height: 130px;">
-								<p>${k.vi_title}</p>
-								<p>${k.vi_address}</p>
-								<p>${k.vi_phoneno}</p>
-								<button onclick="location.href='calendar_add?contentsid=${k.contentsid}'">일정 추가</button>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-
+				<iframe src="calendar" width="1200px" height="1100px" frameborder="0"></iframe>
 			</div>
 		</div>
 		<div class="likeTripDetail">
@@ -171,6 +142,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 		<div id="content"></div>
+	</div>
+	<div>
+	<%@include file="../common/footer.jsp"%>
 	</div>
 </body>
 </html>
