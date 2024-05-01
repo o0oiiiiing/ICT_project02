@@ -18,7 +18,10 @@
 					alert("이메일을 입력하세요");
 					f.u_email.focus();
 					return false;
-				}
+				} else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$/.test(f.u_email.value)) {
+					alert("이메일 형식을 확인하세요.");
+					return false;
+				} 
 				f.action="findID_ok.do";
 				f.submit();
 			}
