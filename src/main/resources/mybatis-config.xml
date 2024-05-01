@@ -12,12 +12,10 @@
 	</settings>
 	
 	<typeAliases>
-
-		<!-- <typeAlias type="com.ict.jeju.dao.CalendarVO" alias="cvo" /> -->
-
 		<typeAlias type="com.ict.jeju.ygh.dao.BoardVO" alias="bovo"/>
 		<typeAlias type="com.ict.jeju.ygh.dao.ReportVO" alias="revo"/>
-		<typeAlias type="com.ict.jeju.ygh.dao.CommentVO" alias="comvo"/>
+		<typeAlias type="com.ict.jeju.pdh.dao.PlaceListVO" alias="PlaceListVO" />
+    <typeAlias type="com.ict.jeju.ygh.dao.CommentVO" alias="comvo"/>
 	    <typeAlias type="com.ict.jeju.lsh.dao.UserVO" alias="userVO"/>
 		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO4" alias="cvo4" />
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
@@ -29,8 +27,9 @@
 	<mappers>
 		<mapper resource="mappers/calendar-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
-	    <mapper resource="mappers/user-mapper.xml" />
-	    <mapper resource="mappers/category-mapper.xml"/>
+    	<mapper resource="mappers/user-mapper.xml" />
+    	<mapper resource="mappers/category-mapper.xml"/>
+    	<mapper resource="mappers/place-mapper.xml"/>
 	</mappers>
 
 </configuration>

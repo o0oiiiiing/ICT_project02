@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="place">
+	<select id="popularList" resultType="PlaceListVO">
+		select *
+		from Visitjeju_table
+		order by vi_hit desc
+		limit 20
+	</select>
+	
+	<select id="placeDetail" parameterType="String" resultType="PlaceListVO">
+		select * 
+		from Visitjeju_table 
+		where contentsid = #{contentsid}
+	</select>
+	
+	<select id="likeNum" parameterType="String" resultType="int">
+		select count(*)
+		from Like_table l
+		inner join Visitjeju_table v on v.contentsid = l.contentsid
+		where l.contentsid = #{contentsid}
+	</select>
+	
+	<select id="reviewNum" parameterType="String" resultType="int">
+		select count(*)
+		from Review_table r
+		inner join Visitjeju_table v on v.contentsid = r.contentsid
+		where r.contentsid = #{contentsid}
+	</select>
+
+</mapper>
+

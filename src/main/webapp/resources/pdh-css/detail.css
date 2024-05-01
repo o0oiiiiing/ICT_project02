@@ -43,6 +43,7 @@
 	top: 0;
 	z-index: -1;
 	position: absolute;
+	filter: brightness(70%)
 }
 
 .header {
@@ -144,11 +145,12 @@
 	color: white;
 	font-size: 60px;
 	margin-top: 430px;
-	margin-left: 84%;
+	position: absolute;
+	right: 30px;
 }
 
 .icons {
-	margin: 90px auto 60px auto;
+	margin: 570px auto 60px auto;
 	width: 60%;
 	table-layout: fixed;
 }
@@ -188,6 +190,7 @@
 	height: 40px;
 	border-radius: 50px;
 	font-size: 15px;
+	background-color: #D9D9D9;
 }
 
 .icon {
@@ -234,11 +237,17 @@
 	margin: 10px auto;
 }
 
+.qa_title__section {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	margin: 20px auto;
+}
+
 .qa_title {
 	font-family: 'GmarketSansMedium';
-	width: 90%;
 	font-size: 25px;
-	margin: 30px auto 10px auto;
+	line-height: 45px;
 }
 
 .qa_table {
@@ -249,15 +258,28 @@
 .qa_table thead {
 	border-top: 3px solid #909090;
 	border-bottom: 2px solid #D9D9D9;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
 }
 
 .qa_table tr {
-	border: 1px solid #D9D9D9;
+	border-bottom: 2px solid #D9D9D9;
 	font-family: 'NanumSquare';
 	font-size: 18px;
 }
 
 .qa_table td {
-	border: 1px solid #D9D9D9;
-	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+
+.write_button {
+	border: none;
+	font-family: 'GmarketSansMedium';
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	font-size: 15px;
+	background-color: #D9D9D9;
 }

@@ -31,7 +31,7 @@
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="detail" class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="" class="a_tag">관광지</a></li>
 			<li class="nav_list"><a href="map_practice" class="a_tag">음식</a></li>
 			<li class="nav_list">숙박</li>
 			<li class="nav_list">쇼핑</li>
@@ -57,66 +57,29 @@
 		<div class="place__container">
 			<ul class="place__list">
 				<li class="place__title"><p>현재 인기있는 장소</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
-				<li class="place"><img alt="장소"
-					src="resources/pdh-image/place.jpg">
-					<p>조회수 : 30</p>
-					<p>관광지</p>
-					<p>오설록 녹차밭</p></li>
+				<c:choose>
+					<c:when test="${empty popularList}">
+						목록이 존재하지 않습니다.
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="k" items="${popularList}">
+							<li class="place">
+								<a href="detail?contentsid=${k.contentsid}">
+									<img alt="장소" src="${k.vi_image}">
+									<p>조회수 : ${k.vi_hit}</p>
+									<c:choose>
+										<c:when test="${k.vi_category == 'c1'}"><p>관광지</p></c:when>
+										<c:when test="${k.vi_category == 'c2'}"><p>쇼핑</p></c:when>
+										<c:when test="${k.vi_category == 'c3'}"><p>숙소</p></c:when>
+										<c:when test="${k.vi_category == 'c4'}"><p>음식</p></c:when>
+										<c:otherwise><p>축제/행사</p></c:otherwise>
+									</c:choose>
+									<p>${k.vi_title}</p>
+								</a>
+							</li>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
