@@ -8,9 +8,10 @@
 </head>
 <body>
 	<h1>안녕ㅇㅇ</h1>
-	<a href="myTripPlan">나의 여행페이지</a>
-	<a href="calendar">캘린더페이지</a>
-	<a href="addCalList">캘린더일정추가</a>
-	<a href="calendar_add">캘린더일정추가(만드는중)</a>
+	<a href="test01">라이트박스테스트</a>
+	<form action="myTripPlan" method="post">
+    	<input type="hidden" name="u_idx" value="1">
+    	<input type="submit" value="나의 여행"> 
+	</form>
 </body>
-</html>
+</html>>

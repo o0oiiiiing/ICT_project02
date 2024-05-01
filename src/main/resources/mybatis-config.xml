@@ -22,6 +22,7 @@
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
     <typeAlias type="com.ict.jeju.chm.dao.CategoryVO" alias="caVO" />
     <typeAlias type="com.ict.jeju.wyy.dao.VisitJejuVO4" alias="viVO4" />
+    <typeAlias type="com.ict.jeju.wyy.dao.UserVO4" alias="uvo4" />
 	</typeAliases>
 
 	<mappers>

@@ -32,21 +32,21 @@ public class CalendarDAO4 {
 		}
 		return 0;
 	}
-
-	// 리스트
-	public List<CalendarVO4> myTripPlan(String u_idx) {
+	
+	// 나의여행 좋아요 리스트
+	public List<LikeVO> myTripLike(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("calendar.tripList", u_idx);
+			return sqlSessionTemplate.selectList("calendar.likeList",u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return null;
 	}
 	
-	// 나의여행 좋아요 리스트
-	public List<LikeVO> myTripLike(String u_idx) {
+	// 나의 여행 유저 리스트
+	public List<UserVO4> myTripUser(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("calendar.likeList",u_idx);
+			return sqlSessionTemplate.selectList("calendar.userList",u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
