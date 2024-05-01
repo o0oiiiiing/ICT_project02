@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,7 @@ import com.ict.jeju.lsh.dao.NaverVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.lsh.service.SignService;
+import com.jcraft.jsch.Session;
 
 @Controller
 public class SignController {
@@ -89,10 +93,6 @@ public class SignController {
 		} else {
 			session.setAttribute("loginChk", "ok");
 			session.setAttribute("userVO", userVO2);
-			// admin 접속시로 만들긴했는데 되는지 확인은 안해봄
-			if (userVO.getU_id().equals("admin")) {
-				mv.addObject("admin", "ok");
-			}
 			mv.addObject("userVO", userVO2);
 			// 로그인성공시 세션에 userVO 정보를 담아서 로그인 페이지로 이동함(아무렇게나 만든 임시페이지)
 			mv.setViewName("redirect:mainsub.do");
@@ -100,9 +100,16 @@ public class SignController {
 		}
 	}
 	
-	// 카카오 로그인 -> 재발급받아야합니다 돌아가긴함
-	@RequestMapping("kakaologin.do")
-	public ModelAndView KakaoLogin(HttpServletRequest request, UserVO userVO) {
+	// SNS 로그인시 기본 회원가입과 비교하기 위해서 match_info.do / JSP : match_info 
+	// if문 사용해서 로그인한 이력있으면 확인 페이지말고 바로 메인페이지로 이동할 수 있게 해야됨
+	// 비교할 때는 JSP에서 받은 전화번호로 매칭시켜서 확인
+	// 만약 일반회원가입으로서 가입 이력이 존재하면 일단 디나이 시킴
+	// 나중에 다 하고나서 디나이 할 필요 없어지면 통합회원 할 수 있게 체크박스로 통합회원 적용
+	
+	
+	// 카카오 로그인 
+	@RequestMapping("kakao_login.do")
+	public ModelAndView KakaoLogin(HttpServletRequest request) {
 		String code = request.getParameter("code");
 		String reqURL = "https://kauth.kakao.com/oauth/token";
 		try {
@@ -117,8 +124,8 @@ public class SignController {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
 			StringBuffer sb = new StringBuffer();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=e6360ca36b4fb9784b213174df6b6022");
-			sb.append("&redirect_uri=http://localhost:8090/kakaologin.do");
+			sb.append("&client_id=b3c8cdc497ebc0c70d13c3383ee0f676");
+			sb.append("&redirect_uri=http://localhost:8090/kakao_login.do");
 			sb.append("&code="+code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -129,18 +136,22 @@ public class SignController {
 			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String line = "";
 			StringBuffer sb2 = new StringBuffer();
-			
 			while ((line=br.readLine()) !=null) {
 				sb2.append(line);
 			}
+			
 			String res = sb2.toString();
+			System.out.println("token : "+res);
 			
 			Gson gson = new Gson();
 			KakaoVO kvo = gson.fromJson(res, KakaoVO.class);
 			request.getSession().setAttribute("access_token", kvo.getAccess_token());
 			request.getSession().setAttribute("refresh_token", kvo.getRefresh_token());
 			request.getSession().setAttribute("token_type", kvo.getToken_type());
-			// 그냥 아무페이지 만들어놓은거
+			
+			// 로그인 성공시 인증용 전화번호 받아서 DB갔다오면서 일반회원가입 했는지 전화번호로 이용해서 확인
+			// 전화번호가 이미 있는 번호라면 있다고 하면 디나이
+			// mv.setViewName("redirect:전화번호 받을수 있는 화면단(회원가입창이랑 비슷하게"));
 			return new ModelAndView("lsh_view/main");
 		} catch (Exception e) {
 			System.out.println("kakao login err : "+e);
@@ -148,7 +159,7 @@ public class SignController {
 		return null;
 	}
 	
-	// 네이버로그인 -> 재발급받아서해야됨 제꺼아니에요, 로그인안되욧
+	// 네이버로그인 
 	@RequestMapping("naverlogin.do")
 	public ModelAndView NaverLogin(HttpServletRequest request, UserVO userVO) {
 		String code = request.getParameter("code");
@@ -166,8 +177,8 @@ public class SignController {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
 			StringBuffer sb = new StringBuffer();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=y0uYS0PIjookcvhFn2xI");
-			sb.append("&client_secret=4lTGOJ1aYn");
+			sb.append("&client_id=i3iG6_9k8h7tam0e8JLn");
+			sb.append("&client_secret=nPGni9yRqK");
 			sb.append("&code=" + code);
 			sb.append("&state=" + state);
 			bw.write(sb.toString());

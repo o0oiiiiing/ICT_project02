@@ -14,7 +14,7 @@
     </insert>
     
     <select id="id_chk" parameterType="String" resultType="int">
-    	SELECT COUNT(*) FROM User_table WHERE u_id = #{u_id}
+    	SELECT COUNT(*) FROM User_table WHERE u_name = #{u_name} and u_email = #{u_email} 
     </select>
    
    <update id="chgpwd" parameterType="userVO">
@@ -25,5 +25,15 @@
     	SELECT * FROM User_table WHERE u_name = #{u_name} and u_email = #{u_email}
     </select>
     
+	
 </mapper>
+
+
+
+
+
+
+
+
+
 

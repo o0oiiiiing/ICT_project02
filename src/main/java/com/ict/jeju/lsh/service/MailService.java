@@ -16,7 +16,7 @@ public class MailService {
 			sendMail.setText(""
 					+ "<p>비밀번호</p>"
                     + "<p><font size='20px'>확인번호 : "+randomNum +"</p>");
-			sendMail.setFrom("gkdldnpdl11@gmail.com", "project");
+			sendMail.setFrom("lsh31739@naver.com", "project");
 			sendMail.setTo(toMail);
 			sendMail.send();
 		} catch (Exception e) {

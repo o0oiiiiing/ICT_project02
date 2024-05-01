@@ -56,22 +56,27 @@
 						<c:choose>
 							<c:when test="${loginChk == 'ok'}">
 								${userVO.u_name}님 환영합니다.
-
-								<!-- 몰루?????? 안됨 -->
-								<c:if test="${admin == 'ok' }">
-									<span>관리자님 환영합니다</span>
-								</c:if>
 								<a href="logout_go.do">로그아웃</a> 
 							</c:when>
 						</c:choose>
 					</div>
 					
 					<div class="sns_login_box">
-						<a href="https://kauth.kakao.com/oauth/authorize?client_id=e6360ca36b4fb9784b213174df6b6022&redirect_uri=http://localhost:8090/kakaologin.do&response_type=code">
+						<%-- 
+							카카오 REST API : b3c8cdc497ebc0c70d13c3383ee0f676
+							RedirectURL : http://localhost:8090/kakao_login.do 
+						--%>
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
 							<img src="resources/images/kakao_login_medium_narrow.png" width="160px">
 						</a>
-						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=y0uYS0PIjookcvhFn2xI&state=STATE_STRING&redirect_uri=http://localhost:8090/naverlogin.do">
-							<img src="resources/images/btnG_logIn.png" width="150px">
+						
+						<%-- 
+							네이버 클라이언트 아이디 : i3iG6_9k8h7tam0e8JLn 
+							클라이언트 시크릿 : nPGni9yRqK 
+							RedirectURL : http://localhost:8090/kakao_login.do
+						--%>
+						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=i3iG6_9k8h7tam0e8JLn&state=STATE_STRING&redirect_uri=http://localhost:8090/naver_login.do">
+							<img src="resources/images/btnG.png" width="150px">
 						</a>
 					</div>
 				</form>

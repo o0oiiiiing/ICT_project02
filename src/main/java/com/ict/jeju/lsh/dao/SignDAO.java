@@ -1,6 +1,7 @@
 package com.ict.jeju.lsh.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,6 @@ public class SignDAO {
 		}
 		return null;
 	}
-	
 	
 	
 }
