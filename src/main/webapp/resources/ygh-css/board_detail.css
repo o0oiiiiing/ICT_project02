@@ -24,9 +24,46 @@
 	border: 1px solid lightgray;
 }
 
-#board_detail input[type="button"] {
-	width: 10%;
+#board_detail_btn {
+    text-align: center;
+}
+
+
+#board_detail_btn input[type="button"] {
+	width: 50px;
 	margin: 20px auto;
 	height: 20px;
-	font-size: 15px;
+	font-size: 12px;
 }
+
+#comment_box table {
+	width: 800px;
+	margin: auto;
+	border-collapse: collapse
+}
+
+#comment_box table tr {
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#comment_box table th {
+	width: 150px;
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#comment_box2 table {
+	width: 800px;
+	margin: auto;
+	border-collapse: collapse
+}
+
+#comment_box2 table tr, #comment_box2 table th {
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
