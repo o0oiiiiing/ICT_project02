@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>비밀번호 변경</title>
 <link href="<c:url value="/resources/ygh-css/repwd_page.css"/>" rel='stylesheet' />
+<link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 </head>
 <body>
 

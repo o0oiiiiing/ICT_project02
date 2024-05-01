@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ict.jeju.ygh.dao.BoardVO;
+import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
 public interface JejuService5 {
@@ -19,5 +20,9 @@ public interface JejuService5 {
 	
 	public int getLevUpdate(Map<String, Integer> map);
 	
-	public int getAnsInsert(BoardVO bovo);
+//	public int getAnsInsert(BoardVO bovo);
+	
+	public List<CommentVO> getCommentList(String bo_idx);
+	
+	public int getCommentInsert(CommentVO comvo);
 }

@@ -34,9 +34,19 @@
 		update Board_table set lev=lev+1 where groups=#{groups} and lev >= #{lev}
 	</update>
 	
+	
 	<insert id="ans_insert" parameterType="bovo">
 		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate)
 		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate())
+	</insert>
+	
+	<select id="commentlist" resultType="comvo" parameterType="String">
+		select * from Comment_table where bo_idx = #{bo_idx}
+	</select>
+	
+	<insert id="comment_insert" parameterType="comvo">
+		insert into Comment_table(com_writer, com_title, com_content, com_regdate, com_status, bo_idx)
+		values(#{com_writer}, #{com_title}, #{com_content}, sysdate(), 1, #{bo_idx})
 	</insert>
 </mapper>
 

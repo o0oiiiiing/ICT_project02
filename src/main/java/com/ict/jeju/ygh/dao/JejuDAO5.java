@@ -83,6 +83,7 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	/*
 	public int getAnsInsert(BoardVO bovo) {
 		try {
 			return sqlSessionTemplate.insert("Board_table.ans_insert", bovo);
@@ -91,4 +92,26 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+	*/
+	
+
+	public List<CommentVO> getCommentList(String bo_idx) {
+		try {
+			return sqlSessionTemplate.selectList("Board_table.commentlist", bo_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public int getCommentInsert(CommentVO comvo) {
+		try {
+			return sqlSessionTemplate.insert("Board_table.comment_insert", comvo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+
 }

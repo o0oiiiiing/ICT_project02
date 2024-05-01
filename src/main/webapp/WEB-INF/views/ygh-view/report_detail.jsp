@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 여행(관리자)</title>
-<link href="<c:url value="/resources/ygh-css/board_detail.css"/>"
-	rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
+<link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 </head>
 <body>
 <div id="report_detail">

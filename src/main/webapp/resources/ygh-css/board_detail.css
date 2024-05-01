@@ -1,18 +1,69 @@
 #board_detail table {
-	width: 500px;
-	margin: 0 auto;
-	border: 1px solid lightgray;
+	width: 800px;
+	margin: auto;
+	border-collapse: collapse
 }
 
 #board_detail table tr {
 	text-align: center;
 	padding: 4px 10px;
-	background-color: #F6F6F6;
+	border: 1px solid lightgray;
 }
 
 #board_detail table th {
-	width: 120px;
+	width: 150px;
 	text-align: center;
 	padding: 4px 10px;
-	background-color: #B2CCFF;
+	border: 1px solid lightgray;
 }
+
+#board_detail table td {
+	width: 150px;
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#board_detail_btn {
+    text-align: center;
+}
+
+
+#board_detail_btn input[type="button"] {
+	width: 50px;
+	margin: 20px auto;
+	height: 20px;
+	font-size: 12px;
+}
+
+#comment_box table {
+	width: 800px;
+	margin: auto;
+	border-collapse: collapse
+}
+
+#comment_box table tr {
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#comment_box table th {
+	width: 150px;
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#comment_box2 table {
+	width: 800px;
+	margin: auto;
+	border-collapse: collapse
+}
+
+#comment_box2 table tr, #comment_box2 table th {
+	text-align: center;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+

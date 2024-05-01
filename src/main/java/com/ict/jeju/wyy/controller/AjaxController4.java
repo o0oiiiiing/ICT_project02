@@ -18,11 +18,25 @@ public class AjaxController4 {
 	@Autowired
 	private CalendarService4 calendarService4;
 	
-	// 지도 정보
+	// 캘린더 지도 정보
 	@RequestMapping(value = "myTripMap", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String myTripMap() {
 		List<VisitJejuVO4> vi_list = calendarService4.myTripMap();
+		if(vi_list != null) {
+			// pom.xml 에서 gson 추가
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(vi_list);
+			return jsonString;
+		}
+		return "fail";
+	}
+	
+	// 좋아요 지도정보
+	@RequestMapping(value = "myTripMapLike", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String myTripMapLike() {
+		List<VisitJejuVO4> vi_list = calendarService4.myTripMapLike();
 		if(vi_list != null) {
 			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();

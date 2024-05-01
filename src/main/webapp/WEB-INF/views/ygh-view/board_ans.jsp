@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+/*
 	function board_ans_write_ok(f) {
 		for (var i = 0; i < f.elements.length; i++) {
 			if (f.elements[i].value == "") {
@@ -16,6 +17,12 @@
 				return;//수행 중단
 			}
 		}
+		f.action="board_ans_write_ok.do";
+		f.submit();
+	}
+	*/
+	
+	function board_ans_write_ok(f) {
 		f.action="board_ans_write_ok.do";
 		f.submit();
 	}
@@ -34,15 +41,15 @@
 		<tbody>
 			<tr>
 				<th>작성자</th>
-				<td align="left"><input type="text" name="writer"></td>
+				<td align="left"><input type="text" name="com_writer"></td>
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td align="left"> <input type="text" name="title"></td>
+				<td align="left"> <input type="text" name="com_title"></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td align="left"><textarea rows="10" cols="60" name="content"></textarea>
+				<td align="left"><textarea rows="10" cols="60" name="com_content"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -52,8 +59,9 @@
 			<tr>
 				<td colspan="2">
 				<input type="hidden" name="cPage" value="${cPage}">
-				<input type="hidden" name="bo_idx" value="${bo_idx}">
-				<input type="button" value="답글입력" onclick="board_ans_write_ok(this.form)" /> 
+				<!-- 댓글 저장 시 어떤 원글의 댓글인지 저장해야 한다. -->
+				<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
+				<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" /> 
 				<input type="button" value="목록" onclick="admin_list(this.form)" /> 
 				<input type="reset" value="취소" />
 				</td>

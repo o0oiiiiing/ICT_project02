@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.ygh.dao.BoardVO;
+import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 import com.ict.jeju.ygh.service.JejuService5;
 
@@ -45,8 +46,8 @@ public class JejuController5 {
 	@RequestMapping("admin_list.do")
 	public ModelAndView boardList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_list");
-		
-		// 페이징 미답변 Q&A 
+
+		// 페이징 미답변 Q&A
 		int count = jejuService5.getTotalCount();
 		paging.setTotalRecord(count);
 
@@ -118,14 +119,17 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-
 	// 관리자페이지 Q&A 상세보기
 	@GetMapping("board_detail.do")
 	public ModelAndView boardDetail(@ModelAttribute("cPage") String cPage, String bo_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/board_detail");
+		// 상세보기
 		BoardVO bovo = jejuService5.getBoardDetail(bo_idx);
 
 		if (bovo != null) {
+			// 댓글 가져오기
+			List<CommentVO> com_list = jejuService5.getCommentList(bo_idx);
+			mv.addObject("com_list", com_list);
 			mv.addObject("bovo", bovo);
 			return mv;
 		}
@@ -144,73 +148,25 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
-	
+
 	@GetMapping("admin_list_go.do")
 	public ModelAndView admin_list_go() {
 		return new ModelAndView("ygh-view/admin_list");
 	}
-	
+
+	/*
 	@PostMapping("board_ans_write.do")
-	public ModelAndView getBoardAnsWrite(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx) {
+	public ModelAndView getBoardAnsWrite(@ModelAttribute("cPage") String cPage,
+			@ModelAttribute("bo_idx") String bo_idx) {
 		return new ModelAndView("ygh-view/board_ans");
 	}
-	
-	
-	@PostMapping("board_ans_write_ok.do")
-	public ModelAndView getBoardAnsWriteOk(@ModelAttribute("cPage")String cPage, BoardVO bovo, HttpServletRequest request) {
-		try {
-			System.out.println("cPage-3 : " +cPage.length());
-			// 답글에서만 처리할 일
-			// 원글의 groups, step, lev 를 가져와라
-			BoardVO bovo2 = jejuService5.getBoardDetail(bovo.getBo_idx());
-			
-			
-			int groups = Integer.parseInt(bovo2.getGroups());
-			int step = Integer.parseInt(bovo2.getStep());
-			int lev = Integer.parseInt(bovo2.getLev());
-			
-			// step, lev 를 하나씩 올리자
-			step++;
-			lev++;
-			
-			// DB에서 lev를 업데이트 하자
-			// ** groups이 같은 글을 찾아서 기존 데이터의 lev이 같거나 크면 기존 데이터의 lev 증가
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("groups", groups);
-			map.put("lev", lev);
-		
-			
-			int result = jejuService5.getLevUpdate(map);
-			
-			bovo.setGroups(String.valueOf(groups));
-			bovo.setStep(String.valueOf(step));
-			bovo.setLev(String.valueOf(lev));
-			
-			
-			ModelAndView mv = new ModelAndView("redirect:admin_list.do");
-//			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-//			MultipartFile file = bovo.getFile();
-//			if (file.isEmpty()) {
-//				bovo.setF_name("");
-//			} else {
-//				UUID uuid = UUID.randomUUID();
-//				String f_name = uuid.toString()+"_"+file.getOriginalFilename();
-//				bovo.setF_name(f_name);
-//				
-//				byte[] in = file.getBytes();
-//				File out = new File(path, f_name);
-//				FileCopyUtils.copy(in, out);
-//			}
-//			bovo.setPwd(passwordEncoder.encode(bovo.getPwd()));
-			
-			int result2 = jejuService5.getAnsInsert(bovo);
-			if (result2 > 0) {
-				return mv;
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return new ModelAndView("ygh-view/error");
-	}
+*/
 
+	@PostMapping("board_ans_write_ok.do")
+	public ModelAndView getCommentInsert(CommentVO comvo, @ModelAttribute("bo_idx")String bo_idx){
+		ModelAndView mv = new ModelAndView("redirect:board_detail.do");
+		int result = jejuService5.getCommentInsert(comvo);
+		return mv;	
+	}
+	
 }

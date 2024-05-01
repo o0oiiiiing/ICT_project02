@@ -2,10 +2,18 @@ package com.ict.jeju.wyy.dao;
 
 public class LikeVO {
 	private String like_idx, like_active;
-	private String u_idx;
+	private String u_idx, u_name;
 	private String contentsid, vi_image, vi_value, vi_title;
 	
-	public String getVi_image() {
+	
+	public String getU_name() {
+		return u_name;
+	}
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
+	}
+	
+	public String getVi_image() { 
 		return vi_image;
 	}
 	public void setVi_image(String vi_image) {
