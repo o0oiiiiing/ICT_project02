@@ -23,7 +23,7 @@
 </head>
 
 <body>
-	<img class="main_image" src="resources/pdh-image/detail01.jpg">
+	<img class="main_image" src="${placeDetail.vi_image}">
 	<header class="header">
 		<ul class="nav">
 			<li>
@@ -53,7 +53,7 @@
 		</ul>
 	</header>
 
-	<p class="place_name">성산일출봉</p>
+	<p class="place_name">${placeDetail.vi_title}</p>
 
 	<table class="icons">
 		<tbody>
@@ -77,12 +77,11 @@
 				<td class="icons-detail no-border-right">링크 복사</td>
 			</tr>
 			<tr class="icons-section">
-				<td class="icons-number border-right">398</td>
+				<td class="icons-number border-right"><fmt:formatNumber value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
 					type="button" value="추가하기"></td>
-				<td class="icons-number border-right">56</td>
-				<td class="icons-number border-right"><fmt:formatNumber
-						value="2000" pattern="#,##0" /></td>
+				<td class="icons-number border-right"><fmt:formatNumber value="${reviewNum}" pattern="#,##0" /></td>
+				<td class="icons-number border-right"><fmt:formatNumber value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
 				<td class="no-border-right"><input class="icons-button"
 					type="button" value="복사하기"></td>
 			</tr>
@@ -103,7 +102,7 @@
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 
 					mapOption = {
-						center : new kakao.maps.LatLng(33.458528, 126.94225), // 지도의 중심좌표
+						center : new kakao.maps.LatLng(${placeDetail.vi_latitude}, ${placeDetail.vi_longitude}), // 지도의 중심좌표
 						level : 4
 					// 지도의 확대 레벨
 					};
@@ -113,7 +112,7 @@
 					
 					// 마커 표시하기
 					// 마커가 표시될 위치입니다 
-					var markerPosition = new kakao.maps.LatLng(33.458528, 126.94225);
+					var markerPosition = new kakao.maps.LatLng(${placeDetail.vi_latitude}, ${placeDetail.vi_longitude});
 
 					// 마커를 생성합니다
 					var marker = new kakao.maps.Marker({
@@ -123,7 +122,7 @@
 					marker.setMap(map);
 					
 					// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-					var iwContent = '<div style="padding:5px;">성산일출봉</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					var iwContent = '<div style="padding:5px;">${placeDetail.vi_title}</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 					// 인포윈도우를 생성합니다
@@ -132,13 +131,17 @@
 						removable : iwRemoveable
 					});
 
-					// 마커에 클릭이벤트를 등록합니다
+					// 마커에 mouseover 이벤트를 등록합니다
 					kakao.maps.event.addListener(marker, 'mouseover', function() {
 						// 마커 위에 인포윈도우를 표시합니다
 						infowindow.open(map, marker);
 					});
 					
 					// mouse나가면 인포윈도우 없애기
+					kakao.maps.event.addListener(marker, 'mouseout', function() {
+						// 마커 위에 인포윈도우를 제거
+						infowindow.close();
+					});
 				</script>
 			</div>
 		</div>
@@ -148,7 +151,10 @@
 				<p class="detail-title">Q&A</p>
 				<span class="material-symbols-outlined expand_icon">expand_more</span>
 			</div>
-			<p class="qa_title">Q&A (18)</p>
+			<div class="qa_title__section">
+				<p class="qa_title">Q&A (18)</p>
+				<input class="write_button" type="button" value="질문작성">
+			</div>
 			<table class="qa_table">
 				<thead>
 					<tr>
@@ -160,10 +166,10 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><span class="material-symbols-outlined">lock</span>제목이에요</td>
-						<td>아무개</td>
-						<td>2024.01.01</td>
-						<td>N</td>
+						<td style="padding-left: 10px;">제목이에요</td>
+						<td style="text-align: center;">아무개</td>
+						<td style="text-align: center;">2024.01.01</td>
+						<td style="text-align: center;">N</td>
 					</tr>
 				</tbody>
 			</table>
