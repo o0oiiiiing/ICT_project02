@@ -3,7 +3,22 @@ package com.ict.jeju.wyy.dao;
 public class VisitJejuVO4 {
 	private String contentsid, vi_category, vi_value, vi_title, vi_address, vi_roadaddress;
 	private String vi_intro, vi_latitude, vi_longitude, vi_phoneno, vi_image, vi_thumbnail;
+	private String like_idx, like_active;
 	
+	
+	
+	public String getLike_idx() {
+		return like_idx;
+	}
+	public void setLike_idx(String like_idx) {
+		this.like_idx = like_idx;
+	}
+	public String getLike_active() {
+		return like_active;
+	}
+	public void setLike_active(String like_active) {
+		this.like_active = like_active;
+	}
 	public String getContentsid() {
 		return contentsid;
 	}
