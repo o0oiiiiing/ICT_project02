@@ -17,31 +17,43 @@
     <delete id="delete" parameterType="String">
     	delete from Calendar_table where c_idx=#{c_idx}
     </delete>
-	<!-- 나의여행 추가한 리스트 -->
-	<select id="tripList" resultType="cvo4">
-		select * 
-		 from Calendar_table c
-		 inner join Visitjeju_table v on v.contentsid = c.contentsid
-		 inner join User_table u on u.u_idx = c.u_idx
-		 where c.c_status = 1
-		 order by c.c_idx   
-    </select>
+    
     <!-- 좋아요한 리스트 -->
-    <select id="likeList" resultType="lvo">
+    <select id="likeList" parameterType="Map" resultType="lvo">
     	select * 
     	from Like_table l
     	inner join User_table u on u.u_idx = l.u_idx 
     	inner join Visitjeju_table v on v.contentsid = l.contentsid
-    	where l.like_active=1
+    	where l.like_active = 1
+    	order by l.like_idx desc
+    	limit #{limit} offset #{offset}
     </select>
+    <!-- 페이징기법 -->
+   	<select id="count" resultType="int">
+   		select count(*) from Like_table
+   	</select>
+    <!-- 나의여행 유저 리스트 -->
+    <select id="userList" resultType="uvo4">
+    	 select *
+    	 from User_table
+    	 where u_idx=#{u_idx}
+    </select>
+		
     <!-- 지도 전체보기 -->
    <select id="map_list" resultType="viVO4">
    		select * 
 		 from Calendar_table c
 		 inner join Visitjeju_table v on v.contentsid = c.contentsid
 		 inner join User_table u on u.u_idx = c.u_idx
-		 where c.c_status = 0 
 		 order by c.c_idx
+   </select>
+    <!-- 좋아요 지도 전체보기 -->
+   <select id="map_list_like" resultType="viVO4">
+   		select * 
+		 from Like_table l
+		 inner join Visitjeju_table v on v.contentsid = l.contentsid
+		 inner join User_table u on u.u_idx = l.u_idx
+		 order by l.like_idx
    </select>
    <!-- 캘린더 일정추가 -->
    <!-- 나중에 로그인되면 u_idx 수정해야한다. -->
@@ -49,5 +61,11 @@
    	insert into Calendar_table(u_idx, contentsid, c_title, c_start, c_end)
    	 values(1,#{contentsid}, #{c_title}, #{c_start}, #{c_end})
    </insert>
+   
+   <!-- 첫화면 임시세션 -->
+   <select id="wyyhome" parameterType="uvo4" resultType="uvo4">
+   	select *
+   	 from User_table
+   	 where u_idx=#{u_idx}
+   </select>
 </mapper>
-
