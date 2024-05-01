@@ -9,6 +9,7 @@
 <title>나의 여행(관리자)</title>
 <link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/report_list.css"/>" rel='stylesheet' />
+<link href="<c:url value="resources/common-css/reset.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -256,6 +257,7 @@ $(document).ready(function() {
 				</tfoot>
 			</table>
 		</div>
-
+		
+		<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
