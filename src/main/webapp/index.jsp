@@ -47,16 +47,16 @@
               <a href="category_page.do?vi_value=관광지">관광지</a>
             </li>
             <li class="category">
-              <a href="category_page.do?vi_value=쇼핑">기념품</a>
+              <a href="category_page.do?vi_value=쇼핑">쇼핑</a>
             </li>
             <li class="category">
-              <a href="category_page.do?vi_value=숙박">숙소</a>
+              <a href="category_page.do?vi_value=숙박">숙박</a>
             </li>
             <li class="category">
-              <a href="category_page.do?vi_value=음식점">식당</a>
+              <a href="category_page.do?vi_value=음식점">음식점</a>
             </li>
             <li class="category">
-              <a href="category_page.do?vi_value=축제/행사">축제</a>
+              <a href="category_page.do?vi_value=축제/행사">축제/행사</a>
             </li>
           </ul>
         </div>

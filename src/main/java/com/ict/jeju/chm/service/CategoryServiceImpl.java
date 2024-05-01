@@ -18,7 +18,18 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<CategoryVO> getCategoryList(String vi_value) {
 		return categoryDAO.getCategoryList(vi_value);
 	}
-	
+
+	@Override
+	public int getTotalCount() {
+		return categoryDAO.getTotalCount();
+	}
+
+	@Override
+	public List<CategoryVO> getBoardList(int offset,  int limit, String vi_value) {
+		return categoryDAO.getBoardList(offset, limit,vi_value);
+
+	}
+
 	
 	
 }

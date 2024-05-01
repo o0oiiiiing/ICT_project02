@@ -7,4 +7,12 @@
     <select id="selectList" parameterType="String" resultType="caVO">
     	select * from Visitjeju_table where vi_value = #{vi_value}
     </select>
+    
+    <select id="count" resultType="int">
+    	select count(*) from Visitjeju_table
+    </select>
+    
+    <select id="board_list" parameterType="Map" resultType="caVO">
+    	select * from Visitjeju_table where vi_value = #{vi_value} limit #{limit} offset #{offset}
+    </select>
 </mapper>
