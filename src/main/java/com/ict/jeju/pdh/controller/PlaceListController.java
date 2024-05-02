@@ -34,7 +34,13 @@ public class PlaceListController {
 		PlaceListVO placeDetail = placeListService.placeDetail(contentsid);
 		int likeNum = placeListService.likeNum(contentsid);
 		int reviewNum = placeListService.reviewNum(contentsid);
-		System.out.println();
+
+		// 조회수 올리기
+		int hitUp = Integer.parseInt(placeDetail.getVi_hit());
+		hitUp++;
+		placeDetail.setVi_hit(String.valueOf(hitUp));
+		int hitUpdate = placeListService.hitUpdate(contentsid);
+
 		if (placeDetail != null) {
 			mv.addObject("placeDetail", placeDetail);
 			mv.addObject("likeNum", likeNum);
@@ -42,6 +48,13 @@ public class PlaceListController {
 			return mv;
 		}
 		return null;
+	}
+	
+	// 일정 추가하기 
+	// 로그인 여부에 따라서 다르게 처리하기
+	@GetMapping("addSchedule")
+	public ModelAndView addSchedule(String contentsid) {
+		return new ModelAndView("wyy-view/calendar_add");
 	}
 
 }

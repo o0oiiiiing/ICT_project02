@@ -37,5 +37,11 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public int reviewNum(String contentsid) {
 		return placeListDAO.reviewNum(contentsid);
 	}
+	
+	// 조회수 올리기
+	@Override
+	public int hitUpdate(String contentsid) {
+		return placeListDAO.hitUpdate(contentsid);
+	}
 
 }

@@ -30,6 +30,12 @@
 		inner join Visitjeju_table v on v.contentsid = r.contentsid
 		where r.contentsid = #{contentsid}
 	</select>
+	
+	<update id="hitUpdate" parameterType="String">
+		update Visitjeju_table 
+		set vi_hit = vi_hit + 1 
+		where contentsid = #{contentsid}
+	</update>
 
 </mapper>
 

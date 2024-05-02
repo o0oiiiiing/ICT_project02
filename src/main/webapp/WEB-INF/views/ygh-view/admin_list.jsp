@@ -59,7 +59,6 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-
 	<div id="board">
 		<h1>나의 여행(관리자)</h1>
 		<table>
