@@ -6,7 +6,22 @@ public class UserVO4 {
 	private String c_idx, c_status;
 	private String like_idx, like_active;
 	private String bo_idx;
+	private String like_active_count, review_count;
 	
+	
+	
+	public String getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(String review_count) {
+		this.review_count = review_count;
+	}
+	public String getLike_active_count() {
+		return like_active_count;
+	}
+	public void setLike_active_count(String like_active_count) {
+		this.like_active_count = like_active_count;
+	}
 	public String getU_id() {
 		return u_id;
 	}

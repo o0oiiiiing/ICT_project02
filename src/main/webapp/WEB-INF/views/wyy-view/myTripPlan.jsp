@@ -18,23 +18,23 @@
 <script type="text/javascript">
 // 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
 $(document).ready(function() {
-	test2();
+	myTripLike();
     $(".myTrip").click(function() {
         $(".detail_calendar").show();   
-        test1();
+        myTripPlan();
         $(".likeTripDetail").hide();   
     });
 
     $(".likeTrip").click(function() {
         $(".likeTripDetail").show();  
-        test2();
+        myTripLike();
         $(".detail_calendar").hide();    
     });
 });
 
 </script>
 <script type="text/javascript">
-			function test1() {
+			function myTripPlan() {
 			    $.ajax({
 			        url: "myTripMap",
 			        method: "post",
@@ -60,20 +60,44 @@ $(document).ready(function() {
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
-			         // 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
+			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
 			            function createMarkers(category, positions) {
-    						var markers = [];
-    						var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
-    						for (var i = 0; i < positions.length; i++) {
-        						var marker = new kakao.maps.Marker({
-            						map: map,
-            						position: new kakao.maps.LatLng(positions[i].vi_latitude, positions[i].vi_longitude),
-            						title: positions[i].vi_title,
-            						image: markerImage
-        						});
-        						markers.push(marker);
-    						}
-    						return markers;
+						    var markers = [];
+						    var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
+						    for (var i = 0; i < positions.length; i++) {
+						        (function(position) {
+						            var marker = new kakao.maps.Marker({
+						                map: map,
+						                position: new kakao.maps.LatLng(position.vi_latitude, position.vi_longitude),
+						                title: position.vi_title,
+						                image: markerImage
+						            });
+						
+						            // 인포윈도우 내용
+						            var iwContent = '<div style="padding:5px; text-align:center;">' 
+						                + position.vi_title
+						                + '<br><a href="#">상세페이지</a>'
+						                + '</div>';
+						
+						            // 인포윈도우 생성
+						            var infowindow = new kakao.maps.InfoWindow({
+						                content: iwContent
+						            });
+						
+						         	// 클릭 이벤트 추가
+						            kakao.maps.event.addListener(marker, 'click', function() {
+						                // 인포윈도우가 열려있으면 닫고, 닫혀있으면 열기
+						                if (infowindow.getMap()) {
+						                    infowindow.close();
+						                } else {
+						                    infowindow.open(map, marker);
+						                }
+						            });
+						
+						            markers.push(marker);
+						        })(positions[i]);
+						    }
+						    return markers;
 						}
 						
 			         	// 선언
@@ -88,7 +112,8 @@ $(document).ready(function() {
 			        }
 			    });
 			};
-			function test2() {
+			
+			function myTripLike() {
 			    $.ajax({
 			        url: "myTripMapLike",
 			        method: "post",
@@ -114,31 +139,63 @@ $(document).ready(function() {
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
-			         // 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
+			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
 			            function createMarkers(category, positions) {
-    						var markers = [];
-    						var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
-    						for (var i = 0; i < positions.length; i++) {
-        						var marker = new kakao.maps.Marker({
-            						map: map,
-            						position: new kakao.maps.LatLng(positions[i].vi_latitude, positions[i].vi_longitude),
-            						title: positions[i].vi_title,
-            						image: markerImage
-        						});
-        						markers.push(marker);
-    						}
-    						return markers;
+						    var markers = [];
+						    var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
+						    for (var i = 0; i < positions.length; i++) {
+						        (function(position) {
+						            var marker = new kakao.maps.Marker({
+						                map: map,
+						                position: new kakao.maps.LatLng(position.vi_latitude, position.vi_longitude),
+						                title: position.vi_title,
+						                image: markerImage
+						            });
+						            markers.push(marker);
+						        })(positions[i]);
+						    }
+						    return markers;
 						}
+
 						
 			         	// 선언
 			            const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
 			            const markers = {};
-
 			            // 각 카테고리에 대한 마커를 생성하고 지도에 표시
 			            categories.forEach(category => {
 			                markers[category] = createMarkers(category, data.filter(item => item.vi_category === category));
 			            });
-			            
+			        	
+			        	 // 인포윈도우 생성
+			            var infowindow = new kakao.maps.InfoWindow({
+			                content: ''
+			            });
+
+			            $('.likeTrip_content').click(function() {
+			                var latitude = $(this).data('vi_latitude'); 
+			                var longitude = $(this).data('vi_longitude');
+			                var title = $(this).data('vi_title'); 
+
+			                // 인포윈도우 내용 업데이트
+			                var iwContent = '<div style="padding:5px; text-align:center;">' 
+			                    + title
+			                    + '<br><a href="#">상세페이지</a>'
+			                    + '</div>';
+			                infowindow.setContent(iwContent);
+
+			                // 인포윈도우 위치
+			                var markerPosition = new kakao.maps.LatLng(latitude, longitude);
+
+			                // 현재 상태 확인하여 토글
+			                if (!infowindow.getMap()) {
+			                    infowindow.open(map, new kakao.maps.Marker({ position: markerPosition }));
+			                } else {
+			                    infowindow.close();
+			                }
+			            })
+
+
+
 			        }
 			    });
 			};
@@ -153,16 +210,13 @@ $(document).ready(function() {
 		<hr>
 		<div class="myTrip_profile">
 			<img src="resources/common-image/profile.png" width="150px"
-				height="150px" style="margin: 10px">
+				height="150px" style="margin: auto 30px;">
 			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
-					<p>${k.u_name}
-						님&nbsp;
-						<button onclick="/">정보수정</button>
-					</p>
-					<p>나의 여행일정 ($값)</p>
-					<p>나의 리뷰 ($값)</p>
-					<p>좋아요한 여행지 ${k.like_active}</p>
+					<p>${k.u_name} 님</p>
+					<p>나의 리뷰 ${k.review_count}</p>
+					<p>좋아요한 여행지 ${k.like_active_count}</p>
+					<button onclick="/">정보수정</button>
 				</c:forEach>
 			</div>
 		</div>
@@ -189,10 +243,12 @@ $(document).ready(function() {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${like_list}" varStatus="vs">
-							<div class="likeTrip_content">
+							<div class="likeTrip_content" 
+									data-vi_latitude="${k.vi_latitude }" data-vi_longitude="${k.vi_longitude }" 
+									data-vi_title="${k.vi_title }" >
 								<img src="${k.vi_image}" class="likeTrip_Image" />
 								<p>${k.vi_value}</p>
-								<p>여행 이름 : ${k.vi_title}</p>
+								<p>${k.vi_title}</p>
 								<button
 									onclick="location.href='calendar_add?contentsid=${k.contentsid}'">일정
 									추가</button>
