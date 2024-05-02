@@ -20,8 +20,7 @@
 
 #board_t table {
 	width: 800px;
-	margin: 0 auto;
-	margin-top: 20px;
+	margin: 20px auto 50px;
 	border-collapse: collapse;
 	font-size: 14px;
 }

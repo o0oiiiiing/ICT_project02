@@ -77,6 +77,7 @@ public class JejuController5 {
 			paging.setEndBlock(paging.getTotalPage());
 		}
 
+		
 		// 페이징 신고
 		int count2 = jejuService5.getTotalCount2();
 		paging2.setTotalRecord(count2);
@@ -106,7 +107,8 @@ public class JejuController5 {
 		if (paging2.getEndBlock() > paging2.getTotalPage()) {
 			paging2.setEndBlock(paging2.getTotalPage());
 		}
-
+		
+		// DB
 		List<BoardVO> board_list = jejuService5.getBoardList(paging.getOffset(), paging.getNumPerPage());
 		List<ReportVO> report_list = jejuService5.getReportList(paging2.getOffset(), paging2.getNumPerPage());
 		if (board_list != null && report_list != null) {
@@ -167,6 +169,12 @@ public class JejuController5 {
 		ModelAndView mv = new ModelAndView("redirect:board_detail.do");
 		int result = jejuService5.getCommentInsert(comvo);
 		return mv;	
+	}
+	
+	// Q&A 게시판 이동
+	@GetMapping("board_write.do")
+	public ModelAndView boardWrite() {
+		return new ModelAndView("ygh-view/board_write");
 	}
 	
 }

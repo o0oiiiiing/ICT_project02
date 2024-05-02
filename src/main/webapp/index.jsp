@@ -66,6 +66,7 @@
 	<a href="home">박다현</a>
 	<a href="user_update.do">회원정보수정(비밀번호변경)</a>
 	<a href="admin_list.do">나의여행(관리자)</a>
+	<a href="board_write.do">Q&A 게시판</a>
 	<form action="wyyhome" method="post">
     	<input type="hidden" name="u_idx" value="1">
     	<input type="hidden" name="u_name" value="원유영">
