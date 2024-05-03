@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 여행(관리자)</title>
-<link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/ygh-css/report_list.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
 <link href="<c:url value="resources/common-css/reset.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -55,6 +55,8 @@ $(document).ready(function() {
 		}
     });
 });
+
+
 
 </script>
 </head>
@@ -105,15 +107,14 @@ $(document).ready(function() {
 					<c:otherwise>
 						<c:forEach var="k" items="${board_list}" varStatus="vs">
 							<tr>
-								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage + vs.index)}</td>
+								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
 								<td style="text-align: left;"><c:forEach begin="1"
 										end="${k.step}">&nbsp;[Re]</c:forEach> <c:choose>
 										<c:when test="${k.active == 1}">
 											<span style="color: lightgray;">삭제된 게시물입니다.</span>
 										</c:when>
 										<c:otherwise>
-											<a
-												href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+											<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
 										</c:otherwise>
 									</c:choose></td>
 								<td>${k.bo_writer}</td>
@@ -133,8 +134,8 @@ $(document).ready(function() {
 									<li class="disable">&#8249;</li>
 								</c:when>
 								<c:otherwise>
-									<li><a
-										href="admin_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
+									<li>
+										<a href="admin_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -147,7 +148,7 @@ $(document).ready(function() {
 										<li class="now">${k}</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="admin_list.do?cPage=${k}">${k}</a></li>
+										<li><a href="admin_list.do?cPage=${k}&cPage2=${paging2.nowPage2}">${k}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -159,7 +160,7 @@ $(document).ready(function() {
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="admin_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
+										href="admin_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -193,15 +194,15 @@ $(document).ready(function() {
 						<c:otherwise>
 							<c:forEach var="k2" items="${report_list}" varStatus="vs">
 								<tr>
-									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage + vs.index)}</td>
+									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 									<td style="text-align: left;">
-									<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> <c:choose>
+									<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
+										<c:choose>
 											<c:when test="${k2.report_active == 1}">
 												<span style="color: lightgray;">삭제된 게시물입니다.</span>
 											</c:when>
 											<c:otherwise>
-												<a
-													href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+												<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
 											</c:otherwise>
 										</c:choose></td>
 									<td>${k2.report_writer}</td>
@@ -222,7 +223,7 @@ $(document).ready(function() {
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="admin_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}">&#8249;</a>
+											href="admin_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8249;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
@@ -235,7 +236,7 @@ $(document).ready(function() {
 											<li class="now">${k2}</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="admin_list.do?cPage2=${k2}">${k2}</a></li>
+											<li><a href="admin_list.do?cPage2=${k2}&cPage=${paging.nowPage}">${k2}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -247,7 +248,7 @@ $(document).ready(function() {
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="admin_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}">&#8250;</a>
+											href="admin_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8250;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>

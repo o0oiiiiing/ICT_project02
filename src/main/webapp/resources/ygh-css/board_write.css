@@ -1,0 +1,57 @@
+.note-btn-group{width: auto;}
+.note-toolbar{width: auto;}
+	
+#board_write table {
+	width: 1000px;
+	margin: auto;
+	border-collapse: collapse;
+}
+
+#board_write table caption {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 15px;
+	padding-bottom: 10px; 
+	text-align : left;
+	border-bottom: 1px solid lightgray;
+	text-align: left;
+}
+
+#board_write table tr {
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+}
+
+#board_write table th {
+	width: 150px;
+	text-align: center;
+	border: 1px solid lightgray;
+}
+
+#board_write table td {
+	border: 1px solid lightgray;
+}
+
+#board_write input[type="text"], input[type="password"] {
+	padding: 5px;
+	margin: 5px;
+	border: 1px solid lightgray;
+}
+
+#board_write_btn {
+	width: 800px;
+	text-align: center;
+	margin: 10px auto;
+}
+
+#board_write_btn input[type="button"] {
+	display: inline-block;
+	width: 80px;
+	margin: 0 5px;
+	height: 35px;
+	font-size: 15px;
+	border-radius: 15px;
+	border: 1px solid gray;
+	background-color: lightgray;
+	cursor: pointer;
+}

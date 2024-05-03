@@ -113,5 +113,14 @@ public class JejuDAO5 {
 		return -1;
 	}
 	
+	public int boardWrtieOk(BoardVO bovo) {
+		try {
+			return sqlSessionTemplate.insert("Board_table.board_insert", bovo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
 
 }

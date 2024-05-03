@@ -62,6 +62,11 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.getCommentInsert(comvo);
 	}
 
+	@Override
+	public int boardWrtieOk(BoardVO bovo) {
+		return jejuDAO5.boardWrtieOk(bovo);
+	}
+
 	
 
 	

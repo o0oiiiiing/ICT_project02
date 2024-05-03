@@ -7,8 +7,9 @@ public class Paging {
 	private int nowPage = 1;
 	private int nowBlock = 1;
 
-	// 한 페이지당 10줄
-	private int numPerPage = 3;
+	// 한 페이지당 줄 갯수
+	private int numPerPage = 10;
+	private int numPerPage2 = 5;
 	// 한 블록당 3개
 	private int pagePerBlock = 3;
 	// DB의 게시물의 수
@@ -26,6 +27,14 @@ public class Paging {
 	private int endBlock = 0;
 
 	private int offset = 0;
+
+	public int getNumPerPage2() {
+		return numPerPage2;
+	}
+
+	public void setNumPerPage2(int numPerPage2) {
+		this.numPerPage2 = numPerPage2;
+	}
 
 	public int getNowPage() {
 		return nowPage;

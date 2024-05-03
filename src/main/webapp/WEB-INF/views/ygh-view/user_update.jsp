@@ -17,7 +17,7 @@
 </script>
 </head>
 <body>
-<%@ include file="../pdh-view/home.jsp"%>
+
 
 	<div id="update_wrap">
 		<form method="post">

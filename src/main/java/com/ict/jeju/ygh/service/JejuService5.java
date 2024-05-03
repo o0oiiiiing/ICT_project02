@@ -25,4 +25,6 @@ public interface JejuService5 {
 	public List<CommentVO> getCommentList(String bo_idx);
 	
 	public int getCommentInsert(CommentVO comvo);
+	
+	public int boardWrtieOk(BoardVO bovo);
 }
