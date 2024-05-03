@@ -7,7 +7,7 @@ public class MyTripPaging {
 	private int nowPage = 1;
 	private int nowBlock = 1;
 
-	// 한 페이지당 3줄
+	// 한 페이지당 2줄
 	private int numPerPage = 8;
 	// 한 블록당 4개
 	private int pagePerBlock = 4;
