@@ -20,6 +20,36 @@
 <link rel="stylesheet" href="resources/pdh-css/detail.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
+
+<script type="text/javascript">
+	// 링크 복사하기 버튼
+	function copyLink() {
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("링크가 복사되었습니다.")
+	}
+	
+	// 일정 추가하기 버튼
+	function addSchedule() {
+		location.href = "addSchedule?contentsid=${placeDetail.contentsid}";
+	}
+	
+	// 아이콘 눌렀을 때 텍스트박스 글 지우기
+	function clearInput() {
+		var searchField = document.getElementsByClassName("search-field")
+
+		for (var i = 0; i < searchField.length; i++) {
+			searchField[i].value = "";
+		}
+	}
+</script>
+
 </head>
 
 <body>
@@ -44,7 +74,7 @@
 				<div class="search-bar">
 					<span class="material-symbols-outlined search-icon">search</span> <input
 						class="search-field" type="text" placeholder="검색어를 입력해주세요." /><span
-						class="material-symbols-outlined delete-icon">close</span>
+						class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
 				</div>
 			</li>
 			<li>로그인</li>
@@ -59,7 +89,7 @@
 		<tbody>
 			<tr class="icons-section">
 				<td class="border-right"><span
-					class="material-symbols-outlined icon">search</span></td>
+					class="material-symbols-outlined icon">favorite</span></td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">calendar_today</span></td>
 				<td class="border-right"><span
@@ -79,11 +109,11 @@
 			<tr class="icons-section">
 				<td class="icons-number border-right"><fmt:formatNumber value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
-					type="button" value="추가하기"></td>
+					type="button" value="추가하기" onclick="addSchedule()"></td>
 				<td class="icons-number border-right"><fmt:formatNumber value="${reviewNum}" pattern="#,##0" /></td>
 				<td class="icons-number border-right"><fmt:formatNumber value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
 				<td class="no-border-right"><input class="icons-button"
-					type="button" value="복사하기"></td>
+					type="button" value="복사하기" onclick="copyLink()"></td>
 			</tr>
 		</tbody>
 	</table>

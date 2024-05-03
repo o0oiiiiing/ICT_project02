@@ -49,4 +49,24 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
+
+	// 조회수 올리기
+	public int hitUpdate(String contentsid) {
+		try {
+			return sqlSessionTemplate.update("place.hitUpdate", contentsid);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 검색하기
+	public List<PlaceListVO> searchList(String keyword) {
+		try {
+			return sqlSessionTemplate.selectList("place.searchList", keyword);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 }

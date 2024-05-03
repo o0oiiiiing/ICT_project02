@@ -17,5 +17,11 @@ public interface PlaceListService {
 	// 게시물의 리뷰 수
 	public int reviewNum(String contentsid);
 	
+	// 조회수 올리기
+	public int hitUpdate(String contentsid);
+	
+	// 검색하기
+	public List<PlaceListVO> searchList(String keyword);
+	
 	
 }
