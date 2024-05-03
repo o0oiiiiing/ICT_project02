@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-
 </style>
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
 <link href="resources/common-css/reset.css" rel="stylesheet" />
@@ -14,6 +13,12 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Remember to include jQuery :) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 
 <script type="text/javascript">
 // 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
@@ -193,14 +198,44 @@ $(document).ready(function() {
 			                    infowindow.close();
 			                }
 			            })
-
-
-
 			        }
 			    });
 			};
-		</script>
+		
+		// 모달창 열고닫기
+	    function openModal(contentsid) {
+	        $(".modal").show();
+	        $("#contentsid").val(contentsid);
+	    }
+	    function closeModal() {
+	        $(".modal").hide();
+	    }
+		
+</script>
 <style type="text/css">
+.modal {
+	display: none;
+	vertical-align: middle;
+	position: relative;
+	z-index: 2;
+	max-width: 500px;
+	box-sizing: border-box;
+	width: 90%;
+	background: #fff;
+	padding: 15px 30px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-o-border-radius: 8px;
+	-ms-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: 0 0 10px #000;
+	-moz-box-shadow: 0 0 10px #000;
+	-o-box-shadow: 0 0 10px #000;
+	-ms-box-shadow: 0 0 10px #000;
+	box-shadow: 0 0 5px #0005;
+    text-align: center;
+    margin: 0px auto;
+}
 </style>
 <title>나의 여행</title>
 </head>
@@ -213,7 +248,7 @@ $(document).ready(function() {
 				height="150px" style="margin: auto 30px;">
 			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
-					<p>${k.u_name} 님</p>
+					<p>${k.u_name}님</p>
 					<p>나의 리뷰 ${k.review_count}</p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button onclick="/">정보수정</button>
@@ -224,9 +259,9 @@ $(document).ready(function() {
 		<div id="map"></div>
 
 		<div class="myTripLikeTrip">
-			<button class="likeTrip" >좋아요한 여행지</button>
+			<button class="likeTrip">좋아요한 여행지</button>
 			&nbsp;|&nbsp;
-			<button class="myTrip" >나의 여행일정</button>
+			<button class="myTrip">나의 여행일정</button>
 			<br>
 		</div>
 		<div class="myTripDetail">
@@ -235,6 +270,19 @@ $(document).ready(function() {
 					frameborder="0"></iframe>
 			</div>
 		</div>
+		<!-- 일정추가 모달창  -->
+		<div class="modal">
+			<div class="screen">
+			<form action="calSave" method="post">
+				<p>일정 제목 : <input type="text" name="c_title"></p>
+				<p>시작 날짜 : <input type="date" name="c_start"></p>
+				<p>끝 날짜 : <input type="date" name="c_end"></p> 
+				<input type="submit" value="일정추가">
+				<input type="hidden" name="contentsid" id="contentsid" >	
+				<button type="button" value="close" class="btn modal--close" onclick="closeModal()">Close</button>
+			</form>
+			</div>
+		</div>	
 		<div class="likeTripDetail">
 			<div class="detail_likeTrip">
 				<c:choose>
@@ -243,28 +291,27 @@ $(document).ready(function() {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${like_list}" varStatus="vs">
-							<div class="likeTrip_content" 
-									data-vi_latitude="${k.vi_latitude }" data-vi_longitude="${k.vi_longitude }" 
-									data-vi_title="${k.vi_title }" >
+							<div class="likeTrip_content"
+								data-vi_latitude="${k.vi_latitude }"
+								data-vi_longitude="${k.vi_longitude }"
+								data-vi_title="${k.vi_title }">
 								<img src="${k.vi_image}" class="likeTrip_Image" />
 								<p>${k.vi_value}</p>
 								<p>${k.vi_title}</p>
-								<button
-									onclick="location.href='calendar_add?contentsid=${k.contentsid}'">일정
-									추가</button>
+								<button type="button" value="open" class="btn modal--open" onclick="openModal('${k.contentsid}')">일정추가</button>
 							</div>
 						</c:forEach>
-						<c:if test="${paging.totalPage > 1}">
-							<div class="paging">
-								<c:forEach var="i" begin="1" end="${paging.totalPage}">
-									<a href="myTripPlan?u_idx=${u_idx}&cPage=${i}">${i}</a>
-								</c:forEach>
-							</div>
-						</c:if>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
+		<c:if test="${paging.totalPage > 1}">
+			<div class="paging">
+				<c:forEach var="i" begin="1" end="${paging.totalPage}">
+					<a href="myTripPlan?u_idx=${u_idx}&cPage=${i}">${i}</a>
+				</c:forEach>
+			</div>
+		</c:if>
 		<div id="content"></div>
 	</div>
 	<div>

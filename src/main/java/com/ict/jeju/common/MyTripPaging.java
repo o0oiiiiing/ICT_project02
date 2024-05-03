@@ -8,7 +8,7 @@ public class MyTripPaging {
 	private int nowBlock = 1;
 
 	// 한 페이지당 3줄
-	private int numPerPage = 12;
+	private int numPerPage = 8;
 	// 한 블록당 4개
 	private int pagePerBlock = 4;
 	// DB의 게시물의 수
