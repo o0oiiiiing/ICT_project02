@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -26,12 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.ict.jeju.lsh.dao.KakaoVO;
+import com.ict.jeju.lsh.dao.KakaoProperties;
 import com.ict.jeju.lsh.dao.NaverVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.lsh.service.SignService;
-import com.jcraft.jsch.Session;
 
 @Controller
 public class SignController {
@@ -100,13 +98,38 @@ public class SignController {
 		}
 	}
 	
+	// 카카오 로그인 
+	@RequestMapping("kakao_login.do")
+	public ModelAndView getKakoLogin(@ModelAttribute("code")String code, HttpSession session, 
+			UserVO userVO, KakaoProperties kakaoProperties) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("code : "+code);
+		
+		String access_Token = signService.getAccess_token(code);
+		Map<String, Object> user_info = signService.getUser_info(access_Token);
+		
+		System.out.println("token : "+access_Token);
+		System.err.println("map check : "+user_info);
+		
+		session.setAttribute("loginChk", "ok");
+		session.setAttribute("userVO", userVO);
+		mv.setViewName("lsh_view/main");
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
 	// SNS 로그인시 기본 회원가입과 비교하기 위해서 match_info.do / JSP : match_info 
 	// if문 사용해서 로그인한 이력있으면 확인 페이지말고 바로 메인페이지로 이동할 수 있게 해야됨
 	// 비교할 때는 JSP에서 받은 전화번호로 매칭시켜서 확인
 	// 만약 일반회원가입으로서 가입 이력이 존재하면 일단 디나이 시킴
 	// 나중에 다 하고나서 디나이 할 필요 없어지면 통합회원 할 수 있게 체크박스로 통합회원 적용
 	
-	
+	/*
 	// 카카오 로그인 
 	@RequestMapping("kakao_login.do")
 	public ModelAndView KakaoLogin(HttpServletRequest request) {
@@ -158,6 +181,7 @@ public class SignController {
 		}
 		return null;
 	}
+	*/
 	
 	// 네이버로그인 
 	@RequestMapping("naverlogin.do")
@@ -224,7 +248,7 @@ public class SignController {
 		userVO.setU_pwd(c_pwd);
 		int res = signService.getJoinOK(userVO);
 		if (res > 0) {
-			return new ModelAndView("redirect:mainsub.do");
+			return new ModelAndView("redirect:login_go.do");
 		}
 		return null;
 	}

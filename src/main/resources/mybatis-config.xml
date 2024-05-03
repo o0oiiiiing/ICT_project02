@@ -17,6 +17,7 @@
 		<typeAlias type="com.ict.jeju.pdh.dao.PlaceListVO" alias="PlaceListVO" />
     	<typeAlias type="com.ict.jeju.ygh.dao.CommentVO" alias="comvo"/>
 	    <typeAlias type="com.ict.jeju.lsh.dao.UserVO" alias="userVO"/>
+	    <typeAlias type="com.ict.jeju.lsh.dao.KakaoVO" alias="kvo"/>
 		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO4" alias="cvo4" />
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
     	<typeAlias type="com.ict.jeju.chm.dao.CategoryVO" alias="caVO" />
