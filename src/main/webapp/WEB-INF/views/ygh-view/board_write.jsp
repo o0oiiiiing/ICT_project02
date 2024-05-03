@@ -15,6 +15,11 @@
 		f.action="board_list.do";
 		f.submit();
 	}
+	
+	function board_write_ok(f) {
+		f.action="board_write_ok.do";
+		f.submit();
+	}
 </script>
 </head>
 <body>
@@ -26,26 +31,30 @@
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="subject" size="50"/></td>
+						<td><input type="text" name="bo_title" size="50"/></td>
 					</tr>
 
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="writer" /></td>
+						<td><input type="text" name="bo_writer" /></td>
+					</tr>
+					<tr>
+						<th>비밀번호</th>
+						<td><input type="password" name="bo_pwd" size="12"/></td>
 					</tr>
 
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea rows="10" cols="60" id="content" name="content" style="margin: 5px;"></textarea>
+							<textarea rows="10" cols="60" id="bo_content" name="bo_content" style="margin: 5px;"></textarea>
 						</td>
 					</tr>
+					
 				</tbody>
 			</table>
 			</div>
 			<div id="board_write_btn">
 				<input type="button" value="목록" onclick="board_list(this.form)" /> 
-				<input type="reset" value="초기화" /> 
 				<input type="button" value="확인" onclick="board_write_ok(this.form)" />
 			</div>
 	</form>
@@ -56,7 +65,7 @@
 <script src="resources/common-js/lang/summernote-ko-KR.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#content").summernote({
+		$("#bo_content").summernote({
 			lang: "ko-KR",									// 한글 설정
 			height: 300,              		 				// 에디터 높이
 			focus: true,               						// 에디터 로딩후 포커스를 맞출지 여부
@@ -84,7 +93,7 @@
 		}).done(function(data) {
 			var path = data.path;
 			var fname = data.fname;
-			$("#content").summernote("editor.insertImage",path+"/"+fname);
+			$("#bo_content").summernote("editor.insertImage",path+"/"+fname);
 		});
 	}
 </script>

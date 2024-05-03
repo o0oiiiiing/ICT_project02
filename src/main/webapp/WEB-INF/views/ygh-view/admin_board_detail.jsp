@@ -9,8 +9,8 @@
 <title>나의 여행(관리자)</title>
 <link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
 <script type="text/javascript">
-	function board_list(f) {
-		f.action="board_list.do";
+	function admin_list(f) {
+		f.action="admin_list.do";
 		f.submit();
 	}
 	
@@ -63,7 +63,7 @@
 			<div id="board_detail_btn">
 				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
 				<input type="hidden" value="${cPage}" name="cPage"> 
-				<input type="button" value="목록" onclick="board_list(this.form)" /> 
+				<input type="button" value="목록" onclick="admin_list(this.form)" /> 
 				<input type="button" value="답글" onclick="toggleCommentBox()" /> 
 				<input type="button" value="삭제" onclick="board_delete(this.form)" />
 			</div>
