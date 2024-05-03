@@ -8,8 +8,8 @@
     	select * from Visitjeju_table where vi_value = #{vi_value}
     </select>
     
-    <select id="count" resultType="int">
-    	select count(*) from Visitjeju_table
+    <select id="count" resultType="int" parameterType="String">
+    	select count(*) from Visitjeju_table where vi_value = #{vi_value}
     </select>
     
     <select id="board_list" parameterType="Map" resultType="caVO">

@@ -9,7 +9,8 @@ public interface CategoryService {
 
 	List<CategoryVO> getCategoryList(String vi_value);
 	
-	public int getTotalCount();
+	public int getTotalCount(String vi_value);
 
 	List<CategoryVO> getBoardList(int offset, int numPerPage, String vi_value);
+
 }
