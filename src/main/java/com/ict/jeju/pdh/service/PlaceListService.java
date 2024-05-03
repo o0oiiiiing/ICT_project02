@@ -20,5 +20,8 @@ public interface PlaceListService {
 	// 조회수 올리기
 	public int hitUpdate(String contentsid);
 	
+	// 검색하기
+	public List<PlaceListVO> searchList(String keyword);
+	
 	
 }

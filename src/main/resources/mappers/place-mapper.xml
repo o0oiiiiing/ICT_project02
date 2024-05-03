@@ -36,6 +36,12 @@
 		set vi_hit = vi_hit + 1 
 		where contentsid = #{contentsid}
 	</update>
+	
+	<select id="searchList" parameterType="String" resultType="PlaceListVO">
+		select * 
+		from Visitjeju_table 
+		where vi_title like CONCAT('%', #{keyword}, '%')
+	</select>
 
 </mapper>
 

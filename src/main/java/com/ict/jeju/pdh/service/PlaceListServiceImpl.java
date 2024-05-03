@@ -43,5 +43,11 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public int hitUpdate(String contentsid) {
 		return placeListDAO.hitUpdate(contentsid);
 	}
+	
+	// 검색하기
+	@Override
+	public List<PlaceListVO> searchList(String keyword) {
+		return placeListDAO.searchList(keyword);
+	}
 
 }

@@ -59,4 +59,14 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
+	
+	// 검색하기
+	public List<PlaceListVO> searchList(String keyword) {
+		try {
+			return sqlSessionTemplate.selectList("place.searchList", keyword);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 }
