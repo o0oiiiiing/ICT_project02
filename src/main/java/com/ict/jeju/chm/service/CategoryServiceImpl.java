@@ -20,8 +20,8 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public int getTotalCount() {
-		return categoryDAO.getTotalCount();
+	public int getTotalCount(String vi_value) {
+		return categoryDAO.getTotalCount(vi_value);
 	}
 
 	@Override
@@ -29,6 +29,7 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryDAO.getBoardList(offset, limit,vi_value);
 
 	}
+
 
 	
 	

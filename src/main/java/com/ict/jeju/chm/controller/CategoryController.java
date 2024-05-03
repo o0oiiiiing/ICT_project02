@@ -31,14 +31,13 @@ public class CategoryController {
 		
 			ModelAndView mv = new ModelAndView("chm-view/category");
 			// vi_value 정상적으로 오나 확인하기
-			System.out.println(vi_value);
 //			List<CategoryVO> cate_list = categoryService.getCategoryList(vi_value);
 //			mv.addObject("cate_list" , cate_list);
 //			return mv;
 
 		// 페이징 기법
         // 전체 게시물의 수
-        int count = categoryService.getTotalCount();
+        int count = categoryService.getTotalCount(vi_value);
         System.out.println(count);
         paging3.setTotalRecord(count);
 
@@ -51,7 +50,9 @@ public class CategoryController {
                 paging3.setTotalPage(paging3.getTotalPage() + 1);
             }
         }
-        
+        System.out.println(paging3.getTotalPage());    
+        System.out.println(paging3.getNumPerPage());
+        System.out.println(paging3.getTotalRecord());
         // 현재 페이지 구함
         String cPage = request.getParameter("cPage");
         System.out.println(cPage);
@@ -76,18 +77,18 @@ public class CategoryController {
         if (paging3.getEndBlock() > paging3.getTotalPage()) {
             paging3.setEndBlock(paging3.getTotalPage());
         }
-
+        
         List<CategoryVO> cate_list = categoryService.getCategoryList(vi_value);
+        
         List<CategoryVO> category_list = categoryService.getBoardList(paging3.getOffset(), paging3.getNumPerPage(),vi_value);
+        
         for (CategoryVO k : category_list) {
-			System.out.println(k.getVi_title());
+        	
 		}
         if (category_list != null) {
             mv.addObject("category_list", category_list);
             mv.addObject("paging3", paging3);
             mv.addObject("cate_list" , cate_list);
-            System.out.println(category_list);
-            System.out.println(vi_value);
             return mv;
         }
 		return null;

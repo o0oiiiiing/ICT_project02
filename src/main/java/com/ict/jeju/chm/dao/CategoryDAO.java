@@ -27,9 +27,9 @@ public class CategoryDAO {
 		return null;
 	}
 
-	public int getTotalCount() {
+	public int getTotalCount(String vi_value) {
 		try {
-			return sqlsessionTemplate.selectOne("category.count");
+			return sqlsessionTemplate.selectOne("category.count" , vi_value);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
