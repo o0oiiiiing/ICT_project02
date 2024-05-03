@@ -56,8 +56,8 @@ public class CalendarService4Impl implements CalendarService4{
 	
 	// 캘린더 일정 추가
 	@Override
-	public int saveCal(CalendarVO4 cvo4) {
-		return cdao4.saveCal(cvo4);
+	public int saveCal(CalendarVO4 cvo4, String u_idx) {
+		return cdao4.saveCal(cvo4, u_idx);
 	}
 	
 	// 첫화면 임시 세션

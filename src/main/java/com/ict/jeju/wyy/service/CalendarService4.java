@@ -31,7 +31,7 @@ public interface CalendarService4 {
 	public List<VisitJejuVO4> myTripMapLike();
 	
 	// 캘린더 일정 추가
-	public int saveCal(CalendarVO4 cvo4);
+	public int saveCal(CalendarVO4 cvo4, String u_idx);
 	
 	// 페이징 처리 - 전체 게시물의 수
 		public int getTotalCount();

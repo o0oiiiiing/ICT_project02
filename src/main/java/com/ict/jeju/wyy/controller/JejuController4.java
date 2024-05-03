@@ -1,4 +1,4 @@
-package com.ict.jeju.wyy.controller;
+	package com.ict.jeju.wyy.controller;
 
 import java.util.List;
 
@@ -91,7 +91,7 @@ public class JejuController4 {
 				  String u_name = (String) session.getAttribute("u_name");
 		List<LikeVO> like_list = calendarService4.myTripLike(paging.getOffset(), paging.getNumPerPage(),u_idx);
 		List<UserVO4> u_list = calendarService4.myTripUser(u_idx);
-		if (like_list != null) {
+		if (like_list != null && u_list != null) {
 			mv.addObject("u_idx", u_idx);
 			mv.addObject("like_list", like_list);
 			mv.addObject("u_list", u_list);
@@ -107,8 +107,9 @@ public class JejuController4 {
 	    HttpSession session = request.getSession();
 	    String u_idx = (String) session.getAttribute("u_idx");
 	    String u_name = (String) session.getAttribute("u_name");
+	    System.out.println(u_idx);
 	    if (u_idx != null) {
-	         int result = calendarService4.saveCal(cvo4);
+	         int result = calendarService4.saveCal(cvo4,u_idx);
 	         System.out.println(result);
 	         if (result > 0) {
 	        	 return new ModelAndView("redirect:myTripPlan");

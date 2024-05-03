@@ -89,13 +89,19 @@ public class CalendarDAO4 {
 	}
 
 	// 캘린더 일정 추가
-	public int saveCal(CalendarVO4 cvo4) {
-		try {
-			return sqlSessionTemplate.insert("calendar.save_cal", cvo4);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
+	public int saveCal(CalendarVO4 cvo4, String u_idx) {
+	    try {
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("u_idx", u_idx);
+	        map.put("contentsid", cvo4.getContentsid());
+	        map.put("c_title", cvo4.getC_title());
+	        map.put("c_start", cvo4.getC_start());
+	        map.put("c_end", cvo4.getC_end());
+	        return sqlSessionTemplate.insert("calendar.save_cal", map);
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
+	    return -1;
 	}
 
 	// 첫화면 임시 세션
