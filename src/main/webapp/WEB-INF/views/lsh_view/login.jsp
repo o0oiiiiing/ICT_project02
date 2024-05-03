@@ -52,12 +52,22 @@
 					<div class="anyitems_box">
 						<a href="findID_go.do">아이디 찾기</a> | 
 						<a href="findpwd_go.do">비밀번호 찾기</a> &nbsp;&nbsp;&nbsp;
-						<a href="join_go.do">회원가입</a>
 						<c:choose>
 							<c:when test="${loginChk == 'ok'}">
-								${userVO.u_name}님 환영합니다.
+								<span>${userVO.u_name}님 환영합니다.</span>
 								<a href="logout_go.do">로그아웃</a> 
 							</c:when>
+							
+							<%-- 
+							<c:when test="${kakao_loginChk == 'ok'}">
+								<span>${userVO.u_name}님 환영합니다.</span>
+								<a href="logout_go.do">로그아웃</a>
+							</c:when>
+							<c:otherwise>
+								<a href="join_go.do">회원가입</a>
+							</c:otherwise>
+							 --%>
+							 
 						</c:choose>
 					</div>
 					
@@ -69,7 +79,6 @@
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
 							<img src="resources/images/kakao_login_medium_narrow.png" width="160px">
 						</a>
-						
 						<%-- 
 							네이버 클라이언트 아이디 : i3iG6_9k8h7tam0e8JLn 
 							클라이언트 시크릿 : nPGni9yRqK 

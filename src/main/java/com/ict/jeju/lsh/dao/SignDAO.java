@@ -61,5 +61,23 @@ public class SignDAO {
 		return null;
 	}
 	
+	public Map<String, Object> find_kakao(Map<String, Object> user_info) {
+		try {
+			return sqlSessionTemplate.selectOne("user.find_kakao", user_info);
+		} catch (Exception e) {
+			System.out.println("dao find kakao err : "+e);
+		}
+		return null;
+	}
+	
+	public void kakao_insert(Map<String, Object> user_info) {
+		try {
+			sqlSessionTemplate.insert("user.insert_kakao", user_info);
+		} catch (Exception e) {
+			System.out.println("dao kakao insert err : "+e);
+		}
+	}
+	
+	
 	
 }
