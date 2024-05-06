@@ -37,12 +37,12 @@
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="" class="a_tag">관광지</a></li>
+ 			<li class="nav_list"><a href="" class="a_tag">관광지</a></li>
 			<li class="nav_list"><a href="" class="a_tag">음식</a></li>
-			<li class="nav_list"><a href="" class="a_tag">숙박</li>
-			<li class="nav_list"><a href="" class="a_tag">쇼핑</li>
-			<li class="nav_list"><a href="" class="a_tag">축제/행사</li>
-			<li class="nav_list"><a href="" class="a_tag">나의 여행</li>
+			<li class="nav_list"><a href="" class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="" class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="" class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="" class="a_tag">나의 여행</a></li> 
 		</ul>
 
 		<ul class="nav-list__right">
