@@ -60,7 +60,7 @@ $(document).ready(function() {
 			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
 			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
 			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식
+			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
@@ -139,8 +139,9 @@ $(document).ready(function() {
 			            var markerImages = {
 			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
 			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
-			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식
+			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박 
+			            	 /*  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 */
+			            	  	c4: 'https://cdn.discordapp.com/attachments/1220363924885733517/1236983535970291742/image.png?ex=6639fe31&is=6638acb1&hm=d77f82f80b7e544eae1784676746bbd31508a318b2f113b201e11db5e742faec&',	// 음식
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
