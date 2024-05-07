@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,5 +67,13 @@ public class AjaxController4 {
 		int result = calendarService4.calDelete(c_idx);
 		return String.valueOf(result);
 	}
+	
+	// 좋아요한 페이지에서 삭제
+	@RequestMapping(value = "removeHeart", produces ="text/plain; charset=utf-8")
+	@ResponseBody
+	public String getAjaxHeartRemove(@RequestParam("like_idx")String like_idx) {
+	        int result = calendarService4.removeHeart(like_idx) ;
+	        return String.valueOf(result);
+	    }
 
 }
