@@ -36,7 +36,13 @@ public class JejuController5 {
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
-
+	
+	// 게시판 이동
+	@GetMapping("all_list.do")
+	public ModelAndView allList() {
+		return new ModelAndView("ygh-view/index");
+	}
+	
 	// 회원정보수정
 	@GetMapping("user_update.do")
 	public ModelAndView userUpdate() {
@@ -49,9 +55,9 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/repwd_page");
 	}
 
-	// 관리자페이지
+	// 관리자 게시판
 	@RequestMapping("admin_list.do")
-	public ModelAndView boardList(HttpServletRequest request) {
+	public ModelAndView adminList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_list");
 
 		// 페이징 미답변 Q&A
@@ -115,8 +121,8 @@ public class JejuController5 {
 		}
 
 		// DB
-		List<BoardVO> board_list = jejuService5.getBoardList(paging.getOffset(), paging.getNumPerPage2());
-		List<ReportVO> report_list = jejuService5.getReportList(paging2.getOffset(), paging2.getNumPerPage2());
+		List<BoardVO> board_list = jejuService5.boardList(paging.getOffset(), paging.getNumPerPage2());
+		List<ReportVO> report_list = jejuService5.reportList(paging2.getOffset(), paging2.getNumPerPage2());
 		if (board_list != null && report_list != null) {
 			mv.addObject("board_list", board_list);
 			mv.addObject("paging", paging);
@@ -127,16 +133,16 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-	// 관리자페이지 Q&A 상세보기
+	// 관리자 Q&A 상세보기
 	@GetMapping("admin_board_detail.do")
 	public ModelAndView adminBoardDetail(@ModelAttribute("cPage") String cPage, String bo_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail");
 		// 상세보기
-		BoardVO bovo = jejuService5.getBoardDetail(bo_idx);
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
 
 		if (bovo != null) {
 			// 댓글 가져오기
-			List<CommentVO> com_list = jejuService5.getCommentList(bo_idx);
+			List<CommentVO> com_list = jejuService5.commentList(bo_idx);
 			mv.addObject("com_list", com_list);
 			mv.addObject("bovo", bovo);
 			return mv;
@@ -144,11 +150,11 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-	// 관리자페이지 신고 상세보기
+	// 관리자 신고 상세보기
 	@GetMapping("report_detail.do")
 	public ModelAndView reportDetail(@ModelAttribute("cPage") String cPage, String report_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/report_detail");
-		ReportVO revo = jejuService5.getReportDetail(report_idx);
+		ReportVO revo = jejuService5.reportDetail(report_idx);
 
 		if (revo != null) {
 			mv.addObject("revo", revo);
@@ -162,23 +168,16 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/admin_list");
 	}
 
-	/*
-	 * @PostMapping("board_ans_write.do") public ModelAndView
-	 * getBoardAnsWrite(@ModelAttribute("cPage") String cPage,
-	 * 
-	 * @ModelAttribute("bo_idx") String bo_idx) { return new
-	 * ModelAndView("ygh-view/board_ans"); }
-	 */
-
+	// Q&A 답글 작성
 	@PostMapping("board_ans_write_ok.do")
-	public ModelAndView getCommentInsert(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx) {
+	public ModelAndView commentInsert(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx) {
 		ModelAndView mv = new ModelAndView("redirect:board_detail.do");
-		int result = jejuService5.getCommentInsert(comvo);
+		int result = jejuService5.commentInsert(comvo);
 		return mv;
 	}
 	
 
-	// Q&A 게시판
+	// 사용자 Q&A 게시판
 	@RequestMapping("board_list.do")
 	public ModelAndView boardlist(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("ygh-view/board_list");
@@ -214,7 +213,7 @@ public class JejuController5 {
 		}
 
 		// DB
-		List<BoardVO> board_list = jejuService5.getBoardList(paging.getOffset(), paging.getNumPerPage());
+		List<BoardVO> board_list = jejuService5.boardList(paging.getOffset(), paging.getNumPerPage());
 		if (board_list != null) {
 			mv.addObject("board_list", board_list);
 			mv.addObject("paging", paging);
@@ -223,16 +222,16 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 	
-	// Q&A 상세보기
+	// 사용자 Q&A 상세보기
 	@GetMapping("board_detail.do")
 	public ModelAndView boardDetail(@ModelAttribute("cPage") String cPage, String bo_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/board_detail");
 		// 상세보기
-		BoardVO bovo = jejuService5.getBoardDetail(bo_idx);
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
 
 		if (bovo != null) {
 			// 댓글 가져오기
-			List<CommentVO> com_list = jejuService5.getCommentList(bo_idx);
+			List<CommentVO> com_list = jejuService5.commentList(bo_idx);
 			mv.addObject("com_list", com_list);
 			mv.addObject("bovo", bovo);
 			return mv;
@@ -240,19 +239,19 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 	
+	// 사용자 Q&A 작성 
 	@GetMapping("board_write_go.do")
 	public ModelAndView boardWriteGo() {
 		return new ModelAndView("ygh-view/board_write");
 	}
 	
+	// 사용자 Q&A 작성 
 	@PostMapping("board_write_ok.do")
 	public ModelAndView boardWrtieOk(BoardVO bovo, HttpServletRequest request) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:board_list.do");
-			
-			/*
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-			MultipartFile file = bovo.getFile_name();
+			MultipartFile file = bovo.getFile();
 			if (file.isEmpty()) {
 				bovo.setF_name("");
 			} else {
@@ -264,21 +263,77 @@ public class JejuController5 {
 				File out = new File(path, f_name);
 				FileCopyUtils.copy(in, out);
 			}
-			*/
 			
-			String pwd = passwordEncoder.encode(bovo.getBo_pwd());
-			bovo.setBo_pwd(pwd);
+			// 비밀번호 암호화
+			bovo.setBo_pwd(passwordEncoder.encode(bovo.getBo_pwd()));
 			
 			int result = jejuService5.boardWrtieOk(bovo);
 			if (result > 0) {
 				return mv;
 			}
-			return new ModelAndView("ygh-view/error");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return new ModelAndView("ygh-view/error");
 	}
+	
+	// 사용자 Q&A 수정
+	@PostMapping("board_update.do")
+	public ModelAndView boardUpdate(@ModelAttribute("bo_idx")String bo_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/update");
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
+		if (bovo != null) {
+			mv.addObject("bovo", bovo);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
+	/*
+	// 사용자 Q&A 수정
+	@PostMapping("board_update_ok.do")
+	public ModelAndView boardUpdateOk(@ModelAttribute("bo_idx")String bo_idx, BoardVO bovo, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		BoardVO bovo2 = jejuService5.boardDetail(bovo.getBo_idx());
+		String dpwd = bovo2.getPwd();
+		
+		if (! passwordEncoder.matches(bovo.getPwd(), dpwd)) {
+			mv.setViewName("board/update");
+			mv.addObject("pwdchk", "fail");
+			mv.addObject("bovo", bovo);
+			return mv;
+		} else {
+			try {
+				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+				MultipartFile file = bovo.getFile();
+				if (file.isEmpty()) {
+					bovo.setF_name(bovo.getOld_f_name());
+				} else {
+					UUID uuid = UUID.randomUUID();
+					String f_name = uuid.toString()+"_"+file.getOriginalFilename();
+					bovo.setF_name(f_name);
+					
+					byte[] in = file.getBytes();
+					File out = new File(path, f_name);
+					FileCopyUtils.copy(in, out);
+				}
+				int result = jejuService5.boardUpdate(bovo);
+				if (result > 0) {
+					mv.setViewName("redirect:board_detail.do");
+					return mv;
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
+	
+	*/
+	
+	
 	
 
 }

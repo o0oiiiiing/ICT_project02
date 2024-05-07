@@ -11,6 +11,7 @@
 <link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 </head>
 <body>
+<%@include file="../common/header.jsp"%>
 <div id="report_detail">
 	<form method="post">
 		<table width="700">
@@ -53,6 +54,6 @@
 	</form>
 </div>
 
-
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

@@ -14,23 +14,20 @@
 		f.submit();
 	}
 	
-	function board_ans_write_ok(f) {
-		f.action="board_ans_write_ok.do";
+	function board_update(f) {
+		f.action="board_update.do";
 		f.submit();
 	}
 	
-	 function toggleCommentBox() {
-	        var comment_box = document.getElementById("comment_box");
-	        if (comment_box.style.display === "none") {
-	        	comment_box.style.display = "block";
-	        } else {
-	        	comment_box.style.display = "none";
-	        }
-	    }
+	function board_delete(f) {
+		f.action="board_delete.do";
+		f.submit();
+	}
 
 </script>
 </head>
 <body>
+<%@include file="../common/header.jsp"%>
 	<form method="post">
 		<div id="board_detail">
 			<table>
@@ -57,6 +54,19 @@
 							<textarea rows="10" cols="60" id="content" name="content" readonly style="margin: 5px;">${bovo.bo_content}</textarea>
 						</td>
 					</tr>
+					<tr>
+					<th>첨부파일</th>
+					 <c:choose>
+					 	<c:when test="${empty bovo.f_name}">
+					 		<td><b>첨부파일없음</b></td>
+					 	</c:when>
+					 	<c:otherwise>
+					 		<td>
+					 			<a href="down.do?f_name=${bovo.f_name}"><img src="resources/upload/${bovo.f_name}" style="width: 80px;"></a>
+					 		</td>
+					 	</c:otherwise>
+					 </c:choose>
+					</tr>
 				</tbody>
 			</table>
 			</div>
@@ -64,64 +74,12 @@
 				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
 				<input type="hidden" value="${cPage}" name="cPage"> 
 				<input type="button" value="목록" onclick="board_list(this.form)" /> 
-				<input type="button" value="답글" onclick="toggleCommentBox()" /> 
+				<input type="button" value="수정" onclick="board_update(this.form)" /> 
 				<input type="button" value="삭제" onclick="board_delete(this.form)" />
 			</div>
 	</form>
 	
-	<br><br><br>
-	
-	<%-- 답글 입력 --%>
-	<form method="post">
-	<div id="comment_box" style="display: none;">
-		<table>
-		
-			<tr><th colspan="2" style="text-align: left;">답변하기</th></tr>
-			<tr>
-				<th>작성자</th>
-				<td align="left"><input type="text" name="com_writer"></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td align="left"><textarea rows="10" cols="60" name="com_content"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<input type="hidden" name="cPage" value="${cPage}">
-				<!-- 댓글 저장 시 어떤 원글의 댓글인지 저장해야 한다. -->
-				<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
-				<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" /> 
-				</td>
-			</tr>
-            
-		</table>
-	</div>
-	</form>
-	
-	<br><br><br>
-	
-	<%-- 답글 출력 --%>
-	<div style="display: table; margin: 0 auto;">
-		<c:forEach var="k" items="${com_list}">
-				<form method="post">
-					<div id="comment_box2">
-					<table>
-						<tr><th colspan="2" style="text-align: left;">답변</th></tr>
-						<tr><th>작성자</th><td>${k.com_writer}</td></tr>
-						<tr><th>날짜</th><td>${k.com_regdate.substring(0,10)}</td></tr>
-						<tr><th>내용</th><td>${k.com_content}</td></tr>
-					</table>
-					</div>			
-					<!-- 실제는 로그인 성공 && 글쓴사람만 삭제할 수 있어야 한다. -->
-					<input type="button" value="댓글삭제" onclick="comment_delete(this.form)">
-					<input type="hidden" name="com_idx" value="${k.com_idx}">
-					<input type="hidden" name="bo_idx" value="${k.bo_idx}">
-				</form>
-				<br><br><br>
-		</c:forEach>
-	</div>
 
-
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>
