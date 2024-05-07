@@ -13,11 +13,13 @@
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	
-	</script>
+</script>
 </head>
 <body>
+
+	<%@include file="../common/header.jsp"%>
 
 	<!-- 전체 틀 -->
 	<div class="background">
@@ -40,7 +42,7 @@
 						<p class="category_id">${k.vi_value}</p>
 						<p class="category_title">${k.vi_title}</p>
 						<p class="category_hits">조회수 : 30</p>
-						
+
 						<!-- 해당 카테고리에 관한 위도 / 경도 값 가져오기 -->
 						<input type="hidden" value="${k.vi_latitude}" class="wdo">
 						<input type="hidden" value="${k.vi_longitude}" class="gdo">
@@ -59,7 +61,6 @@
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
 				<script>
-				
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
 						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -74,33 +75,32 @@
 						// 지도 중심좌표에 마커를 생성합니다 
 						position : new kakao.maps.LatLng(33.450701, 126.570667)
 					});
-					
+
 					// 지도에 마커를 표시합니다
 					marker.setMap(map);
-					
+
 					function toggleCollapse(element) {
-					    console.log("1")
-					    console.log(element)
-					    element.classList.toggle("collapsed");
+						console.log("1")
+						console.log(element)
+						element.classList.toggle("collapsed");
 
-					    var wdoValue = element.querySelector('.wdo').value;
-					    var gdoValue = element.querySelector('.gdo').value;
+						var wdoValue = element.querySelector('.wdo').value;
+						var gdoValue = element.querySelector('.gdo').value;
 
-					    console.log("클릭된 요소의 wdo 값:", wdoValue);
-					    console.log("클릭된 요소의 gdo 값:", gdoValue);
-					    
-					    var latlng = new kakao.maps.LatLng(wdoValue, gdoValue); 
-					    var marker = new kakao.maps.Marker({ 
-					        // 지도 중심좌표에 마커를 생성합니다 
-					        position: latlng
-					        
-					    }); 
-					    
-					    // 지도에 마커를 표시합니다
-					    marker.setMap(map);
-					    map.setCenter(latlng)
+						console.log("클릭된 요소의 wdo 값:", wdoValue);
+						console.log("클릭된 요소의 gdo 값:", gdoValue);
+
+						var latlng = new kakao.maps.LatLng(wdoValue, gdoValue);
+						var marker = new kakao.maps.Marker({
+							// 지도 중심좌표에 마커를 생성합니다 
+							position : latlng
+
+						});
+
+						// 지도에 마커를 표시합니다
+						marker.setMap(map);
+						map.setCenter(latlng)
 					}
-					
 				</script>
 			</div>
 		</div>
