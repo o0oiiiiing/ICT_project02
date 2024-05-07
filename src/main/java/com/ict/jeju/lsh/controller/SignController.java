@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.ict.jeju.lsh.dao.KakaoProperties;
 import com.ict.jeju.lsh.dao.NaverVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.lsh.service.MailService;
@@ -93,23 +92,23 @@ public class SignController {
 			session.setAttribute("userVO", userVO2);
 			mv.addObject("userVO", userVO2);
 			// 로그인성공시 세션에 userVO 정보를 담아서 로그인 페이지로 이동함(아무렇게나 만든 임시페이지)
-			mv.setViewName("redirect:mainsub.do");
+			mv.setViewName("redirect:/mainsub.do");
 			return mv;
 		}
 	}
 	
-	// 카카오 로그인 
+	// 카카오 로그인 / 회원가입 중복 허용됨 이거 구분해야됨, 근데 아직 못함 너무 빡치는걸
 	@RequestMapping("kakao_login.do")
 	public ModelAndView getKakoLogin(@ModelAttribute("code")String code, HttpSession session, 
-			UserVO userVO, KakaoProperties kakaoProperties) {
+			UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("code : "+code);
 		
 		String access_Token = signService.getAccess_token(code);
-		Map<String, Object> user_info = signService.getUser_info(access_Token);
+		Map<String, Object> map = signService.getUser_info(access_Token);
 		
 		System.out.println("token : "+access_Token);
-		System.err.println("map check : "+user_info);
+		System.err.println("map check : "+map);
 		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO);
