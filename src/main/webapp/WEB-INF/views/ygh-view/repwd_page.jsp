@@ -11,7 +11,7 @@
 <link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 </head>
 <body>
-
+<%@include file="../common/header.jsp"%>
 	<div id="repwd_wrap">
 		<form action="repwd_go.do" method="post">
 			<h1>비밀번호 변경</h1>
@@ -25,6 +25,6 @@
 		</form>
 	</div>
 
-
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

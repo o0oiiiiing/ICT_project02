@@ -1,7 +1,34 @@
 package com.ict.jeju.ygh.dao;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
-	private String bo_idx, u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, groups, step, lev, bo_regdate;
+	private String bo_idx, u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, groups, step, lev, bo_regdate, f_name, old_f_name;
+	private MultipartFile file;
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getOld_f_name() {
+		return old_f_name;
+	}
+
+	public void setOld_f_name(String old_f_name) {
+		this.old_f_name = old_f_name;
+	}
+
+	public String getF_name() {
+		return f_name;
+	}
+
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
+	}
 
 	public String getBo_idx() {
 		return bo_idx;

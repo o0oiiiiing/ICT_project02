@@ -8,8 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원정보수정</title>
 <link href="<c:url value="/resources/ygh-css/user_update.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/pdh-css/home.css"/>" rel='stylesheet' />
-<link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 	function repwd_go() {
 		location.href = "repwd_go.do";
@@ -17,7 +15,7 @@
 </script>
 </head>
 <body>
-
+<%@include file="../common/header.jsp"%>
 
 	<div id="update_wrap">
 		<form method="post">
@@ -41,6 +39,6 @@
 			<button id="repwd_go" onclick="repwd_go()">비밀번호변경</button>
 	</div>
 
-
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>
