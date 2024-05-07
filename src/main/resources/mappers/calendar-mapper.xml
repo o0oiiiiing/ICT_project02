@@ -54,7 +54,7 @@
 		 from Like_table l
 		 inner join Visitjeju_table v on v.contentsid = l.contentsid
 		 inner join User_table u on u.u_idx = l.u_idx
-		 where l.u_idx=#{u_idx}
+		<!--  디비 해결되면 넣어야함 오류나는지 확인 where l.u_idx=#{u_idx} -->
 		 order by l.like_idx
    </select>
    <!-- 캘린더 일정추가 -->
