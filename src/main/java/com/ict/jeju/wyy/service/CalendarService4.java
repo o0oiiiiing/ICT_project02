@@ -2,6 +2,8 @@ package com.ict.jeju.wyy.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
 import com.ict.jeju.wyy.dao.UserVO4;
@@ -35,6 +37,9 @@ public interface CalendarService4 {
 	
 	// 페이징 처리 - 전체 게시물의 수
 		public int getTotalCount();
+		
+    // 좋아요 삭제
+	public int removeHeart(String like_idx) ;
 
 	
 }

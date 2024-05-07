@@ -19,23 +19,43 @@
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
 	rel="stylesheet">
+<!-- 구글 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script type="text/javascript">
-// 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
-$(document).ready(function() {
-	myTripLike();
-    $(".myTrip").click(function() {
-        $(".detail_calendar").show();   
-        myTripPlan();
-        $(".likeTripDetail").hide();   
-    });
+	// 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
+	$(document).ready(function() {
+		myTripLike();
+	    $(".myTrip").click(function() {
+	        $(".detail_calendar").show();   
+	        myTripPlan();
+	        $(".likeTripDetail").hide();   
+	    });
+	
+	    $(".likeTrip").click(function() {
+	        $(".likeTripDetail").show();  
+	        myTripLike();
+	        $(".detail_calendar").hide();    
+	    });
+	});
+	
+	// 좋아요 삭제
+	function removeHeart(like_idx, element) {
+    	$.ajax({
+        	url: "removeHeart",
+        	type: "POST",
+        	data: {like_idx: like_idx },
+        	dataType: "text",
+        	success: function(data) {
+            	alert('관심상품에서 해제되었습니다.');
+            	$(element).closest('.likeTrip_content').remove();
+        	},
+        	error: function() {
+            	alert('에러');
+        	}
+    	});
+	};
 
-    $(".likeTrip").click(function() {
-        $(".likeTripDetail").show();  
-        myTripLike();
-        $(".detail_calendar").hide();    
-    });
-});
-
+	
 </script>
 <script type="text/javascript">
 			function myTripPlan() {
@@ -188,18 +208,15 @@ $(document).ready(function() {
 			                    + title
 			                    + '<br><a href="detail?contentsid='+contentsid+'">상세페이지</a>'
 			                    + '</div>';
-			                infowindow.setContent(iwContent);
+			                var infowindow = new kakao.maps.InfoWindow({
+			                    content: iwContent,
+			                    position: new kakao.maps.LatLng(latitude, longitude)
+			                });
 
-			                // 인포윈도우 위치
-			                var markerPosition = new kakao.maps.LatLng(latitude, longitude);
+			                // 인포윈도우 표시
+			                infowindow.open(map);
+			            });
 
-			                // 현재 상태 확인하여 토글
-			                if (!infowindow.getMap()) {
-			                    infowindow.open(map, new kakao.maps.Marker({ position: markerPosition }));
-			                } else {
-			                    infowindow.close();
-			                }
-			            })
 			        }
 			    });
 			};
@@ -219,9 +236,6 @@ $(document).ready(function() {
 	    }
 	    
 </script>
-<style type="text/css">
-
-</style>
 <title>나의 여행</title>
 </head>
 <body>
@@ -291,6 +305,7 @@ $(document).ready(function() {
 								<p>${k.vi_value}</p>
 								<p>${k.vi_title}</p>
 								<button type="button" value="open" class="btn modal--open" onclick="openModal('${k.contentsid}')">일정추가</button>
+								<span class="material-symbols-outlined" onclick="removeHeart('${k.like_idx }', this)" >favorite</span>
 							</div>
 						</c:forEach>
 					</c:otherwise>
