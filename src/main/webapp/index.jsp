@@ -24,8 +24,8 @@
         <!-- 로그아웃 유틸 -->
 	        <div class="util logout_util">
 	          <ul class="info">
-	            <li><a href="login_page.do">로그인</a></li>
-	            <li><a href="signup_page.do">회원가입</a></li>
+	            <li><a href="login_go.do">로그인</a></li>
+	            <li><a href="join_go.do">회원가입</a></li>
 	            <li><a href="community_page.do">고객센터</a></li>
 	          </ul>
 	        </div>
@@ -36,7 +36,7 @@
 	          <ul class="info">
 	            <li>${userVO.u_name }님</li>
 	            <li>보유 포인트: <fmt:formatNumber value="${userVO.u_point}" pattern="#,##0" /></li>
-	            <li><a href="logout.do">로그아웃</a></li>
+	            <li><a href="logout_go.do">로그아웃</a></li>
 	            <li><a href="mypage_page.do">마이페이지</a></li>
 	            <li><a href="basket_page.do">장바구니</a></li>
 	            <li><a href="community_page.do">고객센터</a></li>

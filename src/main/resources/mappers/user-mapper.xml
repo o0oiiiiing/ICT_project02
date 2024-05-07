@@ -25,7 +25,7 @@
     	SELECT * FROM User_table WHERE u_name = #{u_name} and u_email = #{u_email}
     </select>
     
-    <select id="find_kakao" parameterType="Map" resultType="kvo">
+    <select id="find_kakao" parameterType="Map" resultType="userVO">
     	select * from User_table where u_name = #{nickname} and u_email = #{email}
     </select>
     

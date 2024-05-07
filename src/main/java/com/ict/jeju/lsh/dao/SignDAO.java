@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class SignDAO {
 	@Autowired
@@ -61,21 +62,29 @@ public class SignDAO {
 		return null;
 	}
 	
-	public Map<String, Object> find_kakao(Map<String, Object> user_info) {
+	public Map<String, Object> find_kakao(Map<String, Object> map) {
 		try {
-			return sqlSessionTemplate.selectOne("user.find_kakao", user_info);
+			return sqlSessionTemplate.selectOne("user.find_kakao", map);
 		} catch (Exception e) {
 			System.out.println("dao find kakao err : "+e);
 		}
 		return null;
 	}
 	
-	public void kakao_insert(Map<String, Object> user_info) {
+	public int kakao_insert(Map<String, Object> map) {
 		try {
-			sqlSessionTemplate.insert("user.insert_kakao", user_info);
+			if (map.values() != null) {
+				System.out.println("1");
+				return sqlSessionTemplate.insert("user.insert_kakao", map);
+			} else {
+				System.out.println("2");
+				return sqlSessionTemplate.selectOne("user.find_kakao", map);
+			}
 		} catch (Exception e) {
+			System.out.println("3");
 			System.out.println("dao kakao insert err : "+e);
 		}
+		return -1;
 	}
 	
 	

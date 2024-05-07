@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -93,7 +94,7 @@ public class SignServiceImpl implements SignService {
 	
 	@Override
 	public Map<String, Object> getUser_info(String access_Token) {
-		Map<String, Object> user_info = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
 			URL url = new URL(reqURL);
@@ -115,22 +116,26 @@ public class SignServiceImpl implements SignService {
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			user_info.put("nickname", nickname);
-			user_info.put("email", email);
+			map.put("nickname", nickname);
+			map.put("email", email);
+			System.out.println("email : "+email);
+			System.out.println("nickname : "+nickname);
 		} catch (Exception e) {
 			System.out.println("info err : "+e);
 		}
-		Map<String, Object> res = signDAO.find_kakao(user_info);
+		
+		Map<String, Object> res = signDAO.find_kakao(map);
 		System.out.println("find kakao : "+res);
 		
 		if (res ==null) {
-			signDAO.kakao_insert(user_info);
+			signDAO.kakao_insert(map);
+			return signDAO.find_kakao(map);
 		} else {
-			return signDAO.find_kakao(user_info);
+			return map;
 			//return res;
 		}
-		return user_info;
 	}
+	
 	
 	
 

@@ -60,7 +60,7 @@
 			
 			// 약관 전체 동의 확인필요
 			function terms_box() {
-				let clickAll = document.getElementById('.click_all');
+				let clickAll = document.getElementById('click_all');
 				let clickItem = document.querySelectorAll('.click_item');
 
 				clickItem.forEach(function(item) {
@@ -70,7 +70,7 @@
 			
 			// 개별 동의 확인필요
 			function terms_click() {
-				let clickAll = document.getElementById('.click_all');
+				let clickAll = document.getElementById('click_all');
 				let clickItem = document.querySelectorAll('.click_item');
 				let allChecked = true;
 				// .click_item 체크박스 중 하나라도 해제되면 전체 해제
