@@ -37,7 +37,7 @@
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
- 			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag"> 관광지</a></li>
+ 			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
@@ -47,11 +47,13 @@
 
 		<ul class="nav-list__right">
 			<li>
-				<div class="search-bar">
-					<span class="material-symbols-outlined icon">search</span>
-					<input class="search-field" type="text" placeholder="검색어를 입력해주세요." /><span
-						class="material-symbols-outlined icon delete-icon" onclick="clearInput()">close</span>
-				</div>
+				<form method="post" action="search">
+					<div class="search-bar">
+						<span class="material-symbols-outlined icon">search</span> 
+						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
+						<span class="material-symbols-outlined icon delete-icon" onclick="clearInput()">close</span>
+					</div>
+				</form>
 			</li>
 			<li>로그인</li>
 			<li>|</li>

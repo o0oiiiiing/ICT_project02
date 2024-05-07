@@ -10,7 +10,6 @@
 		 from Calendar_table c
 		 inner join Visitjeju_table v on v.contentsid = c.contentsid
 		 inner join User_table u on u.u_idx = c.u_idx
-		<!--  where c.c_status = 0  -->
 		 order by c.c_idx
 	</select>
 	<!-- 삭제 -->
@@ -24,7 +23,7 @@
     	from Like_table l
     	inner join User_table u on u.u_idx = l.u_idx 
     	inner join Visitjeju_table v on v.contentsid = l.contentsid
-    	where l.like_active = 1
+    	where l.u_idx=#{u_idx}
     	order by l.like_idx desc
     	limit #{limit} offset #{offset}
     </select>
@@ -35,7 +34,7 @@
     <!-- 나의여행 유저 리스트 -->
     <select id="userList" resultType="uvo4">
     	select u.*,
-       		(select count(*) from Like_table where u_idx=#{u_idx} and like_active='1') as like_active_count,
+       		(select count(*) from Like_table where u_idx=#{u_idx}) as like_active_count,
        		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count
 		from User_table u
 		where u.u_idx=#{u_idx}
@@ -55,6 +54,7 @@
 		 from Like_table l
 		 inner join Visitjeju_table v on v.contentsid = l.contentsid
 		 inner join User_table u on u.u_idx = l.u_idx
+		<!--  디비 해결되면 넣어야함 오류나는지 확인 where l.u_idx=#{u_idx} -->
 		 order by l.like_idx
    </select>
    <!-- 캘린더 일정추가 -->
@@ -70,4 +70,9 @@
    	 from User_table
    	 where u_idx=#{u_idx}
    </select>
+   
+   <!-- 좋아요 삭제 -->
+   <delete id="removeHeart" parameterType="String">
+   	delete from Like_table where like_idx=#{like_idx}
+   </delete>
 </mapper>

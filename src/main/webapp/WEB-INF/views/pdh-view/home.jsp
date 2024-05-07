@@ -43,12 +43,12 @@ function clearInput() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="" class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="map_practice" class="a_tag">음식</a></li>
-			<li class="nav_list">숙박</li>
-			<li class="nav_list">쇼핑</li>
-			<li class="nav_list">축제/행사</li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
 		</ul>
 
 		<ul class="nav-list__right">
@@ -57,7 +57,7 @@ function clearInput() {
 					<div class="search-bar">
 						<span class="material-symbols-outlined icon">search</span> 
 						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined icon delete-icon" onclick="clearInput()">close</span>
+						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
 					</div>
 				</form>
 			</li>
