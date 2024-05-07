@@ -5,21 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-</style>
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
 <link href="resources/common-css/reset.css" rel="stylesheet" />
+<!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
 <!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
-
+<!-- 폰트? -->
+<link
+	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+	rel="stylesheet">
 <script type="text/javascript">
 // 나의 여행일정, 좋아요한 여행지 클릭시 숨김 및 보이기
 $(document).ready(function() {
@@ -61,7 +60,7 @@ $(document).ready(function() {
 			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
 			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
 			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식
+			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
@@ -74,14 +73,15 @@ $(document).ready(function() {
 						            var marker = new kakao.maps.Marker({
 						                map: map,
 						                position: new kakao.maps.LatLng(position.vi_latitude, position.vi_longitude),
-						                title: position.vi_title,
+						                title: position.vi_title, 
+						                contentsid: position.contentsid,
 						                image: markerImage
 						            });
 						
 						            // 인포윈도우 내용
 						            var iwContent = '<div style="padding:5px; text-align:center;">' 
 						                + position.vi_title
-						                + '<br><a href="#">상세페이지</a>'
+						                + '<br><a href="detail?contentsid='+position.contentsid+'">상세페이지</a>'
 						                + '</div>';
 						
 						            // 인포윈도우 생성
@@ -139,8 +139,9 @@ $(document).ready(function() {
 			            var markerImages = {
 			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
 			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
-			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식
+			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박 
+			            	 /*  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 */
+			            	  	c4: 'https://cdn.discordapp.com/attachments/1220363924885733517/1236983535970291742/image.png?ex=6639fe31&is=6638acb1&hm=d77f82f80b7e544eae1784676746bbd31508a318b2f113b201e11db5e742faec&',	// 음식
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
@@ -180,11 +181,12 @@ $(document).ready(function() {
 			                var latitude = $(this).data('vi_latitude'); 
 			                var longitude = $(this).data('vi_longitude');
 			                var title = $(this).data('vi_title'); 
+			                var contentsid = $(this).data('contentsid'); 
 
 			                // 인포윈도우 내용 업데이트
-			                var iwContent = '<div style="padding:5px; text-align:center;">' 
+			                var iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;">' 
 			                    + title
-			                    + '<br><a href="#">상세페이지</a>'
+			                    + '<br><a href="detail?contentsid='+contentsid+'">상세페이지</a>'
 			                    + '</div>';
 			                infowindow.setContent(iwContent);
 
@@ -211,47 +213,36 @@ $(document).ready(function() {
 	        $(".modal").hide();
 	    }
 		
+	    // 정보수정 창 이동
+	    function mytripPlan_userUpdate(u_idx){
+	    	location.href = "user_update.do?u_idx="+u_idx;
+	    }
+	    
 </script>
 <style type="text/css">
-.modal {
-	display: none;
-	vertical-align: middle;
-	position: relative;
-	z-index: 2;
-	max-width: 500px;
-	box-sizing: border-box;
-	width: 90%;
-	background: #fff;
-	padding: 15px 30px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	-o-border-radius: 8px;
-	-ms-border-radius: 8px;
-	border-radius: 8px;
-	-webkit-box-shadow: 0 0 10px #000;
-	-moz-box-shadow: 0 0 10px #000;
-	-o-box-shadow: 0 0 10px #000;
-	-ms-box-shadow: 0 0 10px #000;
-	box-shadow: 0 0 5px #0005;
-    text-align: center;
-    margin: 0px auto;
-}
+
 </style>
 <title>나의 여행</title>
 </head>
 <body>
+	<div>
+		<%@include file="../common/header.jsp"%>
+	</div>  
 	<div class="myTripPlan">
+		<div class="myTripPlan_title">
 		<h2>나의 여행</h2>
 		<hr>
+		</div>
 		<div class="myTrip_profile">
 			<img src="resources/common-image/profile.png" width="150px"
 				height="150px" style="margin: auto 30px;">
 			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
-					<p>${k.u_name}님</p>
+					<p>${k.u_name} 님</p>
 					<p>나의 리뷰 ${k.review_count}</p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
-					<button onclick="/">정보수정</button>
+					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
+					
 				</c:forEach>
 			</div>
 		</div>
@@ -259,9 +250,9 @@ $(document).ready(function() {
 		<div id="map"></div>
 
 		<div class="myTripLikeTrip">
-			<button class="likeTrip">좋아요한 여행지</button>
+			<button type="button" class="likeTrip">좋아요한 여행지</button>
 			&nbsp;|&nbsp;
-			<button class="myTrip">나의 여행일정</button>
+			<button type="button" class="myTrip">나의 여행일정</button>
 			<br>
 		</div>
 		<div class="myTripDetail">
@@ -294,7 +285,8 @@ $(document).ready(function() {
 							<div class="likeTrip_content"
 								data-vi_latitude="${k.vi_latitude }"
 								data-vi_longitude="${k.vi_longitude }"
-								data-vi_title="${k.vi_title }">
+								data-vi_title="${k.vi_title }"
+								data-contentsid = "${k.contentsid }">
 								<img src="${k.vi_image}" class="likeTrip_Image" />
 								<p>${k.vi_value}</p>
 								<p>${k.vi_title}</p>
