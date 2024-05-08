@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Q&A 게시판</title>
 <link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
-<link href="<c:url value="resources/common-css/reset.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -19,6 +18,7 @@
 </script>
 </head>
 <body>
+<%@include file="../common/header.jsp"%>
 	<div id="board_t">
 		<div id="board_h">
 			<h1>Q&A 게시판</h1>
@@ -26,7 +26,7 @@
 		</div>
 		<table>
 			<thead>
-				<tr class="title">
+				<tr>
 					<th class="no">번호</th>
 					<th class="subject">제목</th>
 					<th class="writer">글쓴이</th>
@@ -107,6 +107,6 @@
 		</table>
 	</div>
 	
-	
+<%@include file="../common/footer.jsp"%>	
 </body>
 </html>

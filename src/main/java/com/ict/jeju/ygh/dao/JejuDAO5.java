@@ -13,6 +13,7 @@ public class JejuDAO5 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 관리자 Q&A 페이징
 	public int getTotalCount() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count");
@@ -21,8 +22,9 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-
-	public List<BoardVO> getBoardList(int offset, int limit) {
+	
+	// 관리자 Q&A 전체보기
+	public List<BoardVO> boardList(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("offset", offset);
@@ -34,7 +36,8 @@ public class JejuDAO5 {
 		return null;
 	}
 	
-	public BoardVO getBoardDetail(String bo_idx) {
+	// 관리자 Q&A 상세보기
+	public BoardVO boardDetail(String bo_idx) {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.board_detail", bo_idx);
 		} catch (Exception e) {
@@ -43,7 +46,7 @@ public class JejuDAO5 {
 		return null;
 	}
 	
-	
+	// 관리자 신고 페이징
 	public int getTotalCount2() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count2");
@@ -52,8 +55,9 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-
-	public List<ReportVO> getReportList(int offset, int limit) {
+	
+	// 관리자 신고 전체보기
+	public List<ReportVO> reportList(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("offset", offset);
@@ -65,7 +69,8 @@ public class JejuDAO5 {
 		return null;
 	}
 	
-	public ReportVO getReportDetail(String report_idx){
+	// 관리자 신고 상세보기
+	public ReportVO reportDetail(String report_idx){
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.report_detail", report_idx);
 		} catch (Exception e) {
@@ -73,6 +78,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
 	
 	public int getLevUpdate(Map<String, Integer> map) {
 		try {
@@ -83,19 +89,9 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	/*
-	public int getAnsInsert(BoardVO bovo) {
-		try {
-			return sqlSessionTemplate.insert("Board_table.ans_insert", bovo);
-		} catch (Exception e) {
-			System.out.println(e); 
-		}
-		return -1;
-	}
-	*/
 	
-
-	public List<CommentVO> getCommentList(String bo_idx) {
+	// Q&A 답글 가져오기
+	public List<CommentVO> commentList(String bo_idx) {
 		try {
 			return sqlSessionTemplate.selectList("Board_table.commentlist", bo_idx);
 		} catch (Exception e) {
@@ -104,7 +100,8 @@ public class JejuDAO5 {
 		return null;
 	}
 	
-	public int getCommentInsert(CommentVO comvo) {
+	// Q&A 답글 작성
+	public int commentInsert(CommentVO comvo) {
 		try {
 			return sqlSessionTemplate.insert("Board_table.comment_insert", comvo);
 		} catch (Exception e) {
@@ -113,6 +110,7 @@ public class JejuDAO5 {
 		return -1;
 	}
 	
+	// Q&A 게시판 작성 (사용자)
 	public int boardWrtieOk(BoardVO bovo) {
 		try {
 			return sqlSessionTemplate.insert("Board_table.board_insert", bovo);
@@ -121,6 +119,8 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+	
+
 	
 
 }

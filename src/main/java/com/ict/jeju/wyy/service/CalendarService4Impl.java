@@ -72,6 +72,12 @@ public class CalendarService4Impl implements CalendarService4{
 	public int getTotalCount() {
 		return cdao4.getTotalCount();
 	}
+	
+	// 좋아요 삭제
+	@Override
+	public int removeHeart(String like_idx) {
+		return cdao4.removeHeart(like_idx);
+	}
 
 
 }

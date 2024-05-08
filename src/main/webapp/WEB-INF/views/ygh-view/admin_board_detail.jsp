@@ -31,6 +31,7 @@
 </script>
 </head>
 <body>
+<%@include file="../common/header.jsp"%>
 	<form method="post">
 		<div id="board_detail">
 			<table>
@@ -122,6 +123,6 @@
 		</c:forEach>
 	</div>
 
-
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

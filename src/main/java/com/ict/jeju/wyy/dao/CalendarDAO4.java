@@ -113,5 +113,15 @@ public class CalendarDAO4 {
 		}
 		return null;
 	}
+	
+	// 좋아요 삭제
+	public int removeHeart(String like_idx) {
+		try {
+			sqlSessionTemplate.delete("calendar.removeHeart", like_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 
 }

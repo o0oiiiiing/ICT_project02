@@ -97,6 +97,7 @@ public class SignController {
 		}
 	}
 	
+	
 	// 카카오 로그인 / 회원가입 중복 허용됨 이거 구분해야됨, 근데 아직 못함 너무 빡치는걸
 	@RequestMapping("kakao_login.do")
 	public ModelAndView getKakoLogin(@ModelAttribute("code")String code, HttpSession session, 
@@ -108,16 +109,13 @@ public class SignController {
 		Map<String, Object> map = signService.getUser_info(access_Token);
 		
 		System.out.println("token : "+access_Token);
-		System.err.println("map check : "+map);
+		System.err.println("**********map check********* : "+map);
 		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO);
 		mv.setViewName("lsh_view/main");
 		return mv;
 	}
-	
-	
-	
 	
 	
 	

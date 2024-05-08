@@ -9,7 +9,6 @@
 <title>나의 여행(관리자)</title>
 <link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
-<link href="<c:url value="resources/common-css/reset.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -61,6 +60,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+
+<%@include file="../common/header.jsp"%>
+
 	<div id="board">
 		<h1>나의 여행(관리자)</h1>
 		<table>
@@ -89,7 +91,7 @@ $(document).ready(function() {
 		<table>
 			<caption>미답변 Q&A()</caption>
 			<thead>
-				<tr class="title">
+				<tr>
 					<th class="no">번호</th>
 					<th class="subject">제목</th>
 					<th class="writer">글쓴이</th>
@@ -176,7 +178,7 @@ $(document).ready(function() {
 			<table>
 			<caption>신고()</caption>
 				<thead>
-					<tr class="title">
+					<tr>
 						<th class="no">번호</th>
 						<th class="subject">제목</th>
 						<th class="writer">글쓴이</th>
@@ -258,6 +260,6 @@ $(document).ready(function() {
 			</table>
 		</div>
 		
-		<%@ include file="../common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>

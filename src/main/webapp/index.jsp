@@ -8,11 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/chm-css/header.css?after">
-<script type="text/javascript">
-	function board_list() {
-		location.href="board_list.do"
-	}
-</script>
 </head>
 <body>
 	<div class="inner">
@@ -71,7 +66,7 @@
 	<a href="home">박다현</a>
 	<a href="user_update.do">회원정보수정(비밀번호변경)</a>
 	<a href="admin_list.do">나의여행(관리자)</a>
-	<button onclick="board_list()">게시판</button>
+	<a href="all_list.do">게시판</a>
 	<form action="wyyhome" method="post">
     	<input type="hidden" name="u_idx" value="1">
     	<input type="hidden" name="u_name" value="원유영">

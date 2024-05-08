@@ -91,5 +91,6 @@
 				</form>
 			</div>
 		</section>
+		<div id="kakao_loginChk"></div>
 	</body>
 </html>

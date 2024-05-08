@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -49,6 +48,7 @@ public class SignServiceImpl implements SignService {
 	public List<UserVO> getFindIdChk(UserVO userVO) {
 		return signDAO.getFindIdChk(userVO);
 	}
+	
 	
 	@Override
 	public String getAccess_token(String authorize_code) {
@@ -92,6 +92,8 @@ public class SignServiceImpl implements SignService {
 		return access_token;
 	}
 	
+	
+	
 	@Override
 	public Map<String, Object> getUser_info(String access_Token) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -128,11 +130,15 @@ public class SignServiceImpl implements SignService {
 		System.out.println("find kakao : "+res);
 		
 		if (res ==null) {
-			signDAO.kakao_insert(map);
-			return signDAO.find_kakao(map);
+			if (map.get("email")!=null) {
+				return signDAO.find_kakao(map);
+			} else {
+				return signDAO.find_kakao(map);
+			}
+			//signDAO.kakao_insert(map);
 		} else {
-			return map;
-			//return res;
+			// return map;
+			return res;
 		}
 	}
 	
