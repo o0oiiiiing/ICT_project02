@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="resources/pdh-css/detail.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	// 링크 복사하기 버튼
 	function copyLink() {
@@ -48,6 +48,20 @@
 			searchField[i].value = "";
 		}
 	}
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    var writeButton = document.querySelector('.write_button');
+	    var testDiv = document.getElementById('test01');
+
+	    writeButton.addEventListener('click', function() {
+	        // 요소의 display를 토글
+	        if (testDiv.style.display === 'block') {
+	            testDiv.style.display = 'none';
+	        } else {
+	            testDiv.style.display = 'block';
+	        }
+	    });
+	});
 </script>
 
 </head>
@@ -214,7 +228,15 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<form id="test01">
+		<label>제목</label>
+		<input type="text" name="title"><br>
+		<label>비밀번호</label>
+		<input type="password" name="pwd">
+		<input type="submit" value="작성하기">
+		<%@ include file="../pdh-view/qa_write.jsp"%>
+	</form>
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>
