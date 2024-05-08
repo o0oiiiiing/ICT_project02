@@ -60,33 +60,21 @@ public class SignDAO {
 		}
 		return null;
 	}
-	
-	
-	public Map<String, Object> find_kakao(Map<String, Object> map) {
+
+	public UserVO kakao_find(Map<String, Object> map) {
 		try {
-			return sqlSessionTemplate.selectOne("user.find_kakao", map);
+			return sqlSessionTemplate.selectOne("user.kakao_find", map);
 		} catch (Exception e) {
-			System.out.println("dao find kakao err : "+e);
+			System.out.println("dao kakao find err : "+e);
 		}
 		return null;
 	}
 	
-	public int kakao_insert(Map<String, Object> map) {
+	public int kakao_join(Map<String, Object> map) {
 		try {
-			if (map.get("email") != null) {
-				System.out.println("1");
-				int res = sqlSessionTemplate.selectOne("user.find_kakao", map);
-				if (res > 0) {
-					return 0;
-				}
-				
-			} else if (map.get("email") == null) {
-				System.out.println("2");
-				return sqlSessionTemplate.insert("user.insert_kakao", map);
-			}
+			return sqlSessionTemplate.insert("user.kakao_join", map);
 		} catch (Exception e) {
-			System.out.println("3");
-			System.out.println("dao kakao insert err : "+e);
+			System.out.println("dao kakao join err : "+e);
 		}
 		return -1;
 	}

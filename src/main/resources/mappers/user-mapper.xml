@@ -9,32 +9,33 @@
     </select>
     
     <insert id="join" parameterType="userVO">
-    	INSERT INTO User_table(u_id, u_pwd, u_name, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
-    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_phone}, #{u_postcode}, #{u_detail_addr}, #{u_detail_addr2}, #{u_addr}, #{u_gender}, 0, sysdate())
+    	INSERT INTO User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
+    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_birth}, #{u_email}, #{u_phone}, #{u_postcode}, #{u_detail_addr}, #{u_detail_addr2}, #{u_addr}, #{u_gender}, '일반 회원가입', sysdate())
     </insert>
     
     <select id="id_chk" parameterType="String" resultType="int">
-    	SELECT COUNT(*) FROM User_table WHERE u_name = #{u_name} and u_email = #{u_email} 
+    	SELECT COUNT(*) FROM User_table WHERE u_id = #{u_id} 
     </select>
    
    <update id="chgpwd" parameterType="userVO">
-		UPDATE User_table SET u_pwd = #{u_pwd} WHERE u_id = #{u_id} and u_email = #{u_email}
+		UPDATE User_table SET u_pwd = #{u_pwd} WHERE u_id = #{u_id} AND u_email = #{u_email}
    </update>
     
     <select id="find_id" parameterType="userVO" resultType="userVO">
-    	SELECT * FROM User_table WHERE u_name = #{u_name} and u_email = #{u_email}
+    	SELECT * FROM User_table WHERE u_name = #{u_name} AND u_email = #{u_email}
     </select>
     
-    <select id="find_kakao" parameterType="Map" resultType="userVO">
-    	select count(*) from User_table where u_name = #{nickname} and u_email = #{email}
+    <select id="kakao_find" parameterType="Map" resultType="userVO">
+    	SELECT * FROM User_table WHERE u_email =#{email} AND u_name = #{nickname}
     </select>
     
-    <insert id="insert_kakao" parameterType="Map">
-    	insert into User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
-    	 values('정보 없음', '정보 없음', #{nickname}, '정보 없음', #{email}, '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '카카오 회원가입', sysdate())
+    <insert id="kakao_join" parameterType="Map">
+    	INSERT INTO User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
+    	 VALUES('소셜 로그인', '정보 없음', #{nickname}, '정보 없음', #{email}, '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '카카오 회원가입', sysdate())
     </insert>
-	 
-	 
+    
+    
+    
 </mapper>
 
 

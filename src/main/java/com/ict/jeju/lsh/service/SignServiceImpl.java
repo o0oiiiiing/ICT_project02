@@ -49,69 +49,69 @@ public class SignServiceImpl implements SignService {
 		return signDAO.getFindIdChk(userVO);
 	}
 	
-	
 	@Override
-	public String getAccess_token(String authorize_code) {
+	public String getAccessToken(String code) {
 		String access_token = "";
-		String refresh_token = "";
+		String refresh_token ="";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setDoOutput(true);
 			
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-			StringBuilder sb = new StringBuilder();
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+			StringBuffer sb = new StringBuffer();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=b3c8cdc497ebc0c70d13c3383ee0f676");
 			sb.append("&redirect_uri=http://localhost:8090/kakao_login.do");
-			sb.append("&code=" + authorize_code);
+			sb.append("&code="+code);
 			bw.write(sb.toString());
 			bw.flush();
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			String result = "";
-			while ((line = br.readLine()) != null) {
-				result += line;
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("code : "+responseCode);
+			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String line ="";
+			String result ="";
+			while ((line=br.readLine())!=null) {
+				result +=line;
 			}
-			System.out.println("response body : " + result);
+			System.err.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			access_token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
-			System.out.println("access_token : " + access_token);
-			System.out.println("refresh_token : " + refresh_token);
+			System.out.println("token : "+access_token);
+			System.out.println("ref token : "+refresh_token);
 			br.close();
 			bw.close();
 		} catch (Exception e) {
-			System.out.println("token err : "+e);
+			System.out.println("getting token err : "+e);
 		}
 		return access_token;
 	}
 	
-	
-	
 	@Override
-	public Map<String, Object> getUser_info(String access_Token) {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public UserVO getKakaoInfo(String access_token) {
+		Map<String, Object>map = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
 			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			String result = "";
-			while ((line = br.readLine()) != null) {
-				result += line;
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "Bearer " + access_token);
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("code : "+responseCode);
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String line ="";
+			String result ="";
+			while ((line=br.readLine())!=null) {
+				result +=line;
 			}
-			System.out.println("response body : " + result);
+			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
@@ -120,28 +120,20 @@ public class SignServiceImpl implements SignService {
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			map.put("nickname", nickname);
 			map.put("email", email);
-			System.out.println("email : "+email);
 			System.out.println("nickname : "+nickname);
+			System.out.println("email : "+email);
 		} catch (Exception e) {
-			System.out.println("info err : "+e);
+			System.out.println("kakaoinfo err : "+e);
 		}
-		
-		Map<String, Object> res = signDAO.find_kakao(map);
-		System.out.println("find kakao : "+res);
-		
-		if (res ==null) {
-			if (map.get("email")!=null) {
-				return signDAO.find_kakao(map);
-			} else {
-				return signDAO.find_kakao(map);
-			}
-			//signDAO.kakao_insert(map);
+		UserVO userVO = signDAO.kakao_find(map);
+		System.out.println("userVO : "+userVO);
+		if (userVO == null) {
+			signDAO.kakao_join(map);
+			return signDAO.kakao_find(map);
 		} else {
-			// return map;
-			return res;
+			return userVO;
 		}
 	}
-	
 	
 	
 

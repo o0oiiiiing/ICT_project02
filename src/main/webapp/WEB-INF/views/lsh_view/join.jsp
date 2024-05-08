@@ -85,7 +85,7 @@
 			// 유효성검사
 			function join_ok(f) {
 				if (f.u_id === '' || f.u_pwd === '' || f.u_pwdchk === '' || f.u_name === '' || f.u_birth === '' || 
-						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detali_addr === '') {
+						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detail_addr === '') {
 					alert("필수 항목을 입력하세요.");
 					return false;
 				} else if (! f.click_1.checked) {
@@ -100,8 +100,8 @@
 					alert("아이디 중복 확인을 해주세요.");
 					f.idChk.focus();
 			        return false;
-				} else if (f.u_birth.value.length !== 6) {
-					alert("생년월일 6자리를 입력하세요.");
+				} else if (f.u_birth.value === '') {
+					alert("생년월일 입력하세요.");
 					f.u_birth.focus();
 					return false;
 				} else if (f.u_phone.value.length !== 11) {
@@ -115,6 +115,20 @@
 				f.action = "join_ok.do";
 				f.submit();
 			}
+			
+			function chk_disabled() {
+				let u_id = document.getElementById('u_id').value;
+				let u_idchk = document.getElementById('u_idchk');
+				if (u_id === '') {
+					u_idchk.disabled = true;
+				} else {
+					u_idchk.disabled = false;
+				}
+			}
+			window.onload = function() {
+				chk_disabled(); 
+		        document.getElementById("u_id").addEventListener("input", chk_disabled);
+		    };
 		</script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script type="text/javascript">
@@ -172,7 +186,7 @@
 								<td>
 									<label>아이디</label>
 									<input type="text"  id="u_id" name="u_id" required />
-									<input type="button" value="중복 확인" onclick="id_doublechk()">
+									<input type="button" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</td>
 								
 								<td>
@@ -193,7 +207,7 @@
 								
 								<td>
 									<label>생년월일</label>
-									<input type="text" id="u_birth" name="u_birth" required />
+									<input type="date" id="u_birth" name="u_birth" required />
 								</td>
 								
 								<td>
@@ -210,16 +224,16 @@
 								
 								<td>
 									<label>전화번호</label>
-									<input type="text" id="u_phone" name="u_phone" required />
+									<input type="number" id="u_phone" name="u_phone" required />
 								</td>
 								
 								<td>
 									<label>주소</label>
 									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호">
 									<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-									<input type="text" id="u_addr" name="u_addr" readonly>
-									<input type="text" id="u_detali_addr" name="u_detali_addr" placeholder="상세주소1">
-									<input type="text" id="u_detali_addr2" name="u_detali_addr2" placeholder="상세주소2" readonly>
+									<input type="text" id="u_addr" name="u_addr">
+									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1">
+									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2">
 								</td>
 							</tr>
 						</tbody>

@@ -57,17 +57,6 @@
 								<span>${userVO.u_name}님 환영합니다.</span>
 								<a href="logout_go.do">로그아웃</a> 
 							</c:when>
-							
-							<%-- 
-							<c:when test="${kakao_loginChk == 'ok'}">
-								<span>${userVO.u_name}님 환영합니다.</span>
-								<a href="logout_go.do">로그아웃</a>
-							</c:when>
-							<c:otherwise>
-								<a href="join_go.do">회원가입</a>
-							</c:otherwise>
-							 --%>
-							 
 						</c:choose>
 					</div>
 					
@@ -80,6 +69,7 @@
 							<img src="resources/images/kakao_login_medium_narrow.png" width="160px">
 						</a>
 						<%-- 
+							아직 안됨 네이버 안해놨슴
 							네이버 클라이언트 아이디 : i3iG6_9k8h7tam0e8JLn 
 							클라이언트 시크릿 : nPGni9yRqK 
 							RedirectURL : http://localhost:8090/kakao_login.do
