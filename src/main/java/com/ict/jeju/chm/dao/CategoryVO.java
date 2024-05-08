@@ -2,7 +2,15 @@ package com.ict.jeju.chm.dao;
 
 public class CategoryVO {
 	private String contentsid , vi_value, vi_title , vi_address , vi_roadaddress
-	, vi_intro , vi_latitude , vi_longitude , vi_phoneno , vi_image , vi_menu;
+	, vi_intro , vi_latitude , vi_longitude , vi_phoneno , vi_image , vi_menu ,vi_hit;
+
+	public String getVi_hit() {
+		return vi_hit;
+	}
+
+	public void setVi_hit(String vi_hit) {
+		this.vi_hit = vi_hit;
+	}
 
 	public String getVi_menu() {
 		return vi_menu;
