@@ -28,7 +28,8 @@
 	    $(".myTrip").click(function() {
 	        $(".detail_calendar").show();   
 	        myTripPlan();
-	        $(".likeTripDetail").hide();   
+	        $(".likeTripDetail").hide();
+	        $(".paging_mytrip").hide(); 
 	    });
 	
 	    $(".likeTrip").click(function() {
@@ -36,6 +37,11 @@
 	        myTripLike();
 	        $(".detail_calendar").hide();    
 	    });
+	    
+	    $(".chatbot_image").click(function() {
+	        $(".chatbot_modal").show();  
+	    });
+	    
 	});
 	
 	// 좋아요 삭제
@@ -48,6 +54,7 @@
         	success: function(data) {
             	alert('관심상품에서 해제되었습니다.');
             	$(element).closest('.likeTrip_content').remove();
+            	myTripLike();
         	},
         	error: function() {
             	alert('에러');
@@ -241,18 +248,32 @@
 		
 	    // 정보수정 창 이동
 	    function mytripPlan_userUpdate(u_idx){
+	    	// 나중에 u_idx 넣지말고 user_update.do 에서 세션으로 받기
 	    	location.href = "user_update.do?u_idx="+u_idx;
 	    }
-	    
+	    function chatbotgo() {
+			
+		}
 </script>
+
 <style type="text/css">
-.paging_mytrip{
-	margin: 50px;
-    font-size: 20px;
+#chatbot_image{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 99;
+	line-height: 60px;
+	cursor: pointer;
 }
-.paging_mytrip a{
-	text-decoration: none;
-	color: black;
+.chatbot_modal{
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	z-index: 2;
+	background-color: red;
+	display: none;
 }
 </style>
 <title>나의 여행</title>
@@ -338,8 +359,12 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<div id="content"></div>
+		<!-- <div id="content"></div> -->
 	</div>
+			<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
+		<div class="chatbot_modal" >
+			<%@include file="../common/chatbot.jsp"%>
+		</div> 
 	<div>
 		<%@include file="../common/footer.jsp"%>
 	</div>

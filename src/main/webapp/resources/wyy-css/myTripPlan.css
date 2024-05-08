@@ -23,6 +23,15 @@
     cursor: pointer;
 }
 
+.paging_mytrip{
+	margin: 50px;
+    font-size: 20px;
+}
+.paging_mytrip a{
+	text-decoration: none;
+	color: black;
+}
+
 .myTripPlan {
 	font-family: 'GmarketSansLight';
 	font-weight: bold;

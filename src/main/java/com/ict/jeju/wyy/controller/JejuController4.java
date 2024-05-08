@@ -126,13 +126,6 @@ public class JejuController4 {
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
 	}
-	@RequestMapping("chatbot")
-    public ModelAndView chatbot() {
-        ModelAndView mv = new ModelAndView("wyy-view/chatbot");
-        mv.addObject("apiKey", openAIConfig.getOpenaiApiKey());
-        System.out.println(mv);
-        return mv;
-    }
 	
 	@RequestMapping("calendar_add")
 	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {

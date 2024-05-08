@@ -7,12 +7,12 @@
 <title>Insert title here</title>
     <style>
         body {
-            display: flex;
+            /* display: flex; */
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
+        } 
         .message {
             border-top: 1px solid #ccc;
             padding: 10px;
@@ -58,7 +58,7 @@
 let gpt_token = [];
 
 // open api에서 제공 받은 각자의 API_KEY를 저장해놓은 변수
-let api_key = "${apiKey}"
+let api_key = "sk-proj-WWc34iiSOmzYhgdu3LuOT3BlbkFJFoNuEvJi5rZUOisGqsE9"
 
 // GPT에 답변을 요구하는 ajax 함수
 function gpt() {
@@ -81,7 +81,7 @@ function gpt() {
 	    	let message = data.choices[0].message.content
 	    	test = { role: "assistant", content: message }
 	    	gpt_token.push(test)
-	    	addMessage('관리자(이름바꿈가능)', message);
+	    	addMessage('챗봇', message);
 	    },
 	    error: function(xhr, status, error) {
 	        console.error('Error:', error);
@@ -108,7 +108,7 @@ $(document).ready(function() {
 	    // 메시지가 비어있으면 리턴
 	    if (message.length === 0) return;
 	    // 사용자 메시지 화면에 추가
-	    addMessage('유저(이름바꿈가능)', message);
+	    addMessage('${u_name}', message);
 	    $("#user-input input").val("");
 	    test = { role: "user", content: message }
 	    gpt_token.push(test)
