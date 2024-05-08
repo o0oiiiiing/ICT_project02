@@ -31,6 +31,9 @@ public class JejuController4 {
 	@Autowired
 	private MyTripPaging paging;
 	
+	@Autowired
+    private OpenAIConfig openAIConfig;
+	
 	@RequestMapping("wyyhome")
 	public ModelAndView wyyHome(@RequestParam("u_name") String u_name,@RequestParam("u_idx") String u_idx, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView("wyy-view/index");
@@ -44,8 +47,7 @@ public class JejuController4 {
 	public ModelAndView myTripPlan(HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("wyy-view/myTripPlan");
 		
-		// 페이지기법
-		
+		// 페이징기법
 				// 전체 게시물의 수를 구한다.
 				int count = calendarService4.getTotalCount();
 				paging.setTotalRecord(count);
@@ -93,6 +95,7 @@ public class JejuController4 {
 		List<UserVO4> u_list = calendarService4.myTripUser(u_idx);
 		if (like_list != null && u_list != null) {
 			mv.addObject("u_idx", u_idx);
+			mv.addObject("u_name", u_name);
 			mv.addObject("like_list", like_list);
 			mv.addObject("u_list", u_list);
 			mv.addObject("paging", paging);
@@ -124,9 +127,12 @@ public class JejuController4 {
 		return new ModelAndView("wyy-view/calendar");
 	}
 	@RequestMapping("chatbot")
-	public ModelAndView test01() {
-		return new ModelAndView("wyy-view/chatbot");
-	}
+    public ModelAndView chatbot() {
+        ModelAndView mv = new ModelAndView("wyy-view/chatbot");
+        mv.addObject("apiKey", openAIConfig.getOpenaiApiKey());
+        System.out.println(mv);
+        return mv;
+    }
 	
 	@RequestMapping("calendar_add")
 	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {

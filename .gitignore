@@ -6,3 +6,4 @@
 /.metadata/
 /target/
 /META-INF/
+/src/main/resources/props/config.properties

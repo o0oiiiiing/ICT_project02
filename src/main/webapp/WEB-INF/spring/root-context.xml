@@ -8,7 +8,6 @@
 	<!-- DAO 어노테이션 -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.ict" />
-
 	<context:property-placeholder location="classpath:props/jdbc.properties" />
 
 	<!-- 오라클 접속 정보 입력 : pom.xml에서 추가해야 한다. -->
