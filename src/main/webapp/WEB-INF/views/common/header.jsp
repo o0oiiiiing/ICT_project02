@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +56,16 @@
 					</div>
 				</form>
 			</li>
-			<li>로그인</li>
+			<li><a href="login_go.do">로그인</a></li>
 			<li>|</li>
-			<li>회원가입</li>
+			<li><a href="join_go.do">회원가입</a></li>
 		</ul>
+		 <c:choose>
+			<c:when test="${loginChk == 'ok'}">
+				<span>${userVO.u_name}님 환영합니다.</span>
+				<a href="logout_go.do">로그아웃</a> 
+			</c:when>
+		</c:choose>
 	</header>
 </body>
 </html>

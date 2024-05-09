@@ -20,8 +20,8 @@ public class CalendarService4Impl implements CalendarService4{
 	
 	// 전체 보기
 	@Override
-	public List<CalendarVO4> calList() {
-		return cdao4.calList();
+	public List<CalendarVO4> calList(String u_idx) {
+		return cdao4.calList(u_idx);
 	}
 	// 삭제
 	@Override
@@ -43,8 +43,8 @@ public class CalendarService4Impl implements CalendarService4{
 
 	// 지도 보기
 	@Override
-	public List<VisitJejuVO4> myTripMap() {
-		return cdao4.myTripMap();
+	public List<VisitJejuVO4> myTripMap(String u_idx) {
+		return cdao4.myTripMap(u_idx);
 	}
 	
 	// 좋아요 지도보기
@@ -69,8 +69,8 @@ public class CalendarService4Impl implements CalendarService4{
 	
 	// 페이징 기법
 	@Override
-	public int getTotalCount() {
-		return cdao4.getTotalCount();
+	public int getTotalCount(String u_idx) {
+		return cdao4.getTotalCount(u_idx);
 	}
 	
 	// 좋아요 삭제
