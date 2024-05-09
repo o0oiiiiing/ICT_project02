@@ -49,9 +49,9 @@ public class CalendarService4Impl implements CalendarService4{
 	
 	// 좋아요 지도보기
 	@Override
-	public List<VisitJejuVO4> myTripMapLike() {
+	public List<VisitJejuVO4> myTripMapLike(String u_idx) {
 		// TODO Auto-generated method stub
-		return cdao4.myTripMapLike();
+		return cdao4.myTripMapLike(u_idx);
 	}
 	
 	// 캘린더 일정 추가

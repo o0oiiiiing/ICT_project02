@@ -2,6 +2,8 @@ package com.ict.jeju.wyy.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +17,10 @@ import com.ict.jeju.wyy.service.CalendarService4;
 
 @RestController
 public class AjaxController4 {
-
+	
+	@Autowired
+	HttpSession session;
+	
 	@Autowired
 	private CalendarService4 calendarService4;
 	
@@ -36,8 +41,9 @@ public class AjaxController4 {
 	// 좋아요 지도정보
 	@RequestMapping(value = "myTripMapLike", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String myTripMapLike() {
-		List<VisitJejuVO4> vi_list = calendarService4.myTripMapLike();
+	public String myTripMapLike(HttpSession session) {
+		String u_idx = (String) session.getAttribute("u_idx");
+		List<VisitJejuVO4> vi_list = calendarService4.myTripMapLike(u_idx);
 		if(vi_list != null) {
 			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();

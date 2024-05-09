@@ -38,4 +38,7 @@ public interface JejuService5 {
 	// Q&A 게시판 작성 (사용자)
 	public int boardWrtieOk(BoardVO bovo);
 	
+	// Q&A 게시판 수정 (사용자)
+	public int boardUpdate(BoardVO bovo);
+	
 }

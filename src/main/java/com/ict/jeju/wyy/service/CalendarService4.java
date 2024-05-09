@@ -30,7 +30,7 @@ public interface CalendarService4 {
 	public List<VisitJejuVO4> myTripMap();
 	
 	// 좋아요 지도 전체보기
-	public List<VisitJejuVO4> myTripMapLike();
+	public List<VisitJejuVO4> myTripMapLike(String u_idx);
 	
 	// 캘린더 일정 추가
 	public int saveCal(CalendarVO4 cvo4, String u_idx);

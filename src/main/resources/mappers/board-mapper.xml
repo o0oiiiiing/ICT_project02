@@ -58,5 +58,12 @@
 		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate, f_name)
 		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate(), #{f_name})
 	</insert>
+	
+	<!-- Q&A 게시판 수정 (사용자) -->
+	<update id="board_update" parameterType="bovo">
+		update Board_table
+		set bo_writer=#{bo_writer}, bo_title=#{bo_title}, bo_content=#{bo_content}
+		where bo_idx=#{bo_idx}
+	</update>
 </mapper>
 
