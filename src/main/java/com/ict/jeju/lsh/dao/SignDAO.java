@@ -79,7 +79,22 @@ public class SignDAO {
 		return -1;
 	}
 	
+	public UserVO naver_find(Map<String, Object> map) {
+		try {
+			return sqlSessionTemplate.selectOne("user.naver_find", map);
+		} catch (Exception e) {
+			System.out.println("dao naver find err : "+e);
+		}
+		return null;
+	}
 	
-	
+	public int naver_join(Map<String, Object> map) {
+		try {
+			return sqlSessionTemplate.insert("user.naver_join", map);
+		} catch (Exception e) {
+			System.out.println("dao naver join err : "+e);
+		}
+		return -1;
+	}
 	
 }

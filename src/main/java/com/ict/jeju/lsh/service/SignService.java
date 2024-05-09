@@ -12,9 +12,7 @@ public interface SignService {
 	public List<UserVO> getFindIdChk(UserVO userVO);
 	public String getAccessToken(String code);
 	public UserVO getKakaoInfo(String access_token);
-
+	public String getNaverToken(String code, String state);
+	public UserVO getNaverInfo(String access_token);
+	
 }
-	
-	
-	
-

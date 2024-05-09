@@ -16,9 +16,28 @@
 		</script>
 	</head>
 	<body>
+		<%@include file="../common/header.jsp" %>
 		<section>
 			<div>
 				<form method="post" action="email_send_ok.do">
+				<h3>비밀번호 찾기</h3>
+				<div>
+					<ul>
+						<li>
+							<input type="text" name="u_id" placeholder="아이디를 입력하세요">
+						</li>
+						<li>
+							<input type="email" name="u_email" placeholder="이메일을 입력하세요" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
+						</li>
+						<li>
+							<input type="submit" value="임시 비밀번호 발급 받기">
+						</li>
+					</ul>
+				</div>
+				
+				
+				
+				<!-- 
 					<table>
 						<thead>
 							<tr>
@@ -39,11 +58,11 @@
 							</tr>
 						</tbody>
 					</table>
-					<div>
-						<a href="login_go.do">로그인</a>
-					</div>
+					 -->
+					
 				</form>
 			</div>
 		</section>
+		<%@include file="../common/footer.jsp" %>
 	</body>
 </html>

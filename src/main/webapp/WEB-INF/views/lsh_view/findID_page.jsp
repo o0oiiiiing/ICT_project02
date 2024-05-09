@@ -28,9 +28,29 @@
 		</script>
 	</head>
 	<body>
+		<%@include file="../common/header.jsp" %>
 		<section>
 			<div>
 				<form method="post">
+				<h3>아이디 찾기</h3>
+				<div>
+					<ul>
+						<li>
+							<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
+						</li>
+						<li>
+							<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
+										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
+						</li>
+						<li>
+							<input type="button" value="아이디 찾기" onclick="findID_ok(this.form)">
+						</li>
+					</ul>
+				</div>
+				
+				
+				
+				<!-- 
 					<table>
 						<thead>
 							<tr>
@@ -52,6 +72,8 @@
 							</tr>
 						</tbody>
 					</table>
+					 -->
+					
 				</form>
 			</div>
 			
@@ -60,6 +82,7 @@
 				<a href="findpwd_go.do">비밀번호 찾기</a>
 			</div>
 		</section>
+		<%@include file="../common/footer.jsp" %>
 	</body>
 </html>
 

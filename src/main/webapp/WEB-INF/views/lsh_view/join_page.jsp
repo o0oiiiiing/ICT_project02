@@ -172,9 +172,63 @@
 		</script>
 	</head>
 	<body>
+		<%@include file="../common/header.jsp" %>
 		<section>
 			<form method="post">
 				<div class="join_box1">
+				<h3>회원가입</h3>
+				<div>
+					<ul>
+						<li>
+							<span>아이디 *</span>
+							<input type="text"  id="u_id" name="u_id" required />
+							<input type="button" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
+						</li>
+						<li>
+							<span>비밀번호 *</span>
+							<input type="password" id="u_pwd" name="u_pwd" required />
+						</li>
+						<li>
+							<span>비밀번호 확인 *</span>
+							<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" />
+							<span id="msg" ></span>
+						</li>
+						<li>
+							<span>이름 *</span>
+							<input type="text" id="u_name" name="u_name" required />
+						</li>
+						<li>
+							<span>생년월일 *</span>
+							<input type="date" id="u_birth" name="u_birth" required />
+						</li>
+						<li>
+							<span>성별 *</span>
+							<input type="radio" name="u_gender" value="1" checked /> 남자
+							<input type="radio" name="u_gender" value="2" /> 여자
+						</li>
+						<li>
+							<span>이메일 *</span>
+							<input type="email" id="u_email" name="u_email" required 
+										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"/>
+						</li>
+						<li>
+							<span>전화번호 *</span>
+							<input type="number" id="u_phone" name="u_phone" required />
+						</li>
+						<li>
+							<span>주소 *</span>
+							<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호">
+							<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+							<input type="text" id="u_addr" name="u_addr">
+							<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1">
+							<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2">
+						</li>
+					</ul>
+				</div>
+				
+				
+				
+				<!-- 
 					<table>
 						<thead class="join_header">
 							<tr>
@@ -237,7 +291,7 @@
 								</td>
 							</tr>
 						</tbody>
-					</table>
+					</table> -->
 				</div>
 				
 				<div class="join_box2">
@@ -288,5 +342,6 @@
 				</div>
 			</form>
 		</section>
+		<%@include file="../common/footer.jsp" %>
 	</body>
 </html>

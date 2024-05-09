@@ -77,7 +77,7 @@ public class SignServiceImpl implements SignService {
 			while ((line=br.readLine())!=null) {
 				result +=line;
 			}
-			System.err.println("response body : "+result);
+			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			access_token = element.getAsJsonObject().get("access_token").getAsString();
@@ -135,6 +135,91 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 	
-	
+	@Override
+	public String getNaverToken(String code, String state) {
+		String access_token = "";
+		String refresh_token ="";
+		String reqURL = "https://nid.naver.com/oauth2.0/token";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setDoOutput(true);
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+			StringBuffer sb = new StringBuffer();
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=J3r3NWMEm1CJS2vNYtQm");
+			sb.append("&client_secret=YpYaVN0u1m");
+			sb.append("&code=" + code);
+			sb.append("&state=" + state);
+			bw.write(sb.toString());
+			bw.flush();
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("responseCode : "+responseCode);
+			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String line ="";
+			String result ="";
+			while ((line=br.readLine())!=null) {
+				result += line;
+			}
+			System.out.println("response body : "+result);
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+			access_token = element.getAsJsonObject().get("access_token").getAsString();
+			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
+			System.out.println("token : "+access_token);
+			System.out.println("ref token : "+refresh_token);
+			br.close();
+			bw.close();
+		} catch (Exception e) {
+			System.out.println("naver token err : "+e);
+		}
+		return access_token;
+	}
 
+	@Override
+	public UserVO getNaverInfo(String access_token) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String reqURL = "https://openapi.naver.com/v1/nid/me";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "Bearer " +access_token);
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("code : "+responseCode);
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String line ="";
+			String result ="";
+			while ((line=br.readLine())!=null) {
+				result +=line;
+			}
+			System.out.println("response body : "+result);
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+			JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
+			String nickname = response.getAsJsonObject().get("nickname").getAsString();
+			String email = response.getAsJsonObject().get("email").getAsString();
+			String name = response.getAsJsonObject().get("name").getAsString();
+			map.put("nickname", nickname);
+			map.put("email", email);
+			map.put("name", name);
+			System.out.println("nickname : "+nickname);
+			System.out.println("email : "+email);
+			System.out.println("name : "+name);
+		} catch (Exception e) {
+			System.out.println("naverinfo err : "+e);
+		}
+		UserVO userVO = signDAO.naver_find(map);
+		if (userVO == null) {
+			signDAO.naver_join(map);
+			return signDAO.naver_find(map);
+		} else {
+			return userVO;
+		}
+	}
+	
 }
