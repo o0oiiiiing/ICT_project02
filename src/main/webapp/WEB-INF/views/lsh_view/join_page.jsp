@@ -158,14 +158,14 @@
 							if (extraAddr !== '') {
 								extraAddr = ' (' + extraAddr + ')';
 							}
-							document.getElementById("u_detali_addr2").value = extraAddr;
+							document.getElementById("u_detail_addr2").value = extraAddr;
 						} else {
-							document.getElementById("u_detali_addr2").value = '';
+							document.getElementById("u_detail_addr2").value = '';
 						}
 						
 						document.getElementById('u_postcode').value = data.zonecode;
 						document.getElementById('u_addr').value = addr;
-						document.getElementById('u_detali_addr').focus();
+						document.getElementById('u_detail_addr').focus();
 					}
 				}).open();
 			}
