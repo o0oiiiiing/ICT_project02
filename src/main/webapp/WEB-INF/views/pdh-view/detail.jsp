@@ -20,7 +20,13 @@
 <link rel="stylesheet" href="resources/pdh-css/detail.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- summernote -->	
+<script src="/resources/common-js/summernote-lite.js"></script>
+<script src="/resources/common-js/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/common-css/summernote-lite.css">
+
 <script type="text/javascript">
 	// 링크 복사하기 버튼
 	function copyLink() {
@@ -49,16 +55,20 @@
 		}
 	}
 	
+	// q&a영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
-	    var testDiv = document.getElementById('test01');
+	    var qaWriteDiv = document.getElementById('qa_write');
+	    var overlay = document.querySelector(".overlay")
 
 	    writeButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if (testDiv.style.display === 'block') {
-	            testDiv.style.display = 'none';
+	        if (qaWriteDiv.style.display === 'block') {
+	        	qaWriteDiv.style.display = 'none';
+	        	overlay.style.display = 'none';
 	        } else {
-	            testDiv.style.display = 'block';
+	        	qaWriteDiv.style.display = 'block';
+	        	overlay.style.display = 'block';
 	        }
 	    });
 	});
@@ -229,14 +239,30 @@
 		</div>
 	</div>
 	
-	<form id="test01">
-		<label>제목</label>
-		<input type="text" name="title"><br>
-		<label>비밀번호</label>
-		<input type="password" name="pwd">
-		<input type="submit" value="작성하기">
-		<%@ include file="../pdh-view/qa_write.jsp"%>
+	<form id="qa_write">
+		<div class="qa_write_container">
+			<p>Q&A 작성</p>
+			<table>
+				<tbody>
+					<tr>
+						<td>제목</td>
+						<td><input type="text" name="title"></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" name="pwd"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<textarea id="summernote" name="editordata" maxlength="1000"></textarea>
+			<input type="reset" value="취소">
+			<input type="submit" value="등록">
+		</div>
 	</form>
+	
+	<div class="overlay"></div>
+	
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>
@@ -244,7 +270,29 @@
 			<span class="material-symbols-outlined">expand_less</span>
 		</button>
 	</div>
+	
 	<script type="text/javascript">
+	// summernote
+	$('#summernote').summernote({
+		height : 300, // 에디터 높이
+		width: 650,
+		minHeight : null, // 최소 높이
+		maxHeight : null, // 최대 높이
+		focus : true, // 에디터 로딩후 포커스를 맞출지 여부
+		lang : "ko-KR", // 한글 설정
+		placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
+		toolbar: [
+			['fontname', ['fontname']],
+			['fontsize', ['fontsize']],
+			['color', ['color']],
+			['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']]
+		],
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+	});
+	
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };
 

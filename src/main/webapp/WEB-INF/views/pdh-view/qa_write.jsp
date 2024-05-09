@@ -13,8 +13,15 @@
 </head>
 <body>
 
-<form method="post">
-	<textarea id="summernote" name="editordata"></textarea>
+<form method="post" id="test01">
+	<label>제목</label>
+	<input type="text" name="title"><br>
+	<label>비밀번호</label>
+	<input type="password" name="pwd">
+	<br>
+	<input type="reset" value="취소">
+	<input type="submit" value="등록">
+	<textarea id="summernote" name="editordata" maxlength="10"></textarea>
 </form>
 <script type="text/javascript">
 	$('#summernote').summernote({
@@ -23,7 +30,7 @@
 		maxHeight : null, // 최대 높이
 		focus : true, // 에디터 로딩후 포커스를 맞출지 여부
 		lang : "ko-KR", // 한글 설정
-		placeholder : '최대 2000자까지 쓸 수 있습니다', //placeholder 설정
+		placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
 		toolbar: [
 			// [groupName, [list of button]]
 			['fontname', ['fontname']],
