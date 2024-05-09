@@ -31,9 +31,6 @@ public class JejuController4 {
 	@Autowired
 	private MyTripPaging paging;
 	
-	@Autowired
-    private OpenAIConfig openAIConfig;
-	
 	@RequestMapping("wyyhome")
 	public ModelAndView wyyHome(@RequestParam("u_name") String u_name,@RequestParam("u_idx") String u_idx, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView("wyy-view/index");
