@@ -58,6 +58,8 @@ body {
 								alert("삭제 실패");
 							} else if (data == "1") {
 								arg.event.remove();
+								// 지도 함수 호출
+								window.parent.myTripPlan();
 							}
 						},
 						error : function() {

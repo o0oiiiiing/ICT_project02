@@ -28,7 +28,8 @@
 	    $(".myTrip").click(function() {
 	        $(".detail_calendar").show();   
 	        myTripPlan();
-	        $(".likeTripDetail").hide();   
+	        $(".likeTripDetail").hide();
+	        $(".paging_mytrip").hide(); 
 	    });
 	
 	    $(".likeTrip").click(function() {
@@ -36,6 +37,11 @@
 	        myTripLike();
 	        $(".detail_calendar").hide();    
 	    });
+	    
+	    $(".chatbot_image").click(function() {
+	        $(".chatbot_modal").toggle();  
+	    });
+	    
 	});
 	
 	// 좋아요 삭제
@@ -48,6 +54,7 @@
         	success: function(data) {
             	alert('관심상품에서 해제되었습니다.');
             	$(element).closest('.likeTrip_content').remove();
+            	myTripLike();
         	},
         	error: function() {
             	alert('에러');
@@ -139,10 +146,13 @@
 			};
 			
 			function myTripLike() {
+				// 세션에서 u_idx값 가지고오기
+				let u_idx = '<%= session.getAttribute("u_idx") %>';
 			    $.ajax({
 			        url: "myTripMapLike",
 			        method: "post",
 			        dataType: "json",
+			        data: { u_idx: u_idx },
 			        success: function(data) {
 			        	// 지도를 표시할 div  
 			            var mapContainer = document.getElementById('map');
@@ -160,8 +170,7 @@
 			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
 			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
 			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박 
-			            	 /*  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 */
-			            	  	c4: 'https://cdn.discordapp.com/attachments/1220363924885733517/1236983535970291742/image.png?ex=6639fe31&is=6638acb1&hm=d77f82f80b7e544eae1784676746bbd31508a318b2f113b201e11db5e742faec&',	// 음식
+			            	    c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
 			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
@@ -204,19 +213,26 @@
 			                var contentsid = $(this).data('contentsid'); 
 
 			                // 인포윈도우 내용 업데이트
-			                var iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;">' 
+			                let iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;">' 
 			                    + title
 			                    + '<br><a href="detail?contentsid='+contentsid+'">상세페이지</a>'
 			                    + '</div>';
-			                var infowindow = new kakao.maps.InfoWindow({
-			                    content: iwContent,
-			                    position: new kakao.maps.LatLng(latitude, longitude)
+
+			                // 인포윈도우에 새로운 내용 적용
+			                infowindow.setContent(iwContent);
+
+			             	// 클릭한 위치에 마커와 인포윈도우 표시
+			                let markerPosition = new kakao.maps.LatLng(latitude, longitude);
+			                let marker = new kakao.maps.Marker({
+			                    position: markerPosition
 			                });
 
-			                // 인포윈도우 표시
-			                infowindow.open(map);
-			            });
+			                // 인포윈도우를 마커 위에 표시
+			                infowindow.open(map, marker);
 
+			                // 지도 중심을 마커 위치로 이동하기
+			           		// map.setCenter(markerPosition);
+			            });
 			        }
 			    });
 			};
@@ -232,10 +248,35 @@
 		
 	    // 정보수정 창 이동
 	    function mytripPlan_userUpdate(u_idx){
+	    	// 나중에 u_idx 넣지말고 user_update.do 에서 세션으로 받기
 	    	location.href = "user_update.do?u_idx="+u_idx;
 	    }
-	    
+	    function chatbotgo() {
+			
+		}
 </script>
+
+<style type="text/css">
+#chatbot_image{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 99;
+	line-height: 60px;
+	cursor: pointer;
+}
+.chatbot_modal{
+	position: fixed;
+	bottom: 20px;
+	right: 80px;
+	z-index: 2;
+	background-color: white;
+	display: none;
+	border-radius: 10px;
+}
+</style>
 <title>나의 여행</title>
 </head>
 <body>
@@ -305,7 +346,7 @@
 								<p>${k.vi_value}</p>
 								<p>${k.vi_title}</p>
 								<button type="button" value="open" class="btn modal--open" onclick="openModal('${k.contentsid}')">일정추가</button>
-								<span class="material-symbols-outlined" onclick="removeHeart('${k.like_idx }', this)" >favorite</span>
+								<span class="material-symbols-outlined" id="heart_icon"onclick="removeHeart('${k.like_idx }', this)" >favorite</span>
 							</div>
 						</c:forEach>
 					</c:otherwise>
@@ -313,14 +354,18 @@
 			</div>
 		</div>
 		<c:if test="${paging.totalPage > 1}">
-			<div class="paging">
+			<div class="paging_mytrip">
 				<c:forEach var="i" begin="1" end="${paging.totalPage}">
 					<a href="myTripPlan?u_idx=${u_idx}&cPage=${i}">${i}</a>
 				</c:forEach>
 			</div>
 		</c:if>
-		<div id="content"></div>
+		<!-- <div id="content"></div> -->
 	</div>
+			<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
+		<div class="chatbot_modal" >
+			<%@include file="../common/chatbot.jsp"%>
+		</div> 
 	<div>
 		<%@include file="../common/footer.jsp"%>
 	</div>

@@ -78,10 +78,10 @@ public class CalendarDAO4 {
 		return null;
 	}
 	
-	// 지도 전체보기
-	public List<VisitJejuVO4> myTripMapLike() {
+	// 좋아요지도 전체보기
+	public List<VisitJejuVO4> myTripMapLike(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("calendar.map_list_like");
+			return sqlSessionTemplate.selectList("calendar.map_list_like", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
