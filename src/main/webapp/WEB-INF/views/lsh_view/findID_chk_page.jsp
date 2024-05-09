@@ -10,6 +10,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	</head>
 	<body>
+		<%@include file="../common/header.jsp" %>
 		<section>
 			<div>
 				<h2>아이디 찾기 결과</h2>
@@ -30,6 +31,7 @@
 				<a href="findpwd_go.do">비밀번호 찾기</a>
 			</div>
 		</section>
+		<%@include file="../common/footer.jsp" %>
 	</body>
 </html>
 

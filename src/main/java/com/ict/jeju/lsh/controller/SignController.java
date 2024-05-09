@@ -1,31 +1,20 @@
 package com.ict.jeju.lsh.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.ict.jeju.lsh.dao.NaverVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.lsh.service.SignService;
@@ -39,34 +28,28 @@ public class SignController {
 	@Autowired
 	private MailService mailService;
 	
-	// 성공시 이동할 화면 아무거나 만들어놓은거임
-	@RequestMapping("mainsub.do")
-	public ModelAndView getmain() {
-		return new ModelAndView("lsh_view/main");
-	}
-	
 	// 로그인 화면 이동
 	@GetMapping("login_go.do")
 	public ModelAndView getLogin() {
-		return new ModelAndView("lsh_view/login");
+		return new ModelAndView("lsh_view/login_page");
 	}
 	
 	// 아이디찾기 화면 이동
 	@GetMapping("findID_go.do")
 	public ModelAndView getFindID() {
-		return new ModelAndView("lsh_view/findID");
+		return new ModelAndView("lsh_view/findID_page");
 	}
 	
 	// 비밀번호 찾기 화면 이동
 	@GetMapping("findpwd_go.do")
 	public ModelAndView getFindpwd() {
-		return new ModelAndView("lsh_view/findpwd");
+		return new ModelAndView("lsh_view/findpwd_page");
 	}
 	
 	// 회원가입 화면 이동
 	@GetMapping("join_go.do")
 	public ModelAndView getJoin() {
-		return new ModelAndView("lsh_view/join");
+		return new ModelAndView("lsh_view/join_page");
 	}
 	
 	// 로그인
@@ -77,170 +60,63 @@ public class SignController {
 		if (userVO2 == null) {
 			session.setAttribute("loginChk", "fail");
 			mv.addObject("msg", "가입한 이력이 없습니다");
-			mv.setViewName("lsh_view/login");
+			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
-		// 암호화
 		String dpwd = userVO2.getU_pwd();
 		if (! passwordEncoder.matches(userVO.getU_pwd(), dpwd)) {
 			session.setAttribute("loginChk", "fail");
 			mv.addObject("msg", "로그인정보 다름");
-			mv.setViewName("lsh_view/login");
+			mv.setViewName("lsh_view/login_page");
 			return mv;
 		} else {
 			session.setAttribute("loginChk", "ok");
 			session.setAttribute("userVO", userVO2);
 			mv.addObject("userVO", userVO2);
-			// 로그인성공시 세션에 userVO 정보를 담아서 로그인 페이지로 이동함(아무렇게나 만든 임시페이지)
-			mv.setViewName("redirect:/mainsub.do");
+			mv.setViewName("pdh-view/home");
 			return mv;
 		}
 	}
 	
-	
-	// 카카오 로그인 / 회원가입 중복 허용됨 이거 구분해야됨, 근데 아직 못함 너무 빡치는걸
+	// 카카오로그인
 	@RequestMapping("kakao_login.do")
-	public ModelAndView getKakoLogin(@ModelAttribute("code")String code, HttpSession session, 
-			UserVO userVO) {
-		ModelAndView mv = new ModelAndView();
+	public String KakaoLogin(String code, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
 		
-		String access_Token = signService.getAccess_token(code);
-		Map<String, Object> map = signService.getUser_info(access_Token);
+		String access_token = signService.getAccessToken(code);
+		System.out.println("token : "+access_token);
 		
-		System.out.println("token : "+access_Token);
-		System.err.println("**********map check********* : "+map);
+		UserVO userVO2 = signService.getKakaoInfo(access_token);
+		System.out.println("cont token : "+access_token);
 		
+		session.setAttribute("userVO", userVO2);
 		session.setAttribute("loginChk", "ok");
-		session.setAttribute("userVO", userVO);
-		mv.setViewName("lsh_view/main");
-		return mv;
+		return "pdh-view/home";
 	}
 	
-	
-	
-	
-	// SNS 로그인시 기본 회원가입과 비교하기 위해서 match_info.do / JSP : match_info 
-	// if문 사용해서 로그인한 이력있으면 확인 페이지말고 바로 메인페이지로 이동할 수 있게 해야됨
-	// 비교할 때는 JSP에서 받은 전화번호로 매칭시켜서 확인
-	// 만약 일반회원가입으로서 가입 이력이 존재하면 일단 디나이 시킴
-	// 나중에 다 하고나서 디나이 할 필요 없어지면 통합회원 할 수 있게 체크박스로 통합회원 적용
-	
-	/*
-	// 카카오 로그인 
-	@RequestMapping("kakao_login.do")
-	public ModelAndView KakaoLogin(HttpServletRequest request) {
-		String code = request.getParameter("code");
-		String reqURL = "https://kauth.kakao.com/oauth/token";
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			
-			con.setRequestMethod("POST");
-			con.setDoOutput(true);
-			
-			con.setRequestProperty("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
-			
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
-			StringBuffer sb = new StringBuffer();
-			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=b3c8cdc497ebc0c70d13c3383ee0f676");
-			sb.append("&redirect_uri=http://localhost:8090/kakao_login.do");
-			sb.append("&code="+code);
-			bw.write(sb.toString());
-			bw.flush();
-			
-			int responseCode = con.getResponseCode();
-			System.out.println(responseCode);
-			
-			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			String line = "";
-			StringBuffer sb2 = new StringBuffer();
-			while ((line=br.readLine()) !=null) {
-				sb2.append(line);
-			}
-			
-			String res = sb2.toString();
-			System.out.println("token : "+res);
-			
-			Gson gson = new Gson();
-			KakaoVO kvo = gson.fromJson(res, KakaoVO.class);
-			request.getSession().setAttribute("access_token", kvo.getAccess_token());
-			request.getSession().setAttribute("refresh_token", kvo.getRefresh_token());
-			request.getSession().setAttribute("token_type", kvo.getToken_type());
-			
-			// 로그인 성공시 인증용 전화번호 받아서 DB갔다오면서 일반회원가입 했는지 전화번호로 이용해서 확인
-			// 전화번호가 이미 있는 번호라면 있다고 하면 디나이
-			// mv.setViewName("redirect:전화번호 받을수 있는 화면단(회원가입창이랑 비슷하게"));
-			return new ModelAndView("lsh_view/main");
-		} catch (Exception e) {
-			System.out.println("kakao login err : "+e);
-		}
-		return null;
-	}
-	*/
-	
-	// 네이버로그인 
-	@RequestMapping("naverlogin.do")
-	public ModelAndView NaverLogin(HttpServletRequest request, UserVO userVO) {
-		String code = request.getParameter("code");
-		String state = request.getParameter("state");
-		String reqURL = "https://nid.naver.com/oauth2.0/token";
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			
-			con.setRequestMethod("POST");
-			con.setDoOutput(true);
-			
-			con.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
-			StringBuffer sb = new StringBuffer();
-			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=i3iG6_9k8h7tam0e8JLn");
-			sb.append("&client_secret=nPGni9yRqK");
-			sb.append("&code=" + code);
-			sb.append("&state=" + state);
-			bw.write(sb.toString());
-			bw.flush();
-			
-			int responseCode = con.getResponseCode();
-			if (responseCode == HttpURLConnection.HTTP_OK) {
-				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-				String line = "";
-				StringBuffer sb2 = new StringBuffer();
-				while ((line = br.readLine()) != null) {
-					sb2.append(line);
-				}
-				String result = sb2.toString();
-				
-				Gson gson = new Gson();
-				NaverVO nvo = gson.fromJson(result, NaverVO.class);
-				request.getSession().setAttribute("access_token", nvo.getAccess_token());
-				request.getSession().setAttribute("token_type", nvo.getToken_type());
-				request.getSession().setAttribute("refresh_token", nvo.getRefresh_token());
-				return new ModelAndView("lsh_view/main");
-			}
-		} catch (Exception e) {
-			System.out.println("naver login err : "+ e);
-		}
-		return null;
+	// 네이버로그인
+	@RequestMapping("naver_login.do")
+	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
+		System.out.println("code : "+code);
+		System.out.println("state : " +state);
+		String access_token = signService.getNaverToken(code, state);
+		System.out.println("token : "+access_token);
+		UserVO userVO2 = signService.getNaverInfo(access_token);
+		session.setAttribute("userVO", userVO2);
+		session.setAttribute("loginChk", "ok");
+		return "pdh-view/home";
 	}
 	
 	// 로그아웃
 	@GetMapping("logout_go.do")
 	public ModelAndView getLogout(HttpSession session) {
-		// 세션 통채로 비움
 		session.invalidate();
-		return new ModelAndView("lsh_view/main");
+		return new ModelAndView("pdh-view/home");
 	}
 	
 	// 회원가입
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO) {
-		// 암호화
 		String c_pwd = passwordEncoder.encode(userVO.getU_pwd());
 		userVO.setU_pwd(c_pwd);
 		int res = signService.getJoinOK(userVO);
@@ -265,7 +141,7 @@ public class SignController {
 		List<UserVO> find_list = signService.getFindIdChk(userVO);
 		if (find_list != null) {
 			mv.addObject("find_list", find_list);
-			mv.setViewName("lsh_view/findID_chk");
+			mv.setViewName("lsh_view/findID_chk_page");
 			return mv;
 		}
 		return new ModelAndView("redirect:findID_go.do");
@@ -279,7 +155,6 @@ public class SignController {
 		try {
 			// DB에 갔다온 정보와 입력한 정보를 가져와서 비교
 			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
-				// 난수 생성
 				Random random = new Random();
 				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
 				if (randomNum.length() < 6) {
@@ -291,7 +166,6 @@ public class SignController {
 					sb.append(randomNum);
 					randomNum = sb.toString();
 				}
-				// 임시비번 암호화 및 업데이트
 				String chgpwd = passwordEncoder.encode(randomNum);
 				userVO2.setU_pwd(chgpwd);
 				
@@ -299,34 +173,17 @@ public class SignController {
 				if (res >0) {
 					mailService.sendEmail(randomNum, userVO2.getU_email());
 					mv.addObject("msg", "가입하신 이메일로 임시 비밀번호를 발급하였습니다.");
-					mv.setViewName("lsh_view/login");
+					mv.setViewName("lsh_view/login_page");
 					return mv;
 				}
 			}
 			mv.addObject("msg", "다시 입력하세요.");
-			mv.setViewName("lsh_view/findpwd");
+			mv.setViewName("lsh_view/findpwd_page");
 			return mv;
 		} catch (Exception e) {
 			System.out.println("con mail err : "+e);
 		}
-		return new ModelAndView("error");
+		return null;
 	}
 	
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

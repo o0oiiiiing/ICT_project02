@@ -9,14 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class LoginInterceptor implements AsyncHandlerInterceptor{
 	
-	/*
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
 			Object handler) throws Exception {
 		HttpSession session = request.getSession(true);
 		Object obj = session.getAttribute("loginChk");
 		if (obj == null) {
-			request.getRequestDispatcher("/WEB-INF/views/lsh_view/main.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/lsh_view/login.jsp").forward(request, response);
 			return false;
 		}
 		return true;
@@ -33,6 +32,5 @@ public class LoginInterceptor implements AsyncHandlerInterceptor{
 			 Object handler, Exception ex) throws Exception { 
 		AsyncHandlerInterceptor.super.afterCompletion(request, response, handler, ex); 
 	 }
-	 */
 	 
 }
