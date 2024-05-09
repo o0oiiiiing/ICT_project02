@@ -26,7 +26,7 @@
 	border-bottom: 2px solid #ccc;
 	border-right: 1px solid #ccc;
 	overflow: hidden;
-	background: #fff;
+	background-color: #fff;
 }
 
 .wrap .info:nth-child(1) {

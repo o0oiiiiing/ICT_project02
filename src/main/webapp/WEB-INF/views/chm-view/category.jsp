@@ -55,6 +55,7 @@
 						<input type="hidden" value="${k.vi_image}" class="vi"> 
 						<input type="hidden" value="${k.vi_roadaddress}" class="va">
 						<input type="hidden" value="${k.vi_phoneno}" class="vn">
+						<input type="hidden" value="${k.contentsid}" class="contentsid">
 
 
 					</div>
@@ -88,6 +89,7 @@
 						var vi = element.querySelector('.vi').value;
 						var va = element.querySelector('.va').value;
 						var vn = element.querySelector('.vn').value;
+						var contentsid = element.querySelector('.contentsid').value;
 
 						console.log("클릭된 요소의 wdo 값:", wdoValue);
 						console.log("클릭된 요소의 gdo 값:", gdoValue);
@@ -125,9 +127,10 @@
 								+ '                <div class="jibun ellipsis">전화번호 : '
 								+					vn
 								+				  '</div>'
-								+ '                <div><a href="detail?contentsid='
-								+ '+contentsid+'
-								+ '"class="link">상세페이지</a></div>'
+								+ '                <div><a href="'
+								+					'detail?contentsid='
+								+					contentsid
+								+					'"class="link">상세페이지</a></div>'
 								+ '            </div>' + '        </div>'
 								+ '    </div>' + '</div>';
 

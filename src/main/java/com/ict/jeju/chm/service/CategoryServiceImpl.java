@@ -29,8 +29,5 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryDAO.getBoardList(offset, limit,vi_value);
 
 	}
-
-
-	
 	
 }

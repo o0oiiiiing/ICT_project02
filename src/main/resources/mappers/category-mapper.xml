@@ -15,4 +15,5 @@
     <select id="board_list" parameterType="Map" resultType="caVO">
     	select * from Visitjeju_table where vi_value = #{vi_value} limit #{limit} offset #{offset}
     </select>
+    
 </mapper>

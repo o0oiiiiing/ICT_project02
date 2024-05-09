@@ -13,4 +13,6 @@ public interface CategoryService {
 
 	List<CategoryVO> getBoardList(int offset, int numPerPage, String vi_value);
 
+	
+
 }
