@@ -39,7 +39,7 @@
 	    });
 	    
 	    $(".chatbot_image").click(function() {
-	        $(".chatbot_modal").show();  
+	        $(".chatbot_modal").toggle();  
 	    });
 	    
 	});
@@ -269,11 +269,12 @@
 }
 .chatbot_modal{
 	position: fixed;
-	bottom: 0px;
-	right: 0px;
+	bottom: 20px;
+	right: 80px;
 	z-index: 2;
-	background-color: red;
+	background-color: white;
 	display: none;
+	border-radius: 10px;
 }
 </style>
 <title>나의 여행</title>

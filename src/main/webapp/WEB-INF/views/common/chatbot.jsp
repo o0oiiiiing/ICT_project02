@@ -5,7 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 폰트? -->
+<link
+	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+	rel="stylesheet">
     <style>
+        @font-face {
+			font-family: 'GmarketSansLight';
+			src:
+				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+				format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+        
         body {
             /* display: flex; */
             justify-content: center;
@@ -25,6 +38,7 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #ccc;
+            border-radius: 10px;
         }
         #chat-messages {
             flex: 1;
@@ -36,20 +50,51 @@
         #user-input {
             display: flex;
             padding: 10px;
- 
         }
         #user-input input {
             flex: 1;
             padding: 10px;
             outline: none;
+            border-radius: 10px;
+            margin-right: 5px;
+            border: 1px solid black;
         }
         #user-input button {
             border: none;
-            background-color: #1e88e5;
+            background-color: black;
             color: white;
             padding: 10px 15px;
             cursor: pointer;
+            border-radius: 10px;
         }
+        .chat-button{
+        	width: 50px;
+        }
+        .user-message {
+		    width: 300px;
+    		margin-left: 98px;
+    		border-radius: 15px;
+    		border-bottom-right-radius: 0px;
+    		background-color: black;
+    		color: white;
+    		margin-bottom: 5px;
+    		font-family: 'NanumSquare';
+		    line-height: 23px;
+		    letter-spacing: 1px;
+		    font-size: 15px;
+		}
+		
+		.bot-message {
+		    width: 300px;
+		    background-color: #d3d3d391;
+		    border-radius: 15px;
+		    border-bottom-left-radius: 0px;
+		    margin-bottom: 5px;
+			font-family: 'NanumSquare';
+		    line-height: 23px;
+		    letter-spacing: 1px;
+		    font-size: 15px;
+		}
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -95,7 +140,9 @@ function addMessage(sender, message) {
     const messageElement = document.createElement('div');
     // 생성된 요소에 클래스 추가
     messageElement.className = 'message';
-     // 채팅 메시지 목록에 새로운 메시지 추가
+    // 사용자 또는 챗봇에 따라 다른 클래스 추가
+    messageElement.classList.add(sender === '${u_name}' ? 'user-message' : 'bot-message');
+    // 채팅 메시지 목록에 새로운 메시지 추가
     messageElement.textContent = sender + ": " + message;
     $("#chat-messages").prepend(messageElement);
 }
