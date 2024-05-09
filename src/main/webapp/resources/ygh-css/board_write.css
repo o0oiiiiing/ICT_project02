@@ -44,7 +44,7 @@
 	margin: 10px auto;
 }
 
-#board_write_btn input[type="button"] {
+#board_write_btn input[type="button"], input[type="reset"] {
 	display: inline-block;
 	width: 80px;
 	margin: 0 5px;
