@@ -1,11 +1,13 @@
+.note-btn-group{width: auto;}
+.note-toolbar{width: auto;}
+	
 #board_detail table {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
-	border-collapse: collapse
+	border-collapse: collapse;
 }
 
 #board_detail table tr {
-	text-align: center;
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
@@ -13,32 +15,36 @@
 #board_detail table th {
 	width: 150px;
 	text-align: center;
-	padding: 4px 10px;
 	border: 1px solid lightgray;
+	padding: 5px;
 }
 
 #board_detail table td {
-	width: 150px;
-	text-align: center;
-	padding: 4px 10px;
 	border: 1px solid lightgray;
+	padding: 5px;
 }
 
 #board_detail_btn {
-    text-align: center;
+    width: 800px;
+	text-align: center;
+	margin: 10px auto;
 }
 
 
 #board_detail_btn input[type="button"] {
-	width: 50px;
-	margin: 20px auto;
-	height: 20px;
-	font-size: 12px;
+	display: inline-block;
+	width: 80px;
+	margin: 0 5px;
+	height: 35px;
+	font-size: 15px;
+	border-radius: 15px;
+	border: 1px solid gray;
+	background-color: lightgray;
 	cursor: pointer;
 }
 
 #comment_box table {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 	border-collapse: collapse
 }
@@ -50,7 +56,6 @@
 }
 
 #comment_box table th {
-	width: 150px;
 	text-align: center;
 	padding: 4px 10px;
 	border: 1px solid lightgray;

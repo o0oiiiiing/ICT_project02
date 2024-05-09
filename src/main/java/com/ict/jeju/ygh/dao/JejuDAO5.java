@@ -120,7 +120,15 @@ public class JejuDAO5 {
 		return -1;
 	}
 	
-
+	// Q&A 게시판 수정 (사용자)
+	public int boardUpdate(BoardVO bovo) {
+		try {
+			return sqlSessionTemplate.update("Board_table.board_update", bovo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 	
 
 }
