@@ -8,10 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Q&A 게시판 등록</title>
 <!-- summer note -->
-<link href="<c:url value="/resources/common-css/summernote-lite.css"/>"
-	rel='stylesheet' />
-<link href="<c:url value="/resources/ygh-css/board_write.css"/>"
-	rel='stylesheet' />
+<link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/board_write.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 	function board_list(f) {
 		f.action = "board_list.do";
@@ -85,22 +83,20 @@
 		});
 
 		function sendImage(file, editor) {
-			var frm = new FormData();
+			let frm = new FormData();
 			frm.append("s_file", file);
 			$.ajax({
-				url : "/saveImg.do",
+				url : "saveImg.do",
 				data : frm,
 				type : "post",
 				contentType : false,
 				processData : false,
 				dataType : "json",
-			}).done(
-					function(data) {
-						var path = data.path;
-						var fname = data.fname;
-						$("#bo_content").summernote("editor.insertImage",
-								path + "/" + fname);
-					});
+			}).done(function(data) {
+				let path = data.path;
+				let fname = data.fname;
+				$("#bo_content").summernote("editor.insertImage", path + "/" + fname);
+			});
 		}
 	</script>
 

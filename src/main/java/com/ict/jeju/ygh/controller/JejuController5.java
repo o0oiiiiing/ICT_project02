@@ -1,9 +1,7 @@
 package com.ict.jeju.ygh.controller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -223,7 +221,7 @@ public class JejuController5 {
 	}
 	
 	// 사용자 Q&A 상세보기
-	@GetMapping("board_detail.do")
+	@RequestMapping("board_detail.do")
 	public ModelAndView boardDetail(@ModelAttribute("cPage") String cPage, String bo_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/board_detail");
 		// 상세보기
@@ -279,8 +277,8 @@ public class JejuController5 {
 	
 	// 사용자 Q&A 수정
 	@PostMapping("board_update.do")
-	public ModelAndView boardUpdate(@ModelAttribute("bo_idx")String bo_idx) {
-		ModelAndView mv = new ModelAndView("ygh-view/update");
+	public ModelAndView boardUpdate(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/board_update");
 		BoardVO bovo = jejuService5.boardDetail(bo_idx);
 		if (bovo != null) {
 			mv.addObject("bovo", bovo);
@@ -289,17 +287,17 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 	
-	/*
+	
 	// 사용자 Q&A 수정
 	@PostMapping("board_update_ok.do")
-	public ModelAndView boardUpdateOk(@ModelAttribute("bo_idx")String bo_idx, BoardVO bovo, HttpServletRequest request) {
+	public ModelAndView boardUpdateOk(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx, BoardVO bovo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
 		BoardVO bovo2 = jejuService5.boardDetail(bovo.getBo_idx());
-		String dpwd = bovo2.getPwd();
-		
-		if (! passwordEncoder.matches(bovo.getPwd(), dpwd)) {
-			mv.setViewName("board/update");
+		String dpwd = bovo2.getBo_pwd();
+		/*
+		if (! passwordEncoder.matches(bovo.getBo_pwd(), dpwd)) {
+			mv.setViewName("ygh-view/board_update");
 			mv.addObject("pwdchk", "fail");
 			mv.addObject("bovo", bovo);
 			return mv;
@@ -318,20 +316,23 @@ public class JejuController5 {
 					File out = new File(path, f_name);
 					FileCopyUtils.copy(in, out);
 				}
+				*/
 				int result = jejuService5.boardUpdate(bovo);
 				if (result > 0) {
 					mv.setViewName("redirect:board_detail.do");
 					return mv;
 				}
+				/*
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
+		*/
 		return new ModelAndView("ygh-view/error");
 	}
 	
 	
-	*/
+	
 	
 	
 	
