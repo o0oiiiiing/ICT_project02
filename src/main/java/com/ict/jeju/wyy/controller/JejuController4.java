@@ -1,6 +1,7 @@
 	package com.ict.jeju.wyy.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
 import com.ict.jeju.wyy.dao.UserVO4;
+import com.ict.jeju.wyy.dao.VisitJejuVO4;
 import com.ict.jeju.wyy.service.CalendarService4;
 
 @Controller
@@ -113,9 +115,43 @@ public class JejuController4 {
 	         return new ModelAndView("wyy-view/error");
 	}
 	
+	// 관리자 일정 추가하기
+	@RequestMapping("admin_insert_ok")
+	public ModelAndView adminInsert(VisitJejuVO4 vo4){
+		ModelAndView mv = new ModelAndView("redirect:admin_insert");
+		int result = calendarService4.adminInsert(vo4);
+		return mv;
+	}
+	
+	
+	/*ModelAndView mv = new ModelAndView();
+		UserVO userVO2 = signService.getLoginOK(userVO);
+	 * 			// DB 정보와 입력 정보 비교
+			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
+				Random random = new Random();
+				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
+				if (randomNum.length() < 6) {
+					int substract = 6 - randomNum.length();
+					StringBuffer sb = new StringBuffer();
+					for (int i=0; i<substract; i++) {
+						sb.append("0");
+					}
+					sb.append(randomNum);
+					randomNum = sb.toString();
+				}
+				String chgpwd = passwordEncoder.encode(randomNum);
+				userVO2.setU_pwd(chgpwd);
+	 * */
+	
+	
 	@RequestMapping("calendar")
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
+	}
+	
+	@RequestMapping("admin_insert")
+	public ModelAndView admin_insert() {
+		return new ModelAndView("wyy-view/admin_insert");
 	}
 	
 	@RequestMapping("calendar_add")

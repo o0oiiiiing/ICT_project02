@@ -78,6 +78,12 @@ public class CalendarService4Impl implements CalendarService4{
 	public int removeHeart(String like_idx) {
 		return cdao4.removeHeart(like_idx);
 	}
+	
+	// 관리자 일정 추가
+	@Override
+	public int adminInsert(VisitJejuVO4 vo4) {
+		return cdao4.adminInsert(vo4);
+	}
 
 
 }

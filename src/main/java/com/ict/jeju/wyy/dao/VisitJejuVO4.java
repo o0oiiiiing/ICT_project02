@@ -4,11 +4,18 @@ public class VisitJejuVO4 {
 	private String contentsid, vi_category, vi_value, vi_title, vi_address, vi_roadaddress;
 	private String vi_intro, vi_latitude, vi_longitude, vi_phoneno, vi_image, vi_thumbnail;
 	private String like_idx, like_active;
+	private String a_idx;
 	
 	
 	
 	public String getLike_idx() {
 		return like_idx;
+	}
+	public String getA_idx() {
+		return a_idx;
+	}
+	public void setA_idx(String a_idx) {
+		this.a_idx = a_idx;
 	}
 	public void setLike_idx(String like_idx) {
 		this.like_idx = like_idx;
