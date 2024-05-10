@@ -6,53 +6,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나의 여행(관리자)</title>
-<link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
-<link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
+<title>신고 게시판 목록</title>
+<!-- summer note -->
+<link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/report_detail.css"/>" rel='stylesheet' />
+<script type="text/javascript">
+	function report_list(f) {
+		f.action="report_list.do";
+		f.submit();
+	}
+	
+	function report_update(f) {
+		f.action="report_update.do";
+		f.submit();
+	}
+	
+	function report_delete(f) {
+		f.action="report_delete.do";
+		f.submit();
+	}
+
+</script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
-<div id="report_detail">
 	<form method="post">
-		<table width="700">
+		<div id="report_detail">
+		<table>
+			<caption>신고 게시판</caption>
 			<tbody>
 				<tr>
-					<th bgcolor="#B2EBF4">제목</th>
+					<th>제목</th>
 					<td>${revo.report_title}</td>
 				</tr>
 
 				<tr>
-					<th bgcolor="#B2EBF4">작성자</th>
+					<th>작성자</th>
 					<td>${revo.report_writer}</td>
 				</tr>
 
 				<tr>
-					<th bgcolor="#B2EBF4">날짜</th>
+					<th>날짜</th>
 					<td>${revo.report_regdate.substring(0,10)}</td>
 				</tr>
 
 				<tr>
-					<th bgcolor="#B2EBF4">내용</th>
+					<th>내용</th>
 					<td>
-						<%-- <pre>${bovo.content}</pre> --%> <textarea rows="10" cols="60"
-							id="content" name="content">${revo.report_content}</textarea>
+						<textarea rows="10" cols="60" id="report_content" name="report_content">${revo.report_content}</textarea>
 					</td>
 				</tr>
 
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="2">
-						<input type="hidden" value="${revo.report_idx}" name="bo_idx"> 
-						<input type="hidden" value="${cPage}" name="cPage"> 
-						<input type="button" value="목록" onclick="report_list(this.form)" /> 
-						<input type="button" value="답글" onclick="ans_write(this.form)" /> 
-						<input type="button" value="삭제" onclick="board_delete(this.form)" /></td>
-				</tr>
-			</tfoot>
-		</table>
+			</table>
+			</div>
+			<div id="report_detail_btn">
+				<input type="hidden" value="${revo.report_idx}" name="report_idx"> 
+				<input type="hidden" value="${cPage2}" name="cPage2"> 
+				<input type="button" value="목록" onclick="report_list(this.form)" /> 
+				<input type="button" value="수정" onclick="report_update(this.form)" /> 
+				<input type="button" value="삭제" onclick="report_delete(this.form)" />
+			</div>
 	</form>
-</div>
+	
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+	<script src="resources/common-js/summernote-lite.js"></script>
+	<script src="resources/common-js/lang/summernote-ko-KR.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#report_content").summernote({
+			lang: "ko-KR",								// 한글 설정
+			height: 300,              		 			// 에디터 높이
+			focus: true,               					// 에디터 로딩후 포커스를 맞출지 여부
+			placeholder: '최대3000자까지 쓸 수 있습니다', 	// placeholder 설정
+			callbacks : {
+				onImageUpload :  function(files, editor){
+					for (var i = 0; i < files.length; i++) {
+						sendImage(files[i], editor);
+					}
+				}
+			}
+		});
+		$('#report_content').summernote('disable');
+	});
+
+	function sendImage(file, editor) {
+		var frm = new FormData();
+		frm.append("s_file",file);
+		$.ajax({
+			url : "/saveImg.do",
+			data : frm,
+			type : "post",
+			contentType : false,
+			processData : false,
+			dataType : "json"
+		}).done(function(data) {
+			var path = data.path;
+			var fname = data.fname;
+			$("#report_content").summernote("editor.insertImage",path+"/"+fname);
+		});
+	}
+	</script>
 
 <%@include file="../common/footer.jsp"%>
 </body>

@@ -72,14 +72,38 @@ public class JejuServiceImpl5 implements JejuService5 {
 
 	// Q&A 게시판 작성 (사용자)
 	@Override
-	public int boardWrtieOk(BoardVO bovo) {
-		return jejuDAO5.boardWrtieOk(bovo);
+	public int boardWriteOk(BoardVO bovo) {
+		return jejuDAO5.boardWriteOk(bovo);
 	}
 	
 	// Q&A 게시판 수정 (사용자)
 	@Override
 	public int boardUpdate(BoardVO bovo) {
 		return jejuDAO5.boardUpdate(bovo);
+	}
+
+	// Q&A 게시판 삭제 (사용자)
+	@Override
+	public int boardDelete(BoardVO bovo) {
+		return jejuDAO5.boardDelete(bovo);
+	}
+	
+	// 신고 게시판 작성 (사용자)
+	@Override
+	public int reportWriteOk(ReportVO revo) {
+		return jejuDAO5.reportWriteOk(revo);
+	}
+	
+	// 신고 게시판 수정 (사용자)
+	@Override
+	public int reportUpdate(ReportVO revo) {
+		return jejuDAO5.reportUpdate(revo);
+	}
+	
+	// 신고 게시판 삭제 (사용자)
+	@Override
+	public int reportDelete(ReportVO revo) {
+		return jejuDAO5.reportDelete(revo);
 	}
 
 	
