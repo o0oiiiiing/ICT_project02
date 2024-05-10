@@ -325,7 +325,7 @@
 
 .qa_write__content {
 	font-family: 'NanumSquare';
-	margin-left: 20px;
+	margin: 0 auto;
 }
 
 .qa_write__container tr, .qa_write__container td {
@@ -355,4 +355,8 @@
 .qa_write__button:hover, .qa_write__button:active {
 	background-color: #b9b9b9;
 	color: #868686;
+}
+
+.note-editor {
+	margin: 0 auto;
 }

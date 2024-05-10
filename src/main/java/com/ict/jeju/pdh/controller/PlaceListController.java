@@ -36,8 +36,10 @@ public class PlaceListController {
 		return null;
 	}
 
-	@GetMapping("detail")
-	public ModelAndView detail(@RequestParam("contentsid") String contentsid) {
+	@RequestMapping("detail")
+	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session, HttpServletRequest request) {
+		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
 		PlaceListVO placeDetail = placeListService.placeDetail(contentsid);
 		int likeNum = placeListService.likeNum(contentsid);
