@@ -21,8 +21,9 @@
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
 <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- summernote -->	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- summernote -->
 <script src="/resources/common-js/summernote-lite.js"></script>
 <script src="/resources/common-js/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/resources/common-css/summernote-lite.css">
@@ -85,21 +86,29 @@
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
+			<li class="nav_list"><a href="category_page.do?vi_value=관광지"
+				class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=음식점"
+				class="a_tag">음식점</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=숙박"
+				class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑"
+				class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사"
+				class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의
+					여행</a></li>
 		</ul>
 
 		<ul class="nav-list__right">
 			<li>
 				<form method="post" action="search">
 					<div class="search-bar">
-						<span class="material-symbols-outlined search-icon">search</span> 
-						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
+						<span class="material-symbols-outlined search-icon">search</span>
+						<input class="search-field" type="text" name="keyword" value=""
+							placeholder="검색어를 입력해주세요." /> <span
+							class="material-symbols-outlined delete-icon"
+							onclick="clearInput()">close</span>
 					</div>
 				</form>
 			</li>
@@ -133,11 +142,14 @@
 				<td class="icons-detail no-border-right">링크 복사</td>
 			</tr>
 			<tr class="icons-section">
-				<td class="icons-number border-right"><fmt:formatNumber value="${likeNum}" pattern="#,##0" /></td>
+				<td class="icons-number border-right"><fmt:formatNumber
+						value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
 					type="button" value="추가하기" onclick="addSchedule()"></td>
-				<td class="icons-number border-right"><fmt:formatNumber value="${reviewNum}" pattern="#,##0" /></td>
-				<td class="icons-number border-right"><fmt:formatNumber value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
+				<td class="icons-number border-right"><fmt:formatNumber
+						value="${reviewNum}" pattern="#,##0" /></td>
+				<td class="icons-number border-right"><fmt:formatNumber
+						value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
 				<td class="no-border-right"><input class="icons-button"
 					type="button" value="복사하기" onclick="copyLink()"></td>
 			</tr>
@@ -238,31 +250,40 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<form id="qa_write">
-		<div class="qa_write_container">
-			<p>Q&A 작성</p>
-			<table>
-				<tbody>
-					<tr>
-						<td>제목</td>
-						<td><input type="text" name="title"></td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td><input type="password" name="pwd"></td>
-					</tr>
-				</tbody>
-			</table>
-			<br>
-			<textarea id="summernote" name="editordata" maxlength="1000"></textarea>
-			<input type="reset" value="취소">
-			<input type="submit" value="등록">
+		<div class="qa_write__container">
+			<p class="qa_wrtie__title">Q&A 작성</p>
+			<div class="qa_write__content">
+				<table>
+					<tbody>
+						<tr>
+							<td>제목</td>
+							<td colspan="2"><input style="width: 420px;" type="text" name="title"></td>
+						</tr>
+						<tr>
+							<td style="width: 149px; text-align: center;">
+    							<div style="display: inline-block; margin-right: 7px;">
+       								<input type="radio" name="disclosure" value="public">공개
+        							<input type="radio" name="disclosure" value="private">비공개
+    							</div>
+							</td>
+							<td style="width: 449px;">비밀번호 : <input style="width: 200px;" type="password" name="pwd"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<textarea id="summernote" name="editordata" maxlength="1000"></textarea>
+			</div>
+			<div class="qa_write__buttons">
+				<input class="qa_write__button" type="reset" value="취소"> <input
+					class="qa_write__button" type="submit" value="등록">
+			</div>
 		</div>
 	</form>
-	
+
 	<div class="overlay"></div>
-	
+
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>
@@ -270,12 +291,12 @@
 			<span class="material-symbols-outlined">expand_less</span>
 		</button>
 	</div>
-	
+
 	<script type="text/javascript">
 	// summernote
 	$('#summernote').summernote({
-		height : 300, // 에디터 높이
-		width: 650,
+		height : 200, // 에디터 높이
+		width: 600,
 		minHeight : null, // 최소 높이
 		maxHeight : null, // 최대 높이
 		focus : true, // 에디터 로딩후 포커스를 맞출지 여부
@@ -292,6 +313,17 @@
 		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 	});
+	
+	// summernote 내용 초기화
+	var resetButton = document.querySelector('#qa_write input[type="reset"]');
+    var summernoteTextarea = document.querySelector('#summernote');
+
+    resetButton.addEventListener('click', function() {
+        // summernote textarea 초기화
+       $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
+    });
+    
+    // Q&A 공개 비공개
 	
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };

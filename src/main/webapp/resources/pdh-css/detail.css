@@ -303,14 +303,56 @@
 	height: 100%;
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 99;
+	z-index: 999;
 	top: 0;
 	display: none;
 }
 
-.qa_write_container {
-	width: 700px;
-	height: 500px;
+.qa_write__container {
+	width: 650px;
+	height: 520px;
 	background-color: white;
 	margin: 0 auto;
+	border-radius: 20px;
+}
+
+.qa_wrtie__title {
+	font-family: 'GmarketSansMedium';
+	text-align: center;
+	padding: 30px 0;
+	font-size: 20px;
+}
+
+.qa_write__content {
+	font-family: 'NanumSquare';
+	margin-left: 20px;
+}
+
+.qa_write__container tr, .qa_write__container td {
+	border: 1px solid #D9D9D9;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+
+.qa_write__buttons {
+	text-align: center;
+	padding-top: 20px;
+}
+
+.qa_write__button {
+	border: none;
+	font-family: 'GmarketSansMedium';
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	font-size: 15px;
+	background-color: #D9D9D9;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.qa_write__button:hover, .qa_write__button:active {
+	background-color: #b9b9b9;
+	color: #868686;
 }
