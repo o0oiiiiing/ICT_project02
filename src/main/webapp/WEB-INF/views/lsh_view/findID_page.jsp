@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>아이디 찾기</title>
+		<link href="resources/lsh-css/findID.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function findID_ok(f) {
@@ -29,57 +30,30 @@
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
-		<section>
-			<div>
+		<section class="find_id_page">
+			<div class="find_id_container">
 				<form method="post">
-				<h3>아이디 찾기</h3>
-				<div>
-					<ul>
-						<li>
-							<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
-						</li>
-						<li>
-							<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
-										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
-						</li>
-						<li>
-							<input type="button" value="아이디 찾기" onclick="findID_ok(this.form)">
-						</li>
-					</ul>
-				</div>
-				
-				
-				
-				<!-- 
-					<table>
-						<thead>
-							<tr>
-								<td>아이디 찾기</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
-								</td>
-								<td>
-									<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
-										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
-								</td>
-								<td>
-									<input type="button" value="아이디 찾기" onclick="findID_ok(this.form)">
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					 -->
+				<h3 class="find_id_text">아이디 찾기</h3>
+					<div class="find_id_box">
+						<ul>
+							<li>
+								<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
+							</li>
+							<li>
+								<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
+											pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
+							</li>
+							<li>
+								<input type="button" class="find_id_btn" value="아이디 찾기" onclick="findID_ok(this.form)">
+							</li>
+						</ul>
+					</div>
 					
+					<div class="find_id_box2">
+						<a href="login_go.do">로그인</a> | 
+						<a href="findpwd_go.do">비밀번호 찾기</a>
+					</div>
 				</form>
-			</div>
-			
-			<div>
-				<a href="login_go.do">로그인</a> | 
-				<a href="findpwd_go.do">비밀번호 찾기</a>
 			</div>
 		</section>
 		<%@include file="../common/footer.jsp" %>

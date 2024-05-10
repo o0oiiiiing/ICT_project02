@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-.login_page {
+.find_id_page {
 	width: 360px;
 	padding: 8% 0 0;
   	margin: auto;
 }
 
-.login_box {
+.find_id_container {
 	position: relative;
   	z-index: 1;
   	background: white;
@@ -17,7 +17,7 @@
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.login_box input {
+.find_id_box input {
   	outline: 0;
   	background: lightgray;
   	width: 100%;
@@ -28,7 +28,7 @@
   	font-size: 14px;
 }
 
-.login_btn {
+.find_id_btn {
   	text-transform: uppercase;
   	outline: 0;
   	background: #4CAF50;
@@ -42,19 +42,15 @@
   	cursor: pointer;
 }
 
-.login_btn:hover, .login_btn:active, .login_btn:focus {
+.find_id_btn:hover, .find_id_btn:active, .find_id_btn:focus {
 	background: #b6dedc;
 }
 
-.login_text{
+.find_id_text {
 	padding: 20px;
 }
 
-.login_find{
+.find_id_box2 {
 	margin: 15px 0 0 15px;
-}
-
-.login_sns {
-	margin-top: 15px;
 }
 

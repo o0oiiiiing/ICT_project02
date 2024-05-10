@@ -28,45 +28,45 @@ public class SignController {
 	@Autowired
 	private MailService mailService;
 	
-	// �α��� ȭ�� �̵�
+	// 로그인 이동
 	@GetMapping("login_go.do")
 	public ModelAndView getLogin() {
 		return new ModelAndView("lsh_view/login_page");
 	}
 	
-	// ���̵�ã�� ȭ�� �̵�
+	// 아이디찾기 이동
 	@GetMapping("findID_go.do")
 	public ModelAndView getFindID() {
 		return new ModelAndView("lsh_view/findID_page");
 	}
 	
-	// ��й�ȣ ã�� ȭ�� �̵�
+	// 비밀번호 찾기 이동
 	@GetMapping("findpwd_go.do")
 	public ModelAndView getFindpwd() {
 		return new ModelAndView("lsh_view/findpwd_page");
 	}
 	
-	// ȸ������ ȭ�� �̵�
+	// 회원가입 이동
 	@GetMapping("join_go.do")
 	public ModelAndView getJoin() {
 		return new ModelAndView("lsh_view/join_page");
 	}
 	
-	// �α���
+	// 로그인
 	@PostMapping("login_ok.do")
 	public ModelAndView getLoginOK(HttpSession session, UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		if (userVO2 == null) {
 			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "������ �̷��� �����ϴ�");
+			mv.addObject("msg", "가입한 내역이 없습니다.");
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
 		String dpwd = userVO2.getU_pwd();
 		if (! passwordEncoder.matches(userVO.getU_pwd(), dpwd)) {
 			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "�α������� �ٸ�");
+			mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		} else {
@@ -78,7 +78,7 @@ public class SignController {
 		}
 	}
 	
-	// īī���α���
+	// 카카오 로그인
 	@RequestMapping("kakao_login.do")
 	public String KakaoLogin(String code, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
@@ -94,7 +94,7 @@ public class SignController {
 		return "pdh-view/home";
 	}
 	
-	// ���̹��α���
+	// 네이버 로그인
 	@RequestMapping("naver_login.do")
 	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
@@ -107,14 +107,14 @@ public class SignController {
 		return "pdh-view/home";
 	}
 	
-	// �α׾ƿ�
+	// 로그아웃
 	@GetMapping("logout_go.do")
 	public ModelAndView getLogout(HttpSession session) {
 		session.invalidate();
 		return new ModelAndView("pdh-view/home");
 	}
 	
-	// ȸ������
+	// 회원가입
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO) {
 		String c_pwd = passwordEncoder.encode(userVO.getU_pwd());
@@ -126,7 +126,7 @@ public class SignController {
 		return null;
 	}
 
-	// ���̵� �ߺ� Ȯ��
+	// 아이디 중복체크
 	@RequestMapping(value = "id_doublechk.do", produces = "text/plain; charset=utf-8")
 	@ResponseBody
 	public String getIdDoubleChk(@RequestParam("u_id") String u_id) {
@@ -134,7 +134,7 @@ public class SignController {
 		return result;
 	}
 	
-	// ���̵� ã��
+	// 아이디 찾기
 	@RequestMapping("findID_ok.do")
 	public ModelAndView getFindIdChk(UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
@@ -146,14 +146,14 @@ public class SignController {
 		}
 		return new ModelAndView("redirect:findID_go.do");
 	}
-
-	// ��й�ȣ ã�� �̸��� ������ȣ �߼� �� DB������Ʈ
+  
+	// 비밀번호 찾기 이메일 인증번호 발송 및 DB업데이트
 	@PostMapping("email_send_ok.do")
 	public ModelAndView SendMailOK(UserVO userVO, String u_email) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		try {
-			// DB�� ���ٿ� ������ �Է��� ������ �����ͼ� ��
+			// DB 정보와 입력 정보 비교
 			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
 				Random random = new Random();
 				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
