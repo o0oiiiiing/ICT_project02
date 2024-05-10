@@ -48,7 +48,7 @@
 
 		<ul class="nav-list__right">
 			<li>
-				<form method="post" action="search">
+				<form method= post" action="search">
 					<div class="search-bar">
 						<span class="material-symbols-outlined icon">search</span> 
 						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />

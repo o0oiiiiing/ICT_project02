@@ -26,9 +26,9 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	// , String option_select
-	public List<CategoryVO> getBoardList(int offset,  int limit, String vi_value ) {
+	public List<CategoryVO> getBoardList(int offset,  int limit, String vi_value , String option) {
 		// ,option_select
-		return categoryDAO.getBoardList(offset, limit,vi_value );
+		return categoryDAO.getBoardList(offset, limit,vi_value ,option);
 
 	}
 	

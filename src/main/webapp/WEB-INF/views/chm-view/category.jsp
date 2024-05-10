@@ -12,43 +12,48 @@
 <link rel="stylesheet" href="resources/chm-css/category.css?after">
 <link rel="stylesheet" href="resources/chm-css/map.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
+<link href="resources/common-css/reset.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
-<script type="text/javascript" src="resources/chm-js/category.js"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript" src="resources/chm-js/category.js"></script>           
+<script type="text/javascript"> 
 		function optionSelect(f) {
-				let check1 = document.getElementById("check1").value
-				f.action = "category_page.do";
+				
+				let option = document.getElementById("optionList").value
+				let vi_value = document.getElementById("vi_value").value
+				
+				console.log(option)
+				f.action = "category_page.do?option="+option+"&vi_value=" + vi_value;
 				f.submit();
 			}
-		}
-	</script> -->
+	</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
+	<form method="post">
 	<!-- 전체 틀 -->
 	<div class="background">
 
 		<!-- 소개 -->
-		<form action="category_Option.do" method="post">
+		
 			<div class="wrapper_top">
 				<div class="wrapper_top_inner">
 					<div class="wrapper_top_left">
 						<span class="wrapper_top_category_id">${vi_value}</span> 
 						<span class="wrapper_top_category_name"> 
 						<select class="option_search" id="optionList" onchange="optionSelect(this.form)" name="option_select">
+							<option disabled selected>옵션을 선택해주세요</option>
 							<option value="option1">조회순</option>
 							<option value="option2">이름순(ㄱ)</option>
 							<option value="option3">이름순(ㅎ)</option>
-						</select>
+						</select> 
 						</span>
 					</div>
 					<div class="wrapper_top_right"></div>
 
 				</div>
 			</div>
-		</form>
+		
 		<!-- DB에서 가져와서 c:foreach 반복문 돌릴 관광지 카테고리 보여주는 구간  -->
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
@@ -62,13 +67,16 @@
 						<!-- 해당 카테고리에 관한 위도 / 경도 값 가져오기 -->
 						<input type="hidden" value="${k.vi_latitude}" class="wdo">
 						<input type="hidden" value="${k.vi_longitude}" class="gdo">
-						<input type="hidden" value="${k.vi_title}" class="vt"> <input
-							type="hidden" value="${k.vi_image}" class="vi"> <input
-							type="hidden" value="${k.vi_roadaddress}" class="va"> <input
-							type="hidden" value="${k.vi_phoneno}" class="vn"> <input
-							type="hidden" value="${k.contentsid}" class="contentsid">
+						<input type="hidden" value="${k.vi_title}" class="vt" id="vi_title"> 
+						<input type="hidden" value="${k.vi_image}" class="vi"> 
+						<input type="hidden" value="${k.vi_roadaddress}" class="va"> 
+						<input type="hidden" value="${k.vi_phoneno}" class="vn"> 
+						<input type="hidden" value="${k.contentsid}" class="contentsid">
+						<input type="hidden" value="${k.vi_hit}" id="vi_hit">
+						<input type="hidden" value="${k.vi_value}" id="vi_value">
+						
 
-
+		
 					</div>
 				</c:forEach>
 			</div>
@@ -192,7 +200,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="category_page.do?cPage=${paging3.beginBlock - paging3.pagePerBlock }&vi_value=${vi_value}">&#8249;</a></li>
+										href="category_page.do?cPage=${paging3.beginBlock - paging3.pagePerBlock }&vi_value=${vi_value}&option=${option}">&#8249;</a></li>
 								</c:otherwise>
 							</c:choose>
 
@@ -205,7 +213,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="category_page.do?cPage=${k}&vi_value=${vi_value}">${k }</a></li>
+											href="category_page.do?cPage=${k}&vi_value=${vi_value}&option=${option}">${k }</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -217,7 +225,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="category_page.do?cPage=${paging3.beginBlock + paging3.pagePerBlock }&vi_value=${vi_value}">&#8250;</a></li>
+										href="category_page.do?cPage=${paging3.beginBlock + paging3.pagePerBlock }&vi_value=${vi_value}&option=${option}">&#8250;</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ol>
@@ -228,6 +236,7 @@
 		</div>
 
 	</div>
+	</form>
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
