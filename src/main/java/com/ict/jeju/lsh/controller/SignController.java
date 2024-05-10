@@ -28,57 +28,57 @@ public class SignController {
 	@Autowired
 	private MailService mailService;
 	
-	// ·Î±×ÀÎ È­¸é ÀÌµ¿
+	// ï¿½Î±ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½
 	@GetMapping("login_go.do")
 	public ModelAndView getLogin() {
 		return new ModelAndView("lsh_view/login_page");
 	}
 	
-	// ¾ÆÀÌµðÃ£±â È­¸é ÀÌµ¿
+	// ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½
 	@GetMapping("findID_go.do")
 	public ModelAndView getFindID() {
 		return new ModelAndView("lsh_view/findID_page");
 	}
 	
-	// ºñ¹Ð¹øÈ£ Ã£±â È­¸é ÀÌµ¿
+	// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½
 	@GetMapping("findpwd_go.do")
 	public ModelAndView getFindpwd() {
 		return new ModelAndView("lsh_view/findpwd_page");
 	}
 	
-	// È¸¿ø°¡ÀÔ È­¸é ÀÌµ¿
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½
 	@GetMapping("join_go.do")
 	public ModelAndView getJoin() {
 		return new ModelAndView("lsh_view/join_page");
 	}
 	
-	// ·Î±×ÀÎ
+	// ï¿½Î±ï¿½ï¿½ï¿½
 	@PostMapping("login_ok.do")
 	public ModelAndView getLoginOK(HttpSession session, UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		if (userVO2 == null) {
 			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "°¡ÀÔÇÑ ÀÌ·ÂÀÌ ¾ø½À´Ï´Ù");
+			mv.addObject("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
 		String dpwd = userVO2.getU_pwd();
 		if (! passwordEncoder.matches(userVO.getU_pwd(), dpwd)) {
 			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "·Î±×ÀÎÁ¤º¸ ´Ù¸§");
+			mv.addObject("msg", "ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½");
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		} else {
 			session.setAttribute("loginChk", "ok");
 			session.setAttribute("userVO", userVO2);
 			mv.addObject("userVO", userVO2);
-			mv.setViewName("pdh-view/home");
+			mv.setViewName("redirect:home");
 			return mv;
 		}
 	}
 	
-	// Ä«Ä«¿À·Î±×ÀÎ
+	// Ä«Ä«ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½
 	@RequestMapping("kakao_login.do")
 	public String KakaoLogin(String code, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
@@ -94,7 +94,7 @@ public class SignController {
 		return "pdh-view/home";
 	}
 	
-	// ³×ÀÌ¹ö·Î±×ÀÎ
+	// ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½Î±ï¿½ï¿½ï¿½
 	@RequestMapping("naver_login.do")
 	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
@@ -107,14 +107,14 @@ public class SignController {
 		return "pdh-view/home";
 	}
 	
-	// ·Î±×¾Æ¿ô
+	// ï¿½Î±×¾Æ¿ï¿½
 	@GetMapping("logout_go.do")
 	public ModelAndView getLogout(HttpSession session) {
 		session.invalidate();
 		return new ModelAndView("pdh-view/home");
 	}
 	
-	// È¸¿ø°¡ÀÔ
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO) {
 		String c_pwd = passwordEncoder.encode(userVO.getU_pwd());
@@ -126,7 +126,7 @@ public class SignController {
 		return null;
 	}
 
-	// ¾ÆÀÌµð Áßº¹ È®ÀÎ
+	// ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ È®ï¿½ï¿½
 	@RequestMapping(value = "id_doublechk.do", produces = "text/plain; charset=utf-8")
 	@ResponseBody
 	public String getIdDoubleChk(@RequestParam("u_id") String u_id) {
@@ -134,7 +134,7 @@ public class SignController {
 		return result;
 	}
 	
-	// ¾ÆÀÌµð Ã£±â
+	// ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	@RequestMapping("findID_ok.do")
 	public ModelAndView getFindIdChk(UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
@@ -147,13 +147,13 @@ public class SignController {
 		return new ModelAndView("redirect:findID_go.do");
 	}
 
-	// ºñ¹Ð¹øÈ£ Ã£±â ÀÌ¸ÞÀÏ ÀÎÁõ¹øÈ£ ¹ß¼Û ¹× DB¾÷µ¥ÀÌÆ®
+	// ï¿½ï¿½Ð¹ï¿½È£ Ã£ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ß¼ï¿½ ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@PostMapping("email_send_ok.do")
 	public ModelAndView SendMailOK(UserVO userVO, String u_email) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		try {
-			// DB¿¡ °¬´Ù¿Â Á¤º¸¿Í ÀÔ·ÂÇÑ Á¤º¸¸¦ °¡Á®¿Í¼­ ºñ±³
+			// DBï¿½ï¿½ ï¿½ï¿½ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½
 			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
 				Random random = new Random();
 				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
@@ -172,12 +172,12 @@ public class SignController {
 				int res = signService.getChgPwd(userVO2);
 				if (res >0) {
 					mailService.sendEmail(randomNum, userVO2.getU_email());
-					mv.addObject("msg", "°¡ÀÔÇÏ½Å ÀÌ¸ÞÀÏ·Î ÀÓ½Ã ºñ¹Ð¹øÈ£¸¦ ¹ß±ÞÇÏ¿´½À´Ï´Ù.");
+					mv.addObject("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ ï¿½Ì¸ï¿½ï¿½Ï·ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ß±ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 					mv.setViewName("lsh_view/login_page");
 					return mv;
 				}
 			}
-			mv.addObject("msg", "´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.");
+			mv.addObject("msg", "ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 			mv.setViewName("lsh_view/findpwd_page");
 			return mv;
 		} catch (Exception e) {
