@@ -172,12 +172,12 @@ public class SignController {
 				int res = signService.getChgPwd(userVO2);
 				if (res >0) {
 					mailService.sendEmail(randomNum, userVO2.getU_email());
-					mv.addObject("msg", "�����Ͻ� �̸��Ϸ� �ӽ� ��й�ȣ�� �߱��Ͽ����ϴ�.");
+					mv.addObject("msg", "가입하신 메일로 임시 비밀번호가 발송되었습니다.");
 					mv.setViewName("lsh_view/login_page");
 					return mv;
 				}
 			}
-			mv.addObject("msg", "�ٽ� �Է��ϼ���.");
+			mv.addObject("msg", "다시 입력하세요.");
 			mv.setViewName("lsh_view/findpwd_page");
 			return mv;
 		} catch (Exception e) {
