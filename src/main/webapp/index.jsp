@@ -44,7 +44,7 @@
         <div class="gnb_wrappr">
           <ul class="gnb">
              <li class="category">
-              <a href="category_page.do?vi_value=관광지">관광지</a>
+              <a href="category_page.do?vi_value=관광지&option=option1">관광지</a>
             </li>
             <li class="category">
               <a href="category_page.do?vi_value=쇼핑">쇼핑</a>
