@@ -64,13 +64,24 @@
 
 	    writeButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if (qaWriteDiv.style.display === 'block') {
-	        	qaWriteDiv.style.display = 'none';
-	        	overlay.style.display = 'none';
-	        } else {
-	        	qaWriteDiv.style.display = 'block';
-	        	overlay.style.display = 'block';
-	        }
+	        if ("${userVO}" == "") {
+				alert("로그인 후 이용 가능합니다.")
+				return 
+			} else {
+		        if (qaWriteDiv.style.display === 'block') {
+		        	qaWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        } else {
+		        	qaWriteDiv.style.display = 'block';
+		        	overlay.style.display = 'block';
+		        }
+			}
+	        overlay.addEventListener('click', function() {
+	        	if (qaWriteDiv.style.display === 'block') {
+		        	qaWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        }
+	        })
 	    });
 	});
 </script>
@@ -112,9 +123,9 @@
 					</div>
 				</form>
 			</li>
-			<li>로그인</li>
+			<li><a href="login_go.do">로그인</a></li>
 			<li>|</li>
-			<li>회원가입</li>
+			<li><a href="join_go.do">회원가입</a></li>
 		</ul>
 	</header>
 
@@ -254,7 +265,7 @@
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
-				<table>
+				<table style="margin: 0 auto;">
 					<tbody>
 						<tr>
 							<td>제목</td>
@@ -264,13 +275,11 @@
 						<tr>
 							<td style="width: 149px; text-align: center;">
 								<div style="display: inline-block; margin-right: 7px;">
-									<input type="radio" name="disclosure" value="public"
-										onclick="handleDisclosure()" checked="checked">공개 <input type="radio"
-										name="disclosure" value="private" onclick="handleDisclosure()">비공개
+									<input type="radio" name="disclosure" value="public" onclick="handleDisclosure()" checked="checked">공개
+									<input type="radio" name="disclosure" value="private" onclick="handleDisclosure()">비공개
 								</div>
 							</td>
-							<td style="width: 449px;">비밀번호 : <input
-								style="width: 200px;" type="password" name="pwd" disabled="disabled"></td>
+							<td style="width: 449px;">비밀번호 : <input style="width: 200px;" type="password" name="pwd" disabled="disabled" id="passwordInput" required="required"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -319,17 +328,20 @@
 	// summernote 내용 초기화
 	var resetButton = document.querySelector('#qa_write input[type="reset"]');
     var summernoteTextarea = document.querySelector('#summernote');
+    var passwordInput = document.getElementById('passwordInput');
 
     resetButton.addEventListener('click', function() {
         // summernote textarea 초기화
        $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
+       passwordInput.disabled = true;
     });
     
     // Q&A 공개 비공개
     function handleDisclosure() {
 	    var disclosureValue = document.querySelector('input[name="disclosure"]:checked').value;
 	    var passwordInput = document.getElementById('passwordInput');
-	
+		console.log(disclosureValue)
+		console.log(passwordInput)
 	    if (disclosureValue === 'private') {
 	        // 비밀번호 입력란을 활성화하고, 비밀번호 입력을 강제합니다.
 	        passwordInput.disabled = false;
@@ -338,6 +350,7 @@
 	        // 비밀번호 입력란을 비활성화하고, 필수 입력이 아니도록 설정합니다.
 	        passwordInput.disabled = true;
 	        passwordInput.required = false;
+	        passwordInput.value = '';
 	    }
 	}
     
