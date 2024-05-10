@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>회원가입</title>
+		<link href="resources/lsh-css/join.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function back() {
@@ -30,7 +31,7 @@
 							alert("사용 가능");
 							idChk = true;
 						} else if (data === '0') {
-							alert("사용 불가능");
+							alert("이미 사용중인 아이디입니다.");
 							idChk = false;
 						}
 					},
@@ -173,174 +174,103 @@
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
-		<section>
-			<form method="post">
-				<div class="join_box1">
-				<h3>회원가입</h3>
-				<div>
-					<ul>
-						<li>
-							<span>아이디 *</span>
-							<input type="text"  id="u_id" name="u_id" required />
-							<input type="button" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
-						</li>
-						<li>
-							<span>비밀번호 *</span>
-							<input type="password" id="u_pwd" name="u_pwd" required />
-						</li>
-						<li>
-							<span>비밀번호 확인 *</span>
-							<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" />
-							<span id="msg" ></span>
-						</li>
-						<li>
-							<span>이름 *</span>
-							<input type="text" id="u_name" name="u_name" required />
-						</li>
-						<li>
-							<span>생년월일 *</span>
-							<input type="date" id="u_birth" name="u_birth" required />
-						</li>
-						<li>
-							<span>성별 *</span>
-							<input type="radio" name="u_gender" value="1" checked /> 남자
-							<input type="radio" name="u_gender" value="2" /> 여자
-						</li>
-						<li>
-							<span>이메일 *</span>
-							<input type="email" id="u_email" name="u_email" required 
-										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"/>
-						</li>
-						<li>
-							<span>전화번호 *</span>
-							<input type="number" id="u_phone" name="u_phone" required />
-						</li>
-						<li>
-							<span>주소 *</span>
-							<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호">
-							<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-							<input type="text" id="u_addr" name="u_addr">
-							<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1">
-							<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2">
-						</li>
-					</ul>
-				</div>
-				
-				
-				
-				<!-- 
-					<table>
-						<thead class="join_header">
-							<tr>
-								<td>회원가입</td>
-							</tr>
-						</thead>
-						<tbody class="join_body">
-							<tr>
-								<td>
-									<label>아이디</label>
-									<input type="text"  id="u_id" name="u_id" required />
-									<input type="button" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
-								</td>
-								
-								<td>
-									<label>비밀번호</label>
-									<input type="password" id="u_pwd" name="u_pwd" required />
-								</td>
-								
-								<td>
-									<label>비밀번호 확인</label>
-									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" />
+		<section class="join_page">
+			<div class="join_container">
+				<form method="post">
+					<h3 class="join_text">회원가입</h3>
+						<div class="join_box">
+							<ul>
+								<li>
+									<input type="text"  id="u_id" name="u_id" required placeholder="아이디"/>
+									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
+								</li>
+								<li>
+									<input type="password" id="u_pwd" name="u_pwd" required placeholder="비밀번호" />
+								</li>
+								<li>
+									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="비밀번호 확인" />
 									<span id="msg" ></span>
-								</td>
-								
-								<td>
-									<label>이름</label>
-									<input type="text" id="u_name" name="u_name" required />
-								</td>
-								
-								<td>
-									<label>생년월일</label>
-									<input type="date" id="u_birth" name="u_birth" required />
-								</td>
-								
-								<td>
-									<label>성별</label>
-									<input type="radio" name="u_gender" value="1" checked /> 남자
-									<input type="radio" name="u_gender" value="2" /> 여자
-								</td>
-								
-								<td>
-									<label>이메일</label>
+								</li>
+								<li class="join_li_box" >
+									<input type="text" id="u_name" name="u_name" required placeholder="이름"/>
+								</li>
+								<li>
+									<input type="date" id="u_birth" name="u_birth" value="생년월일" required data-placeholder="생년월일을 입력하세요" />
+								</li>
+								<li class="join_radio_btn">
+									<input  style="width: 50px;" type="radio" name="u_gender" value="1" checked />
+										<span class="join_radio_text">남자</span>
+									<input  style="width: 50px;" type="radio" name="u_gender" value="2" />
+										<span class="join_radio_text">여자</span>
+								</li>
+								<li>
 									<input type="email" id="u_email" name="u_email" required 
-										pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*"/>
-								</td>
-								
-								<td>
-									<label>전화번호</label>
-									<input type="number" id="u_phone" name="u_phone" required />
-								</td>
-								
-								<td>
-									<label>주소</label>
-									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호">
-									<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-									<input type="text" id="u_addr" name="u_addr">
+												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="이메일"/>
+								</li>
+								<li>
+									<input type="text" id="u_phone" name="u_phone" required placeholder="전화번호"/>
+								</li>
+								<li>
+									<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기">
+									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" readonly>
+									<input type="text" id="u_addr" name="u_addr" readonly>
 									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1">
-									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2">
-								</td>
-							</tr>
-						</tbody>
-					</table> -->
-				</div>
-				
-				<div class="join_box2">
-					<table>
-						<tr>
-							<th >
-								<input type="checkbox" id="click_all" onclick="terms_box()"> 
-								<label for="click_all">이용약관 전체 동의</label>
-							</th>
-						</tr>
-		
-						<tr>
-							<td>
-								<p>[필수] 이용약관1 동의</p> 
-								<div class="terms_box">
-									<p>필수 동의임</p> 
+									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" readonly>
+								</li>
+							</ul>
+					</div>
+					
+					<div class="join_terms_container">
+						<ul>
+							<li>
+								<input type="checkbox" id="click_all" onclick="terms_box()">
+								<label for="click_all">이용약관 전체 동의</label> 
+							</li>
+							<li>
+								<div class="join_terms_box">
+									<p>[필수] 이용약관1 동의</p>
+									<div class="join_terms_box_chk">
+										<input type="checkbox" id="click_1" onclick="terms_click()" class="click_item">
+										<label for="click_1">동의</label>
+									</div>
 								</div>
-								<input type="checkbox" id="click_1" onclick="terms_click()" class="click_item">
-								<label for="click_1">동의</label>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>[필수] 이용약관2 동의</p>
 								<div class="terms_box">
-									<p>필수 동의임</p>
+									<p>필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임</p>
 								</div>
-								<input type="checkbox" id="click_2" onclick="terms_click()" class="click_item">
-								<label for="click_2">동의</label>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>[선택] 광고 수신 동의</p>
+							</li>
+							<li>
+								<div class="join_terms_box">
+									<p>[필수] 이용약관2 동의</p>
+									<div class="join_terms_box_chk">
+										<input type="checkbox" id="click_2" onclick="terms_click()" class="click_item">
+										<label for="click_2">동의</label>
+									</div>
+								</div>
 								<div class="terms_box">
-									<p>선택 동의임</p>
+									<p>필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임필수 동의임</p>
 								</div>
-								<input type="checkbox" id="click_3" onclick="terms_click()" class="click_item">
-								<label for="click_3">동의</label>
-							</td>
-						</tr>
-					</table>
-				</div>
-				
-				<div class="joinOK_box">
-					<input type="button" onclick="join_ok(this.form)" value="가입하기">
-					<input type="button" onclick="back()" value="취소">
-				</div>
-			</form>
+							</li>
+							<li>
+								<div class="join_terms_box">
+									<p>[선택] 광고 수신 동의</p>
+									<div class="join_terms_box_chk">
+										<input type="checkbox" id="click_3" onclick="terms_click()" class="click_item">
+										<label for="click_3">동의</label>
+									</div>
+								</div>
+								<div class="terms_box">
+									<p>선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임선택 동의임</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+						
+					<div>
+						<input type="button" class="join_ok_btn" onclick="join_ok(this.form)" value="가입하기">
+						<input type="button" class="join_ok_btn" onclick="back()" value="취소">
+					</div>
+				</form>
+			</div>
 		</section>
 		<%@include file="../common/footer.jsp" %>
 	</body>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.common.MyTripPaging;
 import com.ict.jeju.common.Paging;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
 import com.ict.jeju.wyy.dao.UserVO4;
@@ -43,11 +44,13 @@ public class JejuController4 {
 	@RequestMapping("myTripPlan")
 	public ModelAndView myTripPlan(HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("wyy-view/myTripPlan");
+		UserVO userVO = (UserVO) session.getAttribute("userVO"); 
 		
 		// 페이징기법
 				// 전체 게시물의 수를 구한다.
-				int count = calendarService4.getTotalCount();
+				int count = calendarService4.getTotalCount(userVO.getU_idx());
 				paging.setTotalRecord(count);
+				System.out.println(count);
 				
 				// 전체 페이지의 수를 구하자.
 				if(paging.getTotalRecord() <= paging.getNumPerPage()) {
@@ -85,15 +88,12 @@ public class JejuController4 {
 				// endBlock 과 totalPage가 endBlock이 크면 endBlock를 totalPage로 지정한다.
 				if(paging.getEndBlock() >  paging.getTotalPage()) {
 					paging.setEndBlock(paging.getTotalPage());
-				}
-				  String u_idx = (String) session.getAttribute("u_idx");
-				  String u_name = (String) session.getAttribute("u_name");
-		List<LikeVO> like_list = calendarService4.myTripLike(paging.getOffset(), paging.getNumPerPage(),u_idx);
-		List<UserVO4> u_list = calendarService4.myTripUser(u_idx);
+				}	
+		List<LikeVO> like_list = calendarService4.myTripLike(paging.getOffset(), paging.getNumPerPage(),userVO.getU_idx());
+		List<UserVO4> u_list = calendarService4.myTripUser(userVO.getU_idx());
 		if (like_list != null && u_list != null) {
-			mv.addObject("u_idx", u_idx);
-			mv.addObject("u_name", u_name);
 			mv.addObject("like_list", like_list);
+			mv.addObject("u_name", userVO.getU_name());
 			mv.addObject("u_list", u_list);
 			mv.addObject("paging", paging);
 			return mv;
@@ -105,18 +105,12 @@ public class JejuController4 {
 	@RequestMapping("calSave")
 	public ModelAndView saveCal(CalendarVO4 cvo4, HttpServletRequest request) {
 	    HttpSession session = request.getSession();
-	    String u_idx = (String) session.getAttribute("u_idx");
-	    String u_name = (String) session.getAttribute("u_name");
-	    System.out.println(u_idx);
-	    if (u_idx != null) {
-	         int result = calendarService4.saveCal(cvo4,u_idx);
-	         System.out.println(result);
+	    UserVO userVO = (UserVO) session.getAttribute("userVO");
+	         int result = calendarService4.saveCal(cvo4,userVO.getU_idx());
 	         if (result > 0) {
 	        	 return new ModelAndView("redirect:myTripPlan");
 	         }
 	         return new ModelAndView("wyy-view/error");
-	    	}
-		return null;
 	}
 	
 	@RequestMapping("calendar")

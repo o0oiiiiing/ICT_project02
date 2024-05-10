@@ -11,9 +11,26 @@
     <select id="count" resultType="int" parameterType="String">
     	select count(*) from Visitjeju_table where vi_value = #{vi_value}
     </select>
-    
     <select id="board_list" parameterType="Map" resultType="caVO">
     	select * from Visitjeju_table where vi_value = #{vi_value} limit #{limit} offset #{offset}
     </select>
     
+    <!-- <select id="board_list" parameterType="Map" resultType="caVO">
+    	select * from Visitjeju_table where vi_value = #{vi_value}
+    		<choose>
+    			<when test="option_select === option1">
+    				SELECT * FROM visitjeju_table ORDER BY vi_hit DESC; 
+    			</when>
+    			<when test="option_select === option2">
+    				SELECT * FROM visitjeju_table ORDER BY vi_title DESC; 
+    			</when>
+    			<when test="option_select === option3">
+    				SELECT * FROM visitjeju_table ORDER BY vi_title ASC; 
+    			</when>
+    			<otherwise>
+    				
+    			</otherwise>
+    		</choose>
+    	 limit #{limit} offset #{offset}
+    </select> -->
 </mapper>

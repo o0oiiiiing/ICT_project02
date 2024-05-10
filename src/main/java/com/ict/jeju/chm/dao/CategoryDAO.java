@@ -35,13 +35,14 @@ public class CategoryDAO {
 		}
 		return -1;
 	}
-
+	// , String option_select
 	public List<CategoryVO> getBoardList(int offset, int limit, String vi_value) {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("offset", offset);
 			map.put("limit", limit);
 			map.put("vi_value", vi_value);
+			/* map.put("option_select", option_select); */
 			System.out.println(offset);
 			System.out.println(limit);
 		return sqlsessionTemplate.selectList("category.board_list" , map);

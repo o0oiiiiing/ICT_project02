@@ -21,6 +21,9 @@ import com.ict.jeju.pdh.service.PlaceListService;
 public class PlaceListController {
 	@Autowired
 	private PlaceListService placeListService;
+	
+	@Autowired
+	private HttpSession session;
 
 	@RequestMapping("home")
 	public ModelAndView home() {

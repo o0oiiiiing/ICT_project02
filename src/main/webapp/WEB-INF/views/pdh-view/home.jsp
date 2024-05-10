@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>HOME | Jeju_travel</title>
 <!-- 구글 아이콘 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
 	rel="stylesheet" />
@@ -20,7 +22,28 @@
 <link rel="stylesheet" href="resources/pdh-css/home.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
+<style type="text/css">
+#chatbot_image{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 99;
+	line-height: 60px;
+	cursor: pointer;
+}
+.chatbot_modal{
+	position: fixed;
+	bottom: 20px;
+	right: 80px;
+	z-index: 2;
+	background-color: white;
+	display: none;
+	border-radius: 10px;
+}
 
+</style> 
 <script type="text/javascript">
 // 아이콘 눌렀을 때 텍스트박스 글 지우기
 function clearInput() {
@@ -30,6 +53,13 @@ function clearInput() {
 		searchField[i].value = "";
 	}
 }
+
+$(document).ready(function() {
+    $(".chatbot_image").click(function() {
+        $(".chatbot_modal").toggle();  
+    });
+    
+});
 </script>
 
 </head>
@@ -61,10 +91,16 @@ function clearInput() {
 					</div>
 				</form>
 			</li>
-			<li>로그인</li>
+			<li><a href="login_go.do">로그인</a></li>
 			<li>|</li>
-			<li>회원가입</li>
+			<li><a href="join_go.do">회원가입</a></li>
 		</ul>
+		<c:choose>
+			<c:when test="${loginChk == 'ok'}">
+				<span>${userVO.u_name}님 환영합니다.</span>
+				<a href="logout_go.do">로그아웃</a> 
+			</c:when>
+		</c:choose>
 	</header>
 
 	<div class="popular__container">
@@ -108,7 +144,10 @@ function clearInput() {
 			</ul>
 		</div>
 	</div>
-
+				<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
+		<div class="chatbot_modal" >
+			<%@include file="../common/chatbot.jsp"%>
+		</div> 
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>

@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-.login_page {
+.find_pwd_page {
 	width: 360px;
 	padding: 8% 0 0;
   	margin: auto;
 }
 
-.login_box {
+.find_pwd_container {
 	position: relative;
   	z-index: 1;
   	background: white;
@@ -17,7 +17,7 @@
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.login_box input {
+.find_pwd_box input {
   	outline: 0;
   	background: lightgray;
   	width: 100%;
@@ -28,7 +28,7 @@
   	font-size: 14px;
 }
 
-.login_btn {
+.find_pwd_btn {
   	text-transform: uppercase;
   	outline: 0;
   	background: #4CAF50;
@@ -42,19 +42,11 @@
   	cursor: pointer;
 }
 
-.login_btn:hover, .login_btn:active, .login_btn:focus {
+.find_pwd_btn:hover, .find_pwd_btn:active, .find_pwd_btn:focus {
 	background: #b6dedc;
 }
 
-.login_text{
+.find_pwd_text {
 	padding: 20px;
-}
-
-.login_find{
-	margin: 15px 0 0 15px;
-}
-
-.login_sns {
-	margin-top: 15px;
 }
 

@@ -48,10 +48,6 @@
 						<td><textarea rows="10" cols="60" id="bo_content"
 								name="bo_content" style="margin: 5px;"></textarea></td>
 					</tr>
-					<tr>
-						<th>첨부파일</th>
-						<td align="left"><input type="file" name="file"></td>
-					</tr>
 				</tbody>
 			</table>
 		</div>

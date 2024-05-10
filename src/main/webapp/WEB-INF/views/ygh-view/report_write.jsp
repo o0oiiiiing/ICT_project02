@@ -6,34 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q&A 게시판 수정</title>
+<title>신고 게시판 등록</title>
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/board_write.css"/>" rel='stylesheet' />
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		let pwdchk = "${pwdchk}";
-		if (pwdchk == 'fail') {
-			alert("비밀번호 틀림");
-			return;
-		}
-	});
-</script>
-<script type="text/javascript">
-	function board_list(f) {
-		f.action = "board_list.do";
-		f.submit();
-	}
-	
-	function board_detail(f) {
-		f.action = "board_detail.do";
+	function report_list(f) {
+		f.action = "report_list.do";
 		f.submit();
 	}
 
-	function board_update_ok(f) {
-		f.action = "board_update_ok.do";
+	function report_write_ok(f) {
+		f.action = "report_write_ok.do";
 		f.submit();
 	}
 </script>
@@ -43,38 +27,33 @@
 	<form method="post" enctype="multipart/form-data">
 		<div id="board_write">
 			<table>
-				<caption>Q&A 게시판 수정</caption>
+				<caption>신고 게시판 등록</caption>
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="bo_title" size="50"
-							value="${bovo.bo_title}" /></td>
+						<td><input type="text" name="report_title" size="50" /></td>
 					</tr>
 
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="bo_writer"
-							value="${bovo.bo_writer}" /></td>
+						<td><input type="text" name="report_writer" /></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="password" name="bo_pwd"></td>
+						<td><input type="password" name="report_pwd" size="12" /></td>
 					</tr>
+
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="10" cols="60" id="bo_content"
-								name="bo_content" style="margin: 5px;">${bovo.bo_content}</textarea>
-						</td>
+						<td><textarea rows="10" cols="60" id="report_content"
+								name="report_content" style="margin: 5px;"></textarea></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div id="board_write_btn">
-			<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
-			<input type="hidden" name="cPage" value="${cPage}">
-			<input type="button" value="목록" onclick="board_list(this.form)" /> 
-			<input type="button" value="취소" onclick="board_detail(this.form)" /> 
-			<input type="button" value="확인" onclick="board_update_ok(this.form)" />
+			<input type="button" value="목록" onclick="report_list(this.form)" /> 
+			<input type="button" value="확인" onclick="report_write_ok(this.form)" />
 		</div>
 	</form>
 
@@ -84,7 +63,7 @@
 	<script src="resources/common-js/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$("#bo_content").summernote({
+			$("#report_content").summernote({
 				lang : "ko-KR", // 한글 설정
 				height : 300, // 에디터 높이
 				focus : true, // 에디터 로딩후 포커스를 맞출지 여부
@@ -98,7 +77,7 @@
 				}
 			});
 		});
-	
+
 		function sendImage(file, editor) {
 			let frm = new FormData();
 			frm.append("s_file", file);
@@ -112,7 +91,7 @@
 			}).done(function(data) {
 				let path = data.path;
 				let fname = data.fname;
-				$("#bo_content").summernote("editor.insertImage", path + "/" + fname);
+				$("#report_content").summernote("editor.insertImage", path + "/" + fname);
 			});
 		}
 	</script>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO4;
 import com.ict.jeju.wyy.service.CalendarService4;
@@ -27,8 +28,9 @@ public class AjaxController4 {
 	// 캘린더 지도 정보
 	@RequestMapping(value = "myTripMap", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String myTripMap() {
-		List<VisitJejuVO4> vi_list = calendarService4.myTripMap();
+	public String myTripMap(HttpSession session) {
+		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		List<VisitJejuVO4> vi_list = calendarService4.myTripMap(userVO.getU_idx());
 		if(vi_list != null) {
 			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();
@@ -42,8 +44,8 @@ public class AjaxController4 {
 	@RequestMapping(value = "myTripMapLike", produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String myTripMapLike(HttpSession session) {
-		String u_idx = (String) session.getAttribute("u_idx");
-		List<VisitJejuVO4> vi_list = calendarService4.myTripMapLike(u_idx);
+		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		List<VisitJejuVO4> vi_list = calendarService4.myTripMapLike(userVO.getU_idx());
 		if(vi_list != null) {
 			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();
@@ -56,8 +58,9 @@ public class AjaxController4 {
 	// 캘린더 전체 정보 가져오기
 	@RequestMapping(value = "calList", produces = "application/json;  charset=utf-8")
 	@ResponseBody
-	public String calList() {
-		List<CalendarVO4> list = calendarService4.calList();
+	public String calList(HttpSession session) {
+		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		List<CalendarVO4> list = calendarService4.calList(userVO.getU_idx());
 		if (list != null) {
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(list);
