@@ -123,5 +123,16 @@ public class CalendarDAO4 {
 		}
 		return -1;
 	}
+	
+	// 관리자 일정 추가
+	public int adminInsert(VisitJejuVO4 vo4) {
+		try {
+			sqlSessionTemplate.insert("calendar.adminInsert", vo4);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+		
+	}
 
 }

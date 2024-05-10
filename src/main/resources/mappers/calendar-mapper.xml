@@ -79,4 +79,28 @@
    <delete id="removeHeart" parameterType="String">
    	delete from Like_table where like_idx=#{like_idx}
    </delete>
+   
+   <!-- 관리자 일정 추가 -->
+   <insert id="adminInsert" parameterType="viVO4">
+    insert into Visitjeju_table(contentsid, vi_value, vi_title, vi_address, vi_roadaddress, vi_intro, vi_latitude, vi_longitude, vi_phoneno, vi_image, vi_thumbnail)
+        values(#{contentsid}, 
+               case 
+                   when #{vi_value} = 'c1' then '관광지' 
+                   when #{vi_value} = 'c2' then '쇼핑' 
+                   when #{vi_value} = 'c3' then '숙박' 
+                   when #{vi_value} = 'c4' then '음식점' 
+                   when #{vi_value} = 'c5' then '축제/행사' 
+                   else #{vi_value} 
+               end,
+               #{vi_title}, 
+               #{vi_address}, 
+               #{vi_roadaddress}, 
+               #{vi_intro}, 
+               #{vi_latitude}, 
+               #{vi_longitude}, 
+               #{vi_phoneno}, 
+               #{vi_image}, 
+               #{vi_thumbnail})
+	</insert>
+
 </mapper>

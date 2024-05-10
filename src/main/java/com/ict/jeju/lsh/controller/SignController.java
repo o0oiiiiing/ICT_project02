@@ -111,7 +111,7 @@ public class SignController {
 	@GetMapping("logout_go.do")
 	public ModelAndView getLogout(HttpSession session) {
 		session.invalidate();
-		return new ModelAndView("pdh-view/home");
+		return new ModelAndView("redirect:home");
 	}
 	
 	// 회원가입

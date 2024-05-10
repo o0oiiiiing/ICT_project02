@@ -40,6 +40,8 @@ public interface CalendarService4 {
 		
     // 좋아요 삭제
 	public int removeHeart(String like_idx) ;
-
+	
+	// 관리자 일정 추가
+	public int adminInsert(VisitJejuVO4 vo4);
 	
 }
