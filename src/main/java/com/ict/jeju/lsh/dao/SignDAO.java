@@ -97,4 +97,25 @@ public class SignDAO {
 		return -1;
 	}
 	
+	
+	
+	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	public int getAdminJoinOK(AdminVO adminVO) {
+		try {
+			return sqlSessionTemplate.insert("user.admin_join", adminVO);
+		} catch (Exception e) {
+			System.out.println("dao admin join err : "+e);
+		}
+		return -1;
+	}
+	*/
+	
+	
+	
+	
 }
+
+
+
+
+
