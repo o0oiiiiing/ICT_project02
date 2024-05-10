@@ -1,7 +1,31 @@
 package com.ict.jeju.ygh.dao;
 
 public class ReportVO {
-	private String report_idx, report_title, report_content, report_active, report_writer, report_regdate, step;
+	private String report_idx, report_title, report_content, report_active, report_writer, report_regdate, step, report_pwd, lev, groups;
+
+	public String getReport_pwd() {
+		return report_pwd;
+	}
+
+	public void setReport_pwd(String report_pwd) {
+		this.report_pwd = report_pwd;
+	}
+
+	public String getLev() {
+		return lev;
+	}
+
+	public void setLev(String lev) {
+		this.lev = lev;
+	}
+
+	public String getGroups() {
+		return groups;
+	}
+
+	public void setGroups(String groups) {
+		this.groups = groups;
+	}
 
 	public String getStep() {
 		return step;

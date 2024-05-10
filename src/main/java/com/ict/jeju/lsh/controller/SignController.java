@@ -73,7 +73,7 @@ public class SignController {
 			session.setAttribute("loginChk", "ok");
 			session.setAttribute("userVO", userVO2);
 			mv.addObject("userVO", userVO2);
-			mv.setViewName("pdh-view/home");
+			mv.setViewName("redirect:home");
 			return mv;
 		}
 	}
@@ -146,7 +146,7 @@ public class SignController {
 		}
 		return new ModelAndView("redirect:findID_go.do");
 	}
-
+  
 	// 비밀번호 찾기 이메일 인증번호 발송 및 DB업데이트
 	@PostMapping("email_send_ok.do")
 	public ModelAndView SendMailOK(UserVO userVO, String u_email) {

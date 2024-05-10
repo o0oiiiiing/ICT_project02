@@ -15,9 +15,9 @@ public class CalendarDAO4 {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	// 캘린더 전체 보기
-	public List<CalendarVO4> calList() {
+	public List<CalendarVO4> calList(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("calendar.cal_list");
+			return sqlSessionTemplate.selectList("calendar.cal_list", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -49,9 +49,9 @@ public class CalendarDAO4 {
 	}
 	
 	// 페이징 기법
-	public int getTotalCount() {
+	public int getTotalCount(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectOne("calendar.count");
+			return sqlSessionTemplate.selectOne("calendar.count", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -69,9 +69,9 @@ public class CalendarDAO4 {
 	}
 
 	// 지도 전체보기
-	public List<VisitJejuVO4> myTripMap() {
+	public List<VisitJejuVO4> myTripMap(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("calendar.map_list");
+			return sqlSessionTemplate.selectList("calendar.map_list", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

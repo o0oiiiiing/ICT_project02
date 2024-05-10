@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나의 여행(관리자)</title>
+<title>Q&A 게시판 목록</title>
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
@@ -33,6 +33,7 @@
 	<form method="post">
 		<div id="board_detail">
 			<table>
+				<caption>Q&A 게시판</caption>
 				<tbody>
 					<tr>
 						<th>제목</th>
@@ -52,22 +53,8 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<%-- <pre>${bovo.content}</pre> --%> 
 							<textarea rows="10" cols="60" id="bo_content" name="bo_content" readonly style="margin: 5px;">${bovo.bo_content}</textarea>
 						</td>
-					</tr>
-					<tr>
-					<th>첨부파일</th>
-					 <c:choose>
-					 	<c:when test="${empty bovo.f_name}">
-					 		<td><b>첨부파일없음</b></td>
-					 	</c:when>
-					 	<c:otherwise>
-					 		<td>
-					 			<a href="down.do?f_name=${bovo.f_name}"><img src="resources/upload/${bovo.f_name}" style="width: 80px;"></a>
-					 		</td>
-					 	</c:otherwise>
-					 </c:choose>
 					</tr>
 				</tbody>
 			</table>

@@ -203,7 +203,7 @@ $(document).ready(function() {
 												<span style="color: lightgray;">삭제된 게시물입니다.</span>
 											</c:when>
 											<c:otherwise>
-												<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+												<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
 											</c:otherwise>
 										</c:choose></td>
 									<td>${k2.report_writer}</td>

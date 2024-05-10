@@ -1,5 +1,4 @@
 #board table {
-	width: 500px;
 	margin: 10px auto 50px;
 }
 
@@ -13,35 +12,35 @@
 	padding: 5px;
 }
 
-
-#report_t {
-	display: none;
-}
-
 #report_t table {
 	width: 800px;
-	margin: 0 auto;
-	margin-top: 20px;
+	margin: 15px auto 50px;
 	border-collapse: collapse;
 	font-size: 14px;
 }
 
-#board>h1 {
+#report_h {
 	width: 800px;
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 2px solid black;
-	padding-bottom: 20px;
-	margin: 0 auto;
-	margin-bottom: 30px;
+	margin: auto;
+	display: flex;
+	justify-content: space-between; /* 요소 사이의 간격을 최대한으로 벌림 */
+	align-items: center;
 }
 
-#report_t table caption {
-	font-size: 17px;
+#report_h h1 {
+	margin: 0;
 	font-weight: bold;
-	margin-bottom: 10px;
-	text-align: left;
+	font-size: 20px;
+}
+
+#report_h button {
+	border: none;
+	background-color: lightgray;
+	cursor: pointer;
+	border-radius: 15px;
+	width: 70px;
+	height: 30px;
+	font-weight: bold;
 }
 
 #report_t table th {
@@ -78,7 +77,6 @@
 }
 
 #report_t table tfoot ol.paging {
-	list-style: none;
 	display: inline-block; /* 가운데 정렬을 위해 인라인 블록으로 설정 */
 	padding: 0; /* 리스트의 패딩 제거 */
 }

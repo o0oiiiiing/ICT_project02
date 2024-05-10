@@ -66,10 +66,12 @@
 </script>
 <script type="text/javascript">
 			function myTripPlan() {
+				let u_idx = '<%= session.getAttribute("u_idx") %>';
 			    $.ajax({
 			        url: "myTripMap",
 			        method: "post",
 			        dataType: "json",
+			        data: { u_idx: u_idx },
 			        success: function(data) {
 			        	// 지도를 표시할 div  
 			            var mapContainer = document.getElementById('map');
@@ -211,9 +213,12 @@
 			                var longitude = $(this).data('vi_longitude');
 			                var title = $(this).data('vi_title'); 
 			                var contentsid = $(this).data('contentsid'); 
+			                var vi_image = $(this).data('vi_image'); 
 
 			                // 인포윈도우 내용 업데이트
-			                let iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;">' 
+			                let iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;'
+			             		+ ' width:200px; ">' 
+			             		+ '<img src="'+vi_image+'" style="width:200px; height:50px;"><br>'
 			                    + title
 			                    + '<br><a href="detail?contentsid='+contentsid+'">상세페이지</a>'
 			                    + '</div>';
@@ -276,6 +281,7 @@
 	display: none;
 	border-radius: 10px;
 }
+
 </style>
 <title>나의 여행</title>
 </head>
@@ -320,7 +326,7 @@
 		<div class="modal">
 			<div class="screen">
 			<form action="calSave" method="post">
-				<p>일정 제목 : <input type="text" name="c_title"></p>
+				<p>일정 제목 : <input type="text" name="c_title" ></p>
 				<p>시작 날짜 : <input type="date" name="c_start"></p>
 				<p>끝 날짜 : <input type="date" name="c_end"></p> 
 				<input type="submit" value="일정추가">
@@ -341,7 +347,8 @@
 								data-vi_latitude="${k.vi_latitude }"
 								data-vi_longitude="${k.vi_longitude }"
 								data-vi_title="${k.vi_title }"
-								data-contentsid = "${k.contentsid }">
+								data-contentsid = "${k.contentsid }"
+								data-vi_image="${k.vi_image }">
 								<img src="${k.vi_image}" class="likeTrip_Image" />
 								<p>${k.vi_value}</p>
 								<p>${k.vi_title}</p>
@@ -360,7 +367,6 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<!-- <div id="content"></div> -->
 	</div>
 			<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
 		<div class="chatbot_modal" >
