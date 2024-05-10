@@ -3,6 +3,7 @@ package com.ict.jeju.pdh.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.service.PlaceListService;
 
@@ -31,8 +33,10 @@ public class PlaceListController {
 		return null;
 	}
 
-	@GetMapping("detail")
-	public ModelAndView detail(@RequestParam("contentsid") String contentsid) {
+	@RequestMapping("detail")
+	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session, HttpServletRequest request) {
+		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
 		PlaceListVO placeDetail = placeListService.placeDetail(contentsid);
 		int likeNum = placeListService.likeNum(contentsid);

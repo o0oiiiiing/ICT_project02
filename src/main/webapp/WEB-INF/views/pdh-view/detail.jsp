@@ -250,8 +250,7 @@
 			</div>
 		</div>
 	</div>
-
-	<form id="qa_write">
+	<form id="qa_write" method="post" action="home">
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
@@ -259,16 +258,19 @@
 					<tbody>
 						<tr>
 							<td>제목</td>
-							<td colspan="2"><input style="width: 420px;" type="text" name="title"></td>
+							<td colspan="2"><input style="width: 420px;" type="text"
+								name="title" required></td>
 						</tr>
 						<tr>
 							<td style="width: 149px; text-align: center;">
-    							<div style="display: inline-block; margin-right: 7px;">
-       								<input type="radio" name="disclosure" value="public">공개
-        							<input type="radio" name="disclosure" value="private">비공개
-    							</div>
+								<div style="display: inline-block; margin-right: 7px;">
+									<input type="radio" name="disclosure" value="public"
+										onclick="handleDisclosure()" checked="checked">공개 <input type="radio"
+										name="disclosure" value="private" onclick="handleDisclosure()">비공개
+								</div>
 							</td>
-							<td style="width: 449px;">비밀번호 : <input style="width: 200px;" type="password" name="pwd"></td>
+							<td style="width: 449px;">비밀번호 : <input
+								style="width: 200px;" type="password" name="pwd" disabled="disabled"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -276,8 +278,8 @@
 				<textarea id="summernote" name="editordata" maxlength="1000"></textarea>
 			</div>
 			<div class="qa_write__buttons">
-				<input class="qa_write__button" type="reset" value="취소"> <input
-					class="qa_write__button" type="submit" value="등록">
+				<input class="qa_write__button" type="reset" value="취소">
+				<button type="button" class="qa_write__button" onclick="test(this.form)">등록</button>
 			</div>
 		</div>
 	</form>
@@ -324,6 +326,37 @@
     });
     
     // Q&A 공개 비공개
+    function handleDisclosure() {
+	    var disclosureValue = document.querySelector('input[name="disclosure"]:checked').value;
+	    var passwordInput = document.getElementById('passwordInput');
+	
+	    if (disclosureValue === 'private') {
+	        // 비밀번호 입력란을 활성화하고, 비밀번호 입력을 강제합니다.
+	        passwordInput.disabled = false;
+	        passwordInput.required = true;
+	    } else {
+	        // 비밀번호 입력란을 비활성화하고, 필수 입력이 아니도록 설정합니다.
+	        passwordInput.disabled = true;
+	        passwordInput.required = false;
+	    }
+	}
+    
+    // Q&A 내용 입력안할 시에 alert 뜨기
+    function test(f) {
+	    var editorContent = $('#summernote').summernote('code');
+	    var titleInput = document.querySelector('input[name="title"]');
+	    console.log(editorContent)
+	    if (!editorContent.trim() || editorContent === '<p><br></p>') {
+	        alert('내용을 입력해주세요.');
+	        return false;
+	    } else if (titleInput.value.trim() === '') {
+	    	alert('제목을 입력해주세요.');
+	        return false;
+		} else {
+	    	f.action = "detail?contentsid=${placeDetail.contentsid}";
+			f.submit();
+	    }
+	}
 	
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };
