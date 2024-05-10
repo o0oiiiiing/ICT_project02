@@ -10,8 +10,8 @@ public interface CategoryService {
 	List<CategoryVO> getCategoryList(String vi_value);
 	
 	public int getTotalCount(String vi_value);
-
-	List<CategoryVO> getBoardList(int offset, int numPerPage, String vi_value);
+	//String option_select
+	List<CategoryVO> getBoardList(int offset, int numPerPage, String vi_value );
 
 	
 

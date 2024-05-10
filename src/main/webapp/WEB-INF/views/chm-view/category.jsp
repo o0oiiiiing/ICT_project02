@@ -14,6 +14,15 @@
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
+<script type="text/javascript" src="resources/chm-js/category.js"></script>
+<!-- <script type="text/javascript">
+		function optionSelect(f) {
+				let check1 = document.getElementById("check1").value
+				f.action = "category_page.do";
+				f.submit();
+			}
+		}
+	</script> -->
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -22,22 +31,24 @@
 	<div class="background">
 
 		<!-- 소개 -->
-		<div class="wrapper_top">
-			<div class="wrapper_top_inner">
-				<div class="wrapper_top_left">
-					<span class="wrapper_top_category_id">${vi_value}</span> <span
-						class="wrapper_top_category_name"> <select
-						class="option_search">
-							<option class="op1">조회순</option>
-							<option class="op2">이름순(ㄱ)</option>
-							<option class="op3">이름순(ㅎ)</option>
-					</select>
-					</span>
-				</div>
-				<div class="wrapper_top_right"></div>
+		<form action="category_Option.do" method="post">
+			<div class="wrapper_top">
+				<div class="wrapper_top_inner">
+					<div class="wrapper_top_left">
+						<span class="wrapper_top_category_id">${vi_value}</span> 
+						<span class="wrapper_top_category_name"> 
+						<select class="option_search" id="optionList" onchange="optionSelect(this.form)" name="option_select">
+							<option value="option1">조회순</option>
+							<option value="option2">이름순(ㄱ)</option>
+							<option value="option3">이름순(ㅎ)</option>
+						</select>
+						</span>
+					</div>
+					<div class="wrapper_top_right"></div>
 
+				</div>
 			</div>
-		</div>
+		</form>
 		<!-- DB에서 가져와서 c:foreach 반복문 돌릴 관광지 카테고리 보여주는 구간  -->
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
@@ -51,11 +62,11 @@
 						<!-- 해당 카테고리에 관한 위도 / 경도 값 가져오기 -->
 						<input type="hidden" value="${k.vi_latitude}" class="wdo">
 						<input type="hidden" value="${k.vi_longitude}" class="gdo">
-						<input type="hidden" value="${k.vi_title}" class="vt"> 
-						<input type="hidden" value="${k.vi_image}" class="vi"> 
-						<input type="hidden" value="${k.vi_roadaddress}" class="va">
-						<input type="hidden" value="${k.vi_phoneno}" class="vn">
-						<input type="hidden" value="${k.contentsid}" class="contentsid">
+						<input type="hidden" value="${k.vi_title}" class="vt"> <input
+							type="hidden" value="${k.vi_image}" class="vi"> <input
+							type="hidden" value="${k.vi_roadaddress}" class="va"> <input
+							type="hidden" value="${k.vi_phoneno}" class="vn"> <input
+							type="hidden" value="${k.contentsid}" class="contentsid">
 
 
 					</div>
@@ -111,7 +122,7 @@
 						var content = '<div class="wrap">'
 								+ '    <div class="info">'
 								+ '        <div class="title">'
-								+ 				vt
+								+ vt
 								+ '            <div class="close" onclick="toggleWrapDisplay()" title="닫기"></div>'
 								+ '        </div>'
 								+ '        <div class="body">'
@@ -122,16 +133,17 @@
 								+ '           </div>'
 								+ '            <div class="desc">'
 								+ '                <div class="ellipsis">'
-								+ 					va
-								+ 					'</div>'
+								+ va
+								+ '</div>'
 								+ '                <div class="jibun ellipsis">전화번호 : '
-								+					vn
-								+				  '</div>'
+								+ vn
+								+ '</div>'
 								+ '                <div><a href="'
-								+					'detail?contentsid='
-								+					contentsid
-								+					'"class="link">상세페이지</a></div>'
-								+ '            </div>' + '        </div>'
+								+ 'detail?contentsid='
+								+ contentsid
+								+ '"class="link">상세페이지</a></div>'
+								+ '            </div>'
+								+ '        </div>'
 								+ '    </div>' + '</div>';
 
 						// 마커 위에 커스텀오버레이를 표시합니다
@@ -160,9 +172,8 @@
 						// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 						function closeOverlay() {
 							overlay.setMap(null);
-							content= null;
+							content = null;
 						}
-						
 
 					}
 				</script>

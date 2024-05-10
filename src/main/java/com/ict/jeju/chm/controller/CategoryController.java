@@ -26,8 +26,9 @@ public class CategoryController {
 	
 	
 	// header에서 카테고리를 클릭했을때 DB에서 vi_value 값으로 해당하는 결과 뽑아오기
+	// ,@ModelAttribute("option_select")String option_select
 	@GetMapping("category_page.do")
-	public ModelAndView getCategory(@ModelAttribute("vi_value")String vi_value, HttpSession session , HttpServletRequest request) {
+	public ModelAndView getCategory(@ModelAttribute("vi_value")String vi_value, HttpSession session , HttpServletRequest request ) {
 		
 			ModelAndView mv = new ModelAndView("chm-view/category");
 			// vi_value 정상적으로 오나 확인하기
@@ -80,11 +81,9 @@ public class CategoryController {
         
         List<CategoryVO> cate_list = categoryService.getCategoryList(vi_value);
         
-        List<CategoryVO> category_list = categoryService.getBoardList(paging3.getOffset(), paging3.getNumPerPage(),vi_value);
+        // ,option_select
+        List<CategoryVO> category_list = categoryService.getBoardList(paging3.getOffset(), paging3.getNumPerPage(),vi_value );
         
-        for (CategoryVO k : category_list) {
-        	
-		}
         if (category_list != null) {
             mv.addObject("category_list", category_list);
             mv.addObject("paging3", paging3);
