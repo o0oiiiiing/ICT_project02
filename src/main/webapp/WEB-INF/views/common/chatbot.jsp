@@ -72,7 +72,7 @@
         }
         .user-message {
 		    width: 300px;
-    		margin-left: 98px;
+    		margin-left: 60px;
     		border-radius: 15px;
     		border-bottom-right-radius: 0px;
     		background-color: black;
@@ -141,7 +141,7 @@ function addMessage(sender, message) {
     // 생성된 요소에 클래스 추가
     messageElement.className = 'message';
     // 사용자 또는 챗봇에 따라 다른 클래스 추가
-    messageElement.classList.add(sender === '${u_name}' ? 'user-message' : 'bot-message');
+    messageElement.classList.add(sender === '사용자' ? 'user-message' : 'bot-message');
     // 채팅 메시지 목록에 새로운 메시지 추가
     messageElement.textContent = sender + ": " + message;
     $("#chat-messages").prepend(messageElement);
@@ -155,7 +155,8 @@ $(document).ready(function() {
 	    // 메시지가 비어있으면 리턴
 	    if (message.length === 0) return;
 	    // 사용자 메시지 화면에 추가
-	    addMessage('${u_name}', message);
+	    // addMessage('${u_name}', message);
+	    addMessage('사용자', message);
 	    $("#user-input input").val("");
 	    test = { role: "user", content: message }
 	    gpt_token.push(test)

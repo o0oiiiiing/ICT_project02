@@ -15,7 +15,7 @@ public interface CalendarService4 {
 	UserVO4 wyyHome(String u_idx);
 	
 	// 캘린더 리스트 전체 보기
-	public List<CalendarVO4> calList();
+	public List<CalendarVO4> calList(String u_idx);
 	
 	// 삭제
 	public int calDelete(String c_idx);
@@ -27,7 +27,7 @@ public interface CalendarService4 {
 	public List<UserVO4> myTripUser(String u_idx);
 	
 	// 캘린더 지도 전체보기
-	public List<VisitJejuVO4> myTripMap();
+	public List<VisitJejuVO4> myTripMap(String u_idx);
 	
 	// 좋아요 지도 전체보기
 	public List<VisitJejuVO4> myTripMapLike(String u_idx);
@@ -36,7 +36,7 @@ public interface CalendarService4 {
 	public int saveCal(CalendarVO4 cvo4, String u_idx);
 	
 	// 페이징 처리 - 전체 게시물의 수
-		public int getTotalCount();
+		public int getTotalCount(String u_idx);
 		
     // 좋아요 삭제
 	public int removeHeart(String like_idx) ;

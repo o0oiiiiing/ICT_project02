@@ -9,7 +9,7 @@
 <title>나의 여행(관리자)</title>
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/report_detail.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 	function admin_list(f) {
 		f.action="admin_list.do";
@@ -35,39 +35,39 @@
 <body>
 <%@include file="../common/header.jsp"%>
 	<form method="post">
-		<div id="board_detail">
+		<div id="report_detail">
 			<table>
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td>${bovo.bo_title}</td>
+						<td>${revo.report_title}</td>
 					</tr>
 
 					<tr>
 						<th>작성자</th>
-						<td>${bovo.bo_writer}</td>
+						<td>${revo.report_writer}</td>
 					</tr>
 
 					<tr>
 						<th>날짜</th>
-						<td>${bovo.bo_regdate.substring(0,10)}</td>
+						<td>${revo.report_regdate.substring(0,10)}</td>
 					</tr>
 
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea rows="10" cols="60" id="bo_content" name="bo_content" readonly style="margin: 5px;">${bovo.bo_content}</textarea>
+							<textarea rows="10" cols="60" id="report_content" name="report_content" readonly style="margin: 5px;">${revo.report_content}</textarea>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			</div>
-			<div id="board_detail_btn">
-				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-				<input type="hidden" value="${cPage}" name="cPage"> 
+			<div id="report_detail_btn">
+				<input type="hidden" value="${revo.report_idx}" name="report_idx"> 
+				<input type="hidden" value="${cPage2}" name="cPage2"> 
 				<input type="button" value="목록" onclick="admin_list(this.form)" /> 
 				<input type="button" value="답글" onclick="toggleCommentBox()" /> 
-				<input type="button" value="삭제" onclick="board_delete(this.form)" />
+				<input type="button" value="삭제" onclick="report_delete(this.form)" />
 			</div>
 	</form>
 	
@@ -90,9 +90,9 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="hidden" name="cPage" value="${cPage}">
+				<input type="hidden" name="cPage2" value="${cPage2}">
 				<!-- 댓글 저장 시 어떤 원글의 댓글인지 저장해야 한다. -->
-				<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
+				<input type="hidden" name="report_idx" value="${revo.report_idx}">
 				<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" /> 
 				</td>
 			</tr>
@@ -118,7 +118,7 @@
 					<!-- 실제는 로그인 성공 && 글쓴사람만 삭제할 수 있어야 한다. -->
 					<input type="button" value="댓글삭제" onclick="comment_delete(this.form)">
 					<input type="hidden" name="com_idx" value="${k.com_idx}">
-					<input type="hidden" name="bo_idx" value="${k.bo_idx}">
+					<input type="hidden" name="report_idx" value="${k.report_idx}">
 				</form>
 				<br><br><br>
 		</c:forEach>
@@ -130,7 +130,7 @@
 	<script src="resources/common-js/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$("#bo_content").summernote({
+		$("#report_content").summernote({
 			lang: "ko-KR",								// 한글 설정
 			height: 300,              		 			// 에디터 높이
 			focus: true,               					// 에디터 로딩후 포커스를 맞출지 여부
@@ -143,7 +143,7 @@
 				}
 			}
 		});
-		$('#bo_content').summernote('disable');
+		$('#report_content').summernote('disable');
 	});
 
 	function sendImage(file, editor) {
@@ -159,7 +159,7 @@
 		}).done(function(data) {
 			var path = data.path;
 			var fname = data.fname;
-			$("#bo_content").summernote("editor.insertImage",path+"/"+fname);
+			$("#report_content").summernote("editor.insertImage",path+"/"+fname);
 		});
 	}
 	</script>

@@ -55,8 +55,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(bo_idx),0)+1) as groups FROM Board_table
         </selectKey>
-		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate, f_name)
-		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate(), #{f_name})
+		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate)
+		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate())
 	</insert>
 	
 	<!-- Q&A 게시판 수정 (사용자) -->
@@ -65,5 +65,31 @@
 		set bo_writer=#{bo_writer}, bo_title=#{bo_title}, bo_content=#{bo_content}
 		where bo_idx=#{bo_idx}
 	</update>
+	
+	<!-- Q&A 게시판 삭제 (사용자) -->
+	<delete id="board_delete" parameterType="bovo">
+		delete from Board_table where bo_idx = #{bo_idx}
+	</delete>
+
+	<!-- 신고 게시판 작성 (사용자) -->
+	<insert id="report_insert" parameterType="revo">
+		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
+            SELECT (IFNULL(MAX(report_idx),0)+1) as groups FROM Report_table
+        </selectKey>
+		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, groups, lev)
+		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{groups}, #{lev})
+	</insert>
+	
+	<!-- 신고 게시판 수정 (사용자) -->
+	<update id="report_update" parameterType="revo">
+		update Report_table
+		set report_writer=#{report_writer}, report_title=#{report_title}, report_content=#{report_content}
+		where report_idx=#{report_idx}
+	</update>
+	
+	<!-- 신고 게시판 삭제 (사용자) -->
+	<delete id="report_delete" parameterType="revo">
+		delete from Report_table where report_idx = #{report_idx}
+	</delete>
 </mapper>
 

@@ -36,9 +36,18 @@ public interface JejuService5 {
 	public int commentInsert(CommentVO comvo);
 	
 	// Q&A 게시판 작성 (사용자)
-	public int boardWrtieOk(BoardVO bovo);
-	
+	public int boardWriteOk(BoardVO bovo);
 	// Q&A 게시판 수정 (사용자)
 	public int boardUpdate(BoardVO bovo);
+	// Q&A 게시판 삭제 (사용자)
+	public int boardDelete(BoardVO bovo);
+	
+	
+	// 신고 게시판 작성 (사용자)
+	public int reportWriteOk(ReportVO revo);
+	// 신고 게시판 수정 (사용자)
+	public int reportUpdate(ReportVO revo);
+	// 신고 게시판 삭제 (사용자)
+	public int reportDelete(ReportVO revo);
 	
 }

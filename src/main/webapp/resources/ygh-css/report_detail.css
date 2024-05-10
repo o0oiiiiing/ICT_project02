@@ -1,13 +1,13 @@
 .note-btn-group{width: auto;}
 .note-toolbar{width: auto;}
 	
-#board_detail table {
+#report_detail table {
 	width: 1000px;
 	margin: auto;
 	border-collapse: collapse;
 }
 
-#board_detail table caption {
+#report_detail table caption {
 	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 15px;
@@ -17,31 +17,31 @@
 	text-align: left;
 }
 
-#board_detail table tr {
+#report_detail table tr {
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
 
-#board_detail table th {
+#report_detail table th {
 	width: 150px;
 	text-align: center;
 	border: 1px solid lightgray;
 	padding: 5px;
 }
 
-#board_detail table td {
+#report_detail table td {
 	border: 1px solid lightgray;
 	padding: 5px;
 }
 
-#board_detail_btn {
+#report_detail_btn {
     width: 800px;
 	text-align: center;
 	margin: 10px auto;
 }
 
 
-#board_detail_btn input[type="button"] {
+#report_detail_btn input[type="button"] {
 	display: inline-block;
 	width: 80px;
 	margin: 0 5px;

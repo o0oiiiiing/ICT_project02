@@ -3,6 +3,7 @@ package com.ict.jeju.pdh.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.service.PlaceListService;
 
@@ -19,6 +21,9 @@ import com.ict.jeju.pdh.service.PlaceListService;
 public class PlaceListController {
 	@Autowired
 	private PlaceListService placeListService;
+	
+	@Autowired
+	private HttpSession session;
 
 	@RequestMapping("home")
 	public ModelAndView home() {
