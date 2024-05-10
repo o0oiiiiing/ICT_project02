@@ -7,7 +7,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>아이디 찾기</title>
-		<link href="resources/lsh-css/findID.css" rel="stylesheet" />
+		<link href="resources/common-css/reset.css" rel="stylesheet" />
+		<link href="resources/lsh_css/findID.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function findID_ok(f) {
@@ -50,8 +51,8 @@
 					</div>
 					
 					<div class="find_id_box2">
-						<a href="login_go.do">로그인</a> | 
-						<a href="findpwd_go.do">비밀번호 찾기</a>
+						<a href="login_go.do" style="text-decoration: none; color: black;">로그인 &nbsp; &nbsp;</a>&nbsp; | 
+						<a href="findpwd_go.do" style="text-decoration: none; color: black;">&nbsp; 비밀번호 찾기</a>
 					</div>
 				</form>
 			</div>
@@ -59,5 +60,4 @@
 		<%@include file="../common/footer.jsp" %>
 	</body>
 </html>
-
 

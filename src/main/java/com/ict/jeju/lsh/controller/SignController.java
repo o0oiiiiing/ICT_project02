@@ -52,6 +52,7 @@ public class SignController {
 		return new ModelAndView("lsh_view/join_page");
 	}
 	
+	
 	// 로그인
 	@PostMapping("login_ok.do")
 	public ModelAndView getLoginOK(HttpSession session, UserVO userVO) {
@@ -89,8 +90,8 @@ public class SignController {
 		UserVO userVO2 = signService.getKakaoInfo(access_token);
 		System.out.println("cont token : "+access_token);
 		
-		session.setAttribute("userVO", userVO2);
 		session.setAttribute("loginChk", "ok");
+		session.setAttribute("userVO", userVO2);
 		return "pdh-view/home";
 	}
 	
@@ -99,11 +100,14 @@ public class SignController {
 	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
 		System.out.println("code : "+code);
 		System.out.println("state : " +state);
+		
 		String access_token = signService.getNaverToken(code, state);
 		System.out.println("token : "+access_token);
+		
 		UserVO userVO2 = signService.getNaverInfo(access_token);
-		session.setAttribute("userVO", userVO2);
+		
 		session.setAttribute("loginChk", "ok");
+		session.setAttribute("userVO", userVO2);
 		return "pdh-view/home";
 	}
 	
@@ -113,6 +117,37 @@ public class SignController {
 		session.invalidate();
 		return new ModelAndView("pdh-view/home");
 	}
+	
+	
+	
+	
+	
+	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 슈퍼관리자가 관리자를 만들수 있는 페이지 존재, 그 슈퍼 관리자가 일반 관리자를 만들 수 있게 해줌
+	
+	// 슈퍼관리자 로그인
+	@PostMapping("admin_login_ok")
+	public ModelAndView getAdminLoginOK() {
+		
+	}
+	
+	
+	// 슈퍼관리자가 일반관리자 계정 생성
+	@PostMapping("admin_join_ok")
+	public ModelAndView getAdminJoinOK(AdminVO adminVO) {
+		String c_pwd = passwordEncoder.encode(null);
+		
+		int res = signService.getAdminJoinOK(adminVO);
+		if (res >0) {
+			return new ModelAndView("redirect:home");
+		}
+		return null;
+	}
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	*/
+	
+	
+	
 	
 	// 회원가입
 	@PostMapping("join_ok.do")

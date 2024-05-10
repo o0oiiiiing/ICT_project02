@@ -14,5 +14,6 @@ public interface SignService {
 	public UserVO getKakaoInfo(String access_token);
 	public String getNaverToken(String code, String state);
 	public UserVO getNaverInfo(String access_token);
+	/* public int getAdminJoinOK(AdminVO adminVO); */
 	
 }

@@ -23,6 +23,7 @@
     	<typeAlias type="com.ict.jeju.wyy.dao.VisitJejuVO4" alias="viVO4" />
     	<typeAlias type="com.ict.jeju.wyy.dao.UserVO4" alias="uvo4" />
 	</typeAliases>
+	    <!-- <typeAlias type="com.ict.jeju.lsh.dao.AdminVO" alias="adminVO"/> -->
 
 	<mappers>
 		<mapper resource="mappers/calendar-mapper.xml" />

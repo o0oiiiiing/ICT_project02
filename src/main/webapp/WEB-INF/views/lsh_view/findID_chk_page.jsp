@@ -7,7 +7,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>아이디 찾기 결과</title>
-		<link href="resources/lsh-css/findID_chk.css" rel="stylesheet">
+		<link href="resources/common-css/reset.css" rel="stylesheet" />
+		<link href="resources/lsh_css/findID_chk.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	</head>
 	<body>
@@ -17,7 +18,7 @@
 				<h2 class="findID_chk_text">아이디 찾기 결과</h2>
 				<c:choose>
 					<c:when test="${empty find_list}">
-						<p class="findID_chk_result">텅</p>
+						<p class="findID_chk_result">해당하는 아이디가 존재하지 않습니다.</p>
 					</c:when>
 			        <c:otherwise>
 			        	<c:forEach var="k" items="${find_list}">
@@ -27,8 +28,8 @@
 				</c:choose>
 				
 				<div class="findID_chk_box">
-					<a href="login_go.do">로그인</a> | 
-					<a href="findpwd_go.do">비밀번호 찾기</a>
+					<a href="login_go.do" style="text-decoration: none; color: black;">로그인 &nbsp; &nbsp;</a> | 
+					<a href="findpwd_go.do" style="text-decoration: none; color: black;">&nbsp; 비밀번호 찾기</a>
 				</div>
 			</div>
 		</section>
