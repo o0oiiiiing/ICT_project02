@@ -84,5 +84,15 @@ public class AjaxController4 {
 	        int result = calendarService4.removeHeart(like_idx) ;
 	        return String.valueOf(result);
 	    }
+	
+	// 관리자 일정추가 중복확인
 
+	@RequestMapping(value ="idCheck", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String idCheck(@RequestParam("contentsid") String contentsid) {
+		String result = calendarService4.idCheck(contentsid);
+		return result;
+	}	
+	
+	
 }

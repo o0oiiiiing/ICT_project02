@@ -1,5 +1,6 @@
 	package com.ict.jeju.wyy.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Random;
 
@@ -122,26 +123,6 @@ public class JejuController4 {
 		int result = calendarService4.adminInsert(vo4);
 		return mv;
 	}
-	
-	
-	/*ModelAndView mv = new ModelAndView();
-		UserVO userVO2 = signService.getLoginOK(userVO);
-	 * 			// DB 정보와 입력 정보 비교
-			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
-				Random random = new Random();
-				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
-				if (randomNum.length() < 6) {
-					int substract = 6 - randomNum.length();
-					StringBuffer sb = new StringBuffer();
-					for (int i=0; i<substract; i++) {
-						sb.append("0");
-					}
-					sb.append(randomNum);
-					randomNum = sb.toString();
-				}
-				String chgpwd = passwordEncoder.encode(randomNum);
-				userVO2.setU_pwd(chgpwd);
-	 * */
 	
 	
 	@RequestMapping("calendar")

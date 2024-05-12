@@ -44,4 +44,7 @@ public interface CalendarService4 {
 	// 관리자 일정 추가
 	public int adminInsert(VisitJejuVO4 vo4);
 	
+	// 관리자 일정 추가 중복체크
+	public String idCheck(String contentsid) ;
+	
 }

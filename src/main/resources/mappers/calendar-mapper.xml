@@ -102,5 +102,12 @@
                #{vi_image}, 
                #{vi_thumbnail})
 	</insert>
-
+	
+	<!-- 관리자 일정 추가 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(contentsid) 
+		FROM Visitjeju_table 
+		WHERE contentsid= #{contentsid}
+	</select>
+	
 </mapper>
