@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.pdh.dao.QaVO;
 
 @Service
 public class PlaceListServiceImpl implements PlaceListService {
@@ -48,6 +49,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public List<PlaceListVO> searchList(String keyword) {
 		return placeListDAO.searchList(keyword);
+	}
+	
+	// Q&A 작성하기
+	@Override
+	public int qaWrite(QaVO qaVO) {
+		return placeListDAO.qaWrite(qaVO);
 	}
 
 }

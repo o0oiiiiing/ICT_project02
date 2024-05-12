@@ -3,6 +3,7 @@ package com.ict.jeju.pdh.service;
 import java.util.List;
 
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.pdh.dao.QaVO;
 
 public interface PlaceListService {
 	// 조회수 순으로 장소 20개 가져오기
@@ -22,6 +23,9 @@ public interface PlaceListService {
 	
 	// 검색하기
 	public List<PlaceListVO> searchList(String keyword);
+	
+	// Q&A 작성하기
+	public int qaWrite(QaVO qaVO);
 	
 	
 }
