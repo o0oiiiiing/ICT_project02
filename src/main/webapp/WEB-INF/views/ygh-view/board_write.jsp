@@ -52,6 +52,7 @@
 			</table>
 		</div>
 		<div id="board_write_btn">
+			<input type="hidden" name="u_idx" value="${userVO.u_idx}">
 			<input type="button" value="목록" onclick="board_list(this.form)" /> 
 			<input type="button" value="확인" onclick="board_write_ok(this.form)" />
 		</div>

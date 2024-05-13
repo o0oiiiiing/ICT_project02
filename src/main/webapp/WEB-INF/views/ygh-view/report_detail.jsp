@@ -69,6 +69,34 @@
 			</div>
 	</form>
 	
+	<br><br><br>
+	
+	<%-- 답글 출력 --%>
+	<div style="display: table; margin: 0 auto;">
+		<c:forEach var="k" items="${rep_list}">
+			<form method="post">
+				<div id="comment_box2">
+					<table>
+						<tr>
+							<th colspan="2" style="text-align: left;">답변</th>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${k.rep_writer}</td>
+						</tr>
+						<tr>
+							<th>날짜</th>
+							<td>${k.rep_regdate.substring(0,10)}</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td>${k.rep_content}</td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</c:forEach>
+	</div>
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
 	<script src="resources/common-js/summernote-lite.js"></script>

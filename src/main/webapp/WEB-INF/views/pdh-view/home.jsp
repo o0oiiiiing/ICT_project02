@@ -63,6 +63,37 @@ $(document).ready(function() {
     });
     
 });
+
+// 경화 날씨api
+$(document).ready(function() {
+    $.ajax({
+        url: "weather.do",           // 서버주소
+        method: "post",             // 전달방식
+        dataType: "xml",            // 가져오는 결과 타입
+        success: function(data) {
+            let table = "<table>";
+            table += "<tbody>";
+
+            $(data).find("local").each(function() {
+                let stn_id = $(this).attr("stn_id");
+                let icon = $(this).attr("icon");
+
+                // stn_id가 184인 경우에만 icon을 가져와서 표시
+                if (stn_id === "184") {
+                    table += "<tr>";
+                    table += "<td><img src='http://www.kma.go.kr/images/icon/NW/NB" + icon + ".png'></td>";
+                    table += "</tr>";
+                }
+            });
+            table += "</tbody>";
+            table += "</table>"
+            $("#weather").append(table);
+        },
+        error: function() {
+            alert("읽기 실패");
+        }
+    });
+});
 </script>
 
 </head>
@@ -76,20 +107,32 @@ $(document).ready(function() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="category_page.do?vi_value=관광지"
-				class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=음식점"
-				class="a_tag">음식점</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=숙박"
-				class="a_tag">숙박</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑"
-				class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사"
-				class="a_tag">축제/행사</a></li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의
-					여행</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
+			<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 		</ul>
-
+		
+		<!-- 경화 날씨api -->
+		<span id="weather" style="background-color: white; height: 100%"></span>
+		
+		<ul class="nav-list__right">
+			<li>
+				<form method="post" action="search">
+					<div class="search-bar">
+						<span class="material-symbols-outlined icon">search</span> 
+						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
+						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
+					</div>
+				</form>
+			</li>
+			<li><a href="login_go.do">로그인</a></li>
+			<li>|</li>
+			<li><a href="join_go.do">회원가입</a></li>
+		</ul>
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">

@@ -11,18 +11,12 @@
 <!-- jQuery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function report_write_go() {
-		location.href = "report_write_go.do"
-	}
-</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div id="report_t">
 		<div id="report_h">
 			<h1>신고 게시판</h1>
-			<button onclick="report_write_go()">글쓰기</button>
 		</div>
 		<table>
 			<thead>
@@ -47,7 +41,7 @@
 								<td style="text-align: left;"><c:forEach begin="1"
 										end="${k2.step}">&nbsp;[Re]</c:forEach> <c:choose>
 										<c:when test="${k2.active == 1}">
-											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[답변완료] ${k2.report_title}</a>
+											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[처리완료] ${k2.report_title}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
@@ -71,7 +65,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="report_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}">&#8249;</a>
+										href="admin_report_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -85,7 +79,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="report_list.do?cPage2=${k2}">${k2}</a></li>
+											href="admin_report_list.do?cPage2=${k2}">${k2}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -97,7 +91,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="report_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}">&#8250;</a>
+										href="admin_report_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
