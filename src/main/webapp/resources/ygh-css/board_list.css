@@ -43,6 +43,10 @@
 	font-weight: bold;
 }
 
+#board_t a {
+	text-decoration: none;
+}
+
 #board_t table th {
 	text-align: center;
 	border-top: 1px solid black;

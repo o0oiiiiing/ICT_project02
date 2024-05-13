@@ -43,6 +43,10 @@
 	font-weight: bold;
 }
 
+#report_t a {
+	text-decoration: none;
+}
+
 #report_t table th {
 	text-align: center;
 	border-top: 1px solid black;

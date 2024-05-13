@@ -71,15 +71,44 @@
 	border: 1px solid lightgray;
 }
 
+#comment_box input[type="text"], textarea {
+	border: 1px solid lightgray;
+	text-align: left;
+}
+
+#comment_btn {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#comment_btn input[type="button"] {
+	display: inline-block;
+	width: 80px;
+	margin: 0 5px;
+	height: 35px;
+	font-size: 15px;
+	border-radius: 15px;
+	border: 1px solid gray;
+	background-color: lightgray;
+	cursor: pointer;
+}
+
 #comment_box2 table {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 	border-collapse: collapse
 }
 
-#comment_box2 table tr, #comment_box2 table th {
+#comment_box2 table tr, #comment_box2 table td {
+	text-align: left;
+	padding: 4px 10px;
+	border: 1px solid lightgray;
+	
+}
+
+#comment_box2 table th {
+	width: 20%;
 	text-align: center;
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
-

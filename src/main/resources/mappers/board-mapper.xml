@@ -6,12 +6,15 @@
 <mapper namespace="Board_table">
 	<!-- 관리자 Q&A 페이징 -->
 	<select id="count" resultType="int">
-		select count(*) from Board_table
+		select count(*) from Board_table where active = 0
 	</select>
 	
 	<!-- 관리자 Q&A 전체보기 -->
-	<select id="board_list" resultType="bovo" parameterType="Map">
-		select * from Board_table order by groups desc, lev asc limit #{limit} offset #{offset}
+	<select id="admin_board_list" resultType="bovo" parameterType="Map">
+		select * from Board_table 
+		where active = 0
+		order by bo_regdate desc
+		limit #{limit} offset #{offset} 
 	</select>
 	
 	<!-- 관리자 Q&A 상세보기 -->
@@ -21,12 +24,15 @@
 	
 	<!-- 관리자 신고 페이징 -->
 	<select id="count2" resultType="int">
-		select count(*) from Report_table
+		select count(*) from Report_table where active = 0
 	</select>
 	
 	<!-- 관리자 신고 전체보기 -->
-	<select id="report_list" resultType="revo" parameterType="Map">
-		select * from Report_table limit #{limit} offset #{offset}
+	<select id="admin_report_list" resultType="revo" parameterType="Map">
+		select * from Report_table 
+		where active = 0
+		order by report_regdate desc
+		limit #{limit} offset #{offset}
 	</select>
 	
 	<!-- 관리자 신고 상세보기 -->
@@ -49,14 +55,47 @@
 		insert into Comment_table(com_writer, com_title, com_content, com_regdate, com_status, bo_idx)
 		values(#{com_writer}, #{com_title}, #{com_content}, sysdate(), 1, #{bo_idx})
 	</insert>
+	
+	<update id="comment_update" parameterType="String">
+		update Board_table
+		set active = 1
+		where bo_idx = #{bo_idx}
+	</update>
+	
+	<!-- Q&A 답글 삭제 -->
+	<delete id="comment_delete" parameterType="comvo">
+		delete from Comment_table where com_idx = #{com_idx}
+	</delete>
+	
+	<!-- 신고 답글 가져오기 -->	
+	<select id="replylist" resultType="repvo" parameterType="String">
+		select * from Reply_table where report_idx = #{report_idx}
+	</select>
+	
+	<!-- 신고 답글 작성 -->
+	<insert id="reply_insert" parameterType="repvo">
+		insert into Reply_table(report_idx, rep_writer, rep_title, rep_content, rep_regdate, rep_status)
+		values(#{report_idx}, #{rep_writer}, #{rep_title}, #{rep_content}, sysdate(), 1)
+	</insert>
+	
+	<update id="reply_update" parameterType="String">
+		update Report_table
+		set active = 1
+		where report_idx = #{report_idx}
+	</update>
+	
+	<!-- 신고 답글 삭제 -->
+	<delete id="reply_delete" parameterType="repvo">
+		delete from Reply_table where rep_idx = #{rep_idx}
+	</delete>
 
 	<!-- Q&A 게시판 작성 (사용자) -->
 	<insert id="board_insert" parameterType="bovo">
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(bo_idx),0)+1) as groups FROM Board_table
         </selectKey>
-		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate)
-		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate())
+		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate, u_idx)
+		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate(), #{u_idx})
 	</insert>
 	
 	<!-- Q&A 게시판 수정 (사용자) -->
@@ -76,8 +115,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(report_idx),0)+1) as groups FROM Report_table
         </selectKey>
-		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, groups, lev)
-		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{groups}, #{lev})
+		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, groups, lev, u_idx)
+		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{groups}, #{lev}, #{u_idx})
 	</insert>
 	
 	<!-- 신고 게시판 수정 (사용자) -->
@@ -91,5 +130,76 @@
 	<delete id="report_delete" parameterType="revo">
 		delete from Report_table where report_idx = #{report_idx}
 	</delete>
+	
+	<!-- 회원정보 상세보기 -->
+	<select id="user_detail" parameterType="String" resultType="userVO">
+		select * from User_table where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="user_update" parameterType="userVO">
+		update User_table
+		set u_phone=#{u_phone}, u_email=#{u_email}, u_postcode=#{u_postcode}, u_addr=#{u_addr}, 
+		 u_detail_addr=#{u_detail_addr}, u_detail_addr2=#{u_detail_addr2}
+		where u_idx = #{u_idx}
+	</update>
+	
+	<!-- 비밀번호변경 -->
+	<update id="pwd_update" parameterType="userVO">
+		update User_table
+		set u_pwd=#{u_pwd}
+		where u_idx = #{u_idx}
+	</update>
+	
+	<!-- 사용자 Q&A 전체보기 -->
+	<select id="board_list" resultType="bovo" parameterType="Map">
+		select * from Board_table 
+		where u_idx = #{u_idx}
+		order by bo_regdate desc
+		limit #{limit} offset #{offset} 
+	</select>
+	
+	<!-- 사용자 Q&A 페이징 -->
+	<select id="count3" resultType="int" parameterType="String">
+		select count(*) from Board_table where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 사용자 신고 전체보기 -->
+	<select id="report_list" resultType="revo" parameterType="Map">
+		select * from Report_table 
+		where u_idx = #{u_idx}	
+		order by report_regdate desc
+		limit #{limit} offset #{offset} 	
+	</select>
+	
+	<!-- 사용자 신고 페이징 -->
+	<select id="count4" resultType="int" parameterType="String">
+		select count(*) from Report_table where u_idx = #{u_idx}
+	</select>
+	
+	<!-- 관리자 전체 Q&A 페이징 -->
+	<select id="count5" resultType="int">
+		select count(*) from Board_table
+	</select>
+	
+	<!-- 관리자 Q&A 전체보기 -->
+	<select id="admin_board_list2" resultType="bovo" parameterType="Map">
+		select * from Board_table 
+		order by bo_regdate desc
+		limit #{limit} offset #{offset} 
+	</select>
+	
+	<!-- 관리자 전체 신고 페이징 -->
+	<select id="count6" resultType="int">
+		select count(*) from Report_table
+	</select>
+	
+	<!-- 관리자 신고 전체보기 -->
+	<select id="admin_report_list2" resultType="revo" parameterType="Map">
+		select * from Report_table 
+		order by report_regdate desc
+		limit #{limit} offset #{offset} 
+	</select>
+	
 </mapper>
 

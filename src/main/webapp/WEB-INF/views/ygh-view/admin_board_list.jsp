@@ -10,19 +10,12 @@
 <link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function board_write_go() {
-		location.href="board_write_go.do"
-	}
-
-</script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
 	<div id="board_t">
 		<div id="board_h">
 			<h1>Q&A 게시판</h1>
-			<button onclick="board_write_go()">글쓰기</button>
 		</div>
 		<form method="post">
 		<table>
@@ -49,7 +42,7 @@
 								<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
 								 <c:choose>
 										<c:when test="${k.active == 1}">
-											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[답변완료] ${k.bo_title}</a>
+											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[처리완료] ${k.bo_title}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
@@ -72,7 +65,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
-										<a href="board_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
+										<a href="admin_board_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -85,7 +78,7 @@
 										<li class="now">${k}</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="board_list.do?cPage=${k}">${k}</a></li>
+										<li><a href="admin_board_list.do?cPage=${k}">${k}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -97,7 +90,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="board_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
+										href="admin_board_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -107,7 +100,6 @@
 			</tfoot>
 		</table>
 		</form>
-		<input type="hidden" name="u_idx" value="${userVO.u_idx}">
 	</div>
 	
 <%@include file="../common/footer.jsp"%>	

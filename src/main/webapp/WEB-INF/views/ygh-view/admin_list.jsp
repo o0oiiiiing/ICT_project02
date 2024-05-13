@@ -55,7 +55,13 @@ $(document).ready(function() {
     });
 });
 
+function admin_board_list() {
+	location.href="admin_board_list.do"
+}
 
+function admin_report_list() {
+	location.href="admin_report_list.do"
+}
 
 </script>
 </head>
@@ -72,15 +78,15 @@ $(document).ready(function() {
 				<td>아이콘</td>
 			</tr>
 			<tr>
-				<td style="border-right: 1px solid lightgray"><a
-					href="board_list.do">미답변 Q&A</a></td>
-				<td style="border-right: 1px solid lightgray"><a
-					href="report_list.do">신고</a></td>
-				<td><a href="">회원관리</a></td>
+				<td style="border-right: 1px solid lightgray">
+				<a href="#">미답변 Q&A</a></td>
+				<td style="border-right: 1px solid lightgray">
+				<a href="#">신고</a></td>
+				<td><a href="#">회원관리</a></td>
 			</tr>
 			<tr>
-				<td style="border-right: 1px solid lightgray">()</td>
-				<td style="border-right: 1px solid lightgray">()</td>
+				<td style="border-right: 1px solid lightgray">(${paging.totalRecord})</td>
+				<td style="border-right: 1px solid lightgray">(${paging2.totalRecord})</td>
 				<td>()</td>
 			</tr>
 		</table>
@@ -89,7 +95,8 @@ $(document).ready(function() {
 	<div class="tab_bar">미답변 Q&A</div>
 	<div id="board_t">
 		<table>
-			<caption>미답변 Q&A()</caption>
+			<caption>미답변 Q&A (${paging.totalRecord}) <button onclick="admin_board_list()">전체</button></caption>
+			
 			<thead>
 				<tr>
 					<th class="no">번호</th>
@@ -109,15 +116,10 @@ $(document).ready(function() {
 						<c:forEach var="k" items="${board_list}" varStatus="vs">
 							<tr>
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
-								<td style="text-align: left;"><c:forEach begin="1"
-										end="${k.step}">&nbsp;[Re]</c:forEach> <c:choose>
-										<c:when test="${k.active == 1}">
-											<span style="color: lightgray;">삭제된 게시물입니다.</span>
-										</c:when>
-										<c:otherwise>
-											<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
-										</c:otherwise>
-									</c:choose></td>
+								<td style="text-align: left;">
+									<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
+									<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+								</td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
 							</tr>
@@ -176,7 +178,7 @@ $(document).ready(function() {
 	<div class="tab_bar2">신고</div>
 		<div id="report_t">
 			<table>
-			<caption>신고()</caption>
+			<caption>신고 (${paging2.totalRecord}) <button onclick="admin_report_list()">전체</button></caption>
 				<thead>
 					<tr>
 						<th class="no">번호</th>
@@ -197,15 +199,9 @@ $(document).ready(function() {
 								<tr>
 									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 									<td style="text-align: left;">
-									<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
-										<c:choose>
-											<c:when test="${k2.report_active == 1}">
-												<span style="color: lightgray;">삭제된 게시물입니다.</span>
-											</c:when>
-											<c:otherwise>
-												<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
-											</c:otherwise>
-										</c:choose></td>
+										<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
+										<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+									</td>
 									<td>${k2.report_writer}</td>
 									<td>${k2.report_regdate.substring(0,10)}</td>
 								</tr>

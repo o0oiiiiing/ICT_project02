@@ -259,6 +259,14 @@
 	    function chatbotgo() {
 			
 		}
+	    
+	    // 경화
+	    function board_list() {
+			location.href="board_list.do"
+		}
+		function report_list() {
+			location.href="report_list.do"
+		}
 </script>
 
 <style type="text/css">
@@ -303,6 +311,9 @@
 					<p>나의 리뷰 ${k.review_count}</p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
+					<!-- 경화 -->
+					<button onclick="board_list()">문의하기</button>
+					<button onclick="report_list()">신고하기</button>
 					
 				</c:forEach>
 			</div>
