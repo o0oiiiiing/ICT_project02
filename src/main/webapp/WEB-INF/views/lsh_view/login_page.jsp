@@ -53,11 +53,14 @@
 					
 					<div class="login_sns">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
-							<img src="resources/lsh_images/kakao_login_medium_narrow.png" height="40px;" width="120px">
+							<img src="resources/lsh_images/kakao_login_medium_narrow.png" height="50px;" width="200px" style="margin: 10px;">
 						</a>
 						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=J3r3NWMEm1CJS2vNYtQm&state=STATE_STRING&redirect_uri=http://localhost:8090/naver_login.do">
-							<img src="resources/lsh_images/btnG.png" height="40px;" width="120px;">
+							<img src="resources/lsh_images/btnG.png" height="50px;" width="200px;" style="margin: 10px;">
 						</a>
+					</div>
+					<div class="login_find">
+						<a href="admin_login.do">관리자로그인</a>
 					</div>
 				</form>
 			</div>

@@ -1,7 +1,15 @@
 package com.ict.jeju.wyy.dao;
 
 public class AdminVO {
-	private String a_idx, a_id, a_pwd, a_phone, a_email, a_status;
+	private String a_idx, a_id, a_pwd, a_name, a_phone, a_email, a_status;
+
+	public String getA_name() {
+		return a_name;
+	}
+
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 
 	public String getA_idx() {
 		return a_idx;

@@ -14,11 +14,6 @@
 			function back() {
 				window.history.back();
 			}
-			function double_chk(f) {
-				f.action = "double_chk.do";
-				f.submit();
-			}
-			
 			// 아이디 중복 여부
 			let idChk = false;
 			function id_doublechk() {

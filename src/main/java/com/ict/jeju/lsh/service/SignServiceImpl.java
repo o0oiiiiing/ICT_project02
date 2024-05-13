@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ict.jeju.lsh.dao.SignDAO;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 
 @Service
 public class SignServiceImpl implements SignService {
@@ -222,13 +223,20 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 	
+	@Override
+	public AdminVO getAdminLoginOK(AdminVO adminVO) {
+		return signDAO.getAdminLoginOK(adminVO);
+	}
 	
-	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@Override
 	public int getAdminJoinOK(AdminVO adminVO) {
 		return signDAO.getAdminJoinOK(adminVO);
 	}
-	*/
+	
+	@Override
+	public String getAdminIdChk(String a_id) {
+		return signDAO.getAdminIdChk(a_id);
+	}
 	
 	
 }
