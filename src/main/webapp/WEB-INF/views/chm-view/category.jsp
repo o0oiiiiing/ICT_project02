@@ -42,7 +42,7 @@
 						<span class="wrapper_top_category_id">${vi_value}</span> 
 						<span class="wrapper_top_category_name"> 
 						<select class="option_search" id="optionList" onchange="optionSelect(this.form)" name="option_select">
-							<option disabled selected>옵션을 선택해주세요</option>
+							<option disadbled selected>옵션을 선택해주세요</option>
 							<option value="option1">조회순</option>
 							<option value="option2">이름순(ㄱ)</option>
 							<option value="option3">이름순(ㅎ)</option>
@@ -50,7 +50,7 @@
 						</span>
 					</div>
 					<div class="wrapper_top_right"></div>
-
+						
 				</div>
 			</div>
 		
@@ -58,7 +58,7 @@
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
 				<c:forEach var="k" items="${category_list}">
-					<div class="category_box" onclick="toggleCollapse(this)">
+					<div class="category_box" onclick="toggleCollapse(this)" >
 						<img src='${k.vi_image}' class="category_img">
 						<p class="category_id">${k.vi_value}</p>
 						<p class="category_title">${k.vi_title}</p>
@@ -74,9 +74,6 @@
 						<input type="hidden" value="${k.contentsid}" class="contentsid">
 						<input type="hidden" value="${k.vi_hit}" id="vi_hit">
 						<input type="hidden" value="${k.vi_value}" id="vi_value">
-						
-
-		
 					</div>
 				</c:forEach>
 			</div>
@@ -88,6 +85,7 @@
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
 				<script>
+				let markers = [];
 					var mapContainer = document.getElementById('map'); // 지도를 표시할 div
 					var mapOption = {
 						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -153,7 +151,7 @@
 								+ '            </div>'
 								+ '        </div>'
 								+ '    </div>' + '</div>';
-
+					
 						// 마커 위에 커스텀오버레이를 표시합니다
 						// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 						var overlay = new kakao.maps.CustomOverlay({
@@ -161,7 +159,8 @@
 							map : map,
 							position : marker.getPosition()
 						});
-
+					}
+					
 						// Close button element
 						var closeBtn = overlay.getContent().querySelector(
 								'.close');
@@ -170,7 +169,7 @@
 						closeBtn.addEventListener('click', function() {
 							closeOverlay(overlay);
 						});
-
+						
 						// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 						kakao.maps.event.addListener(marker, 'click',
 								function() {
@@ -182,8 +181,24 @@
 							overlay.setMap(null);
 							content = null;
 						}
+						
 
-					}
+						// 마커 제거 함수(타이틀 기반)
+						function marker_del(position) {
+						    for (let i = 0; i < markers.length; i++) {
+						        if (markers[i].getTitle() == position.title) {
+						            markers[i].setMap(null);
+						        }
+						    }
+						    for (let i = 0; i < infos.length; i++) {
+						        console.log("info", infos[i].getPosition())
+						        console.log("position", position.latlng)
+						        console.log(infos[i].getPosition().equals(position.latlng))
+						        if (infos[i].getPosition().equals(position.latlng)) {
+						            infos[i].close();
+						        }
+						    }
+						}
 				</script>
 			</div>
 		</div>
