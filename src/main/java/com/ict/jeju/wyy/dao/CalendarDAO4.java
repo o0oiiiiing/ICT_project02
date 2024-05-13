@@ -123,5 +123,30 @@ public class CalendarDAO4 {
 		}
 		return -1;
 	}
+	
+	// 관리자 일정 추가
+	public int adminInsert(VisitJejuVO4 vo4) {
+		try {
+			sqlSessionTemplate.insert("calendar.adminInsert", vo4);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 관리자 일정 추가 중복체크
+	public String idCheck(String contentsid) {
+		try {
+			int res = sqlSessionTemplate.selectOne("calendar.idCheck", contentsid);
+			if (res >0) {
+				return "0";
+			} 
+			return "1";
+		} catch (Exception e) {
+			System.out.println("dao id chk err : "+e);
+		}
+		return null;
+	}
 
+	
 }

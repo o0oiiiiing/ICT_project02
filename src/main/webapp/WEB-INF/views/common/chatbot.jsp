@@ -96,7 +96,6 @@
 		    font-size: 15px;
 		}
     </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 // 이전 질문 및 답변을 저장해 놓을 빈 배열 객체
 // 이전 질문과 답변을 저장해놓고 gpt에 물어봐야 더 정확한 답변이 옵니다.
@@ -163,14 +162,13 @@ $(document).ready(function() {
 	    //ChatGPT API 요청후 답변을 화면에 추가
 	    gpt();
 	});
-	
+
 	// 사용자 입력 필드에서 Enter 키 이벤트를 처리
 	$("#user-input input").on('keydown', function(e) {
 		if (e.key === 'Enter') {
 			$("#user-input button").click();
 		}
 	});
-	
 })
 </script>
 </head>

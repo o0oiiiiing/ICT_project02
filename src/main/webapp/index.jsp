@@ -44,7 +44,7 @@
         <div class="gnb_wrappr">
           <ul class="gnb">
              <li class="category">
-              <a href="category_page.do?vi_value=관광지">관광지</a>
+              <a href="category_page.do?vi_value=관광지&option=option1">관광지</a>
             </li>
             <li class="category">
               <a href="category_page.do?vi_value=쇼핑">쇼핑</a>
@@ -67,6 +67,10 @@
 	<a href="user_update.do">회원정보수정(비밀번호변경)</a>
 	<a href="admin_list.do">나의여행(관리자)</a>
 	<a href="all_list.do">게시판</a>
+	
+	<form action="admin_insert">
+    	<input type="submit" value="관리자 장소추가"> 
+	</form>
 	<form action="wyyhome" method="post">
     	<input type="hidden" name="u_idx" value="1">
     	<input type="hidden" name="u_name" value="원유영">

@@ -7,7 +7,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>로그인</title>
-		<link href="resources/lsh-css/login.css" rel="stylesheet" />
+		<link href="resources/common-css/reset.css" rel="stylesheet" />
+		<link href="resources/lsh_css/login.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
@@ -46,8 +47,8 @@
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do">아이디 찾기</a> | 
-						<a href="findpwd_go.do">비밀번호 찾기</a>
+						<a href="findID_go.do" style="text-decoration: none; color: black;">아이디 찾기 &nbsp;</a> | 
+						<a href="findpwd_go.do" style="text-decoration: none; color: black;">&nbsp; 비밀번호 찾기</a>
 					</div>
 					
 					<div class="login_sns">

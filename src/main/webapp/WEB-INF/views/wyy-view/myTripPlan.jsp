@@ -86,17 +86,17 @@
 			         	
 			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
 			            var markerImages = {
-			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
-			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
-			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
-			            	  	c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
-			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
+			            		'관광지': 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
+			            		'쇼핑': 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
+			            		'숙박': 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
+			            		'음식점': 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
+			            		'축제/행사': 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
 			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
-			            function createMarkers(category, positions) {
+			            function createMarkers(value, positions) {
 						    var markers = [];
-						    var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
+						    var markerImage = new kakao.maps.MarkerImage(markerImages[value], new kakao.maps.Size(32, 32));
 						    for (var i = 0; i < positions.length; i++) {
 						        (function(position) {
 						            var marker = new kakao.maps.Marker({
@@ -135,12 +135,12 @@
 						}
 						
 			         	// 선언
-			            const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
+			            const values = ['관광지', '쇼핑', '숙박', '음식점', '축제/행사'];
 			            const markers = {};
 
 			            // 각 카테고리에 대한 마커를 생성하고 지도에 표시
-			            categories.forEach(category => {
-			                markers[category] = createMarkers(category, data.filter(item => item.vi_category === category));
+			            values.forEach(value => {
+			                markers[value] = createMarkers(value, data.filter(item => item.vi_value === value));
 			            });
 			            
 			        }
@@ -169,17 +169,17 @@
 			         	
 			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
 			            var markerImages = {
-			            	    c1: 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
-			            	    c2: 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
-			            	    c3: 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박 
-			            	    c4: 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
-			            	    c5: 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
+			            		'관광지': 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
+			            		'쇼핑': 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
+			            		'숙박': 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
+			            		'음식점': 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
+			            		'축제/행사': 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
 			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
-			            function createMarkers(category, positions) {
+			            function createMarkers(value, positions) {
 						    var markers = [];
-						    var markerImage = new kakao.maps.MarkerImage(markerImages[category], new kakao.maps.Size(32, 32));
+						    var markerImage = new kakao.maps.MarkerImage(markerImages[value], new kakao.maps.Size(32, 32));
 						    for (var i = 0; i < positions.length; i++) {
 						        (function(position) {
 						            var marker = new kakao.maps.Marker({
@@ -196,11 +196,12 @@
 
 						
 			         	// 선언
-			            const categories = ['c1', 'c2', 'c3', 'c4', 'c5'];
+			            const values = ['관광지', '쇼핑', '숙박', '음식점', '축제/행사'];
 			            const markers = {};
+
 			            // 각 카테고리에 대한 마커를 생성하고 지도에 표시
-			            categories.forEach(category => {
-			                markers[category] = createMarkers(category, data.filter(item => item.vi_category === category));
+			            values.forEach(value => {
+			                markers[value] = createMarkers(value, data.filter(item => item.vi_value === value));
 			            });
 			        	
 			        	 // 인포윈도우 생성

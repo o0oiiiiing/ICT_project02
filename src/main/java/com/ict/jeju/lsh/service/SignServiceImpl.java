@@ -222,4 +222,28 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 	
+	
+	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@Override
+	public int getAdminJoinOK(AdminVO adminVO) {
+		return signDAO.getAdminJoinOK(adminVO);
+	}
+	*/
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

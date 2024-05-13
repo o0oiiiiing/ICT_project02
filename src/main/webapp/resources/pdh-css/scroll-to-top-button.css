@@ -3,7 +3,7 @@
 #scrollToTopButton {
 	display: none; /* 처음에는 숨겨둔다. */
 	position: fixed;
-	bottom: 20px;
+	bottom: 80px;
 	right: 20px;
 	z-index: 98;
 	background-color: white;

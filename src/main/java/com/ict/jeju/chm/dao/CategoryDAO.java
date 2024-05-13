@@ -18,7 +18,6 @@ public class CategoryDAO {
 	public List<CategoryVO> getCategoryList(String vi_value) {
 		try {
 			System.out.println(vi_value+"dao");
-			System.out.println(1);
 			return sqlsessionTemplate.selectList("category.selectList",vi_value);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -36,15 +35,14 @@ public class CategoryDAO {
 		return -1;
 	}
 	// , String option_select
-	public List<CategoryVO> getBoardList(int offset, int limit, String vi_value) {
+	public List<CategoryVO> getBoardList(int offset, int limit, String vi_value , String option ) {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("offset", offset);
 			map.put("limit", limit);
 			map.put("vi_value", vi_value);
+			map.put("option", option);
 			/* map.put("option_select", option_select); */
-			System.out.println(offset);
-			System.out.println(limit);
 		return sqlsessionTemplate.selectList("category.board_list" , map);
 		}catch (Exception e) {
 		System.out.println(e);

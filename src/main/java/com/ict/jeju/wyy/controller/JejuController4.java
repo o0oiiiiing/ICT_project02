@@ -1,6 +1,8 @@
 	package com.ict.jeju.wyy.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO4;
 import com.ict.jeju.wyy.dao.LikeVO;
 import com.ict.jeju.wyy.dao.UserVO4;
+import com.ict.jeju.wyy.dao.VisitJejuVO4;
 import com.ict.jeju.wyy.service.CalendarService4;
 
 @Controller
@@ -113,9 +116,23 @@ public class JejuController4 {
 	         return new ModelAndView("wyy-view/error");
 	}
 	
+	// 관리자 일정 추가하기
+	@RequestMapping("admin_insert_ok")
+	public ModelAndView adminInsert(VisitJejuVO4 vo4){
+		ModelAndView mv = new ModelAndView("redirect:admin_insert");
+		int result = calendarService4.adminInsert(vo4);
+		return mv;
+	}
+	
+	
 	@RequestMapping("calendar")
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
+	}
+	
+	@RequestMapping("admin_insert")
+	public ModelAndView admin_insert() {
+		return new ModelAndView("wyy-view/admin_insert");
 	}
 	
 	@RequestMapping("calendar_add")

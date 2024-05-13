@@ -42,6 +42,11 @@
 		from Visitjeju_table 
 		where vi_title like CONCAT('%', #{keyword}, '%')
 	</select>
+	
+	<insert id="qaWrite" parameterType="QaVO">
+		insert into Board_table(u_idx, contentsid, bo_writer, bo_title, bo_content, bo_pwd, bo_regdate, disclosure) 
+		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{disclosure}) 
+	</insert>
 
 </mapper>
 

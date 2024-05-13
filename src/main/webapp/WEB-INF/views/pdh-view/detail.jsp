@@ -24,9 +24,35 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- summernote -->
+<script src="/resources/common-js/summernote-ko-KR.min.js"></script>
 <script src="/resources/common-js/summernote-lite.js"></script>
-<script src="/resources/common-js/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/resources/common-css/summernote-lite.css">
+
+<!-- 챗봇 css -->
+<style type="text/css">
+#chatbot_image {
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 99;
+	line-height: 60px;
+	cursor: pointer;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+}
+
+.chatbot_modal {
+	position: fixed;
+	bottom: 20px;
+	right: 80px;
+	z-index: 2;
+	background-color: white;
+	display: none;
+	border-radius: 10px;
+}
+</style>
 
 <script type="text/javascript">
 	// 링크 복사하기 버튼
@@ -55,7 +81,13 @@
 			searchField[i].value = "";
 		}
 	}
-	
+	// 챗봇
+	$(document).ready(function() {
+	    $(".chatbot_image").click(function() {
+	        $(".chatbot_modal").toggle();  
+	    });
+	    
+	});
 	// q&a영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
@@ -64,19 +96,28 @@
 
 	    writeButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if (qaWriteDiv.style.display === 'block') {
-	        	qaWriteDiv.style.display = 'none';
-	        	overlay.style.display = 'none';
-	        } else {
-	        	qaWriteDiv.style.display = 'block';
-	        	overlay.style.display = 'block';
-	        }
+	        if ("${userVO}" == "") {
+				alert("로그인 후 이용 가능합니다.")
+				return 
+			} else {
+		        if (qaWriteDiv.style.display === 'block') {
+		        	qaWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        } else {
+		        	qaWriteDiv.style.display = 'block';
+		        	overlay.style.display = 'block';
+		        }
+			}
+	        overlay.addEventListener('click', function() {
+	        	if (qaWriteDiv.style.display === 'block') {
+		        	qaWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        }
+	        })
 	    });
 	});
 </script>
-
 </head>
-
 <body>
 	<img class="main_image" src="${placeDetail.vi_image}">
 	<header class="header">
@@ -100,22 +141,44 @@
 					여행</a></li>
 		</ul>
 
-		<ul class="nav-list__right">
-			<li>
-				<form method="post" action="search">
-					<div class="search-bar">
-						<span class="material-symbols-outlined search-icon">search</span>
-						<input class="search-field" type="text" name="keyword" value=""
-							placeholder="검색어를 입력해주세요." /> <span
-							class="material-symbols-outlined delete-icon"
-							onclick="clearInput()">close</span>
-					</div>
-				</form>
-			</li>
-			<li>로그인</li>
-			<li>|</li>
-			<li>회원가입</li>
-		</ul>
+		<c:choose>
+			<c:when test="${loginChk == 'ok'}">
+				<ul class="nav-list__right" style="width: 600px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined search-icon">search</span>
+								<input class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>|</li>
+					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<ul class="nav-list__right" style="width: 500px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined search-icon">search</span>
+								<input class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li><a href="login_go.do" class="a_tag">로그인</a></li>
+					<li>|</li>
+					<li><a href="join_go.do" class="a_tag">회원가입</a></li>
+				</ul>
+			</c:otherwise>
+		</c:choose>
 	</header>
 
 	<p class="place_name">${placeDetail.vi_title}</p>
@@ -250,81 +313,81 @@
 			</div>
 		</div>
 	</div>
-
-	<form id="qa_write">
+	<form id="qa_write" method="post" action="detail">
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
-				<table>
+				<table style="margin: 0 auto;">
 					<tbody>
 						<tr>
 							<td>제목</td>
-							<td colspan="2"><input style="width: 420px;" type="text" name="title"></td>
+							<td colspan="2"><input style="width: 420px;" type="text"
+								name="bo_title" required></td>
 						</tr>
 						<tr>
 							<td style="width: 149px; text-align: center;">
-    							<div style="display: inline-block; margin-right: 7px;">
-       								<input type="radio" name="disclosure" value="public">공개
-        							<input type="radio" name="disclosure" value="private">비공개
-    							</div>
+								<div style="display: inline-block; margin-right: 7px;">
+									<input type="radio" name="disclosure" value="0"
+										onclick="handleDisclosure()" checked="checked">공개 <input
+										type="radio" name="disclosure" value="1"
+										onclick="handleDisclosure()">비공개
+								</div>
 							</td>
-							<td style="width: 449px;">비밀번호 : <input style="width: 200px;" type="password" name="pwd"></td>
+							<td style="width: 449px;">비밀번호 : <input
+								style="width: 200px;" type="password" name="bo_pwd"
+								disabled="disabled" id="passwordInput" required="required"></td>
 						</tr>
 					</tbody>
 				</table>
 				<br>
-				<textarea id="summernote" name="editordata" maxlength="1000"></textarea>
+				<textarea id="summernote" name="bo_content" maxlength="1000"></textarea>
 			</div>
 			<div class="qa_write__buttons">
-				<input class="qa_write__button" type="reset" value="취소"> <input
-					class="qa_write__button" type="submit" value="등록">
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> 
+				<input type="hidden" value="${userVO.u_name}" name="u_name"> 
+				<input class="qa_write__button" type="reset" value="취소">
+				<button type="button" class="qa_write__button"
+					onclick="test(this.form)">등록</button>
 			</div>
 		</div>
 	</form>
 
 	<div class="overlay"></div>
-
-	<%@ include file="../common/footer.jsp"%>
+	<script type="text/javascript">
+		// summernote
+		$('#summernote').summernote({
+			height : 200, // 에디터 높이
+			width: 600,
+			minHeight : null, // 최소 높이
+			maxHeight : null, // 최대 높이
+			focus : true, // 에디터 로딩후 포커스를 맞출지 여부
+			lang : "ko-KR", // 한글 설정
+			placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
+			toolbar: [
+				['fontname', ['fontname']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+			],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+		});
+	</script>
 
 	<div>
 		<button id="scrollToTopButton">
 			<span class="material-symbols-outlined">expand_less</span>
 		</button>
 	</div>
-
+	<img src="resources/common-image/chatbot.png" id="chatbot_image"
+		class="chatbot_image">
+	<div class="chatbot_modal">
+		<%@include file="../common/chatbot.jsp"%>
+	</div>
+	<%@ include file="../common/footer.jsp"%> 
 	<script type="text/javascript">
-	// summernote
-	$('#summernote').summernote({
-		height : 200, // 에디터 높이
-		width: 600,
-		minHeight : null, // 최소 높이
-		maxHeight : null, // 최대 높이
-		focus : true, // 에디터 로딩후 포커스를 맞출지 여부
-		lang : "ko-KR", // 한글 설정
-		placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
-		toolbar: [
-			['fontname', ['fontname']],
-			['fontsize', ['fontsize']],
-			['color', ['color']],
-			['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-			['para', ['ul', 'ol', 'paragraph']],
-			['height', ['height']]
-		],
-		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-	});
-	
-	// summernote 내용 초기화
-	var resetButton = document.querySelector('#qa_write input[type="reset"]');
-    var summernoteTextarea = document.querySelector('#summernote');
-
-    resetButton.addEventListener('click', function() {
-        // summernote textarea 초기화
-       $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
-    });
-    
-    // Q&A 공개 비공개
-	
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };
 
@@ -343,6 +406,53 @@
 			behavior: 'smooth'
 		});
 	})
-	</script>
+	
+	// summernote 내용 초기화
+	var resetButton = document.querySelector('#qa_write input[type="reset"]');
+    var summernoteTextarea = document.querySelector('#summernote');
+    var passwordInput = document.getElementById('passwordInput');
+
+    resetButton.addEventListener('click', function() {
+        // summernote textarea 초기화
+       $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
+       passwordInput.disabled = true;
+    });
+    
+    // Q&A 공개 비공개
+    function handleDisclosure() {
+	    var disclosureValue = document.querySelector('input[name="disclosure"]:checked').value;
+	    var passwordInput = document.getElementById('passwordInput');
+		console.log(disclosureValue)
+		console.log(passwordInput)
+	    if (disclosureValue === '1') {
+	        // 비밀번호 입력란을 활성화하고, 비밀번호 입력을 강제합니다.
+	        passwordInput.disabled = false;
+	        passwordInput.required = true;
+	    } else {
+	        // 비밀번호 입력란을 비활성화하고, 필수 입력이 아니도록 설정합니다.
+	        passwordInput.disabled = true;
+	        passwordInput.required = false;
+	        passwordInput.value = '';
+	    }
+	}
+    
+    // Q&A 내용 입력안할 시에 alert 뜨기
+    function test(f) {
+	    var editorContent = $('#summernote').summernote('code');
+	    var titleInput = document.querySelector('input[name="bo_title"]');
+	    console.log(editorContent)
+	    if (!editorContent.trim() || editorContent === '<p><br></p>') {
+	        alert('내용을 입력해주세요.');
+	        return false;
+	    } else if (titleInput.value.trim() === '') {
+	    	alert('제목을 입력해주세요.');
+	        return false;
+		} else {
+	    	f.action = "detail?contentsid=${placeDetail.contentsid}";
+			f.submit();
+	    }
+	}
+</script>
 </body>
+
 </html>

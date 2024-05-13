@@ -42,5 +42,21 @@
     	INSERT INTO User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
     	 VALUES(#{nickname}, '정보 없음', #{name}, '정보 없음', #{email}, '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '네이버 회원가입', sysdate())
     </insert>
+
+<!--     
+    <insert id="admin_join" parameterType="adminVO">
+    	INSERT INTO 테이블명()
+    	 VALUES()
+    </insert>
+     -->
     
 </mapper>
+
+
+
+
+
+
+
+
+

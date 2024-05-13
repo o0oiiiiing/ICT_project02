@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/chm-css/category.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
+<link href="resources/common-css/reset.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
 </head>
