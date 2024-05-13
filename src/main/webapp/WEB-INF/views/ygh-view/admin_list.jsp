@@ -82,7 +82,7 @@ function admin_report_list() {
 				<a href="#">미답변 Q&A</a></td>
 				<td style="border-right: 1px solid lightgray">
 				<a href="#">신고</a></td>
-				<td><a href="#">회원관리</a></td>
+				<td><a href="user_list.do">회원관리</a></td>
 			</tr>
 			<tr>
 				<td style="border-right: 1px solid lightgray">(${paging.totalRecord})</td>

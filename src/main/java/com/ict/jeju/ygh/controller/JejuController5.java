@@ -691,4 +691,58 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
+	/*
+	 * // 회원관리 페이지 이동
+	 * 
+	 * @GetMapping("user_list.do") public ModelAndView userList() { return new
+	 * ModelAndView("ygh-view/user_list"); }
+	 */
+
+	// 회원관리
+	@RequestMapping("user_list.do")
+	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView("ygh-view/user_list");
+		
+		// 페이징
+		int count7 = jejuService5.getTotalCount7();
+		paging.setTotalRecord(count7);
+
+		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+			paging.setTotalPage(1);
+		} else {
+			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+				paging.setTotalPage(paging.getTotalPage() + 1);
+			}
+		}
+
+		String cPage = request.getParameter("cPage");
+		if (cPage == null) {
+			paging.setNowPage(1);
+		} else {
+			paging.setNowPage(Integer.parseInt(cPage));
+		}
+
+		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+
+		paging.setBeginBlock(
+				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+
+		if (paging.getEndBlock() > paging.getTotalPage()) {
+			paging.setEndBlock(paging.getTotalPage());
+		}
+
+		// DB
+		
+		List<UserVO> user_list = jejuService5.userList(paging.getOffset(), paging.getNumPerPage());
+		
+		if (user_list != null) {
+			mv.addObject("user_list", user_list);
+			mv.addObject("paging", paging);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
 }

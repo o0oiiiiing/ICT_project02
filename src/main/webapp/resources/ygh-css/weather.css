@@ -1,0 +1,40 @@
+#weather_image {
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	z-index: 99;
+	line-height: 60px;
+	cursor: pointer;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
+}
+
+.weather_modal {
+	width: 200px;
+	height: 100px;
+	position: fixed;
+	bottom: 20px;
+	left: 80px;
+	z-index: 2;
+	background-color: white;
+	display: none;
+	border-radius: 10px;
+	border: 2px solid lightblue;
+}
+
+#weather table {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+}
+
+#weather table td {
+    vertical-align: middle;
+}
+
+#weather table img {
+    display: block;
+    margin: 0 auto;
+}

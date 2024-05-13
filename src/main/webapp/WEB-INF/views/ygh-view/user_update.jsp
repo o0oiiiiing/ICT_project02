@@ -103,8 +103,8 @@
 			</div>
 			<input type="hidden" value="${userVO.u_idx}" name="u_idx">
 			<input type="button" id="update_ok" value="저장" onclick="user_update_ok(this.form)">
-		</form>
 			<button id="u_pwd" onclick="repwd_go()">비밀번호변경</button>
+		</form>
 	</div>
 
 <%@include file="../common/footer.jsp"%>
