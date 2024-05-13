@@ -48,7 +48,7 @@
 
 		<ul class="nav-list__right">
 			<li>
-				<form method= post" action="search">
+				<form method="post" action="search">
 					<div class="search-bar">
 						<span class="material-symbols-outlined icon">search</span> 
 						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
@@ -56,9 +56,9 @@
 					</div>
 				</form>
 			</li>
-			<li><a href="login_go.do">로그인</a></li>
+			<li><a href="login_go.do" class="a_tag">로그인</a></li>
 			<li>|</li>
-			<li><a href="join_go.do">회원가입</a></li>
+			<li><a href="join_go.do" class="a_tag">회원가입</a></li>
 		</ul>
 		 <c:choose>
 			<c:when test="${loginChk == 'ok'}">

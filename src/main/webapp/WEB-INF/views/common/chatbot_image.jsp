@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#chatbot_image{
+#chatbot_image {
 	width: 50px;
 	height: 50px;
 	position: fixed;
@@ -15,16 +15,19 @@
 	z-index: 99;
 	line-height: 60px;
 	cursor: pointer;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+	border-radius: 50%;
 }
 </style>
 <script type="text/javascript">
 	//챗봇 창 이동
-	function chatbotgo(){
+	function chatbotgo() {
 		location.href = "chatbot";
 	}
 </script>
 </head>
 <body>
-	<img src="resources/common-image/chatbot.png" onclick="chatbotgo()" id="chatbot_image">
+	<img src="resources/common-image/chatbot.png" onclick="chatbotgo()"
+		id="chatbot_image">
 </body>
 </html>

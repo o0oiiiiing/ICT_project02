@@ -69,4 +69,14 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
+	
+	// Q&A 작성하기
+	public int qaWrite(QaVO qaVO) {
+		try {
+			return sqlSessionTemplate.insert("place.qaWrite", qaVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }

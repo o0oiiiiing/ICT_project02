@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
 <style type="text/css">
-#chatbot_image{
+#chatbot_image {
 	width: 50px;
 	height: 50px;
 	position: fixed;
@@ -32,8 +32,11 @@
 	z-index: 99;
 	line-height: 60px;
 	cursor: pointer;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+	border-radius: 50%;
 }
-.chatbot_modal{
+
+.chatbot_modal {
 	position: fixed;
 	bottom: 20px;
 	right: 80px;
@@ -42,8 +45,7 @@
 	display: none;
 	border-radius: 10px;
 }
-
-</style> 
+</style>
 <script type="text/javascript">
 // 아이콘 눌렀을 때 텍스트박스 글 지우기
 function clearInput() {
@@ -54,6 +56,7 @@ function clearInput() {
 	}
 }
 
+// 챗봇
 $(document).ready(function() {
     $(".chatbot_image").click(function() {
         $(".chatbot_modal").toggle();  
@@ -73,33 +76,57 @@ $(document).ready(function() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
+			<li class="nav_list"><a href="category_page.do?vi_value=관광지"
+				class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=음식점"
+				class="a_tag">음식점</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=숙박"
+				class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑"
+				class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사"
+				class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의
+					여행</a></li>
 		</ul>
 
-		<ul class="nav-list__right">
-			<li>
-				<form method="post" action="search">
-					<div class="search-bar">
-						<span class="material-symbols-outlined icon">search</span> 
-						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
-					</div>
-				</form>
-			</li>
-			<li><a href="login_go.do">로그인</a></li>
-			<li>|</li>
-			<li><a href="join_go.do">회원가입</a></li>
-		</ul>
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
-				<span>${userVO.u_name}님 환영합니다.</span>
-				<a href="logout_go.do">로그아웃</a> 
+				<ul class="nav-list__right" style="width: 600px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined icon">search</span> <input
+									class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>|</li>
+					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
+				</ul>
 			</c:when>
+			<c:otherwise>
+				<ul class="nav-list__right" style="width: 500px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined icon">search</span> <input
+									class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li><a href="login_go.do" class="a_tag">로그인</a></li>
+					<li>|</li>
+					<li><a href="join_go.do" class="a_tag">회원가입</a></li>
+				</ul>
+			</c:otherwise>
 		</c:choose>
 	</header>
 
@@ -144,10 +171,11 @@ $(document).ready(function() {
 			</ul>
 		</div>
 	</div>
-				<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
-		<div class="chatbot_modal" >
-			<%@include file="../common/chatbot.jsp"%>
-		</div> 
+	<img src="resources/common-image/chatbot.png" id="chatbot_image"
+		class="chatbot_image">
+	<div class="chatbot_modal">
+		<%@include file="../common/chatbot.jsp"%>
+	</div>
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>

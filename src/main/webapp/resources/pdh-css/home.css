@@ -54,6 +54,10 @@
 	color: white;
 }
 
+.a_tag:hover {
+	color: #D9D9D9;
+}
+
 .nav {
 	list-style-type: none;
 	display: flex;
@@ -77,7 +81,6 @@
 	position: absolute;
 	justify-content: space-between;
 	right: 1.5%;
-	width: 500px;
 	line-height: 50px;
 }
 
