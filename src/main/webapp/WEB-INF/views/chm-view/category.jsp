@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="resources/chm-css/map.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
 <link href="resources/common-css/reset.css" rel="stylesheet" />
+<link href="resources/common-css/chatbot.css" rel="stylesheet" />
+<link href="resources/pdh-css/scroll-to-top-button.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
 <script type="text/javascript" src="resources/chm-js/category.js"></script>           
@@ -26,6 +30,14 @@
 				f.action = "category_page.do?option="+option+"&vi_value=" + vi_value;
 				f.submit();
 			}
+		
+		// 챗봇
+		$(document).ready(function() {
+		    $(".chatbot_image").click(function() {
+		        $(".chatbot_modal").toggle();  
+		    });
+		    
+		});
 	</script>
 </head>
 <body>
@@ -252,6 +264,36 @@
 
 	</div>
 	</form>
+	<img src="resources/common-image/chatbot.png" id="chatbot_image"
+		class="chatbot_image">
+	<div class="chatbot_modal">
+		<%@include file="../common/chatbot.jsp"%>
+	</div>
 	<%@ include file="../common/footer.jsp"%>
+	<div>
+		<button id="scrollToTopButton">
+			<span class="material-symbols-outlined">expand_less</span>
+		</button>
+	</div>
+	<script type="text/javascript">
+	// 클릭시에 한 번에 위로 올라가는 버튼
+	window.onscroll = function() { scrollFunction() };
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("scrollToTopButton").style.display = "block";
+		} else {
+			document.getElementById("scrollToTopButton").style.display = "none";
+		}
+	}
+
+	document.getElementById("scrollToTopButton").addEventListener("click", () => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		});
+	})
+	</script>
 </body>
 </html>

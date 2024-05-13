@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.iw_wrap{
+	padding:5px;
+	text-align:center;
+	position:relative; 
+	margin:0 auto; 
+	width:220px; 
+	height:130px;
+}
+.iw_title{
+	width: 220px; 
+	background-color:lightgray; 
+	height:30px; 
+	line-height: 34px;
+}
+.iw_image{
+	width:100px;
+	height:70px; 
+	display: inline-block; 
+	vertical-align: top;
+}
+.iw_a{
+	display: inline-block; 
+	vertical-align: top; 
+	margin-left: 10px;
+}

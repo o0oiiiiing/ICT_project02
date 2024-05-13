@@ -17,31 +17,23 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.common.MyTripPaging;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.lsh.dao.UserVO;
-import com.ict.jeju.wyy.dao.CalendarVO4;
+import com.ict.jeju.wyy.dao.CalendarVO;
 import com.ict.jeju.wyy.dao.LikeVO;
 import com.ict.jeju.wyy.dao.UserVO4;
-import com.ict.jeju.wyy.dao.VisitJejuVO4;
-import com.ict.jeju.wyy.service.CalendarService4;
+import com.ict.jeju.wyy.dao.VisitJejuVO;
+import com.ict.jeju.wyy.service.MytripService;
 
 @Controller
-public class JejuController4 {
+public class JejuController {
 	
 	@Autowired
-	private CalendarService4 calendarService4;
+	private MytripService calendarService4;
 	
 	@Autowired
 	private HttpSession session;
 	
 	@Autowired
 	private MyTripPaging paging;
-	
-	@RequestMapping("wyyhome")
-	public ModelAndView wyyHome(@RequestParam("u_name") String u_name,@RequestParam("u_idx") String u_idx, HttpServletResponse response, HttpSession session) {
-		ModelAndView mv = new ModelAndView("wyy-view/index");
-	    session.setAttribute("u_idx", u_idx);
-	    session.setAttribute("u_name", u_name);
-	    return mv;
-	}
 	
 	// 나의여행일정 추가한 리스트 / 좋아요한 리스트
 	@RequestMapping("myTripPlan")
@@ -106,7 +98,7 @@ public class JejuController4 {
 	
 	// 캘린더 일정 추가하기
 	@RequestMapping("calSave")
-	public ModelAndView saveCal(CalendarVO4 cvo4, HttpServletRequest request) {
+	public ModelAndView saveCal(CalendarVO cvo4, HttpServletRequest request) {
 	    HttpSession session = request.getSession();
 	    UserVO userVO = (UserVO) session.getAttribute("userVO");
 	         int result = calendarService4.saveCal(cvo4,userVO.getU_idx());
@@ -116,27 +108,32 @@ public class JejuController4 {
 	         return new ModelAndView("wyy-view/error");
 	}
 	
+	
+	// 캘린더 화면 이동
+	@RequestMapping("calendar")
+	public ModelAndView getPlanner() {
+		return new ModelAndView("wyy-view/calendar");
+	}
+	
+	// 캘린더 일정 추가 
+	@RequestMapping("calendar_add")
+	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {
+		return new ModelAndView("wyy-view/calendar_add");
+	}
+	
+	// 관리자 일정 추가 페이지 이동
+	@RequestMapping("admin_insert")
+	public ModelAndView admin_insert() {
+		return new ModelAndView("wyy-view/admin_insert");
+	}
+	
 	// 관리자 일정 추가하기
 	@RequestMapping("admin_insert_ok")
-	public ModelAndView adminInsert(VisitJejuVO4 vo4){
+	public ModelAndView adminInsert(VisitJejuVO vo4){
 		ModelAndView mv = new ModelAndView("redirect:admin_insert");
 		int result = calendarService4.adminInsert(vo4);
 		return mv;
 	}
 	
 	
-	@RequestMapping("calendar")
-	public ModelAndView getPlanner() {
-		return new ModelAndView("wyy-view/calendar");
-	}
-	
-	@RequestMapping("admin_insert")
-	public ModelAndView admin_insert() {
-		return new ModelAndView("wyy-view/admin_insert");
-	}
-	
-	@RequestMapping("calendar_add")
-	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {
-		return new ModelAndView("wyy-view/calendar_add");
-	}
 }
