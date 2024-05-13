@@ -296,12 +296,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 10px;">제목이에요</td>
-						<td style="text-align: center;">아무개</td>
-						<td style="text-align: center;">2024.01.01</td>
-						<td style="text-align: center;">N</td>
-					</tr>
+					<c:forEach var="k" items="${qaList}">
+						<tr>
+							<td style="padding-left: 10px;">${k.bo_title}</td>
+							<td style="text-align: center;">${k.bo_writer}</td>
+							<td style="text-align: center;">${k.bo_regdate}</td>
+							<c:choose>
+								<c:when test="${k.active == '0'}">
+									<td style="text-align: center;">N</td>
+								</c:when>
+								<c:otherwise>
+									<td style="text-align: center;">Y</td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -313,7 +322,7 @@
 			</div>
 		</div>
 	</div>
-	<form id="qa_write" method="post" action="detail">
+	<form id="qa_write" method="post" action="qaWrite">
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
@@ -448,7 +457,7 @@
 	    	alert('제목을 입력해주세요.');
 	        return false;
 		} else {
-	    	f.action = "detail?contentsid=${placeDetail.contentsid}";
+	    	f.action = "qaWrite?contentsid=${placeDetail.contentsid}";
 			f.submit();
 	    }
 	}

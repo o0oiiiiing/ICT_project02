@@ -119,20 +119,6 @@ $(document).ready(function() {
 		<!-- 경화 날씨api -->
 		<span id="weather" style="background-color: white; height: 100%"></span>
 		
-		<ul class="nav-list__right">
-			<li>
-				<form method="post" action="search">
-					<div class="search-bar">
-						<span class="material-symbols-outlined icon">search</span> 
-						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
-					</div>
-				</form>
-			</li>
-			<li><a href="login_go.do">로그인</a></li>
-			<li>|</li>
-			<li><a href="join_go.do">회원가입</a></li>
-		</ul>
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
@@ -186,23 +172,24 @@ $(document).ready(function() {
 							<li class="place"><a
 								href="detail?contentsid=${k.contentsid}"> <img alt="장소"
 									src="${k.vi_image}">
-									<p style="font-weight: bold;">${k.vi_title}</p> <c:choose>
-										<c:when test="${k.vi_category == 'c1'}">
-											<p>관광지</p>
-										</c:when>
-										<c:when test="${k.vi_category == 'c2'}">
-											<p>쇼핑</p>
-										</c:when>
-										<c:when test="${k.vi_category == 'c3'}">
-											<p>숙소</p>
-										</c:when>
-										<c:when test="${k.vi_category == 'c4'}">
-											<p>음식</p>
-										</c:when>
-										<c:otherwise>
-											<p>축제/행사</p>
-										</c:otherwise>
-									</c:choose>
+									<p style="font-weight: bold;">${k.vi_title}</p>
+										<c:choose>
+											<c:when test="${k.vi_value == '관광지'}">
+												<p>관광지</p>
+											</c:when>
+											<c:when test="${k.vi_value == '쇼핑'}">
+												<p>쇼핑</p>
+											</c:when>
+											<c:when test="${k.vi_value == '숙박'}">
+												<p>숙박</p>
+											</c:when>
+											<c:when test="${k.vi_value == '음식점'}">
+												<p>음식점</p>
+											</c:when>
+											<c:otherwise>
+												<p>축제/행사</p>
+											</c:otherwise>
+										</c:choose>
 									<p>
 										조회수 :
 										<fmt:formatNumber value="${k.vi_hit}" pattern="#,##0" />

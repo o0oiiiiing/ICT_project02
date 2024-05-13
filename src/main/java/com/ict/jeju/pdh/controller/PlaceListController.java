@@ -8,11 +8,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaVO;
@@ -38,11 +40,17 @@ public class PlaceListController {
 	}
 
 	@RequestMapping("detail")
-	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session, HttpServletRequest request, QaVO qaVO) {
+	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session, HttpServletRequest request) {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
+		
+		// 상세정보 가져오기
 		PlaceListVO placeDetail = placeListService.placeDetail(contentsid);
-		int qaWrite = placeListService.qaWrite(qaVO);
+		
+		// Q&A 리스트 가져오기
+		List<QaVO> qaList = placeListService.qaList(contentsid);
+		
+		// 좋아요, 리뷰 수 가져오기
 		int likeNum = placeListService.likeNum(contentsid);
 		int reviewNum = placeListService.reviewNum(contentsid);
 
@@ -56,9 +64,18 @@ public class PlaceListController {
 			mv.addObject("placeDetail", placeDetail);
 			mv.addObject("likeNum", likeNum);
 			mv.addObject("reviewNum", reviewNum);
+			mv.addObject("qaList", qaList);
 			return mv;
 		}
 		return null;
+	}
+	
+	@PostMapping("qaWrite")
+	public ModelAndView qaWrite(QaVO qaVO, @ModelAttribute("contentsid") String contentsid) {
+		System.out.println(contentsid);
+		// Q&A 작성 삽입
+		int qaWrite = placeListService.qaWrite(qaVO);
+		return new ModelAndView("redirect:detail");
 	}
 
 	// 일정 추가하기
