@@ -87,6 +87,7 @@ public class CategoryController {
             mv.addObject("cate_list" , cate_list);
             return mv;
         }
+        
 		return null;
 	}
 	

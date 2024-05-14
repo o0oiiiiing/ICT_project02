@@ -20,7 +20,7 @@
     		SELECT * FROM Visitjeju_table where vi_value = #{vi_value}
     		<choose>
     			<when test="option == 'option1'">
-    				 ORDER BY vi_hit ASC
+    				 ORDER BY vi_hit DESC
     			</when>
     			<when test="option == 'option2'">
     				 ORDER BY vi_title ASC
