@@ -349,4 +349,27 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
+	// 회원관리 페이징
+	public int getTotalCount7() {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.count7");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 회원관리 전체보기
+	public List<UserVO> userList(int offset, int limit) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			return sqlSessionTemplate.selectList("Board_table.user_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 }

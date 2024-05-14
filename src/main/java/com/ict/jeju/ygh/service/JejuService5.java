@@ -77,23 +77,31 @@ public interface JejuService5 {
 	// 비밀번호변경
 	public int rePwd(UserVO uvo);
 
-	// 사용자 Q&A 전체보기
-	public List<BoardVO> boardList(int offset, int limit, String u_idx);
 	// 사용자 Q&A 페이징
 	public int getTotalCount3(String u_idx);
+	// 사용자 Q&A 전체보기
+	public List<BoardVO> boardList(int offset, int limit, String u_idx);
 
-	// 사용자 신고 전체보기
-	public List<ReportVO> reportList(int offset, int limit, String u_idx);
 	// 사용자 신고 페이징
 	public int getTotalCount4(String u_idx);
+	// 사용자 신고 전체보기
+	public List<ReportVO> reportList(int offset, int limit, String u_idx);
 	
-	// 관지자 전체 Q&A 전체보기
-	public int getTotalCount5();
 	// 관지자 전체 Q&A 페이징
+	public int getTotalCount5();
+	// 관지자 전체 Q&A 전체보기
 	public List<BoardVO> adminBoardlist2(int offset, int limit);
 	
-	// 관지자 전체 신고 전체보기
-	public int getTotalCount6();
 	// 관지자 전체 신고 페이징
+	public int getTotalCount6();
+	// 관지자 전체 신고 전체보기
 	public List<ReportVO> adminReportlist2(int offset, int limit);
+	
+	
+	// 회원관리 페이징
+	public int getTotalCount7();
+	// 관지자 전체 신고 페이징
+	public List<UserVO> userList(int offset, int limit);
+	
+	
 }
