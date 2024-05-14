@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.JejuDAO5;
@@ -212,6 +213,16 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public List<UserVO> userList(int offset, int limit) {
 		return jejuDAO5.userList(offset, limit);
+	}
+
+	@Override
+	public AdminVO adminDetail(String a_idx) {
+		return jejuDAO5.adminDetail(a_idx);
+	}
+	
+	@Override
+	public int userDelete(UserVO userVO) {
+		return jejuDAO5.userDelete(userVO);
 	}
 
 }

@@ -209,9 +209,20 @@
 	<!-- 회원관리 전체보기 -->
 	<select id="user_list" resultType="userVO" parameterType="Map">
 		select * from User_table 
-		order by u_regdate desc
+		order by u_idx desc
 		limit #{limit} offset #{offset} 
 	</select>
+	
+	<select id="admin_detail" parameterType="String" resultType="adminVO">
+		select * from Admin_table where a_idx = #{a_idx}
+	</select>
+	
+	<update id="user_delete" parameterType="userVO">
+		update User_table
+		set active = 1, u_del = #{u_del}
+		where u_idx = #{u_idx}
+	</update>
+	
 	
 </mapper>
 

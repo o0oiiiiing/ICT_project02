@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
@@ -702,7 +703,7 @@ public class JejuController5 {
 	@RequestMapping("user_list.do")
 	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("ygh-view/user_list");
-		
+
 		// 페이징
 		int count7 = jejuService5.getTotalCount7();
 		paging.setTotalRecord(count7);
@@ -734,9 +735,8 @@ public class JejuController5 {
 		}
 
 		// DB
-		
 		List<UserVO> user_list = jejuService5.userList(paging.getOffset(), paging.getNumPerPage());
-		
+
 		if (user_list != null) {
 			mv.addObject("user_list", user_list);
 			mv.addObject("paging", paging);
@@ -744,29 +744,36 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
-	
+
 	// 회원관리 삭제
 	@PostMapping("user_del_ok.do")
 	public ModelAndView userDelOk(@ModelAttribute("cPage") String cPage,
-			@ModelAttribute("u_idx") String u_idx, ReportVO revo) {
-		ModelAndView mv = new ModelAndView("ygh-view/user_list");
-		ReportVO revo2 = jejuService5.reportDetail(revo.getReport_idx());
-		String dpwd = revo2.getReport_pwd();
-
-		if (!passwordEncoder.matches(revo.getReport_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/report_delete");
-			mv.addObject("pwdchk", "fail");
-			return mv;
-		} else {
-			// active 컬럼의 값을 1로 변경하자.
-			int result = jejuService5.reportDelete(revo2);
-			if (result > 0) {
-				mv.setViewName("redirect:report_list.do");
-				return mv;
-			}
-		}
-		return new ModelAndView("ygh-view/error");
+	        AdminVO adminVO, HttpSession session, UserVO userVO) {
+		ModelAndView mv = new ModelAndView("redirect:user_list.do");
+		
+		// 세션에 저장된 관리자 정보
+	    AdminVO avo = (AdminVO) session.getAttribute("adminVO");
+	    AdminVO avo2 = jejuService5.adminDetail(avo.getA_idx());
+	    String dpwd = avo2.getA_pwd();
+	    
+	    if (!passwordEncoder.matches(adminVO.getA_pwd(), dpwd)) {
+	    	mv.setViewName("ygh-view/user_list");
+	        mv.addObject("pwdchk", "fail");
+	        mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+	        mv.addObject("paging", paging);
+	        return mv;
+	    } else {
+	        // active 컬럼의 값을 1로 변경하자.
+	        int result = jejuService5.userDelete(userVO);
+	        if (result > 0) {
+	        	mv.setViewName("ygh-view/user_list");
+	        	mv.addObject("del", "ok");
+	        	mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+	        	mv.addObject("paging", paging);
+	            return mv;
+	        }
+	    }
+	    return new ModelAndView("ygh-view/error");
 	}
-	
 
 }

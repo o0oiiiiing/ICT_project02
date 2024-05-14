@@ -11,47 +11,65 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-	function user_del() {
-		f.action="user_del.do"
-		f.submit();
-	}
-	
-	function user_del_ok(f) {
-		f.action="user_del_ok.do"
-			f.submit();
-	}
-	
-	document.addEventListener('DOMContentLoaded', function() {
-	    let writeButtons = document.querySelectorAll('.write_button');
-	    let delWrite = document.getElementById('del_write');
-
-	    // 초기에 qaWriteDiv 요소를 숨김
-	    delWrite.style.display = 'none';
-
-	    // 모든 버튼에 대해 이벤트를 설정
-	    writeButtons.forEach(function(writeButton) {
-	        writeButton.addEventListener('click', function(event) {
-	            // 요소의 display를 토글
-	            if (delWrite.style.display === 'block') {
-	            	delWrite.style.display = 'none';
-	            } else {
-	            	delWrite.style.display = 'block';
-	            }
-	            event.preventDefault(); // 기본 동작 취소
-	        });
-	    });
+	$(document).ready(function() {
+		let pwdchk = "${pwdchk}";
+		if (pwdchk == 'fail') {
+			alert("비밀번호 틀림");
+			return;
+		}
 	});
+	$(document).ready(function() {
+		let del = "${del}";
+		if (del == 'ok') {
+			alert("해당 회원 계정을 삭제했습니다.");
+			return;
+		}
+	});
+</script>
+<script type="text/javascript">
 	
+ 	function user_del_ok(f) {
+		f.action="user_del_ok.do"
+		f.submit();
+	} 
+	
+ 	document.addEventListener('DOMContentLoaded', function() {
+ 	    let writeButtons = document.querySelectorAll('.write_button');
+ 	    let delWrite = document.getElementById('del_write');
+
+ 	    // 초기에 del_write 요소를 숨김
+ 	    delWrite.style.display = 'none';
+
+ 	    // 모든 버튼에 대해 이벤트를 설정
+ 	    writeButtons.forEach(function(writeButton) {
+ 	        writeButton.addEventListener('click', function(event) {
+ 	            // 해당 버튼이 속한 행의 u_idx 값을 가져오기
+ 	            let u_idx = this.parentNode.parentNode.querySelector('.u_idx').value;
+
+ 	            // del_write 폼에 u_idx 값 설정
+ 	            delWrite.querySelector('input[name="u_idx"]').value = u_idx;
+
+ 	            // 요소의 display를 토글
+ 	            if (delWrite.style.display === 'block') {
+ 	                delWrite.style.display = 'none';
+ 	            } else {
+ 	                delWrite.style.display = 'block';
+ 	            }
+ 	            event.preventDefault(); // 기본 동작 취소
+ 	        });
+ 	    });
+ 	});
 	
 </script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
+	<form  method="post">
 	<div id="user_t">
 		<div id="user_h">
 			<h1>회원관리</h1>
 		</div>
-		<form method="post">
+		<div>
 		<table>
 			<thead>
 				<tr>
@@ -78,7 +96,10 @@
 								<td>${k.u_email}</td>
 								<td>${k.u_regdate.substring(0,10)}</td>
 								<td>${k.u_report}</td>
-								<td><button class="write_button" >계정삭제</button></td>
+								<td>
+									<input type="hidden" class="u_idx" value="${k.u_idx}">
+									<button class="write_button" >계정삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -101,8 +122,7 @@
 							</c:choose>
 
 							<!-- 페이지번호들 -->
-							<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}"
-								step="1" var="k">
+							<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="k">
 								<c:choose>
 									<c:when test="${k == paging.nowPage}">
 										<li class="now">${k}</li>
@@ -129,10 +149,10 @@
 				</tr>
 			</tfoot>
 		</table>
-		</form>
+		</div>
 	</div>
 	
-	<form id="del_write" method="post" action="detail">
+	<div id="del_write">
 		<div class="del_container">
 			<div class="del_content">
 				<table style="margin: auto;">
@@ -140,26 +160,28 @@
 						<tr>
 							<td style="width: 30%">사유</td>
 							<td>
-								<input type="text" name="bo_title" required size="40">
+								<input type="text" name="u_del" required size="40">
 							</td>
 						</tr>
 						<tr>
 							<td style="width: 30%">비밀번호</td>
 							<td>
-							<input type="password" name="bo_pwd" id="passwordInput" required size="40">
+							<input type="password" name="a_pwd" id="passwordInput" required size="40">
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="del_buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> 
+				<input type="hidden" value="${k.u_idx}" name="u_idx"> 
+				<input type="hidden" value="${adminVO.a_idx}" name="a_idx"> 
+				<input type="hidden" value="${paging.nowPage}" name="cPage"> 
 				<input class="del_button" type="reset" value="취소">
 				<button class="del_button" onclick="user_del_ok(this.form)">등록</button>
 			</div>
 		</div>
+		</div>
 	</form>
-	
 <%@include file="../common/footer.jsp"%>	
 </body>
 </html>

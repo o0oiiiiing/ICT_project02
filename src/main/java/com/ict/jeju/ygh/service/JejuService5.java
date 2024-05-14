@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
@@ -102,6 +103,8 @@ public interface JejuService5 {
 	public int getTotalCount7();
 	// 관지자 전체 신고 페이징
 	public List<UserVO> userList(int offset, int limit);
-	
+	// 관리자 상세보기
+	public AdminVO adminDetail(String a_idx);
+	public int userDelete(UserVO userVO);
 	
 }
