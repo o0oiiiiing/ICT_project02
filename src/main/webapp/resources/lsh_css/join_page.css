@@ -26,12 +26,12 @@
   	padding: 15px;
   	box-sizing: border-box;
   	font-size: 14px;
+  	border-radius: 10px;
 }
 
 .join_btn {
   	text-transform: uppercase;
   	outline: 0;
-  	background: #4CAF50;
   	width: 100%;
   	border: 0;
   	padding: 15px;
@@ -39,6 +39,7 @@
   	-webkit-transition: all 0.3 ease;
   	transition: all 0.3 ease;
   	cursor: pointer;
+  	border-radius: 10px;
 }
 
 .join_radio_btn{
@@ -53,6 +54,7 @@
 
 .join_text{
 	padding: 20px;
+	font-weight: bold;
 }
 
 input[type='date']::before {
@@ -68,7 +70,10 @@ input[type='date']::before {
 	width: 100%;
 	height: 100px;
 	overflow: auto;
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
+	text-align: left;
+	line-height: 25px;
+	border: 1px solid black;
 }
 
 .join_terms_box {
@@ -78,7 +83,7 @@ input[type='date']::before {
 }
 
 .join_terms_box_chk {
-	margin-left: 120px;
+	margin-left: 140px;
 }
 
 .join_ok_btn{
@@ -87,12 +92,13 @@ input[type='date']::before {
   	width: 100%;
   	border: 0;
   	padding: 15px;
-  	color: black;
+  	color: #6c6c6c;
   	font-size: 14px;
   	-webkit-transition: all 0.3 ease;
   	transition: all 0.3 ease;
   	cursor: pointer;
   	margin-top: 20px;
+  	border-radius: 10px;
 }
 
 .join_ok_btn:hover, .join_ok_btn:active, .join_ok_btn:focus {

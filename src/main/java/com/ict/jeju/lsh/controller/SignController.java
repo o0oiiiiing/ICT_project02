@@ -40,13 +40,13 @@ public class SignController {
 	// 아이디찾기 이동
 	@GetMapping("findID_go.do")
 	public ModelAndView getFindID() {
-		return new ModelAndView("lsh_view/findID_page");
+		return new ModelAndView("lsh_view/find_id_page");
 	}
 	
 	// 비밀번호 찾기 이동
 	@GetMapping("findpwd_go.do")
 	public ModelAndView getFindpwd() {
-		return new ModelAndView("lsh_view/findpwd_page");
+		return new ModelAndView("lsh_view/find_pwd_page");
 	}
 	
 	// 회원가입 이동
@@ -55,7 +55,7 @@ public class SignController {
 		return new ModelAndView("lsh_view/join_page");
 	}
 	
-	// 임시 회원가입 페이지 이동
+	// 관리자 회원가입 페이지 이동
 	@GetMapping("admin_join.do")
 	public ModelAndView getAdminJoin() {
 		return new ModelAndView("lsh_view/admin_join_page");
@@ -154,13 +154,13 @@ public class SignController {
 		return new ModelAndView("redirect:home");
 	}
 	
-	// 슈퍼관리자가 일반 관리자 계정 생성
+	// 관리자 계정 생성
 	@RequestMapping("admin_join_ok.do")
 	public ModelAndView getAdminJoinOK(AdminVO adminVO) {
 		adminVO.setA_pwd(passwordEncoder.encode(adminVO.getA_pwd()));
 		int res = signService.getAdminJoinOK(adminVO);
 		if (res >0) {
-			return new ModelAndView("redirect:login_go.do");
+			return new ModelAndView("redirect:admin_login.do");
 		}
 		return null;
 	}
@@ -199,7 +199,7 @@ public class SignController {
 		List<UserVO> find_list = signService.getFindIdChk(userVO);
 		if (find_list != null) {
 			mv.addObject("find_list", find_list);
-			mv.setViewName("lsh_view/findID_chk_page");
+			mv.setViewName("lsh_view/find_id_chk_page");
 			return mv;
 		}
 		return new ModelAndView("redirect:findID_go.do");
@@ -236,7 +236,7 @@ public class SignController {
 				}
 			}
 			mv.addObject("msg", "다시 입력하세요.");
-			mv.setViewName("lsh_view/findpwd_page");
+			mv.setViewName("lsh_view/find_pwd_page");
 			return mv;
 		} catch (Exception e) {
 			System.out.println("con mail err : "+e);

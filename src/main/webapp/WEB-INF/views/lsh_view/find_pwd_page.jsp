@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>비밀번호 찾기</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<link href="resources/lsh_css/findpwd.css" rel="stylesheet" />
+		<link href="resources/lsh_css/find_pwd.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			let msg = "${msg}";
@@ -26,13 +26,13 @@
 					<div class="find_pwd_box">
 						<ul>
 							<li>
-								<input type="text" name="u_id" placeholder="아이디를 입력하세요">
+								<input type="text" name="u_id" placeholder="아이디를 입력하세요" style="border-radius: 10px;" />
 							</li>
 							<li>
-								<input type="email" name="u_email" placeholder="이메일을 입력하세요" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
+								<input type="email" name="u_email" placeholder="이메일을 입력하세요" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" style="border-radius: 10px;" />
 							</li>
 							<li>
-								<input type="submit" class="find_pwd_btn" value="임시 비밀번호 발급 받기">
+								<input type="submit" class="find_pwd_btn" value="임시 비밀번호 발급 받기" style="border-radius: 10px;" />
 							</li>
 						</ul>
 					</div>
