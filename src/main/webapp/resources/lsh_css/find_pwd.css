@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-.find_id_page {
-	width: 360px;
+.find_pwd_page {
+	width: 720px;
 	padding: 8% 0 0;
   	margin: auto;
 }
 
-.find_id_container {
+.find_pwd_container {
 	position: relative;
   	z-index: 1;
   	background: white;
@@ -17,7 +17,7 @@
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.find_id_box input {
+.find_pwd_box ul li input {
   	outline: 0;
   	background: lightgray;
   	width: 100%;
@@ -26,31 +26,29 @@
   	padding: 15px;
   	box-sizing: border-box;
   	font-size: 14px;
+  	border-radius: 10px;
 }
 
-.find_id_btn {
+.find_pwd_btn {
   	text-transform: uppercase;
   	outline: 0;
-  	background: #4CAF50;
   	width: 100%;
   	border: 0;
   	padding: 15px;
-  	color: black;
+  	color: #6c6c6c;
   	font-size: 14px;
   	-webkit-transition: all 0.3 ease;
   	transition: all 0.3 ease;
   	cursor: pointer;
+  	border-radius: 10px;
 }
 
-.find_id_btn:hover, .find_id_btn:active, .find_id_btn:focus {
+.find_pwd_btn:hover, .find_pwd_btn:active, .find_pwd_btn:focus {
 	background: #b6dedc;
 }
 
-.find_id_text {
+.find_pwd_text {
 	padding: 20px;
-}
-
-.find_id_box2 {
-	margin: 15px 0 0 15px;
+	font-weight: bold;
 }
 

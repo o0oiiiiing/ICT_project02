@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>회원 가입</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<link href="resources/lsh_css/join.css" rel="stylesheet" />
+		<link href="resources/lsh_css/join_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function back() {
@@ -116,9 +116,13 @@
 			function chk_disabled() {
 				let u_id = document.getElementById('u_id').value;
 				let u_idchk = document.getElementById('u_idchk');
+				let empty = "#b6dedc";
+				let basic = "lightgray";
 				if (u_id === '') {
+					u_idchk.style.background = basic;
 					u_idchk.disabled = true;
 				} else {
+					u_idchk.style.background = empty;
 					u_idchk.disabled = false;
 				}
 			}
@@ -173,11 +177,11 @@
 		<section class="join_page">
 			<div class="join_container">
 				<form method="post">
-					<h3 class="join_text">회원 가입</h3>
+					<h3 class="join_text">Sign Up</h3>
 						<div class="join_box">
 							<ul>
 								<li>
-									<input type="text"  id="u_id" name="u_id" required placeholder="아이디"/>
+									<input type="text"  id="u_id" name="u_id" required placeholder="아이디" />
 									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</li>
 								<li>
@@ -188,7 +192,7 @@
 									<span id="msg" ></span>
 								</li>
 								<li class="join_li_box" >
-									<input type="text" id="u_name" name="u_name" required placeholder="이름"/>
+									<input type="text" id="u_name" name="u_name" required placeholder="이름" />
 								</li>
 								<li>
 									<input type="date" id="u_birth" name="u_birth" value="생년월일" required data-placeholder="생년월일을 입력하세요" />
@@ -201,17 +205,17 @@
 								</li>
 								<li>
 									<input type="email" id="u_email" name="u_email" required 
-												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="이메일"/>
+												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="이메일" />
 								</li>
 								<li>
-									<input type="text" id="u_phone" name="u_phone" required placeholder="전화번호"/>
+									<input type="text" id="u_phone" name="u_phone" required placeholder="전화번호" />
 								</li>
 								<li>
-									<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기">
-									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" readonly>
-									<input type="text" id="u_addr" name="u_addr" readonly>
-									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1">
-									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" readonly>
+									<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" />
+									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" readonly />
+									<input type="text" id="u_addr" name="u_addr" readonly />
+									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1" />
+									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" readonly />
 								</li>
 							</ul>
 					</div>
@@ -230,7 +234,7 @@
 										<label for="click_1">동의</label>
 									</div>
 								</div>
-								<div class="terms_box"  style="text-align: left; line-height: 20px;">
+								<div class="terms_box">
 									<p>제1조(목적)</p>
 										<p>이 약관은 제주관광공사 이하 “공사”가 운영하는 제주관광정보 공식사이트('www.visitjeju.net'이하 'visitjeju 홈페이지')에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이트와 이용자의 권리•의무 및 책임사항을 규정함을 목적으로 합니다.</p>
 										<br>
@@ -326,7 +330,7 @@
 										<label for="click_2">동의</label>
 									</div>
 								</div>
-								<div class="terms_box" style="text-align: left; line-height: 20px;">
+								<div class="terms_box">
 									<p>제11조(제주관광공사의 의무)</p>
 									<p>1.제주관광정보 공식사이트 시스템을 계속적 안정적으로 서비스를 제공할 의무가 있습니다.</p>
 									<p>2.제주관광정보 공식사이트 서비스를 위한 설비에 장애가 발생될 때에는 신속한 복구가 가능하도록 조치하여야 합니다.</p>
@@ -401,7 +405,7 @@
 										<label for="click_3">동의</label>
 									</div>
 								</div>
-								<div class="terms_box"  style="text-align: left; line-height: 20px;">
+								<div class="terms_box">
 									<p>제1조(가입비 및 이용요금)</p>
 									<p>제주관광정보 공식사이트의 가입비, 이용요금은 무료입니다.</p>
 									<br>
@@ -417,8 +421,8 @@
 					</div>
 					
 					<div>
-						<input type="button" class="join_ok_btn" onclick="join_ok(this.form)" value="가입하기">
-						<input type="button" class="join_ok_btn" onclick="back()" value="취소">
+						<input type="button" class="join_ok_btn" onclick="join_ok(this.form)" value="가입하기" />
+						<input type="button" class="join_ok_btn" onclick="back()" value="취소" />
 					</div>
 				</form>
 			</div>

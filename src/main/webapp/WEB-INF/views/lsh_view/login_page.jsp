@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>로그인</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<link href="resources/lsh_css/login.css" rel="stylesheet" />
+		<link href="resources/lsh_css/login_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
@@ -31,32 +31,32 @@
 		<section class="login_page">
 			<div class="login_box">
 				<form method="post" class="login_form">
-					<h3 class="login_text">로그인</h3>
+					<h3 class="login_text">Login</h3>
 					<div>
 						<ul>
 							<li>
-								<input type="text"  id="u_id" name="u_id" placeholder="아이디" required>
+								<input type="text" id="u_id" name="u_id" class="login_box_input" placeholder="아이디" required />
 							</li>
 							<li>
-								<input type="password" id="u_pwd" name="u_pwd" placeholder="비밀번호" required>
+								<input type="password" id="u_pwd" name="u_pwd" class="login_box_input" placeholder="비밀번호" required />
 							</li>
 							<li>
-								<input type="button" class="login_btn" value="로그인" onclick="login_ok(this.form)">
+								<input type="button" class="login_btn" value="로그인" onclick="login_ok(this.form)" />
 							</li>
 						</ul>
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do" style="text-decoration: none; color: black;">아이디 찾기 &nbsp;</a> | 
-						<a href="findpwd_go.do" style="text-decoration: none; color: black;">&nbsp; 비밀번호 찾기</a>
+						<a href="findID_go.do" >아이디 찾기 &nbsp;&nbsp; | </a>
+						<a href="findpwd_go.do" >비밀번호 찾기</a>
 					</div>
 					
 					<div class="login_sns">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
-							<img src="resources/lsh_images/kakao_login_medium_narrow.png" height="50px;" width="200px" style="margin: 10px;">
+							<img src="resources/lsh_images/kakao_login.png" class="login_sns_btn" />
 						</a>
 						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=J3r3NWMEm1CJS2vNYtQm&state=STATE_STRING&redirect_uri=http://localhost:8090/naver_login.do">
-							<img src="resources/lsh_images/btnG.png" height="50px;" width="200px;" style="margin: 10px;">
+							<img src="resources/lsh_images/naver_login.png" class="login_sns_btn" />
 						</a>
 					</div>
 					<div class="login_find">

@@ -8,8 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>아이디 찾기 결과</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<link href="resources/lsh_css/findID_chk.css" rel="stylesheet" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link href="resources/lsh_css/find_id_chk.css" rel="stylesheet" />
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
@@ -28,8 +27,8 @@
 				</c:choose>
 				
 				<div class="findID_chk_box">
-					<a href="login_go.do" style="text-decoration: none; color: black;">로그인 &nbsp; &nbsp;</a> | 
-					<a href="findpwd_go.do" style="text-decoration: none; color: black;">&nbsp; 비밀번호 찾기</a>
+					<a href="login_go.do" >로그인 &nbsp; | </a>
+					<a href="findpwd_go.do" >비밀번호 찾기</a>
 				</div>
 			</div>
 		</section>

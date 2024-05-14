@@ -1,13 +1,12 @@
 @charset "UTF-8";
 
-
-.login_page {
-	width: 360px;
+.admin_join_page {
+	width: 720px;
 	padding: 8% 0 0;
   	margin: auto;
 }
 
-.login_box {
+.admin_join_container {
 	position: relative;
   	z-index: 1;
   	background: white;
@@ -18,7 +17,7 @@
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.login_box input {
+.admin_join_box input {
   	outline: 0;
   	background: lightgray;
   	width: 100%;
@@ -27,34 +26,46 @@
   	padding: 15px;
   	box-sizing: border-box;
   	font-size: 14px;
+  	border-radius: 10px;
 }
 
-.login_btn {
+.admin_join_btn {
   	text-transform: uppercase;
   	outline: 0;
-  	background: #4CAF50;
   	width: 100%;
   	border: 0;
   	padding: 15px;
-  	color: black;
   	font-size: 14px;
   	-webkit-transition: all 0.3 ease;
   	transition: all 0.3 ease;
   	cursor: pointer;
 }
 
-.login_btn:hover, .login_btn:active, .login_btn:focus {
+.admin_join_text{
+	padding: 20px;
+	font-weight: bold;
+}
+
+.admin_join_li_box {
+	margin-top: 10px;
+}
+
+.admin_join_ok_btn{
+	text-transform: uppercase;
+  	outline: 0;
+  	width: 100%;
+  	border: 0;
+  	padding: 15px;
+  	color: #6c6c6c;
+  	font-size: 14px;
+  	-webkit-transition: all 0.3 ease;
+  	transition: all 0.3 ease;
+  	cursor: pointer;
+  	margin-top: 20px;
+  	border-radius: 10px;
+}
+
+.admin_join_ok_btn:hover, .admin_join_ok_btn:active, .admin_join_ok_btn:focus {
 	background: #b6dedc;
 }
 
-.login_text{
-	padding: 20px;
-}
-
-.login_find{
-	margin: 15px 0 0 15px;
-}
-
-.login_sns {
-	margin-top: 15px;
-}
