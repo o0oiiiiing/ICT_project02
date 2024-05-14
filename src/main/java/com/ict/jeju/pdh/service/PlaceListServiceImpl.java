@@ -56,5 +56,11 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public int qaWrite(QaVO qaVO) {
 		return placeListDAO.qaWrite(qaVO);
 	}
+	
+	// 장소의 Q&A 가져오기
+	@Override
+	public List<QaVO> qaList(String contentsid) {
+		return placeListDAO.qaList(contentsid);
+	}
 
 }

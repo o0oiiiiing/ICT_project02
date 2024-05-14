@@ -27,5 +27,8 @@ public interface PlaceListService {
 	// Q&A 작성하기
 	public int qaWrite(QaVO qaVO);
 	
+	// 장소의 Q&A 가져오기
+	public List<QaVO> qaList(String contentsid);
+	
 	
 }
