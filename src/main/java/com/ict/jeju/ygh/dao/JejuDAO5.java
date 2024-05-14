@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 
 @Repository
 public class JejuDAO5 {
@@ -372,4 +373,24 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
+	
+	public AdminVO adminDetail(String a_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.admin_detail", a_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public int userDelete(UserVO userVO) {
+		try {
+			return sqlSessionTemplate.update("Board_table.user_delete", userVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
 }
