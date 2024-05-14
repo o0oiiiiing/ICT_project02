@@ -20,33 +20,7 @@
 <link rel="stylesheet" href="resources/pdh-css/home.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
-<link rel="stylesheet" href="resources/ygh-css/weather.css" />
-<style type="text/css">
-#chatbot_image {
-	width: 50px;
-	height: 50px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 99;
-	line-height: 60px;
-	cursor: pointer;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-	border-radius: 50%;
-}
-
-.chatbot_modal {
-	position: fixed;
-	bottom: 20px;
-	right: 80px;
-	z-index: 2;
-	background-color: white;
-	display: none;
-	border-radius: 10px;
-}
-
-
-</style>
+<link rel="stylesheet" href="resources/common-css/chatbot.css" />
 <script type="text/javascript">
 // 아이콘 눌렀을 때 텍스트박스 글 지우기
 function clearInput() {
@@ -93,22 +67,9 @@ $(document).ready(function() {
 			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
 			<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 		</ul>
-		
-		
-		<ul class="nav-list__right">
-			<li>
-				<form method="post" action="search">
-					<div class="search-bar">
-						<span class="material-symbols-outlined icon">search</span> 
-						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined delete-icon" onclick="clearInput()">close</span>
-					</div>
-				</form>
-			</li>
-			<li><a href="login_go.do">로그인</a></li>
-			<li>|</li>
-			<li><a href="join_go.do">회원가입</a></li>
-		</ul>
+	
+		<!-- 경화 날씨api -->
+		<span id="weather" style="background-color: white; height: 100%"></span>
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
@@ -163,16 +124,16 @@ $(document).ready(function() {
 								href="detail?contentsid=${k.contentsid}"> <img alt="장소"
 									src="${k.vi_image}">
 									<p style="font-weight: bold;">${k.vi_title}</p> <c:choose>
-										<c:when test="${k.vi_category == 'c1'}">
+										<c:when test="${k.vi_value == '관광지'}">
 											<p>관광지</p>
 										</c:when>
-										<c:when test="${k.vi_category == 'c2'}">
+										<c:when test="${k.vi_value == '쇼핑'}">
 											<p>쇼핑</p>
 										</c:when>
-										<c:when test="${k.vi_category == 'c3'}">
+										<c:when test="${k.vi_value == '숙박'}">
 											<p>숙소</p>
 										</c:when>
-										<c:when test="${k.vi_category == 'c4'}">
+										<c:when test="${k.vi_value == '음식점'}">
 											<p>음식</p>
 										</c:when>
 										<c:otherwise>

@@ -3,10 +3,22 @@ package com.ict.jeju.wyy.dao;
 public class LikeVO {
 	private String like_idx, like_active;
 	private String u_idx, u_name;
-	private String contentsid, vi_image, vi_value, vi_title, vi_latitude, vi_longitude;
+	private String contentsid, vi_image, vi_value, vi_title, vi_latitude, vi_longitude, vi_phoneno, vi_roadaddress;
 	
 	
 	
+	public String getVi_phoneno() {
+		return vi_phoneno;
+	}
+	public void setVi_phoneno(String vi_phoneno) {
+		this.vi_phoneno = vi_phoneno;
+	}
+	public String getVi_roadaddress() {
+		return vi_roadaddress;
+	}
+	public void setVi_roadaddress(String vi_roadaddress) {
+		this.vi_roadaddress = vi_roadaddress;
+	}
 	public String getVi_latitude() {
 		return vi_latitude;
 	}

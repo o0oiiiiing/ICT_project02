@@ -7,36 +7,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="resources/common-css/reset.css" rel="stylesheet" />
+<link href="resources/wyy-css/admin_insert.css" rel="stylesheet" />
+<!-- 다음 주소 api  -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 카카오 api -->
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd&libraries=services"></script>
 <title>관리자 장소추가</title>
-<style type="text/css">
-	.admin_result{
-		text-align: center;
-    	margin: 135px auto;
-    	line-height: 2;
-    	width: 50%;
-	}
-	.admin_result p{
-		padding-bottom: 17px;
-	}
-	.admin_result textarea{
-		resize: none;
-	}
-	.admin_category{
-		padding: 10px;
-	}
-	.admin_input{
-		padding: 10px;
-	}
-	.id_ok{
-		color:#008000;
-		display: none;
-		}
-		
-	.id_already{
-		color:#6A82FB; 
-		display: none;
-	}
-</style>
 <script type="text/javascript">
 	let idChk = false;
 	//아이디 중복 여부
@@ -50,8 +26,6 @@
 				if (data === '1') {
 					alert("사용 가능");
 					idChk = true;
-					// 중복확인 후에 폼 제출하기
-					// submitForm();
 				} else if (data === '0') {
 					alert("동일한 콘텐츠 ID가 있습니다.");
 					idChk = false;
@@ -74,40 +48,114 @@
 	}
 		 
 </script>
+<script>
+    function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var roadAddr = data.roadAddress; 
+            var extraRoadAddr = ''; 
 
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+            // 위도경도 가지고오는 함수 호출
+            getAddressCoordinates(roadAddr);
+        }
+    }).open();
+}
+
+function getAddressCoordinates(address) {
+    // 카카오맵 Geocoding API 사용
+    var geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            document.getElementById("vi_latitude").value = coords.getLat(); // 위도
+            document.getElementById("vi_longitude").value = coords.getLng(); // 경도
+        } else {
+            alert('주소를 변환할 수 없습니다: ' + status);
+        }
+    });
+}
+
+</script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
 	<form action="admin_insert_ok" method="post" >
 		<div class="admin_result">
-		<h3 >장소 추가</h3>
+		<h3 style="margin-bottom: 30px; font-size: 28px; font-weight: bold;">장소 추가</h3>
 		<br>
-		<p>카테고리 : 
-			<select class="admin_category" name="vi_value" required>
-				<option value="관광지" >관광지</option>
-				<option value="쇼핑" >쇼핑</option>
-				<option value="숙박" >숙박</option>
-				<option value="음식점" >음식점</option>
-				<option value="축제" >축제/행사</option>
-			</select>
-		</p>
-		<!-- 중복검사예정 -->
-		<p>콘텐츠 ID : 
-			<input type="text"  class="admin_input" id="contentsid" name="contentsid" required>
-			<input type="button" class="join_btn" id="contents_idchk"  value="중복 확인" onclick="id_doublechk()"/>
-    		
-		</p>
-		<p>장소 이름 : <input type="text"  class="admin_input" name="vi_title" required></p>
-		<p>지번 주소 : <input type="text" class="admin_input" name="vi_address" required></p>
-		<p>도로명 주소 : <input type="text" class="admin_input" name="vi_roadaddress" required></p>
-		<p style="padding-bottom: 7px;">장소 소개 : <textarea rows="4" cols="50" name="vi_intro" required></textarea></p>
-		<p>위도 : <input type="text"  class="admin_input" name="vi_latitude" required></p>
-		<p>경도 : <input type="text" class="admin_input" name="vi_longitude" required></p>
-		<p>전화번호 : <input type="text" class="admin_input" name="vi_phoneno" required></p>
-		<p>장소 이미지 링크 : <input type="text" class="admin_input" name="vi_image" required></p>
-		<p>장소 썸네일 링크 : <input type="text" class="admin_input" name="vi_thumbnail" required></p>
-		<input type="button" value="제출" onclick="submitForm()" >
-		<input type="reset" value="취소">
+		<div class="name_category">
+			<p>카테고리 : </p>
+			<p>콘텐츠 ID : </p>
+			<p>장소 이름 : </p>
+			<p>지번 주소 : </p>
+			<p>도로명 주소 : </p>
+			<p>장소 소개 : </p>
+			<p>위도 : </p>
+			<p>경도 : </p>
+			<p>전화번호 : </p>
+			<p>장소 이미지 링크 : </p>
+			<p>장소 썸네일 링크 : </p>
+		</div>
+		<div class="input_category">
+			<p>
+				<select class="admin_category" name="vi_value" required>
+					<option value="관광지" >관광지</option>
+					<option value="쇼핑" >쇼핑</option>
+					<option value="숙박" >숙박</option>
+					<option value="음식점" >음식점</option>
+					<option value="축제" >축제/행사</option>
+				</select>
+			</p>
+			<p>
+				<input type="text"  class="admin_input" id="contentsid" name="contentsid" required>
+				<input type="button" class="join_btn" id="contents_idchk"  value="중복 확인" onclick="id_doublechk()"/>
+			</p>
+			<p>
+				<input type="text"  class="admin_input" name="vi_title" required>
+			</p>
+			<p>
+				<input type="text" class="admin_input" id="sample4_jibunAddress"name="vi_address" required>
+				<input type="button" id="input_button" onclick="sample4_execDaumPostcode()" value="주소 찾기">
+			</p>
+			<p>
+				<input type="text" class="admin_input" id="sample4_roadAddress" name="vi_roadaddress" required>
+			</p>
+			<p>
+				<input type="text"  class="admin_input" name="vi_intro" required>
+			</p>
+			<p>
+				<input type="text"  class="admin_input" name="vi_latitude" id="vi_latitude" required>
+			</p>
+			<p>
+				<input type="text" class="admin_input" name="vi_longitude" id="vi_longitude" required>
+			</p>
+			<p>
+				<input type="text" class="admin_input" name="vi_phoneno" required>
+			</p>
+			<p>
+				<input type="text" class="admin_input" name="vi_image" required>
+			</p>
+			<p>
+				<input type="text" class="admin_input" name="vi_thumbnail" required>
+			</p>
+			<p>
+				<input type="button" id="input_submit" value="제출" onclick="submitForm()" >
+				<input type="reset" id="input_submit" value="취소" onclick="history.go(-1)">
+			</p>
+		</div>
 		</div>
 	</form>
 	<%@include file="../common/footer.jsp"%>

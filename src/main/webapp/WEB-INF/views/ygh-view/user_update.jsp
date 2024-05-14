@@ -77,33 +77,36 @@
 		<form method="post">
 			<h1>회원정보수정</h1>
 			<div id="update_box">
-				<label>아이디</label>
-				<input type="text" name="u_id" id="u_id" value="${userVO.u_id}" readonly><br> 
-				
-				<label>이름</label>
-				<input type="text" name="u_name" id="u_name" value="${userVO.u_name}" readonly><br> 
-				
-				<label>전화번호</label>
-				<input type="text" name="u_phone" id="u_phone" value="${userVO.u_phone}" title="- 를 제외한 11자리를 입력해 주세요."><br> 
-				
-				<label>이메일</label>
+			<div class="update_category">
+				<p>아이디</p>
+				<p>이름</p>
+				<p>전화번호</p>
+				<p>이메일</p>
+				<p>우편번호</p>
+				<p>도로명주소</p>
+				<p>상세주소1</p>
+				<p>상세주소2</p>
+				<p>비밀번호 확인</p>
+			</div>
+			<div class="update_input">
+				<input type="text" name="u_id" id="u_id" value="${userVO.u_id}" readonly><br>
+				<input type="text" name="u_name" id="u_name" value="${userVO.u_name}" readonly><br>
+				<input type="text" name="u_phone" id="u_phone" value="${userVO.u_phone}" title="- 를 제외한 11자리를 입력해 주세요."><br>
 				<input type="text" name="u_email" id="u_email" value="${userVO.u_email}" 
-				pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" title="이메일 양식" ><br> 
-				
-				<label>주소</label>
+				pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" title="이메일 양식" ><br>
 				<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" value="${userVO.u_postcode}" readonly /> 
-				<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" /> <br> 
+				<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" id="find_postcode"/> <br> 
 				<input type="text" id="u_addr" name="u_addr" placeholder="도로명주소" value="${userVO.u_addr}"  /><br> 
 				<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1" value="${userVO.u_detail_addr}"   /><br>
-				<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" value="${userVO.u_detail_addr2}"  /><br> 
-			
-				<label>비밀번호 확인</label>
-				<input type="password" name="u_pwd" id="u_pwd" ><br> 
-				
+				<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" value="${userVO.u_detail_addr2}"  /><br>
+				<input type="password" name="u_pwd" id="u_pwd" ><br>     
 			</div>
+			<div class="update_submit">
 			<input type="hidden" value="${userVO.u_idx}" name="u_idx">
 			<input type="button" id="update_ok" value="저장" onclick="user_update_ok(this.form)">
-			<button id="u_pwd" onclick="repwd_go()">비밀번호변경</button>
+			<input type="button" id="u_pwd" onclick="repwd_go()" value="비밀번호변경">
+			</div>
+			</div>
 		</form>
 	</div>
 

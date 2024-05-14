@@ -71,11 +71,6 @@
 	<form action="admin_insert">
     	<input type="submit" value="관리자 장소추가"> 
 	</form>
-	<form action="wyyhome" method="post">
-    	<input type="hidden" name="u_idx" value="1">
-    	<input type="hidden" name="u_name" value="원유영">
-    	<input type="submit" value="원유영"> 
-	</form>
 
 </body>
 </html>

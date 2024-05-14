@@ -6,7 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
+<link href="resources/wyy-css/infowindow.css" rel="stylesheet" />
 <link href="resources/common-css/reset.css" rel="stylesheet" />
+<link href="resources/common-css/chatbot.css" rel="stylesheet" />
+<link href="resources/pdh-css/scroll-to-top-button.css" rel="stylesheet" />
 <!-- 카카오 지도 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
@@ -104,14 +107,17 @@
 						                position: new kakao.maps.LatLng(position.vi_latitude, position.vi_longitude),
 						                title: position.vi_title, 
 						                contentsid: position.contentsid,
+						                vi_image: position.vi_image,
 						                image: markerImage
 						            });
 						
 						            // 인포윈도우 내용
-						            var iwContent = '<div style="padding:5px; text-align:center;">' 
-						                + position.vi_title
-						                + '<br><a href="detail?contentsid='+position.contentsid+'">상세페이지</a>'
-						                + '</div>';
+						           let iwContent = '<div class="iw_wrap">' 
+    										+ '<div class="iw_title">'+position.vi_title+'</div><br>'
+    										+ '<img src="'+position.vi_image+'" class="iw_image">'
+										    + '<a href="detail?contentsid='+position.contentsid+'" class="iw_a">상세페이지</a>'
+										    + '</div>';
+
 						
 						            // 인포윈도우 생성
 						            var infowindow = new kakao.maps.InfoWindow({
@@ -217,12 +223,12 @@
 			                var vi_image = $(this).data('vi_image'); 
 
 			                // 인포윈도우 내용 업데이트
-			                let iwContent = '<div style="padding:5px; text-align:center; position:relative; margin:0 auto;'
-			             		+ ' width:200px; ">' 
-			             		+ '<img src="'+vi_image+'" style="width:200px; height:50px;"><br>'
-			                    + title
-			                    + '<br><a href="detail?contentsid='+contentsid+'">상세페이지</a>'
-			                    + '</div>';
+			               let iwContent = '<div class="iw_wrap">' 
+    										+ '<div class="iw_title">'+title+'</div><br>'
+    										+ '<img src="'+vi_image+'" class="iw_image">'
+										    + '<a href="detail?contentsid='+contentsid+'" class="iw_a">상세페이지</a>'
+										    + '</div>';
+
 
 			                // 인포윈도우에 새로운 내용 적용
 			                infowindow.setContent(iwContent);
@@ -270,28 +276,6 @@
 		}
 </script>
 
-<style type="text/css">
-#chatbot_image{
-	width: 50px;
-	height: 50px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 99;
-	line-height: 60px;
-	cursor: pointer;
-}
-.chatbot_modal{
-	position: fixed;
-	bottom: 20px;
-	right: 80px;
-	z-index: 2;
-	background-color: white;
-	display: none;
-	border-radius: 10px;
-}
-
-</style>
 <title>나의 여행</title>
 </head>
 <body>
@@ -384,8 +368,31 @@
 		<div class="chatbot_modal" >
 			<%@include file="../common/chatbot.jsp"%>
 		</div> 
-	<div>
 		<%@include file="../common/footer.jsp"%>
+		<div>
+		<button id="scrollToTopButton">
+			<span class="material-symbols-outlined">expand_less</span>
+		</button>
 	</div>
+	<script type="text/javascript">
+	// 클릭시에 한 번에 위로 올라가는 버튼
+	window.onscroll = function() { scrollFunction() };
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("scrollToTopButton").style.display = "block";
+		} else {
+			document.getElementById("scrollToTopButton").style.display = "none";
+		}
+	}
+
+	document.getElementById("scrollToTopButton").addEventListener("click", () => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		});
+	})
+	</script>
 </body>
 </html>
