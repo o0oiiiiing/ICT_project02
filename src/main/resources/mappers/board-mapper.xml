@@ -94,8 +94,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(bo_idx),0)+1) as groups FROM Board_table
         </selectKey>
-		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_hit, step, groups, lev, bo_regdate, u_idx)
-		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, 0, #{step}, #{groups}, #{lev}, sysdate(), #{u_idx})
+		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_regdate, u_idx)
+		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{u_idx})
 	</insert>
 	
 	<!-- Q&A 게시판 수정 (사용자) -->
@@ -115,8 +115,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(report_idx),0)+1) as groups FROM Report_table
         </selectKey>
-		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, groups, lev, u_idx)
-		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{groups}, #{lev}, #{u_idx})
+		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, u_idx)
+		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{u_idx})
 	</insert>
 	
 	<!-- 신고 게시판 수정 (사용자) -->
@@ -198,6 +198,18 @@
 	<select id="admin_report_list2" resultType="revo" parameterType="Map">
 		select * from Report_table 
 		order by report_regdate desc
+		limit #{limit} offset #{offset} 
+	</select>
+	
+	<!-- 회원관리 페이징 -->
+	<select id="count7" resultType="int">
+		select count(*) from User_table
+	</select>
+	
+	<!-- 회원관리 전체보기 -->
+	<select id="user_list" resultType="userVO" parameterType="Map">
+		select * from User_table 
+		order by u_regdate desc
 		limit #{limit} offset #{offset} 
 	</select>
 	

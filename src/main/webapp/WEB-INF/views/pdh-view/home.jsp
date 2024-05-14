@@ -15,37 +15,12 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
 	rel="stylesheet" />
 <!-- 폰트 적용 -->
-<link
-	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
-	rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <!-- css 적용 -->
 <link rel="stylesheet" href="resources/pdh-css/home.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
-<style type="text/css">
-#chatbot_image {
-	width: 50px;
-	height: 50px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 99;
-	line-height: 60px;
-	cursor: pointer;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-	border-radius: 50%;
-}
-
-.chatbot_modal {
-	position: fixed;
-	bottom: 20px;
-	right: 80px;
-	z-index: 2;
-	background-color: white;
-	display: none;
-	border-radius: 10px;
-}
-</style>
+<link rel="stylesheet" href="resources/common-css/chatbot.css" />
 <script type="text/javascript">
 // 아이콘 눌렀을 때 텍스트박스 글 지우기
 function clearInput() {
@@ -64,35 +39,12 @@ $(document).ready(function() {
     
 });
 
-// 경화 날씨api
+// 날씨
 $(document).ready(function() {
-    $.ajax({
-        url: "weather.do",           // 서버주소
-        method: "post",             // 전달방식
-        dataType: "xml",            // 가져오는 결과 타입
-        success: function(data) {
-            let table = "<table>";
-            table += "<tbody>";
-
-            $(data).find("local").each(function() {
-                let stn_id = $(this).attr("stn_id");
-                let icon = $(this).attr("icon");
-
-                // stn_id가 184인 경우에만 icon을 가져와서 표시
-                if (stn_id === "184") {
-                    table += "<tr>";
-                    table += "<td><img src='http://www.kma.go.kr/images/icon/NW/NB" + icon + ".png'></td>";
-                    table += "</tr>";
-                }
-            });
-            table += "</tbody>";
-            table += "</table>"
-            $("#weather").append(table);
-        },
-        error: function() {
-            alert("읽기 실패");
-        }
+    $(".weather_image").click(function() {
+        $(".weather_modal").toggle();  
     });
+    
 });
 </script>
 
@@ -115,10 +67,10 @@ $(document).ready(function() {
 			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
 			<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 		</ul>
-		
+	
 		<!-- 경화 날씨api -->
 		<span id="weather" style="background-color: white; height: 100%"></span>
-		
+
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
@@ -201,11 +153,18 @@ $(document).ready(function() {
 			</ul>
 		</div>
 	</div>
-	<img src="resources/common-image/chatbot.png" id="chatbot_image"
-		class="chatbot_image">
+	<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
 	<div class="chatbot_modal">
 		<%@include file="../common/chatbot.jsp"%>
 	</div>
+	
+	<!-- 날씨 -->
+	<img src="resources/common-image/weather.png" id="weather_image" class="weather_image">
+	<div class="weather_modal">
+		<%@include file="../ygh-view/weather.jsp"%>
+	</div>
+	
+	
 	<%@ include file="../common/footer.jsp"%>
 
 	<div>
@@ -233,6 +192,6 @@ $(document).ready(function() {
 		});
 	})
 	</script>
-
+	
 </body>
 </html>

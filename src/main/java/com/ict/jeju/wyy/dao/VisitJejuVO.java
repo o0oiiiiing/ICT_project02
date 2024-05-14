@@ -1,6 +1,6 @@
 package com.ict.jeju.wyy.dao;
 
-public class VisitJejuVO4 {
+public class VisitJejuVO {
 	private String contentsid, vi_category, vi_value, vi_title, vi_address, vi_roadaddress;
 	private String vi_intro, vi_latitude, vi_longitude, vi_phoneno, vi_image, vi_thumbnail;
 	private String like_idx, like_active;

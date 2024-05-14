@@ -691,4 +691,82 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
+	/*
+	 * // 회원관리 페이지 이동
+	 * 
+	 * @GetMapping("user_list.do") public ModelAndView userList() { return new
+	 * ModelAndView("ygh-view/user_list"); }
+	 */
+
+	// 회원관리
+	@RequestMapping("user_list.do")
+	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView("ygh-view/user_list");
+		
+		// 페이징
+		int count7 = jejuService5.getTotalCount7();
+		paging.setTotalRecord(count7);
+
+		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+			paging.setTotalPage(1);
+		} else {
+			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+				paging.setTotalPage(paging.getTotalPage() + 1);
+			}
+		}
+
+		String cPage = request.getParameter("cPage");
+		if (cPage == null) {
+			paging.setNowPage(1);
+		} else {
+			paging.setNowPage(Integer.parseInt(cPage));
+		}
+
+		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+
+		paging.setBeginBlock(
+				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+
+		if (paging.getEndBlock() > paging.getTotalPage()) {
+			paging.setEndBlock(paging.getTotalPage());
+		}
+
+		// DB
+		
+		List<UserVO> user_list = jejuService5.userList(paging.getOffset(), paging.getNumPerPage());
+		
+		if (user_list != null) {
+			mv.addObject("user_list", user_list);
+			mv.addObject("paging", paging);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
+	// 회원관리 삭제
+	@PostMapping("user_del_ok.do")
+	public ModelAndView userDelOk(@ModelAttribute("cPage") String cPage,
+			@ModelAttribute("u_idx") String u_idx, ReportVO revo) {
+		ModelAndView mv = new ModelAndView("ygh-view/user_list");
+		ReportVO revo2 = jejuService5.reportDetail(revo.getReport_idx());
+		String dpwd = revo2.getReport_pwd();
+
+		if (!passwordEncoder.matches(revo.getReport_pwd(), dpwd)) {
+			mv.setViewName("ygh-view/report_delete");
+			mv.addObject("pwdchk", "fail");
+			return mv;
+		} else {
+			// active 컬럼의 값을 1로 변경하자.
+			int result = jejuService5.reportDelete(revo2);
+			if (result > 0) {
+				mv.setViewName("redirect:report_list.do");
+				return mv;
+			}
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
+
 }
