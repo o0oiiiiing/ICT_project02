@@ -15,7 +15,8 @@
 <link href="resources/common-css/reset.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fwqqugcxzu"></script>
-<script type="text/javascript" src="resources/chm-js/category.js"></script>           
+<script type="text/javascript" src="resources/chm-js/category.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>           
 <script type="text/javascript"> 
 		function optionSelect(f) {
 				
@@ -33,7 +34,7 @@
 	<form method="post">
 	<!-- 전체 틀 -->
 	<div class="background">
-
+	
 		<!-- 소개 -->
 		
 			<div class="wrapper_top">
@@ -58,7 +59,7 @@
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
 				<c:forEach var="k" items="${category_list}">
-					<div class="category_box" onclick="toggleCollapse(this)" >
+					<div class="category_box" onclick="toggleCollapse(this)" class="category_box">
 						<img src='${k.vi_image}' class="category_img">
 						<p class="category_id">${k.vi_value}</p>
 						<p class="category_title">${k.vi_title}</p>
@@ -74,6 +75,7 @@
 						<input type="hidden" value="${k.contentsid}" class="contentsid">
 						<input type="hidden" value="${k.vi_hit}" id="vi_hit">
 						<input type="hidden" value="${k.vi_value}" id="vi_value">
+						<input type="hidden" value="0" id="chk">
 					</div>
 				</c:forEach>
 			</div>
@@ -82,10 +84,10 @@
 			<div class="wrapper_right">
 				<div id="map" style="width: 40.9vw; height: 60.5vh;"></div>
 				<div id="clickLatlng"></div>
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
 				<script>
 				let markers = [];
+				let infos = [];
 					var mapContainer = document.getElementById('map'); // 지도를 표시할 div
 					var mapOption = {
 						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -97,9 +99,26 @@
 
 					var marker = null; // 초기에는 마커를 null로 초기화
 
+					var divClicked = false;
+					$(".category_box").click(function() {
+						let title = $(this).find(".vt").val()
+					})
+			/* 	    document.getElementsByClassName("category_box").addEventListener("click", function() {
+				    	let title = this.querySelector('input[type="hidden"].vt#vi_title');
+				    	console.log(title)
+				        if (!divClicked) {
+				        	toggleCollapse(this);
+				            divClicked = true;
+				        } else {
+				        	marker_del()
+				            divClicked = false;
+				        	
+				        }
+				    }); */
+
 					function toggleCollapse(element) {
 						element.classList.toggle("collapsed");
-
+						 
 						var wdoValue = element.querySelector('.wdo').value;
 						var gdoValue = element.querySelector('.gdo').value;
 						var vt = element.querySelector('.vt').value;
@@ -115,6 +134,7 @@
 
 						// 새로운 마커를 생성.
 						marker = new kakao.maps.Marker({
+							title : vt,
 							position : latlng
 						// 마커의 위치를 설정
 						});
@@ -124,12 +144,13 @@
 
 						// 마커를 중심으로 지도를 이동
 						map.setCenter(latlng);
-
+						
+						markers.push(marker)
 						var content = '<div class="wrap">'
 								+ '    <div class="info">'
 								+ '        <div class="title">'
 								+ vt
-								+ '            <div class="close" onclick="toggleWrapDisplay()" title="닫기"></div>'
+								+ '            <div class="close" onclick="marker_del()" title="닫기"></div>'
 								+ '        </div>'
 								+ '        <div class="body">'
 								+ '            <div class="img">'
@@ -154,35 +175,14 @@
 					
 						// 마커 위에 커스텀오버레이를 표시합니다
 						// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-						var overlay = new kakao.maps.CustomOverlay({
-							content : content,
-							map : map,
-							position : marker.getPosition()
+						var infowindow = new kakao.maps.InfoWindow({
+						    map: map,
+						    position : latlng,
+						    content: content
 						});
-					}
-					
-						// Close button element
-						var closeBtn = overlay.getContent().querySelector(
-								'.close');
-
-						// Add click event listener to close button
-						closeBtn.addEventListener('click', function() {
-							closeOverlay(overlay);
-						});
-						
-						// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-						kakao.maps.event.addListener(marker, 'click',
-								function() {
-									overlay.setMap(map);
-								});
-
-						// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-						function closeOverlay() {
-							overlay.setMap(null);
-							content = null;
+						infos.push(infowindows)
 						}
-						
-
+				
 						// 마커 제거 함수(타이틀 기반)
 						function marker_del(position) {
 						    for (let i = 0; i < markers.length; i++) {
@@ -190,14 +190,15 @@
 						            markers[i].setMap(null);
 						        }
 						    }
-						    for (let i = 0; i < infos.length; i++) {
+						    
+						/*     for (let i = 0; i < over.length; i++) {
 						        console.log("info", infos[i].getPosition())
 						        console.log("position", position.latlng)
 						        console.log(infos[i].getPosition().equals(position.latlng))
 						        if (infos[i].getPosition().equals(position.latlng)) {
 						            infos[i].close();
 						        }
-						    }
+						    } */
 						}
 				</script>
 			</div>
