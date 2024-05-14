@@ -2,7 +2,32 @@ package com.ict.jeju.lsh.dao;
 
 public class UserVO {
 	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, 
-								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate;
+								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate,
+								active, u_report, step;
+
+	public String getStep() {
+		return step;
+	}
+
+	public void setStep(String step) {
+		this.step = step;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+	public String getU_report() {
+		return u_report;
+	}
+
+	public void setU_report(String u_report) {
+		this.u_report = u_report;
+	}
 
 	public String getU_postcode() {
 		return u_postcode;

@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="calendar">
+<mapper namespace="mytrip">
 	<!-- 캘린더 전체보기 -->
-	<select id="cal_list" resultType="cvo4">
+	<select id="cal_list" resultType="cvo">
 		select * 
 		 from Calendar_table c
 		 inner join Visitjeju_table v on v.contentsid = c.contentsid
@@ -13,7 +13,7 @@
 		 where c.u_idx=#{u_idx}
 		 order by c.c_idx
 	</select>
-	<!-- 삭제 -->
+	<!-- 캘린더 일정 삭제 -->
     <delete id="delete" parameterType="String">
     	delete from Calendar_table where c_idx=#{c_idx}
     </delete>
@@ -41,10 +41,9 @@
        		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count
 		from User_table u
 		where u.u_idx=#{u_idx}
-	</select>
-		
+	</select>		
     <!-- 지도 전체보기 -->
-   <select id="map_list" resultType="viVO4">
+   <select id="map_list" resultType="vivo">
    		select * 
 		 from Calendar_table c
 		 inner join Visitjeju_table v on v.contentsid = c.contentsid
@@ -53,7 +52,7 @@
 		 order by c.c_idx
    </select>
    <!-- 좋아요 지도 전체보기 -->
-<select id="map_list_like" resultType="viVO4" >
+<select id="map_list_like" resultType="vivo" >
     select * 
     from Like_table l
     inner join Visitjeju_table v on v.contentsid = l.contentsid
@@ -62,26 +61,17 @@
     order by l.like_idx
 </select>
    <!-- 캘린더 일정추가 -->
-   <!-- 나중에 로그인되면 u_idx 수정해야한다. -->
    <insert id="save_cal" parameterType="map" >
    	insert into Calendar_table(u_idx, contentsid, c_title, c_start, c_end)
    	 values(#{u_idx},#{contentsid}, #{c_title}, #{c_start}, #{c_end})
    </insert>
-   
-   <!-- 첫화면 임시세션 -->
-   <select id="wyyhome" parameterType="uvo4" resultType="uvo4">
-   	select *
-   	 from User_table
-   	 where u_idx=#{u_idx}
-   </select>
-   
    <!-- 좋아요 삭제 -->
    <delete id="removeHeart" parameterType="String">
    	delete from Like_table where like_idx=#{like_idx}
    </delete>
    
    <!-- 관리자 일정 추가 -->
-   <insert id="adminInsert" parameterType="viVO4">
+   <insert id="adminInsert" parameterType="vivo">
     insert into Visitjeju_table(contentsid, vi_value, vi_title, vi_address, vi_roadaddress, vi_intro, vi_latitude, vi_longitude, vi_phoneno, vi_image, vi_thumbnail)
         values(#{contentsid}, 
                case 
@@ -105,9 +95,9 @@
 	
 	<!-- 관리자 일정 추가 중복체크 -->
 	<select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(contentsid) 
-		FROM Visitjeju_table 
-		WHERE contentsid= #{contentsid}
+		select count(contentsid) 
+		from Visitjeju_table 
+		where contentsid= #{contentsid}
 	</select>
 	
 </mapper>

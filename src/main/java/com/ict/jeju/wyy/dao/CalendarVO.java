@@ -1,6 +1,6 @@
 package com.ict.jeju.wyy.dao;
 
-public class CalendarVO4 {
+public class CalendarVO {
 	private String c_idx, c_title, c_start, c_end,c_status;
 	private String u_idx, u_name;
 	private String contentsid, vi_title, vi_image, vi_value, vi_address, vi_phoneno, vi_category;

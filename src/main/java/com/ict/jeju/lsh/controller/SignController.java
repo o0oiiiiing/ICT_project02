@@ -1,6 +1,8 @@
 package com.ict.jeju.lsh.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.lsh.service.SignService;
+import com.ict.jeju.wyy.dao.AdminVO;
 
 @Controller
 public class SignController {
@@ -52,6 +55,17 @@ public class SignController {
 		return new ModelAndView("lsh_view/join_page");
 	}
 	
+	// 임시 회원가입 페이지 이동
+	@GetMapping("admin_join.do")
+	public ModelAndView getAdminJoin() {
+		return new ModelAndView("lsh_view/admin_join_page");
+	}
+	
+	// 관리자 로그인 페이지 이동
+	@GetMapping("admin_login.do")
+	public ModelAndView getAdminLogin() {
+		return new ModelAndView("lsh_view/admin_login_page");
+	}
 	
 	// 로그인
 	@PostMapping("login_ok.do")
@@ -64,19 +78,41 @@ public class SignController {
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
-		String dpwd = userVO2.getU_pwd();
-		if (! passwordEncoder.matches(userVO.getU_pwd(), dpwd)) {
-			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "입력하신 정보를 확인해주세요.");
-			mv.setViewName("lsh_view/login_page");
-			return mv;
-		} else {
-			session.setAttribute("loginChk", "ok");
-			session.setAttribute("userVO", userVO2);
-			mv.addObject("userVO", userVO2);
-			mv.setViewName("redirect:home");
+		
+	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), userVO2.getU_pwd())) {
+	        session.setAttribute("loginChk", "ok");
+	        session.setAttribute("userVO", userVO2);
+	        mv.addObject("userVO", userVO2);
+	        mv.setViewName("redirect:home");
+	        System.out.println("2");
+	        return mv;
+	    }
+	    session.setAttribute("loginChk", "fail");
+	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
+	    mv.setViewName("lsh_view/login_page");
+	    System.out.println("4");
+	    return mv;
+	}
+	
+	// 관리자 로그인
+	@PostMapping("admin_login_ok.do")
+	public ModelAndView getAdminLoginOK(HttpSession session, AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView();
+		AdminVO adminVO2 = signService.getAdminLoginOK(adminVO);
+		if (adminVO2 == null) {
+			session.setAttribute("admin_loginChk", "fail");
+			mv.addObject("msg", "가입한 내역이 없습니다.");
+			mv.setViewName("lsh_view/admin_login_page");
 			return mv;
 		}
+		if (adminVO2 != null && passwordEncoder.matches(adminVO.getA_pwd(), adminVO2.getA_pwd())) {
+			session.setAttribute("admin_loginChk", "ok");
+			session.setAttribute("adminVO", adminVO2);
+			mv.addObject("adminVO", adminVO2);
+			mv.setViewName("redirect:admin_list.do");
+			return mv;
+		}
+		return null;
 	}
 	
 	// 카카오 로그인
@@ -118,42 +154,21 @@ public class SignController {
 		return new ModelAndView("redirect:home");
 	}
 	
-	
-	
-	
-	
-	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	// 슈퍼관리자가 관리자를 만들수 있는 페이지 존재, 그 슈퍼 관리자가 일반 관리자를 만들 수 있게 해줌
-	
-	// 슈퍼관리자 로그인
-	@PostMapping("admin_login_ok")
-	public ModelAndView getAdminLoginOK() {
-		
-	}
-	
-	
-	// 슈퍼관리자가 일반관리자 계정 생성
-	@PostMapping("admin_join_ok")
+	// 슈퍼관리자가 일반 관리자 계정 생성
+	@RequestMapping("admin_join_ok.do")
 	public ModelAndView getAdminJoinOK(AdminVO adminVO) {
-		String c_pwd = passwordEncoder.encode(null);
-		
+		adminVO.setA_pwd(passwordEncoder.encode(adminVO.getA_pwd()));
 		int res = signService.getAdminJoinOK(adminVO);
 		if (res >0) {
-			return new ModelAndView("redirect:home");
+			return new ModelAndView("redirect:login_go.do");
 		}
 		return null;
 	}
-	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	*/
-	
-	
-	
-	
+
 	// 회원가입
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO) {
-		String c_pwd = passwordEncoder.encode(userVO.getU_pwd());
-		userVO.setU_pwd(c_pwd);
+		userVO.setU_pwd(passwordEncoder.encode(userVO.getU_pwd()));
 		int res = signService.getJoinOK(userVO);
 		if (res > 0) {
 			return new ModelAndView("redirect:login_go.do");
@@ -167,6 +182,14 @@ public class SignController {
 	public String getIdDoubleChk(@RequestParam("u_id") String u_id) {
 		String result = signService.getIdDoubleChk(u_id);
 		return result;
+	}
+	
+	// 관리자 아이디 중복 체크
+	@RequestMapping(value = "admin_chk.do", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String getAdminIdChk(@RequestParam("a_id") String a_id) {
+		String res = signService.getAdminIdChk(a_id);
+		return res;
 	}
 	
 	// 아이디 찾기

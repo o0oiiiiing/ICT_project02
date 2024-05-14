@@ -155,7 +155,7 @@
 							</div>
 						</form>
 					</li>
-					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>${userVO.u_name}님환영합니다.</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
@@ -296,12 +296,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 10px;">제목이에요</td>
-						<td style="text-align: center;">아무개</td>
-						<td style="text-align: center;">2024.01.01</td>
-						<td style="text-align: center;">N</td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty qaList}">
+							<tr>
+								<td colspan="4" style="text-align: center;">Q&A가 존재하지 않습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="k" items="${qaList}">
+								<tr>
+									<td style="padding-left: 10px;">${k.bo_title}</td>
+									<td style="text-align: center;">${k.bo_writer}</td>
+									<td style="text-align: center;">${k.bo_regdate.substring(0,10)}</td>
+									<c:choose>
+										<c:when test="${k.active == '0'}">
+											<td style="text-align: center;">N</td>
+										</c:when>
+										<c:otherwise>
+											<td style="text-align: center;">Y</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 		</div>
@@ -313,7 +331,7 @@
 			</div>
 		</div>
 	</div>
-	<form id="qa_write" method="post" action="detail">
+	<form id="qa_write" method="post" action="qaWrite">
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
@@ -343,9 +361,9 @@
 				<textarea id="summernote" name="bo_content" maxlength="1000"></textarea>
 			</div>
 			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> 
-				<input type="hidden" value="${userVO.u_name}" name="u_name"> 
-				<input class="qa_write__button" type="reset" value="취소">
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
+					type="hidden" value="${userVO.u_name}" name="u_name"> <input
+					class="qa_write__button" type="reset" value="취소">
 				<button type="button" class="qa_write__button"
 					onclick="test(this.form)">등록</button>
 			</div>
@@ -386,7 +404,7 @@
 	<div class="chatbot_modal">
 		<%@include file="../common/chatbot.jsp"%>
 	</div>
-	<%@ include file="../common/footer.jsp"%> 
+	<%@ include file="../common/footer.jsp"%>
 	<script type="text/javascript">
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };
@@ -448,7 +466,7 @@
 	    	alert('제목을 입력해주세요.');
 	        return false;
 		} else {
-	    	f.action = "detail?contentsid=${placeDetail.contentsid}";
+	    	f.action = "qaWrite?contentsid=${placeDetail.contentsid}";
 			f.submit();
 	    }
 	}

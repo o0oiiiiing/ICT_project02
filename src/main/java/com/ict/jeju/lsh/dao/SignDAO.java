@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.jeju.wyy.dao.AdminVO;
+
 @Repository
 public class SignDAO {
 	@Autowired
@@ -97,21 +99,40 @@ public class SignDAO {
 		return -1;
 	}
 	
+	// 관리자 로그인
+	public AdminVO getAdminLoginOK(AdminVO adminVO) {
+		try {
+			return sqlSessionTemplate.selectOne("admin.admin_login", adminVO);
+		} catch (Exception e) {
+			System.out.println("dao admin login err : "+e);
+		}
+		return null;
+	}
 	
 	
-	/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 관리자 권한부여
 	public int getAdminJoinOK(AdminVO adminVO) {
 		try {
-			return sqlSessionTemplate.insert("user.admin_join", adminVO);
+			return sqlSessionTemplate.insert("admin.admin_join", adminVO);
 		} catch (Exception e) {
 			System.out.println("dao admin join err : "+e);
 		}
 		return -1;
 	}
-	*/
 	
-	
-	
+	// 관리자 중복 체크
+	public String getAdminIdChk(String a_id) {
+		try {
+			int res = sqlSessionTemplate.selectOne("admin.admin_idChk", a_id);
+			if (res >0) {
+				return "0";
+			}
+			return "1";
+		} catch (Exception e) {
+			System.err.println("dao admin id chk err : "+e);
+		}
+		return null;
+	}
 	
 }
 

@@ -3,6 +3,7 @@ package com.ict.jeju.lsh.service;
 import java.util.List;
 
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.wyy.dao.AdminVO;
 
 public interface SignService {
 	public UserVO getLoginOK(UserVO userVO);
@@ -14,6 +15,10 @@ public interface SignService {
 	public UserVO getKakaoInfo(String access_token);
 	public String getNaverToken(String code, String state);
 	public UserVO getNaverInfo(String access_token);
-	/* public int getAdminJoinOK(AdminVO adminVO); */
+
+	// 관리자
+	public AdminVO getAdminLoginOK(AdminVO adminVO);
+	public int getAdminJoinOK(AdminVO adminVO);
+	public String getAdminIdChk(String a_id);
 	
 }

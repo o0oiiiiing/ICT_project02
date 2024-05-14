@@ -46,25 +46,43 @@
 			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
 		</ul>
 
-		<ul class="nav-list__right">
-			<li>
-				<form method="post" action="search">
-					<div class="search-bar">
-						<span class="material-symbols-outlined icon">search</span> 
-						<input class="search-field" type="text" name="keyword" value="" placeholder="검색어를 입력해주세요." />
-						<span class="material-symbols-outlined icon delete-icon" onclick="clearInput()">close</span>
-					</div>
-				</form>
-			</li>
-			<li><a href="login_go.do" class="a_tag">로그인</a></li>
-			<li>|</li>
-			<li><a href="join_go.do" class="a_tag">회원가입</a></li>
-		</ul>
-		 <c:choose>
+		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
-				<span>${userVO.u_name}님 환영합니다.</span>
-				<a href="logout_go.do">로그아웃</a> 
+				<ul class="nav-list__right" style="width: 600px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined icon">search</span> <input
+									class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>|</li>
+					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
+				</ul>
 			</c:when>
+			<c:otherwise>
+				<ul class="nav-list__right" style="width: 500px;">
+					<li>
+						<form method="post" action="search">
+							<div class="search-bar">
+								<span class="material-symbols-outlined icon">search</span> <input
+									class="search-field" type="text" name="keyword" value=""
+									placeholder="검색어를 입력해주세요." /> <span
+									class="material-symbols-outlined delete-icon"
+									onclick="clearInput()">close</span>
+							</div>
+						</form>
+					</li>
+					<li><a href="login_go.do" class="a_tag">로그인</a></li>
+					<li>|</li>
+					<li><a href="join_go.do" class="a_tag">회원가입</a></li>
+				</ul>
+			</c:otherwise>
 		</c:choose>
 	</header>
 </body>

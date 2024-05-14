@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.admin_result{
+		text-align: center;
+    	margin: 135px auto;
+    	line-height: 2;
+    	width: 75%;
+	}
+	.admin_result p{
+		padding-bottom: 17px;
+	}
+	.admin_category{
+		padding: 10px;
+		width: 59%;
+		text-align: center;
+	}
+	.admin_input{
+		padding: 10px;
+		width: 56%;
+	}
+	.name_category{
+		width: 20%;
+		text-align: right;
+		display: inline-block;
+		vertical-align: top;
+		line-height: 39px;
+	}
+	.input_category{
+		width: 45%;
+		text-align: left;
+		display: inline-block;
+		vertical-align: top;
+	}
+	#input_button{
+		padding: 10px;
+		width: 20%;
+	}
+	#contents_idchk{
+	padding: 10px;
+		width: 20%;
+	}
+	#contentsid{
+		width: 35%;
+	}
+	#sample4_jibunAddress{
+		width: 35%;
+	}
+	#input_submit{
+		padding: 10px;
+		width: 30%;
+	}
