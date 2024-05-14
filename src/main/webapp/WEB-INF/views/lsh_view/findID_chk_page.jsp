@@ -18,7 +18,7 @@
 				<h2 class="findID_chk_text">아이디 찾기 결과</h2>
 				<c:choose>
 					<c:when test="${empty find_list}">
-						<p class="findID_chk_result">해당하는 아이디가 존재하지 않습니다.</p>
+						<p class="findID_chk_result">해당 아이디는 존재하지 않습니다.</p>
 					</c:when>
 			        <c:otherwise>
 			        	<c:forEach var="k" items="${find_list}">

@@ -24,7 +24,7 @@
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
     	<typeAlias type="com.ict.jeju.wyy.dao.VisitJejuVO" alias="vivo" />
     	<typeAlias type="com.ict.jeju.wyy.dao.UserVO4" alias="uvo4" />
-    	<typeAlias type="com.ict.jeju.wyy.dao.AdminVO" alias="avo" />
+    	<typeAlias type="com.ict.jeju.wyy.dao.AdminVO" alias="adminVO" />
 	</typeAliases>
 
 	<mappers>
@@ -33,6 +33,7 @@
     	<mapper resource="mappers/user-mapper.xml" />
     	<mapper resource="mappers/category-mapper.xml"/>
     	<mapper resource="mappers/place-mapper.xml"/>
+    	<mapper resource="mappers/admin-mapper.xml"/>
 	</mappers>
 
 </configuration>
