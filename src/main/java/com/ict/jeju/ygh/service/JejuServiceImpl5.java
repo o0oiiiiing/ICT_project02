@@ -204,4 +204,14 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.adminReportlist2(offset, limit);
 	}
 
+	@Override
+	public int getTotalCount7() {
+		return jejuDAO5.getTotalCount7();
+	}
+
+	@Override
+	public List<UserVO> userList(int offset, int limit) {
+		return jejuDAO5.userList(offset, limit);
+	}
+
 }
