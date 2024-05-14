@@ -19,6 +19,7 @@
 <!-- css 적용 -->
 <link rel="stylesheet" href="resources/pdh-css/detail.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
+<link rel="stylesheet" href="resources/pdh-css/paging.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
 <!-- jQuery -->
 <script
@@ -283,13 +284,16 @@
 				<span class="material-symbols-outlined expand_icon">expand_more</span>
 			</div>
 			<div class="qa_title__section">
-				<p class="qa_title">Q&A (18)</p>
+				<p class="qa_title">
+					Q&A <span style="color: orange;">(${qaNum})</span>
+				</p>
 				<input class="write_button" type="button" value="질문작성">
 			</div>
 			<table class="qa_table">
 				<thead>
 					<tr>
-						<td style="width: 50%">제목</td>
+						<td style="width: 10%">공개 여부</td>
+						<td style="width: 40%">제목</td>
 						<td style="width: 20%">작성자</td>
 						<td style="width: 20%">작성일</td>
 						<td style="width: 10%">답변 여부</td>
@@ -299,13 +303,21 @@
 					<c:choose>
 						<c:when test="${empty qaList}">
 							<tr>
-								<td colspan="4" style="text-align: center;">Q&A가 존재하지 않습니다.</td>
+								<td colspan="5" style="text-align: center;">Q&A가 존재하지 않습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="k" items="${qaList}">
 								<tr>
-									<td style="padding-left: 10px;">${k.bo_title}</td>
+									<c:choose>
+										<c:when test="${k.disclosure == '0'}">
+											<td style="text-align: center;">공개</td>
+										</c:when>
+										<c:otherwise>
+											<td style="text-align: center;">비공개</td>
+										</c:otherwise>
+									</c:choose>
+									<td style="text-align: center;">${k.bo_title}</td>
 									<td style="text-align: center;">${k.bo_writer}</td>
 									<td style="text-align: center;">${k.bo_regdate.substring(0,10)}</td>
 									<c:choose>
@@ -322,6 +334,45 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<!-- 페이징 -->
+			<ol class="paging">
+				<!-- 이전 버튼 -->
+				<c:choose>
+					<c:when test="${qaPaging.beginBlock <= qaPaging.pagePerBlock}">
+						<li class="disable">이전</li>
+					</c:when>
+					<c:otherwise>
+						<li><a class="able"
+							href="detail?cPage=${qaPaging.beginBlock - qaPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+
+				<!-- 페이지번호들 -->
+				<c:forEach begin="${qaPaging.beginBlock}" end="${qaPaging.endBlock}"
+					step="1" var="k">
+					<c:choose>
+						<c:when test="${k == qaPaging.nowPage}">
+							<li class="now">${k}</li>
+						</c:when>
+						<c:otherwise>
+							<li><a class="other_page"
+								href="detail?cPage=${k}&contentsid=${placeDetail.contentsid}">${k}</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<!-- 이후 버튼 -->
+				<c:choose>
+					<c:when test="${qaPaging.endBlock >= qaPaging.totalPage}">
+						<li class="disable">다음</li>
+					</c:when>
+					<c:otherwise>
+						<li><a class="able"
+							href="detail?cPage=${qaPaging.beginBlock + qaPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ol>
 		</div>
 
 		<div class="detail-section">

@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* 페이징 전체 */
+.paging {
+	width: 320px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 50px auto;
+}
+
+/* 이전, 다음 버튼 활성화X */
+.disable {
+	font-family: 'NanumSquareLight';
+	font-size: 14px;
+	color: #9E9E9E;
+	font-weight: bold;
+}
+
+/* 이전, 다음 활성화O */
+.able {
+	font-family: 'NanumSquareLight';
+	font-size: 14px;
+	color: #1E1E1E;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* 현재 페이지 버튼 */
+.now {
+	font-family: 'NanumSquareLight';
+	font-size: 15px;
+	color: #9E9E9E;
+	font-weight: bold;
+}
+
+/* 현재 페이지 이외의 페이지들 */
+.other_page {
+	font-family: 'NanumSquareLight';
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.other_page:link, .other_page:visited {
+	color: #1E1E1E;
+	text-decoration: none;
+}
+
+.other_page:active, .other_page:hover {
+	color: #9E9E9E;
+}

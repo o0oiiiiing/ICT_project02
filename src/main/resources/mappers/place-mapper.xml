@@ -24,6 +24,13 @@
 		where l.contentsid = #{contentsid}
 	</select>
 	
+	<select id="qaNum" parameterType="String" resultType="int">
+		select count(*)
+		from Board_table b
+		inner join Visitjeju_table v on v.contentsid = b.contentsid
+		where b.contentsid = #{contentsid}
+	</select>
+	
 	<select id="reviewNum" parameterType="String" resultType="int">
 		select count(*)
 		from Review_table r
@@ -48,10 +55,13 @@
 		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{disclosure}) 
 	</insert>
 	
-	<select id="qaList" parameterType="String" resultType="QaVO">
+	<select id="qaList" parameterType="QaPagingVO" resultType="QaVO">
 		select * 
 		from Board_table 
 		where contentsid = #{contentsid} 
+		order by bo_regdate desc
+		limit #{limit}
+		offset #{offset}
 	</select>
 
 </mapper>

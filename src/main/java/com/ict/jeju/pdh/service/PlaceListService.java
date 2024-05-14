@@ -3,6 +3,7 @@ package com.ict.jeju.pdh.service;
 import java.util.List;
 
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.pdh.dao.QaPagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 
 public interface PlaceListService {
@@ -15,6 +16,9 @@ public interface PlaceListService {
 	// 게시물의 좋아요 수
 	public int likeNum(String contentsid);
 
+	// Q&A 수
+	public int qaNum(String contentsid);
+	
 	// 게시물의 리뷰 수
 	public int reviewNum(String contentsid);
 	
@@ -28,7 +32,8 @@ public interface PlaceListService {
 	public int qaWrite(QaVO qaVO);
 	
 	// 장소의 Q&A 가져오기
-	public List<QaVO> qaList(String contentsid);
+	public List<QaVO> qaList(QaPagingVO qaPagingVO);
+
 	
 	
 }

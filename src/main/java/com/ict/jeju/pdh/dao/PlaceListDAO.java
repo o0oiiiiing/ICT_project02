@@ -42,6 +42,15 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
+	
+	public int qaNum(String contentsid) {
+		try {
+			return sqlSessionTemplate.selectOne("place.qaNum", contentsid);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 
 	public int reviewNum(String contentsid) {
 		try {
@@ -83,9 +92,9 @@ public class PlaceListDAO {
 	}
 	
 	// 장소의 Q&A 가져오기
-	public List<QaVO> qaList(String contentsid) {
+	public List<QaVO> qaList(QaPagingVO qaPagingVO) {
 		try {
-			return sqlSessionTemplate.selectList("place.qaList", contentsid);
+			return sqlSessionTemplate.selectList("place.qaList", qaPagingVO);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
