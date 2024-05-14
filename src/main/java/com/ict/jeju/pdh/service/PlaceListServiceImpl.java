@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.pdh.dao.QaPagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 
 @Service
@@ -31,6 +32,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public int likeNum(String contentsid) {
 		return placeListDAO.likeNum(contentsid);
+	}
+	
+	// Q&A 수
+	@Override
+	public int qaNum(String contentsid) {
+		return placeListDAO.qaNum(contentsid);
 	}
 
 	// 게시물의 리뷰 수
@@ -59,8 +66,8 @@ public class PlaceListServiceImpl implements PlaceListService {
 	
 	// 장소의 Q&A 가져오기
 	@Override
-	public List<QaVO> qaList(String contentsid) {
-		return placeListDAO.qaList(contentsid);
+	public List<QaVO> qaList(QaPagingVO qaPagingVO) {
+		return placeListDAO.qaList(qaPagingVO);
 	}
 
 }
