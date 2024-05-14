@@ -13,7 +13,12 @@
 <script type="text/javascript">
 	function user_del() {
 		f.action="user_del.do"
-		
+		f.submit();
+	}
+	
+	function user_del_ok(f) {
+		f.action="user_del_ok.do"
+			f.submit();
 	}
 	
 	document.addEventListener('DOMContentLoaded', function() {
@@ -150,8 +155,7 @@
 			<div class="del_buttons">
 				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> 
 				<input class="del_button" type="reset" value="취소">
-				<button type="button" class="del_button"
-					onclick="test(this.form)">등록</button>
+				<button class="del_button" onclick="user_del_ok(this.form)">등록</button>
 			</div>
 		</div>
 	</form>

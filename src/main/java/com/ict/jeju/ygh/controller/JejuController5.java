@@ -744,5 +744,29 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
+	
+	// 회원관리 삭제
+	@PostMapping("user_del_ok.do")
+	public ModelAndView userDelOk(@ModelAttribute("cPage") String cPage,
+			@ModelAttribute("u_idx") String u_idx, ReportVO revo) {
+		ModelAndView mv = new ModelAndView("ygh-view/user_list");
+		ReportVO revo2 = jejuService5.reportDetail(revo.getReport_idx());
+		String dpwd = revo2.getReport_pwd();
+
+		if (!passwordEncoder.matches(revo.getReport_pwd(), dpwd)) {
+			mv.setViewName("ygh-view/report_delete");
+			mv.addObject("pwdchk", "fail");
+			return mv;
+		} else {
+			// active 컬럼의 값을 1로 변경하자.
+			int result = jejuService5.reportDelete(revo2);
+			if (result > 0) {
+				mv.setViewName("redirect:report_list.do");
+				return mv;
+			}
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
 
 }
