@@ -153,6 +153,7 @@ $(document).ready(function() {
 			</ul>
 		</div>
 	</div>
+	
 	<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
 	<div class="chatbot_modal">
 		<%@include file="../common/chatbot.jsp"%>
