@@ -99,7 +99,7 @@
 	        // 요소의 display를 토글
 	        if ("${userVO}" == "") {
 				alert("로그인 후 이용 가능합니다.")
-				return 
+				location.href="login_go.do"
 			} else {
 		        if (qaWriteDiv.style.display === 'block') {
 		        	qaWriteDiv.style.display = 'none';

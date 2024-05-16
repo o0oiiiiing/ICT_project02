@@ -31,6 +31,15 @@
 		<beans:property name="maxUploadSize" value="104857600" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
-
+	<!-- 로그인 인터셉터 -->
+	<beans:bean id="log_inter" class="com.ict.jeju.common.LoginInterceptor" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/myTripPlan" />
+			<mapping path="/addSchedule" />
+			<beans:ref bean="log_inter"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.ict" />
 </beans:beans>

@@ -46,8 +46,41 @@ $(document).ready(function() {
     });
     
 });
+
+// 팝업
+/*  $(document).ready(function() {
+    $('.btn_open').click(function() {
+      var targetID = $(this).attr('href');
+      $(targetID).show();
+    });
+
+    $('.btn_close').click(function() {
+      $(this).closest('.pop_wrap').hide();
+    });
+  });  */
+
 </script>
 
+<style type="text/css">
+#pop_info_1{
+	width: 500px;
+    height: 500px;
+    z-index: 2;
+    position: absolute;
+    top: 26%;
+    left: 40%;
+    display: none;
+}
+#pop_info_2{
+	width: 500px;
+    height: 500px;
+    z-index: 1;
+    position: absolute;
+    top: 16%;
+    left: 28%;
+    display: none;
+}
+</style>
 </head>
 
 <body>
@@ -68,8 +101,7 @@ $(document).ready(function() {
 			<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 		</ul>
 	
-		<!-- 경화 날씨api -->
-		<span id="weather" style="background-color: white; height: 100%"></span>
+
 
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
@@ -110,6 +142,26 @@ $(document).ready(function() {
 			</c:otherwise>
 		</c:choose>
 	</header>
+	
+	<!-- 팝업1 -->
+<div id="pop_info_1" class="pop_wrap" name="popup1">
+  <div class="pop_inner">
+  	<img src="resources/common-image/haehae.png" style="width: 100%">
+    <p class="dsc">성산일출봉 바로가기!</p>
+    <input type="checkbox" name="today_close1" />오늘만 이 창을 열지 않음
+    <button type="button" class="btn_close">닫기</button>
+  </div>
+</div>
+
+<!-- 팝업2 -->
+<div id="pop_info_2" class="pop_wrap" name="popup2">
+  <div class="pop_inner" >
+  	<img src="resources/common-image/haehae2.png" style="width: 100%">
+    <p class="dsc">한라산 바로가기!</p>
+    <input type="checkbox" name="today_close2" />오늘만 이 창을 열지 않음
+    <button type="button" class="btn_close">닫기</button>
+  </div>
+</div>
 
 	<div class="popular__container">
 		<div class="place__container">
@@ -192,6 +244,68 @@ $(document).ready(function() {
 		});
 	})
 	</script>
-	
+	 <script type="text/javascript">
+        $(document).ready(function () {
+            // 팝업창에 주어진 이름을 변수로 던져 저장된 쿠키가 있는지 확인         
+            var popup1 = getCookie('popup1');
+            var popup2 = getCookie('popup2');
+
+            // 변수가 없을경우 팝업 출력         
+            if (!popup1) {
+                popUpAction('popup1');
+            }
+
+            // 변수가 없을경우 팝업 출력 
+            if (!popup2) { popUpAction('popup2'); }
+
+        });
+
+        // 쿠키 가져오기 
+
+        function getCookie(name) {
+            var nameOfCookie = name + "=";
+            var x = 0; while (x <= document.cookie.length) {
+                var y = (x + nameOfCookie.length);
+                if (document.cookie.substring(x, y) == nameOfCookie) {
+                    if ((endOfCookie = document.cookie.indexOf(";", y)) == -1)
+                        endOfCookie = document.cookie.length;
+                    return unescape(document.cookie.substring(y, endOfCookie));
+                }
+                x = document.cookie.indexOf(" ", x) + 1; if (x == 0)
+                    break;
+            }
+            return "";
+        }
+
+     // 24시간 기준 쿠키 설정하기 
+     // expiredays 후의 클릭한 시간까지 쿠키 설정 
+     function setCookie24(name, value, expiredays) {
+         var todayDate = new Date();
+         var expireDate = new Date(todayDate.getTime() + (expiredays * 24 * 60 * 60 * 1000)); // 현재 시간에 expiredays 일수를 더해 만료일을 계산
+         document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expireDate.toGMTString() + ";";
+     }
+
+
+        // 팝업출력
+        function popUpAction(name) {
+            // name으로 해당 팝업창 열기 
+            $("div[name=" + name + "]").fadeIn();
+        }
+
+        $('.btn_close').click(function () {
+            console.log("닫기 버튼 클릭됨");
+            $(this).closest('.pop_wrap').fadeOut(); // 팝업 숨기기
+            // 오늘하루 보지않기 체크 확인 
+            if ($("input:checkbox[name=today_close1]").is(":checked") == true) {
+                setCookie24('popup1', "done", 1);
+            }
+
+            // 오늘하루 보지않기 체크 확인
+            if ($("input:checkbox[name=today_close2]").is(":checked") == true) {
+                setCookie24('popup2', "done", 1);
+            }
+        });
+
+    </script>
 </body>
 </html>

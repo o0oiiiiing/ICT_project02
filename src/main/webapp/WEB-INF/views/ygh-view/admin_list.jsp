@@ -76,6 +76,8 @@ function admin_report_list() {
 				<td style="border-right: 1px solid lightgray">아이콘</td>
 				<td style="border-right: 1px solid lightgray">아이콘</td>
 				<td>아이콘</td>
+				<td>아이콘</td>
+				
 			</tr>
 			<tr>
 				<td style="border-right: 1px solid lightgray">
@@ -83,6 +85,7 @@ function admin_report_list() {
 				<td style="border-right: 1px solid lightgray">
 				<a href="#">신고</a></td>
 				<td><a href="user_list.do">회원관리</a></td>
+				<td><a href="admin_insert">일정 추가</a></td>
 				
 				<c:if test="${adminVO.a_status == '1'}">
 					<td><a href="admin_join.do">관리자 생성</a></td>

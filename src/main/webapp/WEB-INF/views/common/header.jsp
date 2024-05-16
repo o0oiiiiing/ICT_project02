@@ -43,7 +43,12 @@
 			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
+			<c:if test="${admin_loginChk != 'ok'}">
+                <li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li> 
+            </c:if>
+            <c:if test="${admin_loginChk == 'ok'}">
+                <li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
+            </c:if>
 		</ul>
 
 		<c:choose>
