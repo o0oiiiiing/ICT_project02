@@ -86,25 +86,29 @@
 
 }
 
-.category_box{
+.category_box {
   width: 16.2vw; 
-  height: 35.8vh; 
-  transition: transform 0.3s ease;
+  height: 40.8vh; 
+  padding-top:2.0vh;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   margin-bottom: 2vw;
+  cursor: pointer;
 }
-
 
 .category_box.collapsed {
-    transform: scale(0.9);
+  transform: scale(0.9);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0.0, 0.8); 
+  background-color: snow;
 }
+
 
 .category_img{
   width: 14.2vw; 
   height: 14.2vw; 
 }
 
-.category_id{
-  margin: 0;
+.category_id{ 
+  margin-top:1.0vh;
   font-family: 'Times New Roman', Times, serif; font-weight: bold;
 }
 

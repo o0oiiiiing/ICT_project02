@@ -31,5 +31,15 @@ public class CategoryServiceImpl implements CategoryService{
 		return categoryDAO.getBoardList(offset, limit,vi_value ,option);
 
 	}
+
+	@Override
+	public int getTotalCount2(String keyword) {
+		return categoryDAO.getTotalCount2(keyword);
+	}
 	
+	@Override
+	public List<CategoryVO> searchList(int offset, int limit , String keyword) {
+		return categoryDAO.searchList(offset , limit, keyword);
+		
+	}
 }

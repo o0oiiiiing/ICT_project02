@@ -144,15 +144,15 @@ public class PlaceListController {
 	}
 
 	// 검색하기
-	@PostMapping("search")
-	public ModelAndView search(String keyword) {
-		ModelAndView mv = new ModelAndView("chm-view/searchlist");
-		List<PlaceListVO> searchList = placeListService.searchList(keyword);
-		if (searchList != null) {
-			mv.addObject("searchList", searchList);
-			return mv;
-		}
-		return null;
-	}
+//	@PostMapping("search")
+//	public ModelAndView search(String keyword) {
+//		ModelAndView mv = new ModelAndView("chm-view/searchlist");
+//		List<PlaceListVO> searchList = placeListService.searchList(keyword);
+//		if (searchList != null) {
+//			mv.addObject("searchList", searchList);
+//			return mv;
+//		}
+//		return null;
+//	}
 
 }
