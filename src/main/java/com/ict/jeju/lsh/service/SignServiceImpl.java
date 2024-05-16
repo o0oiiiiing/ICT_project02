@@ -78,13 +78,10 @@ public class SignServiceImpl implements SignService {
 			while ((line=br.readLine())!=null) {
 				result +=line;
 			}
-			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			access_token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
-			System.out.println("token : "+access_token);
-			System.out.println("ref token : "+refresh_token);
 			br.close();
 			bw.close();
 		} catch (Exception e) {
@@ -112,7 +109,6 @@ public class SignServiceImpl implements SignService {
 			while ((line=br.readLine())!=null) {
 				result +=line;
 			}
-			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
@@ -121,13 +117,10 @@ public class SignServiceImpl implements SignService {
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			map.put("nickname", nickname);
 			map.put("email", email);
-			System.out.println("nickname : "+nickname);
-			System.out.println("email : "+email);
 		} catch (Exception e) {
 			System.out.println("kakaoinfo err : "+e);
 		}
 		UserVO userVO = signDAO.kakao_find(map);
-		System.out.println("userVO : "+userVO);
 		if (userVO == null) {
 			signDAO.kakao_join(map);
 			return signDAO.kakao_find(map);
@@ -164,13 +157,10 @@ public class SignServiceImpl implements SignService {
 			while ((line=br.readLine())!=null) {
 				result += line;
 			}
-			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			access_token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
-			System.out.println("token : "+access_token);
-			System.out.println("ref token : "+refresh_token);
 			br.close();
 			bw.close();
 		} catch (Exception e) {
@@ -198,7 +188,6 @@ public class SignServiceImpl implements SignService {
 			while ((line=br.readLine())!=null) {
 				result +=line;
 			}
-			System.out.println("response body : "+result);
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
@@ -208,9 +197,6 @@ public class SignServiceImpl implements SignService {
 			map.put("nickname", nickname);
 			map.put("email", email);
 			map.put("name", name);
-			System.out.println("nickname : "+nickname);
-			System.out.println("email : "+email);
-			System.out.println("name : "+name);
 		} catch (Exception e) {
 			System.out.println("naverinfo err : "+e);
 		}
@@ -240,18 +226,5 @@ public class SignServiceImpl implements SignService {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

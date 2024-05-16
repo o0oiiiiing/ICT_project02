@@ -6,13 +6,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>관리자 생성</title>
+		<title>ADMIN | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/admin_join.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
-			function back() {
-				window.history.back();
+			function go_main() {
+				location.href="home";
 			}
 			
 			// 아이디 중복 여부
@@ -95,42 +95,80 @@
 		        document.getElementById("a_id").addEventListener("input", chk_disabled);
 		    };
 		</script>
+		<style type="text/css">
+			.admin_join_page {
+				padding: 8% 0 0;
+			  	margin: auto;
+			  	width: 100%;
+			  	height: 600px;
+			  	background-image: url('resources/lsh_images/jeju_island.jpg');
+			  	background-position: center;
+			  	background-size: cover;
+			}
+			.admin_join_container {
+				position: relative;
+			  	z-index: 1;
+			  	background: white;
+			  	max-width: 360px;
+			  	max-height: 400px;
+			  	margin: 0 auto 100px;
+			  	padding: 45px;
+			  	text-align: center;
+			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			  	opacity: 0.85;
+			  	overflow: auto;
+			}
+			
+			.admin_join_container::-webkit-scrollbar {
+				width: 7px;
+			}
+			
+			.admin_join_container::-webkit-scrollbar-thumb {
+				height: 30%;
+				background: #a5deeb;
+				border-radius: 10px;
+			}
+			
+			.admin_join_container::-webkit-scrollbar-track {
+				background: rgba(33, 122, 244, .1);
+			}
+		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="admin_join_page">
 			<div class="admin_join_container">
 				<form method="post">
-					<h3 class="admin_join_text">관리자 생성</h3>
+					<h3 class="admin_join_text">ADMIN | Sign UP</h3>
 						<div class="admin_join_box">
 							<ul>
 								<li>
-									<input type="text"  id="a_id" name="a_id" required placeholder="아이디"/>
+									<input type="text"  id="a_id" name="a_id" required placeholder="ID"/>
 									<input type="button" class="admin_join_btn" id="a_idchk"  value="중복 확인" onclick="admin_chk()" disabled />
 								</li>
 								<li>
-									<input type="password" id="a_pwd" name="a_pwd" required placeholder="비밀번호" />
+									<input type="password" id="a_pwd" name="a_pwd" required placeholder="Password" />
 								</li>
 								<li>
 									<input type="password" id="a_pwdchk" name="a_pwdchk" required oninput="pwdchk_go()" placeholder="비밀번호 확인" />
 									<span id="msg" ></span>
 								</li>
 								<li class="admin_join_li_box" >
-									<input type="text" id="a_name" name="a_name" required placeholder="이름"/>
+									<input type="text" id="a_name" name="a_name" required placeholder="Name"/>
 								</li>
 								<li>
 									<input type="email" id="a_email" name="a_email" required 
-												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="이메일"/>
+												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="E-Mail"/>
 								</li>
 								<li>
-									<input type="text" id="a_phone" name="a_phone" required placeholder="전화번호"/>
+									<input type="text" id="a_phone" name="a_phone" required placeholder="Phone"/>
 								</li>
 							</ul>
 					</div>
 					
 					<div>
-						<input type="button" class="admin_join_ok_btn" onclick="admin_join_ok(this.form)" value="생성">
-						<input type="button" class="admin_join_ok_btn" onclick="back()" value="취소">
+						<input type="button" class="admin_join_ok_btn" onclick="admin_join_ok(this.form)" value="Create Admin">
+						<input type="button" class="admin_join_ok_btn" onclick="go_main()" value="Cancel">
 					</div>
 				</form>
 			</div>

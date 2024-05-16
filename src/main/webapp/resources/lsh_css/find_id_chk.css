@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.findID_chk_page {
-	width: 720px;
-	padding: 8% 0 0;
-  	margin: auto;
-}
-
 .findID_chk_container {
 	position: relative;
   	z-index: 1;
@@ -15,6 +9,9 @@
   	padding: 45px;
   	text-align: center;
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  	opacity: 0.8;
+  	overflow: auto;
+  	height: 400px;
 }
 
 .findID_chk_result {

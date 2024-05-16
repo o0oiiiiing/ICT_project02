@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>회원 가입</title>
+		<title>SIGN UP | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/join_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -171,6 +171,17 @@
 				}).open();
 			}
 		</script>
+		<style type="text/css">
+			.join_page {
+				padding: 8% 0 0;
+			  	margin: auto;
+			  	width: 100%;
+			  	height: 600px;
+			  	background-image: url('resources/lsh_images/jeju_island.jpg');
+			  	background-position: center;
+			  	background-size: cover;
+			}
+		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
@@ -181,34 +192,34 @@
 						<div class="join_box">
 							<ul>
 								<li>
-									<input type="text"  id="u_id" name="u_id" required placeholder="아이디" />
+									<input type="text"  id="u_id" name="u_id" required placeholder="ID" />
 									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</li>
 								<li>
-									<input type="password" id="u_pwd" name="u_pwd" required placeholder="비밀번호" />
+									<input type="password" id="u_pwd" name="u_pwd" required placeholder="Password" />
 								</li>
 								<li>
 									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="비밀번호 확인" />
 									<span id="msg" ></span>
 								</li>
 								<li class="join_li_box" >
-									<input type="text" id="u_name" name="u_name" required placeholder="이름" />
+									<input type="text" id="u_name" name="u_name" required placeholder="Name" />
 								</li>
 								<li>
 									<input type="date" id="u_birth" name="u_birth" value="생년월일" required data-placeholder="생년월일을 입력하세요" />
 								</li>
 								<li class="join_radio_btn">
 									<input  style="width: 50px;" type="radio" name="u_gender" value="1" checked />
-										<span class="join_radio_text">남자</span>
+										<span class="join_radio_text">Male</span>
 									<input  style="width: 50px;" type="radio" name="u_gender" value="2" />
-										<span class="join_radio_text">여자</span>
+										<span class="join_radio_text">Female</span>
 								</li>
 								<li>
 									<input type="email" id="u_email" name="u_email" required 
-												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="이메일" />
+												pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="E-Mail" />
 								</li>
 								<li>
-									<input type="text" id="u_phone" name="u_phone" required placeholder="전화번호" />
+									<input type="text" id="u_phone" name="u_phone" required placeholder="Phone" />
 								</li>
 								<li>
 									<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" />
@@ -222,10 +233,6 @@
 					
 					<div class="join_terms_container">
 						<ul>
-							<li>
-								<input type="checkbox" id="click_all" onclick="terms_box()">
-								<label for="click_all">이용약관 전체 동의</label> 
-							</li>
 							<li>
 								<div class="join_terms_box">
 									<p>[필수] 이용약관1</p>
@@ -416,6 +423,10 @@
 									<br>
 									<p>본 약관은 2016년 9월 5일부터 적용됩니다.</p>
 								</div>
+							</li>
+							<li>
+								<input type="checkbox" id="click_all" onclick="terms_box()">
+								<label for="click_all">이용약관 전체 동의</label> 
 							</li>
 						</ul>
 					</div>
