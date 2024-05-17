@@ -32,14 +32,14 @@
 					</c:when>
 			        <c:otherwise>
 			        	<c:forEach var="k" items="${find_list}">
-				            <p class="findID_chk_result"> ${k.u_id} </p>
+				            <p class="findID_chk_result">ID : ${k.u_id} </p>
 			        	</c:forEach>
 			        </c:otherwise>
 				</c:choose>
 				
 				<div class="findID_chk_box">
-					<a href="login_go.do" >로그인 &nbsp;&nbsp; | </a>
-					<a href="findpwd_go.do" >비밀번호 찾기</a>
+					<a href="login_go.do" >Login &nbsp;&nbsp; | </a>
+					<a href="findpwd_go.do" >find your Password</a>
 				</div>
 			</div>
 		</section>

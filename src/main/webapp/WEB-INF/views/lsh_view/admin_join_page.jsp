@@ -110,12 +110,11 @@
 			  	z-index: 1;
 			  	background: white;
 			  	max-width: 360px;
-			  	max-height: 400px;
+			  	max-height: 450px;
 			  	margin: 0 auto 100px;
 			  	padding: 45px;
 			  	text-align: center;
 			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-			  	opacity: 0.85;
 			  	overflow: auto;
 			}
 			
@@ -150,7 +149,7 @@
 									<input type="password" id="a_pwd" name="a_pwd" required placeholder="Password" />
 								</li>
 								<li>
-									<input type="password" id="a_pwdchk" name="a_pwdchk" required oninput="pwdchk_go()" placeholder="비밀번호 확인" />
+									<input type="password" id="a_pwdchk" name="a_pwdchk" required oninput="pwdchk_go()" placeholder="Password" />
 									<span id="msg" ></span>
 								</li>
 								<li class="admin_join_li_box" >
@@ -167,7 +166,7 @@
 					</div>
 					
 					<div>
-						<input type="button" class="admin_join_ok_btn" onclick="admin_join_ok(this.form)" value="Create Admin">
+						<input type="button" class="admin_join_ok_btn" onclick="admin_join_ok(this.form)" value="Create Admin_account">
 						<input type="button" class="admin_join_ok_btn" onclick="go_main()" value="Cancel">
 					</div>
 				</form>
