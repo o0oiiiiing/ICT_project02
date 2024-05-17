@@ -49,5 +49,28 @@ public class CategoryDAO {
 	}
 		return null;
 	}
+
+	public int getTotalCount2(String keyword) {
+		try {
+			return sqlsessionTemplate.selectOne("category.count2" , keyword);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	public List<CategoryVO> searchList(int offset , int limit ,String keyword) {
+		try {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			map.put("keyword", keyword);
+			return sqlsessionTemplate.selectList("category.searchList", map);
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("searchList DAO에서 에러 발생");
+		}
+		return null;
+	}
 	
 }

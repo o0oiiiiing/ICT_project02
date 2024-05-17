@@ -3,6 +3,7 @@ package com.ict.jeju.chm.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.chm.dao.Paging3;
 import com.ict.jeju.chm.service.CategoryService;
+import com.ict.jeju.pdh.dao.PlaceListVO;
 
 @Controller
 public class CategoryController {
@@ -81,6 +84,8 @@ public class CategoryController {
         // ,option_select
         List<CategoryVO> category_list = categoryService.getBoardList(paging3.getOffset(), paging3.getNumPerPage(),vi_value,option);
         
+        System.out.println(category_list.size());
+        
         if (category_list != null) {
             mv.addObject("category_list", category_list);
             mv.addObject("paging3", paging3);
@@ -91,4 +96,53 @@ public class CategoryController {
 		return null;
 	}
 	
+	@RequestMapping("search")
+	public ModelAndView search(HttpSession session 
+			, HttpServletRequest request ,@ModelAttribute("keyword")String keyword) {
+		ModelAndView mv = new ModelAndView("chm-view/searchlist");
+		int count = categoryService.getTotalCount2(keyword);
+        System.out.println(count +"카운트");
+        paging3.setTotalRecord(count);
+
+        // 전체 페이지의 수
+        if (paging3.getTotalRecord() <= paging3.getNumPerPage()) {
+            paging3.setTotalPage(1);
+        } else {
+            paging3.setTotalPage(paging3.getTotalRecord() / paging3.getNumPerPage());
+            if (paging3.getTotalRecord() % paging3.getNumPerPage() != 0) {
+                paging3.setTotalPage(paging3.getTotalPage() + 1);
+            }
+        }
+        
+        System.out.println(paging3.getTotalPage());
+        
+		// 현재 페이지 구함
+        String cPage = request.getParameter("cPage");
+        if (cPage == null) {
+            paging3.setNowPage(1);
+        } else {
+            paging3.setNowPage(Integer.parseInt(cPage));
+        }
+        
+        paging3.setOffset(paging3.getNumPerPage() * (paging3.getNowPage() - 1));
+
+        paging3.setBeginBlock(
+                (int) ((paging3.getNowPage() - 1) / paging3.getPagePerBlock()) * paging3.getPagePerBlock() + 1);
+        paging3.setEndBlock(paging3.getBeginBlock() + paging3.getPagePerBlock() - 1);
+
+        if (paging3.getEndBlock() > paging3.getTotalPage()) {
+            paging3.setEndBlock(paging3.getTotalPage());
+        }
+        
+        // ,option_select
+        List<CategoryVO> searchList = categoryService.searchList(paging3.getOffset(), paging3.getNumPerPage(),keyword);
+        System.out.println(searchList.size());
+        if (searchList != null) {
+            mv.addObject("paging3", paging3);
+            mv.addObject("searchList", searchList);
+            return mv;
+        }
+        
+		return null;
+	}
 }

@@ -11,11 +11,7 @@
     <select id="count" resultType="int" parameterType="String">
     	select count(*) from Visitjeju_table where vi_value = #{vi_value}
     </select>
-    <!-- <select id="board_list" parameterType="Map" resultType="caVO">
-    	select * from Visitjeju_table where vi_value = #{vi_value} limit #{limit} offset #{offset}
-    </select> -->
-    
-    
+  
     <select id="board_list" parameterType="Map" resultType="caVO">
     		SELECT * FROM Visitjeju_table where vi_value = #{vi_value}
     		<choose>
@@ -30,5 +26,16 @@
     			</otherwise>
     		</choose>
 	    	limit #{limit} offset #{offset}
+    </select>
+    
+    <select id="count2" resultType="int" parameterType="String">
+    	select count(*) from Visitjeju_table where vi_title like CONCAT('%', #{keyword}, '%')
+    </select>
+    
+    <select id="searchList" parameterType="Map" resultType="caVO">
+    	select * 
+		from Visitjeju_table 
+		where vi_title like CONCAT('%', #{keyword}, '%')
+		limit #{limit} offset #{offset}
     </select>
 </mapper>

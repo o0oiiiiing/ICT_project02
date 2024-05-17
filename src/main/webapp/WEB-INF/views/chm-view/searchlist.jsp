@@ -57,7 +57,6 @@
 		<!-- DB에서 가져와서 c:foreach 반복문 돌릴 관광지 카테고리 보여주는 구간  -->
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
-				<%-- <c:forEach var="k" items="${searchList}"> --%>
 				<c:forEach var="k" items="${searchList}">
 					<div class="category_box" onclick="toggleCollapse(this)" class="category_box">
 						<img src='${k.vi_image}' class="category_img">
@@ -204,7 +203,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="category_page.do?cPage=${paging3.beginBlock - paging3.pagePerBlock }&vi_value=${vi_value}&option=${option}">&#8249;</a></li>
+										href="search?cPage=${paging3.beginBlock - paging3.pagePerBlock }&keyword=${keyword}">&#8249;</a></li>
 								</c:otherwise>
 							</c:choose>
 
@@ -217,19 +216,19 @@
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="category_page.do?cPage=${k}&vi_value=${vi_value}&option=${option}">${k }</a></li>
+											href="search?cPage=${k}&keyword=${keyword}">${k}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
 							<!-- 이후 버튼 -->
 							<c:choose>
-								<c:when test="${paging3.endBlock >= paging3.totalPage }">
+								<c:when test="${paging3.endBlock >= paging3.totalPage}">
 									<li class="disable">&#8250;</li>
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="category_page.do?cPage=${paging3.beginBlock + paging3.pagePerBlock }&vi_value=${vi_value}&option=${option}">&#8250;</a></li>
+										href="search?cPage=${paging3.beginBlock + paging3.pagePerBlock }&keyword=${keyword}">&#8250;</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ol>
