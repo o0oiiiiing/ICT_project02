@@ -11,10 +11,14 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
+	function user_list() {
+		location.href="user_list.do";
+	}
 </script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
+
 	 <div id="user_detail">
 		<div class="user_container">
 			<div class="user_content">
@@ -43,7 +47,7 @@
 			<div class="user_buttons">
 				<input type="hidden" value="${k.u_idx}" name="u_idx"> 
 				<input type="hidden" value="${paging.nowPage}" name="cPage"> 
-				<button class="user_button">닫기</button>
+				<input type="button" class="user_button" value="닫기" onclick="user_list()">
 			</div>
 		</div>
 		</div>

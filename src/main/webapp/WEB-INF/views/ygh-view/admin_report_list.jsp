@@ -42,10 +42,10 @@
 									<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
 									<c:choose>
 										<c:when test="${k2.active == 1}">
-											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[처리완료] ${k2.report_title}</a>
+											<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[처리완료] ${k2.report_title}</a>
 										</c:when>
 										<c:otherwise>
-											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+											<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
 										</c:otherwise>
 									</c:choose></td>
 								<td>${k2.report_writer}</td>
