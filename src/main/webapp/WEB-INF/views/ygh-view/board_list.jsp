@@ -14,6 +14,28 @@
 	function board_write_go() {
 		location.href="board_write_go.do"
 	}
+	
+	// a링크 postmapping 으로 변경
+	function board_detail_go(bo_idx, cPage) {
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "post");
+	    form.setAttribute("action", "board_detail.do");
+	
+	    var bo_idxField = document.createElement("input");
+	    bo_idxField.setAttribute("type", "hidden");
+	    bo_idxField.setAttribute("name", "bo_idx");
+	    bo_idxField.setAttribute("value", bo_idx);
+	    form.appendChild(bo_idxField);
+	
+	    var cPageField = document.createElement("input");
+	    cPageField.setAttribute("type", "hidden");
+	    cPageField.setAttribute("name", "cPage");
+	    cPageField.setAttribute("value", cPage);
+	    form.appendChild(cPageField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
 
 </script>
 </head>
@@ -49,10 +71,12 @@
 								<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
 								 <c:choose>
 										<c:when test="${k.active == 1}">
-											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[답변완료] ${k.bo_title}</a>
+											<%-- <a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[답변완료] ${k.bo_title}</a> --%>
+											 <a href="#" onclick="board_detail_go('${k.bo_idx}', '${paging.nowPage}')">[답변완료] ${k.bo_title}</a>
 										</c:when>
 										<c:otherwise>
-											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+											<%-- <a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a> --%>
+											<a href="#" onclick="board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a>
 									</c:otherwise></c:choose></td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
@@ -107,7 +131,6 @@
 			</tfoot>
 		</table>
 		</form>
-		<input type="hidden" name="u_idx" value="${userVO.u_idx}">
 	</div>
 	
 <%@include file="../common/footer.jsp"%>	

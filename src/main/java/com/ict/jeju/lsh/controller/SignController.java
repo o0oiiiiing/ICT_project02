@@ -1,8 +1,6 @@
 package com.ict.jeju.lsh.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -79,18 +77,24 @@ public class SignController {
 			return mv;
 		}
 		
-	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), userVO2.getU_pwd())) {
+	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), 
+	    		userVO2.getU_pwd()) && userVO2.getActive().equals("0")) {
 	        session.setAttribute("loginChk", "ok");
 	        session.setAttribute("userVO", userVO2);
 	        mv.addObject("userVO", userVO2);
 	        mv.setViewName("redirect:home");
-	        System.out.println("2");
 	        return mv;
 	    }
+	    if (userVO2.getActive().equals("1")) {
+			session.setAttribute("loginChk", "fail");
+			mv.addObject("msg", "이미 탈퇴한 회원입니다.");
+			mv.setViewName("lsh_view/login_page");
+			return mv;
+		}
+
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 	    mv.setViewName("lsh_view/login_page");
-	    System.out.println("4");
 	    return mv;
 	}
 	
@@ -109,7 +113,7 @@ public class SignController {
 			session.setAttribute("admin_loginChk", "ok");
 			session.setAttribute("adminVO", adminVO2);
 			mv.addObject("adminVO", adminVO2);
-			mv.setViewName("redirect:admin_list.do");
+			mv.setViewName("redirect:home");
 			return mv;
 		}
 		return null;
@@ -118,33 +122,21 @@ public class SignController {
 	// 카카오 로그인
 	@RequestMapping("kakao_login.do")
 	public String KakaoLogin(String code, HttpSession session, UserVO userVO) {
-		System.out.println("code : "+code);
-		
 		String access_token = signService.getAccessToken(code);
-		System.out.println("token : "+access_token);
-		
 		UserVO userVO2 = signService.getKakaoInfo(access_token);
-		System.out.println("cont token : "+access_token);
-		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO2);
-		return "pdh-view/home";
+		return "redirect:home";
 	}
 	
 	// 네이버 로그인
 	@RequestMapping("naver_login.do")
 	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
-		System.out.println("code : "+code);
-		System.out.println("state : " +state);
-		
 		String access_token = signService.getNaverToken(code, state);
-		System.out.println("token : "+access_token);
-		
 		UserVO userVO2 = signService.getNaverInfo(access_token);
-		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO2);
-		return "pdh-view/home";
+		return "redirect:home";
 	}
 	
 	// 로그아웃
@@ -230,7 +222,7 @@ public class SignController {
 				int res = signService.getChgPwd(userVO2);
 				if (res >0) {
 					mailService.sendEmail(randomNum, userVO2.getU_email());
-					mv.addObject("msg", "가입하신 메일로 임시 비밀번호가 발송되었습니다.");
+					mv.addObject("msg", "가입시 입력한 이메일로 임시 비밀번호가 발송되었습니다.");
 					mv.setViewName("lsh_view/login_page");
 					return mv;
 				}

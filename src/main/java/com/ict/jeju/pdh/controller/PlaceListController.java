@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
@@ -21,19 +22,17 @@ import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPaging;
 import com.ict.jeju.pdh.dao.QaPagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.service.PlaceListService;
 
 @Controller
 public class PlaceListController {
 	@Autowired
 	private PlaceListService placeListService;
-
 	@Autowired
 	private HttpSession session;
-
 	@Autowired
 	private QaPaging qaPaging;
-	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -131,10 +130,17 @@ public class PlaceListController {
 		System.out.println(contentsid);
 		// Q&A 작성 삽입
 		// 비밀번호 암호화
-		qaVO.setBo_pwd(passwordEncoder.encode(qaVO.getBo_pwd()));
+		if (qaVO.getBo_pwd() != null) {
+			qaVO.setBo_pwd(passwordEncoder.encode(qaVO.getBo_pwd()));
+		}
 		placeListService.qaWrite(qaVO);
 		return new ModelAndView("redirect:detail");
 	}
+	
+	/*
+	 * @PostMapping("reviewWrite") public ModelAndView reviewWrite(ReviewVO
+	 * reviewVO) { MultipartFile[] images = }
+	 */
 
 	// 일정 추가하기
 	// 로그인 여부에 따라서 다르게 처리하기
@@ -154,5 +160,6 @@ public class PlaceListController {
 //		}
 //		return null;
 //	}
+
 
 }

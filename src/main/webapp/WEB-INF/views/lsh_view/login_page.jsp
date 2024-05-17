@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>로그인</title>
+		<title>LOGIN | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/login_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -25,23 +25,34 @@
 			    alert(msg);
 			}
 		</script>
+		<style type="text/css">
+			.login_page {
+				padding: 8% 0 0;
+			  	margin: auto;
+			  	width: 100%;
+			  	height: 600px;
+			  	background-image: url('resources/lsh_images/jeju_island.jpg');
+			  	background-position: center;
+			  	background-size: cover;
+			}
+		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="login_page">
-			<div class="login_box">
+			<div class="login_box" style="opacity: 0.85;">
 				<form method="post" class="login_form">
 					<h3 class="login_text">Login</h3>
 					<div>
 						<ul>
 							<li>
-								<input type="text" id="u_id" name="u_id" class="login_box_input" placeholder="아이디" required />
+								<input type="text" id="u_id" name="u_id" class="login_box_input" placeholder="ID" required />
 							</li>
 							<li>
-								<input type="password" id="u_pwd" name="u_pwd" class="login_box_input" placeholder="비밀번호" required />
+								<input type="password" id="u_pwd" name="u_pwd" class="login_box_input" placeholder="Password" required />
 							</li>
 							<li>
-								<input type="button" class="login_btn" value="로그인" onclick="login_ok(this.form)" />
+								<input type="button" class="login_btn" value="Login" onclick="login_ok(this.form)" />
 							</li>
 						</ul>
 					</div>
