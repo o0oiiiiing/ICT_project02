@@ -63,6 +63,49 @@ function admin_report_list() {
 	location.href="admin_report_list.do"
 }
 
+//a링크 postmapping 으로 변경
+function admin_board_detail_go(bo_idx, cPage) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "admin_board_detail.do");
+
+    var bo_idxField = document.createElement("input");
+    bo_idxField.setAttribute("type", "hidden");
+    bo_idxField.setAttribute("name", "bo_idx");
+    bo_idxField.setAttribute("value", bo_idx);
+    form.appendChild(bo_idxField);
+
+    var cPageField = document.createElement("input");
+    cPageField.setAttribute("type", "hidden");
+    cPageField.setAttribute("name", "cPage");
+    cPageField.setAttribute("value", cPage);
+    form.appendChild(cPageField);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+//a링크 postmapping 으로 변경
+function admin_report_detail_go(report_idx, cPage2) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "admin_report_detail.do");
+
+    var report_idxField = document.createElement("input");
+    report_idxField.setAttribute("type", "hidden");
+    report_idxField.setAttribute("name", "report_idx");
+    report_idxField.setAttribute("value", report_idx);
+    form.appendChild(report_idxField);
+
+    var cPage2Field = document.createElement("input");
+    cPage2Field.setAttribute("type", "hidden");
+    cPage2Field.setAttribute("name", "cPage2");
+    cPage2Field.setAttribute("value", cPage2);
+    form.appendChild(cPage2Field);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 </script>
 </head>
 <body>
@@ -122,7 +165,8 @@ function admin_report_list() {
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
 								<td style="text-align: left;">
 									<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
-									<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+									<%-- <a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a> --%>
+									<a href="#" onclick="admin_board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a>
 								</td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
@@ -204,7 +248,8 @@ function admin_report_list() {
 									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 									<td style="text-align: left;">
 										<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
-										<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+										<%-- <a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a> --%>
+										<a href="#" onclick="admin_report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
 									</td>
 									<td>${k2.report_writer}</td>
 									<td>${k2.report_regdate.substring(0,10)}</td>

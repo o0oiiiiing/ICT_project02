@@ -70,7 +70,7 @@ public interface JejuService5 {
 	public int reportDelete(ReportVO revo);
 
 	// 회원정보 상세보기
-	public UserVO userDetail(String U_idx);
+	public UserVO userDetail(String u_idx);
 
 	// 회원정보수정
 	public int userUpdate(UserVO userVO);
@@ -106,5 +106,6 @@ public interface JejuService5 {
 	// 관리자 상세보기
 	public AdminVO adminDetail(String a_idx);
 	public int userDelete(UserVO userVO);
+	public int userRestore(UserVO userVO);
 	
 }

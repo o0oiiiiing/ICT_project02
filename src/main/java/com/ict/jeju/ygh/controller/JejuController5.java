@@ -126,7 +126,7 @@ public class JejuController5 {
 	}
 
 	// 관리자 Q&A 상세보기
-	@GetMapping("admin_board_detail.do")
+	@RequestMapping("admin_board_detail.do")
 	public ModelAndView adminBoardDetail(@ModelAttribute("cPage") String cPage, String bo_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail");
 		// 상세보기
@@ -143,7 +143,7 @@ public class JejuController5 {
 	}
 
 	// 관리자 신고 상세보기
-	@GetMapping("admin_report_detail.do")
+	@RequestMapping("admin_report_detail.do")
 	public ModelAndView adminReportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail");
 		ReportVO revo = jejuService5.reportDetail(report_idx);
@@ -160,7 +160,7 @@ public class JejuController5 {
 
 	// Q&A 답글 작성
 	@PostMapping("board_ans_write_ok.do")
-	public ModelAndView commentInsert(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx) {
+	public ModelAndView commentInsert(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx, @ModelAttribute("cPage") String cPage) {
 		ModelAndView mv = new ModelAndView("redirect:admin_board_detail.do");
 		int result = jejuService5.commentInsert(comvo);
 		int result2 = jejuService5.commentUpdate(bo_idx);
@@ -182,7 +182,7 @@ public class JejuController5 {
 
 	// 신고 답글 작성
 	@PostMapping("report_ans_write_ok.do")
-	public ModelAndView replyInsert(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx) {
+	public ModelAndView replyInsert(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx, @ModelAttribute("cPage2") String cPage2) {
 		ModelAndView mv = new ModelAndView("redirect:admin_report_detail.do");
 		int result = jejuService5.replyInsert(repvo);
 		int result2 = jejuService5.replyUpdate(report_idx);
@@ -746,34 +746,82 @@ public class JejuController5 {
 	}
 
 	// 회원관리 삭제
-	@PostMapping("user_del_ok.do")
-	public ModelAndView userDelOk(@ModelAttribute("cPage") String cPage,
-	        AdminVO adminVO, HttpSession session, UserVO userVO) {
-		ModelAndView mv = new ModelAndView("redirect:user_list.do");
-		
-		// 세션에 저장된 관리자 정보
-	    AdminVO avo = (AdminVO) session.getAttribute("adminVO");
-	    AdminVO avo2 = jejuService5.adminDetail(avo.getA_idx());
-	    String dpwd = avo2.getA_pwd();
-	    
-	    if (!passwordEncoder.matches(adminVO.getA_pwd(), dpwd)) {
-	    	mv.setViewName("ygh-view/user_list");
-	        mv.addObject("pwdchk", "fail");
-	        mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
-	        mv.addObject("paging", paging);
-	        return mv;
-	    } else {
-	        // active 컬럼의 값을 1로 변경하자.
-	        int result = jejuService5.userDelete(userVO);
-	        if (result > 0) {
-	        	mv.setViewName("ygh-view/user_list");
-	        	mv.addObject("del", "ok");
-	        	mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
-	        	mv.addObject("paging", paging);
-	            return mv;
-	        }
-	    }
-	    return new ModelAndView("ygh-view/error");
-	}
+    @PostMapping("user_del_ok.do")
+    public ModelAndView userDelOk(@ModelAttribute("cPage") String cPage,
+            AdminVO adminVO, HttpSession session, UserVO userVO) {
+        ModelAndView mv = new ModelAndView("redirect:user_list.do");
+        
+        // 세션에 저장된 관리자 정보
+        AdminVO avo = (AdminVO) session.getAttribute("adminVO");
+        AdminVO avo2 = jejuService5.adminDetail(avo.getA_idx());
+        String dpwd = avo2.getA_pwd();
+        
+        if (!passwordEncoder.matches(adminVO.getA_pwd(), dpwd)) {
+            mv.setViewName("ygh-view/user_list");
+            mv.addObject("pwdchk", "fail");
+            mv.addObject("msg", "비밀번호가 일치하지 않습니다.");
+            mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+            mv.addObject("paging", paging);
+            return mv;
+        } else {
+            // active 컬럼의 값을 1로 변경하자.
+            int result = jejuService5.userDelete(userVO);
+            if (result > 0) {
+                mv.setViewName("ygh-view/user_list");
+                mv.addObject("del", "ok");
+                mv.addObject("msg", "해당 회원 계정을 삭제했습니다.");
+                mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+                mv.addObject("paging", paging);
+                return mv;
+            }
+        }
+        return new ModelAndView("ygh-view/error");
+    }
+    
+    // 회원관리 복구
+    @PostMapping("user_restore_ok.do")
+    public ModelAndView userRestoreOk(@ModelAttribute("cPage") String cPage,
+    		AdminVO adminVO, HttpSession session, UserVO userVO) {
+    	ModelAndView mv = new ModelAndView("redirect:user_list.do");
+    	
+    	// 세션에 저장된 관리자 정보
+    	AdminVO avo = (AdminVO) session.getAttribute("adminVO");
+    	AdminVO avo2 = jejuService5.adminDetail(avo.getA_idx());
+    	String dpwd = avo2.getA_pwd();
+    	
+    	if (!passwordEncoder.matches(adminVO.getA_pwd(), dpwd)) {
+    		mv.setViewName("ygh-view/user_list");
+    		mv.addObject("pwdchk", "fail");
+    		mv.addObject("msg", "비밀번호가 일치하지 않습니다.");
+    		mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+    		mv.addObject("paging", paging);
+    		return mv;
+    	} else {
+    		// active 컬럼의 값을 0로 변경하자.
+    		int result = jejuService5.userRestore(userVO);
+    		if (result > 0) {
+    			mv.setViewName("ygh-view/user_list");
+    			mv.addObject("restore", "ok");
+    			mv.addObject("msg", "해당 회원 계정을 복구했습니다.");
+    			mv.addObject("user_list", jejuService5.userList(paging.getOffset(), paging.getNumPerPage()));
+    			mv.addObject("paging", paging);
+    			return mv;
+    		}
+    	}
+    	return new ModelAndView("ygh-view/error");
+    }
+    
+    @RequestMapping("user_detail.do")
+    public ModelAndView userDetail(@ModelAttribute("u_idx") String u_idx) {
+    	ModelAndView mv = new ModelAndView("ygh-view/user_detail");
+    	
+    	System.out.println(u_idx);
+    	UserVO uvo = jejuService5.userDetail(u_idx);
+    	if (uvo != null) {
+			mv.addObject("uvo", uvo);
+			return mv;
+		}
+    	return new ModelAndView("ygh-view/error");
+    }
 
 }
