@@ -275,13 +275,13 @@
 			location.href="report_list.do"
 		}
 </script>
-
 <title>나의 여행</title>
 </head>
 <body>
 	<div>
 		<%@include file="../common/header.jsp"%>
-	</div>  
+	</div>
+	
 	<div class="myTripPlan">
 		<div class="myTripPlan_title">
 		<h2>나의 여행</h2>
@@ -297,8 +297,8 @@
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
 					<!-- 경화 -->
-					<button onclick="board_list()">문의하기</button>
-					<button onclick="report_list()">신고하기</button>
+					<button onclick="board_list()">문의내역</button>
+					<button onclick="report_list()">신고내역</button>
 					
 				</c:forEach>
 			</div>
@@ -364,6 +364,7 @@
 			</div>
 		</c:if>
 	</div>
+
 			<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
 		<div class="chatbot_modal" >
 			<%@include file="../common/chatbot.jsp"%>
@@ -394,5 +395,6 @@
 		});
 	})
 	</script>
+	
 </body>
 </html>
