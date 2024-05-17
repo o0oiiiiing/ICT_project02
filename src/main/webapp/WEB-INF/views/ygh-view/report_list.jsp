@@ -15,6 +15,28 @@
 	function report_write_go() {
 		location.href = "report_write_go.do"
 	}
+	
+	// a링크 postmapping 으로 변경
+	function report_detail_go(report_idx, cPage2) {
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "post");
+	    form.setAttribute("action", "report_detail.do");
+	
+	    var report_idxField = document.createElement("input");
+	    report_idxField.setAttribute("type", "hidden");
+	    report_idxField.setAttribute("name", "report_idx");
+	    report_idxField.setAttribute("value", report_idx);
+	    form.appendChild(report_idxField);
+	
+	    var cPage2Field = document.createElement("input");
+	    cPage2Field.setAttribute("type", "hidden");
+	    cPage2Field.setAttribute("name", "cPage2");
+	    cPage2Field.setAttribute("value", cPage2);
+	    form.appendChild(cPage2Field);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}	
 </script>
 </head>
 <body>
@@ -47,10 +69,12 @@
 								<td style="text-align: left;"><c:forEach begin="1"
 										end="${k2.step}">&nbsp;[Re]</c:forEach> <c:choose>
 										<c:when test="${k2.active == 1}">
-											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[답변완료] ${k2.report_title}</a>
+											<%-- <a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[답변완료] ${k2.report_title}</a> --%>
+											<a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">[답변완료] ${k2.report_title}</a>
 										</c:when>
 										<c:otherwise>
-											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a>
+											<%-- <a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a> --%>
+											 <a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
 										</c:otherwise>
 									</c:choose></td>
 								<td>${k2.report_writer}</td>

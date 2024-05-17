@@ -74,10 +74,10 @@
 		</div>
 		<div id="board_detail_btn">
 			<input type="hidden" value="${revo.report_idx}" name="report_idx">
-			<input type="hidden" value="${cPage2}" name="cPage2"> <input
-				type="button" value="목록" onclick="admin_list(this.form)" /> <input
-				type="button" value="답글" onclick="toggleCommentBox()" /> <input
-				type="button" value="삭제" onclick="report_delete(this.form)" />
+			<input type="hidden" value="${cPage2}" name="cPage2"> 
+			<input type="button" value="목록" onclick="admin_list(this.form)" /> 
+			<input type="button" value="답글" onclick="toggleCommentBox()" /> 
+			<input type="button" value="삭제" onclick="report_delete(this.form)" />
 		</div>
 	</form>
 
@@ -105,7 +105,6 @@
 		</div>
 		<div id="comment_btn" style="display: none;">
 			<input type="hidden" name="cPage2" value="${cPage2}">
-			<!-- 댓글 저장 시 어떤 원글의 댓글인지 저장해야 한다. -->
 			<input type="hidden" name="report_idx" value="${revo.report_idx}">
 			<input type="button" value="입력" onclick="report_ans_write_ok(this.form)" />
 		</div>
@@ -139,10 +138,10 @@
 					</table>
 				</div>
 				<div id="comment_btn">
-					<!-- 실제는 로그인 성공 && 글쓴사람만 삭제할 수 있어야 한다. -->
 					<input type="button" value="댓글삭제" onclick="reply_delete(this.form)">
 					<input type="hidden" name="rep_idx" value="${k.rep_idx}"> 
 					<input type="hidden" name="report_idx" value="${k.report_idx}">
+					<input type="hidden" value="${cPage2}" name="cPage2"> 
 				</div>
 			</form>
 			<br>

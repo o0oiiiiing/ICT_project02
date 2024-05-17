@@ -38,8 +38,9 @@
 						<c:forEach var="k2" items="${report_list}" varStatus="vs">
 							<tr>
 								<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
-								<td style="text-align: left;"><c:forEach begin="1"
-										end="${k2.step}">&nbsp;[Re]</c:forEach> <c:choose>
+								<td style="text-align: left;">
+									<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
+									<c:choose>
 										<c:when test="${k2.active == 1}">
 											<a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[처리완료] ${k2.report_title}</a>
 										</c:when>

@@ -228,9 +228,9 @@ public class JejuDAO5 {
 	}
 
 	// 회원정보 상세보기
-	public UserVO userDetail(String U_idx) {
+	public UserVO userDetail(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectOne("Board_table.user_detail", U_idx);
+			return sqlSessionTemplate.selectOne("Board_table.user_detail", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -387,6 +387,15 @@ public class JejuDAO5 {
 	public int userDelete(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.update("Board_table.user_delete", userVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	public int userRestore(UserVO userVO) {
+		try {
+			return sqlSessionTemplate.update("Board_table.user_Restore", userVO);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -101,8 +101,6 @@ $(document).ready(function() {
 			<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 		</ul>
 	
-
-
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
