@@ -91,6 +91,7 @@ public class SignController {
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
+
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 	    mv.setViewName("lsh_view/login_page");

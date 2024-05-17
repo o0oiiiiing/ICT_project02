@@ -73,11 +73,11 @@
 			</table>
 		</div>
 		<div id="board_detail_btn">
-			<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> <input
-				type="hidden" value="${cPage}" name="cPage"> <input
-				type="button" value="목록" onclick="admin_list(this.form)" /> <input
-				type="button" value="답글" onclick="toggleCommentBox()" /> <input
-				type="button" value="삭제" onclick="admin_board_delete(this.form)" />
+			<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+			<input type="hidden" value="${cPage}" name="cPage"> 
+			<input type="button" value="목록" onclick="admin_list(this.form)" /> 
+			<input type="button" value="답글" onclick="toggleCommentBox()" /> 
+			<input type="button" value="삭제" onclick="admin_board_delete(this.form)" />
 		</div>
 	</form>
 
@@ -105,9 +105,8 @@
 			</table>
 		</div>
 		<div id="comment_btn" style="display: none;">
-			<input type="hidden" name="cPage" value="${cPage}">
-			<!-- 댓글 저장 시 어떤 원글의 댓글인지 저장해야 한다. -->
 			<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
+			<input type="hidden" name="cPage" value="${cPage}">
 			<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" />
 		</div>
 	</form>
@@ -140,10 +139,10 @@
 					</table>
 				</div>
 				<div id="comment_btn">
-					<!-- 실제는 로그인 성공 && 글쓴사람만 삭제할 수 있어야 한다. -->
 					<input type="button" value="댓글삭제" onclick="comment_delete(this.form)"> 
 					<input type="hidden" name="com_idx" value="${k.com_idx}"> 
 					<input type="hidden" name="bo_idx" value="${k.bo_idx}">
+					<input type="hidden" name="cPage" value="${cPage}">
 				</div>
 			</form>
 			<br>
@@ -153,8 +152,7 @@
 	</div>
 
 	<!-- jQuery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
 		crossorigin="anonymous"></script>
 	<script src="resources/common-js/summernote-lite.js"></script>
 	<script src="resources/common-js/lang/summernote-ko-KR.js"></script>

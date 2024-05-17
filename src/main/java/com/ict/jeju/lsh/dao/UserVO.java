@@ -3,8 +3,32 @@ package com.ict.jeju.lsh.dao;
 public class UserVO {
 	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, 
 								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate,
-								active, u_report, step, u_del;
+								active, u_report, step, u_del, out_regdate, u_restore, re_regdate;
 
+	public String getRe_regdate() {
+		return re_regdate;
+	}
+
+	public void setRe_regdate(String re_regdate) {
+		this.re_regdate = re_regdate;
+	}
+
+	public String getU_restore() {
+		return u_restore;
+	}
+
+	public void setU_restore(String u_restore) {
+		this.u_restore = u_restore;
+	}
+
+	public String getOut_regdate() {
+		return out_regdate;
+	}
+
+	public void setOut_regdate(String out_regdate) {
+		this.out_regdate = out_regdate;
+	}
+	
 	public String getU_del() {
 		return u_del;
 	}
