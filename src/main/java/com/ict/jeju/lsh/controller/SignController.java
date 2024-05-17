@@ -79,13 +79,20 @@ public class SignController {
 			return mv;
 		}
 		
-	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), userVO2.getU_pwd())) {
+	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), userVO2.getU_pwd()) && userVO2.getActive().equals("0")) {
 	        session.setAttribute("loginChk", "ok");
 	        session.setAttribute("userVO", userVO2);
 	        mv.addObject("userVO", userVO2);
 	        mv.setViewName("redirect:home");
+	        System.out.println(userVO2.getActive());
 	        System.out.println("2");
 	        return mv;
+	    }
+	    if(userVO2.getActive().equals("1")) {
+	    	session.setAttribute("loginChk", "fail");
+	    	mv.addObject("msg", "이미 탈퇴한 회원입니다.");
+	    	mv.setViewName("lsh_view/login_page");
+	    	return mv;
 	    }
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
@@ -128,7 +135,7 @@ public class SignController {
 		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO2);
-		return "pdh-view/home";
+		return "redirect:home";
 	}
 	
 	// 네이버 로그인
@@ -144,7 +151,7 @@ public class SignController {
 		
 		session.setAttribute("loginChk", "ok");
 		session.setAttribute("userVO", userVO2);
-		return "pdh-view/home";
+		return "redirect:home";
 	}
 	
 	// 로그아웃
