@@ -75,7 +75,7 @@
 	width: 43%;
 }
 
-.nav_list {
+.nav_list, .nav-list__right {
 	font-family: 'GmarketSansLight';
 	font-weight: bold;
 	font-size: 17px;
@@ -83,27 +83,15 @@
 }
 
 .nav-list__right {
-	font-family: 'GmarketSansLight';
-	font-weight: bold;
-	font-size: 17px;
 	list-style-type: none;
 	display: flex;
 	position: absolute;
 	justify-content: space-between;
 	right: 1.5%;
 	width: 500px;
-	line-height: 50px;
 }
 
-.search-icon {
-	color: white;
-	background-color: transparent;
-	border: none;
-	font-size: 23px;
-	line-height: 22px;
-}
-
-.delete-icon {
+.search-icon, .delete-icon {
 	color: white;
 	background-color: transparent;
 	border: none;
@@ -279,7 +267,7 @@
 	line-height: 40px;
 }
 
-.write_button {
+.write_button, .write_r_button {
 	border: none;
 	font-family: 'GmarketSansMedium';
 	width: 100px;
@@ -289,7 +277,7 @@
 	background-color: #D9D9D9;
 }
 
-#qa_write {
+#qa_write, #review_write {
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -363,4 +351,17 @@
 
 .note-editor {
 	margin: 0 auto;
+}
+
+.review_title__section {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	margin: 20px auto;
+}
+
+.hr {
+	width: 90%;
+	margin: 10px auto;
+	border: 1px solid #D9D9D9;
 }

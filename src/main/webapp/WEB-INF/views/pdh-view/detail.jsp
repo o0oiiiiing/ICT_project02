@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="resources/pdh-css/detail.css" />
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/pdh-css/paging.css" />
+<link rel="stylesheet" href="resources/pdh-css/starRating.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
 <!-- jQuery -->
 <script
@@ -89,10 +90,13 @@
 	    });
 	    
 	});
-	// q&a영역 버튼 클릭할 때 보이게 하기
+	
+	// q&a영역, review영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
+	    var reviewButton = document.querySelector('.write_r_button');
 	    var qaWriteDiv = document.getElementById('qa_write');
+	    var reviewWriteDiv = document.getElementById('review_write');
 	    var overlay = document.querySelector(".overlay")
 
 	    writeButton.addEventListener('click', function() {
@@ -100,6 +104,7 @@
 	        if ("${userVO}" == "") {
 				alert("로그인 후 이용 가능합니다.")
 				location.href="login_go.do"
+				return 
 			} else {
 		        if (qaWriteDiv.style.display === 'block') {
 		        	qaWriteDiv.style.display = 'none';
@@ -112,6 +117,29 @@
 	        overlay.addEventListener('click', function() {
 	        	if (qaWriteDiv.style.display === 'block') {
 		        	qaWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        }
+	        })
+	    });
+	    
+	    reviewButton.addEventListener('click', function() {
+	        // 요소의 display를 토글
+	        if ("${userVO}" == "") {
+				alert("로그인 후 이용 가능합니다.")
+				location.href="login_go.do"
+				return 
+			} else {
+		        if (reviewWriteDiv.style.display === 'block') {
+		        	reviewWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        } else {
+		        	reviewWriteDiv.style.display = 'block';
+		        	overlay.style.display = 'block';
+		        }
+			}
+	        overlay.addEventListener('click', function() {
+	        	if (reviewWriteDiv.style.display === 'block') {
+	        		reviewWriteDiv.style.display = 'none';
 		        	overlay.style.display = 'none';
 		        }
 	        })
@@ -156,7 +184,7 @@
 							</div>
 						</form>
 					</li>
-					<li>${userVO.u_name}님환영합니다.</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
@@ -283,9 +311,10 @@
 				<p class="detail-title">Q&A</p>
 				<span class="material-symbols-outlined expand_icon">expand_more</span>
 			</div>
+			<!-- 내용 -->
 			<div class="qa_title__section">
 				<p class="qa_title">
-					Q&A <span style="color: orange;">(${qaNum})</span>
+					Q&A <span style="color: #FFBB36;">(${qaNum})</span>
 				</p>
 				<input class="write_button" type="button" value="질문작성">
 			</div>
@@ -325,7 +354,7 @@
 											<td style="text-align: center;">N</td>
 										</c:when>
 										<c:otherwise>
-											<td style="text-align: center;">Y</td>
+											<td style="text-align: center; color: #FFBB36;">Y</td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
@@ -380,8 +409,22 @@
 				<p class="detail-title">리뷰</p>
 				<span class="material-symbols-outlined expand_icon">expand_more</span>
 			</div>
+			<!-- 내용 -->
+			<div class="review_title__section">
+				<p class="qa_title">
+					리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
+				</p>
+				<input class="write_r_button" type="button" value="리뷰작성">
+			</div>
+			<hr class="hr">
+			<p
+				style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
+				존재하지 않습니다.</p>
+			<hr class="hr">
 		</div>
 	</div>
+
+	<!-- Q&A 작성하는 영역 -->
 	<form id="qa_write" method="post" action="qaWrite">
 		<div class="qa_write__container">
 			<p class="qa_wrtie__title">Q&A 작성</p>
@@ -410,6 +453,32 @@
 				</table>
 				<br>
 				<textarea id="summernote" name="bo_content" maxlength="1000"></textarea>
+			</div>
+			<div class="qa_write__buttons">
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
+					type="hidden" value="${userVO.u_name}" name="u_name"> <input
+					class="qa_write__button" type="reset" value="취소">
+				<button type="button" class="qa_write__button"
+					onclick="test(this.form)">등록</button>
+			</div>
+		</div>
+	</form>
+
+	<!-- 리뷰 작성하는 영역 -->
+	<form id="review_write" method="post" action="qaWrite">
+		<div class="qa_write__container">
+			<p class="qa_wrtie__title">리뷰 작성</p>
+			<div class="qa_write__content">
+				<fieldset>
+					<input type="radio" name="starRating" value="1" id="rate1"><label for="rate1">★</label>
+					<input type="radio" name="starRating" value="2" id="rate2"><label for="rate2">★</label>
+					<input type="radio" name="starRating" value="3" id="rate3"><label for="rate3">★</label>
+					<input type="radio" name="starRating" value="4" id="rate4"><label for="rate4">★</label>
+					<input type="radio" name="starRating" value="5" id="rate5"><label for="rate5">★</label>
+				</fieldset>
+					<input type="file" name="" multiple style="display: block; margin-left: 21px;"> 
+					<br>
+					<textarea style="width: 600px; height: 250px; display: block; margin: 0 auto;"></textarea>
 			</div>
 			<div class="qa_write__buttons">
 				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input

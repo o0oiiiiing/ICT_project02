@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: '116angduk_honesty15';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/116angduk_honesty15.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#review_write fieldset {
+	direction: rtl;
+	border: 0;
+	text-align: center;
+}
+
+#review_write fieldset legend {
+	text-align: right;
+}
+
+#review_write input[type=radio] {
+	display: none;
+}
+
+#review_write label {
+	font-family: '116angduk_honesty15';
+	font-size: 50px;
+	color: transparent;
+	text-shadow: 0 0 0 #f0f0f0;
+}
+
+#review_write label:hover {
+	text-shadow: 0 0 0 #FFDF6B;
+}
+
+#review_write label:hover ~ label {
+	text-shadow: 0 0 0 #FFDF6B;
+}
+
+#review_write input[type=radio]:checked ~ label {
+	text-shadow: 0 0 0 #FFDF6B;
+}
