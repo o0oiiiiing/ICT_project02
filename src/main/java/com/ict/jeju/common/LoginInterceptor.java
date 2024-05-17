@@ -16,26 +16,18 @@ public class LoginInterceptor implements AsyncHandlerInterceptor{
 			Object handler) throws Exception {
 		HttpSession session = request.getSession(true);
 		Object obj = session.getAttribute("loginChk");
-		if (obj == null) {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script> alert('로그인 후 이용 부탁드립니다.');");
-			out.println("window.location.href = 'login_go.do'; </script>");
+		Object obj2 = session.getAttribute("admin_loginChk");
+		if (obj == null && obj2 == null) {
+	        response.setContentType("text/html; charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.println("<script>");
+	        out.println("alert('로그인 후 이용 가능합니다.');");
+	        out.println("window.location.href = 'login_go.do';");
+	        out.println("</script>");
+	        out.flush();
 			return false;
 		}
 		return true;
 	}
 
-	/*
-	 * @Override public void postHandle(HttpServletRequest request,
-	 * HttpServletResponse response, Object handler, ModelAndView modelAndView)
-	 * throws Exception { AsyncHandlerInterceptor.super.postHandle(request,
-	 * response, handler, modelAndView); }
-	 * 
-	 * @Override public void afterCompletion(HttpServletRequest request,
-	 * HttpServletResponse response, Object handler, Exception ex) throws Exception
-	 * { AsyncHandlerInterceptor.super.afterCompletion(request, response, handler,
-	 * ex); }
-	 */
 }

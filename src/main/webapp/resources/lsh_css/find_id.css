@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.find_id_page {
-	width: 720px;
-	padding: 8% 0 0;
-  	margin: auto;
-}
-
 .find_id_container {
 	position: relative;
   	z-index: 1;

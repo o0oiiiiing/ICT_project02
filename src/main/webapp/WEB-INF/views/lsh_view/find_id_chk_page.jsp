@@ -6,9 +6,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>아이디 찾기 결과</title>
+		<title>FiND_ID | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/find_id_chk.css" rel="stylesheet" />
+		<style type="text/css">
+			.findID_chk_page {
+				padding: 8% 0 0;
+			  	margin: auto;
+			  	width: 100%;
+			  	height: 600px;
+			  	background-image: url('resources/lsh_images/jeju_island.jpg');
+			  	background-position: center;
+			  	background-size: cover;
+			}
+		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
@@ -27,7 +38,7 @@
 				</c:choose>
 				
 				<div class="findID_chk_box">
-					<a href="login_go.do" >로그인 &nbsp; | </a>
+					<a href="login_go.do" >로그인 &nbsp;&nbsp; | </a>
 					<a href="findpwd_go.do" >비밀번호 찾기</a>
 				</div>
 			</div>

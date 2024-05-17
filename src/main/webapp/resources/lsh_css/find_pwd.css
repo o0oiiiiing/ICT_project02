@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.find_pwd_page {
-	width: 720px;
-	padding: 8% 0 0;
-  	margin: auto;
-}
-
 .find_pwd_container {
 	position: relative;
   	z-index: 1;
@@ -15,6 +9,10 @@
   	padding: 45px;
   	text-align: center;
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.find_pwd_box {
+	margin-bottom: 20px;
 }
 
 .find_pwd_box ul li input {
@@ -50,5 +48,16 @@
 .find_pwd_text {
 	padding: 20px;
 	font-weight: bold;
+}
+
+.find_pwd_link_box {
+	margin: o auto;
+	margin-top: 30px;
+}
+
+.find_pwd_link_box a {
+	margin: 15px 0 0 15px;
+	text-decoration: none;
+	color: #6c6c6c;
 }
 

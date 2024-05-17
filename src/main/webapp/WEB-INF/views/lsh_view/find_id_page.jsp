@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>아이디 찾기</title>
+		<title>FiND_ID | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/find_id.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -27,12 +27,26 @@
 				f.action="findID_ok.do";
 				f.submit();
 			}
+			function back() {
+				window.history.back();
+			}
 		</script>
+		<style type="text/css">
+			.find_id_page {
+				padding: 8% 0 0;
+			  	margin: auto;
+			  	width: 100%;
+			  	height: 600px;
+			  	background-image: url('resources/lsh_images/jeju_island.jpg');
+			  	background-position: center;
+			  	background-size: cover;
+			}
+		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="find_id_page">
-			<div class="find_id_container">
+			<div class="find_id_container" style="opacity: 0.9; height: 400px;">
 				<form method="post">
 				<h3 class="find_id_text">아이디 찾기</h3>
 					<div class="find_id_box">
@@ -46,6 +60,9 @@
 							</li>
 							<li>
 								<input type="button" class="find_id_btn" value="아이디 찾기" onclick="findID_ok(this.form)">
+							</li>
+							<li>
+								<input type="button" class="find_id_btn" onclick="back()" value="Cancel">
 							</li>
 						</ul>
 					</div>

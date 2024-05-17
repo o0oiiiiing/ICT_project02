@@ -1,20 +1,17 @@
 @charset "UTF-8";
 
-.login_page {
-	width: 720px;
-	padding: 8% 0 0;
-  	margin: auto;
-}
-
 .login_box {
 	position: relative;
   	z-index: 1;
   	background: white;
   	max-width: 360px;
+  	max-height: 400px;
   	margin: 0 auto 100px;
   	padding: 45px;
   	text-align: center;
   	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  	opacity: 0.75;
+  	overflow: auto;
 }
 
 .login_box input {
@@ -74,6 +71,4 @@
 	margin: o auto;
 	margin-top: 15px;
 }
-
-
 
