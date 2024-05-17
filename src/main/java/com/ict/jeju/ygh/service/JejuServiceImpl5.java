@@ -143,8 +143,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 
 	// 회원정보 상세보기
 	@Override
-	public UserVO userDetail(String U_idx) {
-		return jejuDAO5.userDetail(U_idx);
+	public UserVO userDetail(String u_idx) {
+		return jejuDAO5.userDetail(u_idx);
 	}
 	
 	// 회원정보수정
@@ -223,6 +223,11 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public int userDelete(UserVO userVO) {
 		return jejuDAO5.userDelete(userVO);
+	}
+	
+	@Override
+	public int userRestore(UserVO userVO) {
+		return jejuDAO5.userRestore(userVO);
 	}
 
 }

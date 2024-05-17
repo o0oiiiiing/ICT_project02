@@ -219,7 +219,13 @@
 	
 	<update id="user_delete" parameterType="userVO">
 		update User_table
-		set active = 1, u_del = #{u_del}
+		set active = 1, u_del = #{u_del}, out_regdate = sysdate(), u_restore = #{u_restore}
+		where u_idx = #{u_idx}
+	</update>
+	
+	<update id="user_Restore" parameterType="userVO">
+		update User_table
+		set active = 0, u_restore = #{u_restore}, out_regdate = #{out_regdate}, u_del = #{u_del}, re_regdate = sysdate()
 		where u_idx = #{u_idx}
 	</update>
 	
