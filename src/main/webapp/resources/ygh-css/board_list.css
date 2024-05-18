@@ -75,6 +75,10 @@
 	width: 20%
 }
 
+#board_t .grade {
+	width: 20%
+}
+
 /* paging */
 #board_t table tfoot {
 	text-align: center;

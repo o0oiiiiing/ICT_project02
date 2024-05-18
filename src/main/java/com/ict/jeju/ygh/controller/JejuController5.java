@@ -20,6 +20,7 @@ import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
+import com.ict.jeju.ygh.dao.MyreviewVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 import com.ict.jeju.ygh.service.JejuService5;
@@ -823,5 +824,55 @@ public class JejuController5 {
 		}
     	return new ModelAndView("ygh-view/error");
     }
+    
+    // 나의 리뷰
+ 	@RequestMapping("myreview_list.do")
+ 	public ModelAndView myreviewlist(HttpServletRequest request, HttpSession session) {
+ 		ModelAndView mv = new ModelAndView("chm-view/myreview_list");
+ 		UserVO myvo = (UserVO) session.getAttribute("userVO");
+ 		
+ 		// 페이징
+ 		int count3 = jejuService5.getTotalCount3(myvo.getU_idx());
+ 		paging.setTotalRecord(count3);
 
+ 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+ 			paging.setTotalPage(1);
+ 		} else {
+ 			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+ 			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+ 				paging.setTotalPage(paging.getTotalPage() + 1);
+ 			}
+ 		}
+
+ 		String cPage = request.getParameter("cPage");
+ 		if (cPage == null) {
+ 			paging.setNowPage(1);
+ 		} else {
+ 			paging.setNowPage(Integer.parseInt(cPage));
+ 		}
+
+ 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+
+ 		paging.setBeginBlock(
+ 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+ 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+
+ 		if (paging.getEndBlock() > paging.getTotalPage()) {
+ 			paging.setEndBlock(paging.getTotalPage());
+ 		}
+
+ 		// DB
+ 		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
+ 		
+ 		for (MyreviewVO k : myreview_list) {
+ 			k.getU_idx();
+ 			System.out.println(k.getU_idx());
+ 		}
+ 		if (myreview_list != null) {
+ 			mv.addObject("myreview_list", myreview_list);
+ 			mv.addObject("paging", paging);
+ 			return mv;
+ 		}
+ 		return new ModelAndView("ygh-view/error");
+ 	}
 }
