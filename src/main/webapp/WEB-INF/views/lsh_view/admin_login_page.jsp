@@ -43,12 +43,11 @@
 			  	z-index: 1;
 			  	background: white;
 			  	max-width: 360px;
-			  	height: 400px;
-			  	margin: 0 auto 100px;
+			  	height: 450px;
+			  	margin: 0 auto 150px;
 			  	padding: 45px;
 			  	text-align: center;
 			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-			  	opacity: 0.9;
 			  	overflow: auto;
 			}
 		</style>

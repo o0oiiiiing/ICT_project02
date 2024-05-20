@@ -39,9 +39,9 @@ public class PlaceListController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@RequestMapping("home")
+	@RequestMapping("/")
 	public ModelAndView home() {
-		ModelAndView mv = new ModelAndView("pdh-view/home");
+		 ModelAndView mv = new ModelAndView("pdh-view/home");
 		List<PlaceListVO> popularList = placeListService.popularList();
 		if (popularList != null) {
 			mv.addObject("popularList", popularList);

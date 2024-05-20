@@ -23,55 +23,11 @@
 		location.href="user_detail.do?u_idx="+u_idx;
  	}  
 	
-	// 계정 삭제
- 	function user_del_ok(f) {
-		f.action="user_del_ok.do"
-		f.submit();
-	} 
 	// 계정 복구
  	function user_restore_ok(f) {
 		f.action="user_restore_ok.do"
 		f.submit();
 	} 
-	
-	
-	// 계정 삭제 토글
- 	document.addEventListener('DOMContentLoaded', function() {
- 	    let delButtons = document.querySelectorAll('.del_button');
- 	   	let delModal = document.getElementById('delModal');
-       	let closeModal = delModal.querySelector('.close');
- 	    let delWrite = document.getElementById('del_write');
-
- 	   function hideDelModal() {
-           delModal.style.display = 'none';
-       }
-       function showDelModal() {
-           delModal.style.display = 'block';
-       }
-
- 	    // 계정 삭제 버튼에 대한 이벤트 설정
- 	   delButtons.forEach(function(delButton) {
- 		  delButton.addEventListener('click', function(event) {
- 	           // 해당 버튼이 속한 행의 u_idx 값을 가져오기
- 	           let u_idx = this.parentNode.parentNode.querySelector('.u_idx').value;
-
- 	           // del_write 폼에 u_idx 값 설정
- 	           delWrite.querySelector('input[name="u_idx"]').value = u_idx;
- 	            
- 	           showDelModal();
- 	           event.preventDefault(); // 기본 동작 취소
- 	       });
- 	   });
- 	   closeModal.addEventListener('click', function() {
-           hideDelModal();
-       });
-
-       delModal.addEventListener('click', function(event) {
-           event.stopPropagation();
-       });
- 	  
- 	});
- 	
 	
 	// 계정 복구 토글
  	document.addEventListener('DOMContentLoaded', function() {
@@ -114,10 +70,6 @@
  	    });
  	});
 	
-	function out_user_list() {
-		location.href="out_user_list.do";
-	}
-	
 	
 </script>
 </head>
@@ -128,7 +80,7 @@
 		<div id="user_h">
 			<button>전체회원</button>
 			<button>현재회원</button>
-			<button onclick="out_user_list()">탈퇴회원</button>
+			<button>탈퇴회원</button>
 		</div>
 		<div>
 			<table>
@@ -154,7 +106,7 @@
 						<c:otherwise>
 							<c:forEach var="k" items="${user_list}" varStatus="vs">
 								<tr>
-									<c:set var="activeRow" value="${k.active == 1 ? 'active-row' : ''}" />
+									<c:if test="${k.active == 1}">
 									<td class="${activeRow}">${k.u_name}</td>
 									<td class="${activeRow}">${k.u_id}</td>
 									<td class="${activeRow}">${k.u_email}</td>
@@ -176,6 +128,7 @@
 											</c:otherwise>
 										</c:choose>
 									</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

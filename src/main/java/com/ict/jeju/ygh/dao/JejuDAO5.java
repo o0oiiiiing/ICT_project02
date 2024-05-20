@@ -120,6 +120,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+
 	public int commentUpdate(String bo_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.comment_update", bo_idx);
@@ -148,6 +149,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+
 	public int replyUpdate(String report_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.reply_update", report_idx);
@@ -257,6 +259,16 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	// 사용자 Q&A 페이징
+	public int getTotalCount3(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.count3", u_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
 	// 관리자 Q&A 전체보기
 	public List<BoardVO> boardList(int offset, int limit, String u_idx) {
 		try {
@@ -271,10 +283,10 @@ public class JejuDAO5 {
 		return null;
 	}
 
-	// 사용자 Q&A 페이징
-	public int getTotalCount3(String u_idx) {
+	// 사용자 신고 페이징
+	public int getTotalCount4(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectOne("Board_table.count3", u_idx);
+			return sqlSessionTemplate.selectOne("Board_table.count4", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -295,17 +307,7 @@ public class JejuDAO5 {
 		return null;
 	}
 
-	// 사용자 신고 페이징
-	public int getTotalCount4(String u_idx) {
-		try {
-			return sqlSessionTemplate.selectOne("Board_table.count4", u_idx);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-	
-	// 관지자 전체 Q&A 전체보기
+	// 관지자 전체 Q&A 페이징
 	public int getTotalCount5() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count5");
@@ -315,7 +317,7 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// 관지자 전체 Q&A 페이징
+	// 관지자 전체 Q&A 전체보기
 	public List<BoardVO> adminBoardlist2(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
@@ -327,8 +329,8 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
-	// 관지자 전체 신고 전체보기
+
+	// 관지자 전체 신고 페이징
 	public int getTotalCount6() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count6");
@@ -337,8 +339,8 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
-	// 관지자 전체 신고 페이징
+
+	// 관지자 전체 신고 전체보기
 	public List<ReportVO> adminReportlist2(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
@@ -350,7 +352,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 회원관리 페이징
 	public int getTotalCount7() {
 		try {
@@ -360,7 +362,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
 	// 회원관리 전체보기
 	public List<UserVO> userList(int offset, int limit) {
 		try {
@@ -373,8 +375,8 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
-	
+
+	// 관리자 상세보기
 	public AdminVO adminDetail(String a_idx) {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.admin_detail", a_idx);
@@ -383,7 +385,8 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
+	// 회원관리 삭제
 	public int userDelete(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.update("Board_table.user_delete", userVO);
@@ -392,7 +395,8 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
+	// 회원관리 복구
 	public int userRestore(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.update("Board_table.user_Restore", userVO);
@@ -400,6 +404,19 @@ public class JejuDAO5 {
 			System.out.println(e);
 		}
 		return -1;
+	}
+
+	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			map.put("u_idx", Integer.parseInt(u_idx));
+			return sqlSessionTemplate.selectList("Board_table.myreview_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 
 }

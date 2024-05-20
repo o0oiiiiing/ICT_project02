@@ -17,7 +17,6 @@ public class CategoryDAO {
 
 	public List<CategoryVO> getCategoryList(String vi_value) {
 		try {
-			System.out.println(vi_value+"dao");
 			return sqlsessionTemplate.selectList("category.selectList",vi_value);
 		} catch (Exception e) {
 			System.out.println(e);

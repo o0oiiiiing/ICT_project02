@@ -92,11 +92,11 @@ $(document).ready(function() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="category_page.do?vi_value=관광지" class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=음식점" class="a_tag">음식점</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=숙박" class="a_tag">숙박</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑" class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사" class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=관광지&option=option1" class="a_tag">관광지</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=음식점&option=option1" class="a_tag">음식점</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=숙박&option=option1" class="a_tag">숙박</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑&option=option1" class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사&option=option1" class="a_tag">축제/행사</a></li>
 			<c:if test="${admin_loginChk != 'ok'}">
 				<li class="nav_list"><a href="myTripPlan" class="a_tag">나의 여행</a></li>
 			</c:if>
@@ -119,7 +119,7 @@ $(document).ready(function() {
 							</div>
 						</form>
 					</li>
-					<li>${userVO.u_id}님 환영합니다.</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
@@ -139,7 +139,7 @@ $(document).ready(function() {
 									</div>
 								</form>
 							</li>
-							<li>${adminVO.a_id}님 환영합니다.</li>
+							<li>${adminVO.a_name}님 환영합니다.</li>
 							<li>|</li>
 							<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 						</ul>
