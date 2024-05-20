@@ -55,7 +55,7 @@
 		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{disclosure}) 
 	</insert>
 	
-	<select id="qaList" parameterType="QaPagingVO" resultType="QaVO">
+	<select id="qaList" parameterType="PagingVO" resultType="QaVO">
 		select * 
 		from Board_table 
 		where contentsid = #{contentsid} 
@@ -65,17 +65,46 @@
 	</select>
 	
 	<insert id="reviewWrite" parameterType="ReviewVO">
-		insert into Review_table(u_idx, contentsid, re_content, re_grade, re_regdate) 
-		values(#{u_idx}, #{contentsid}, #{re_content}, #{re_grade}, sysdate()) 
+		insert into Review_table(u_idx, contentsid, u_profile_img, u_name, re_content, re_grade, re_regdate) 
+		values(#{u_idx}, #{contentsid}, #{u_profile_img}, #{u_name}, #{re_content}, #{re_grade}, sysdate()) 
 	</insert>
 	
-	<insert id="imageInsert" parameterType="ReviewVO">
+	<insert id="imageInsert" parameterType="ImagesVO">
 		<selectKey keyProperty="re_idx" resultType="String" order="BEFORE">
 			SELECT (IFNULL(MAX(re_idx),0)) as re_idx FROM Review_table
 	    </selectKey>
 	    INSERT INTO Picture_table (re_idx, pic_file)
 	    VALUES (#{re_idx}, #{pic_file})
 	</insert>
+	
+	<resultMap type="ReviewVO" id="ReviewMap">
+		<result column="re_idx" property="re_idx"/>
+		<result column="u_idx" property="u_idx"/>
+		<result column="contentsid" property="contentsid"/>
+		<result column="re_content" property="re_content"/>
+		<result column="re_grade" property="re_grade"/>
+		<result column="re_regdate" property="re_regdate"/>
+		<collection column="re_idx" 
+			property="imageList" 
+			javaType="java.util.List" 
+			ofType="ImagesVO" 
+			select="imageList" />
+	</resultMap>
+	
+	<select id="reviewList" parameterType="PagingVO" resultMap="ReviewMap">
+		select * 
+		from Review_table 
+		where contentsid = #{contentsid} 
+		order by re_regdate desc
+		limit #{limit}
+		offset #{offset}
+	</select>
+	
+	<select id="imageList" parameterType="String" resultType="ImagesVO">
+		select * 
+		from Picture_table
+		where re_idx = #{re_idx}
+	</select>
 
 </mapper>
 

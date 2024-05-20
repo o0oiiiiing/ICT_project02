@@ -1,6 +1,6 @@
 package com.ict.jeju.pdh.dao;
 
-public class QaPagingVO {
+public class PagingVO {
 	private String contentsid;
 	private int offset, limit;
 	

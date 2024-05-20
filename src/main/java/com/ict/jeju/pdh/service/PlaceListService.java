@@ -3,7 +3,8 @@ package com.ict.jeju.pdh.service;
 import java.util.List;
 
 import com.ict.jeju.pdh.dao.PlaceListVO;
-import com.ict.jeju.pdh.dao.QaPagingVO;
+import com.ict.jeju.pdh.dao.ImagesVO;
+import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 
@@ -33,11 +34,14 @@ public interface PlaceListService {
 	public int qaWrite(QaVO qaVO);
 	
 	// 장소의 Q&A 가져오기
-	public List<QaVO> qaList(QaPagingVO qaPagingVO);
+	public List<QaVO> qaList(PagingVO qaPagingVO);
 	
 	// 리뷰 작성하기
 	public int reviewWrite(ReviewVO reviewVO);
 	
 	// 리뷰 이미지 삽입하기
-	public int imageInsert(ReviewVO reviewVO);
+	public int imageInsert(ImagesVO imagesVO);
+	
+	// 장소의 리뷰 가져오기
+	public List<ReviewVO> reviewList(PagingVO rPagingVO);
 }
