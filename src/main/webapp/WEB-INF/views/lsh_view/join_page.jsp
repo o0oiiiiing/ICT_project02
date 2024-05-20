@@ -24,7 +24,7 @@
 					dataType : "text",
 					success : function(data) {
 						if (data === '1') {
-							alert("사용 가능");
+							alert("사용 가능한 아이디입니다.");
 							idChk = true;
 						} else if (data === '0') {
 							alert("이미 사용중인 아이디입니다.");
@@ -32,7 +32,7 @@
 						}
 					},
 					error : function() {
-						alert("읽기 실패");
+						alert("read fail");
 						idChk = false;
 					}
 				});
@@ -83,7 +83,7 @@
 			function join_ok(f) {
 				if (f.u_id === '' || f.u_pwd === '' || f.u_pwdchk === '' || f.u_name === '' || f.u_birth === '' || 
 						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detail_addr === '') {
-					alert("필수 항목을 입력하세요.");
+					alert("필수 항목들을 입력해주세요.");
 					return false;
 				} else if (! f.click_1.checked) {
 					alert("필수 이용 약관1에 동의해주세요.");
@@ -94,7 +94,7 @@
 					f.click_2.focus();
 					return false;
 				} else if (! idChk) {
-					alert("아이디 중복 확인을 해주세요.");
+					alert("아이디 중복 확인을 하세요.");
 					f.idChk.focus();
 			        return false;
 				} else if (f.u_birth.value === '') {
@@ -139,31 +139,28 @@
 					oncomplete : function(data) {
 						let addr = ''
 						let extraAddr = '';
-		
 						if (data.userSelectedType === 'R') {
 							addr = data.roadAddress;
 						} else {
 							addr = data.jibunAddress;
 						}
-		
+						
 						if (data.userSelectedType === 'R') {
 							if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
 								extraAddr += data.bname;
 							}
-							
 							if (data.buildingName !== '' && data.apartment === 'Y') {
 								extraAddr += (extraAddr !== '' ? ', '
 										+ data.buildingName : data.buildingName);
 							}
-							
 							if (extraAddr !== '') {
 								extraAddr = ' (' + extraAddr + ')';
 							}
+							
 							document.getElementById("u_detail_addr2").value = extraAddr;
 						} else {
 							document.getElementById("u_detail_addr2").value = '';
 						}
-						
 						document.getElementById('u_postcode').value = data.zonecode;
 						document.getElementById('u_addr').value = addr;
 						document.getElementById('u_detail_addr').focus();
@@ -199,7 +196,7 @@
 									<input type="password" id="u_pwd" name="u_pwd" required placeholder="Password" />
 								</li>
 								<li>
-									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="비밀번호 확인" />
+									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="Password" />
 									<span id="msg" ></span>
 								</li>
 								<li class="join_li_box" >
@@ -225,8 +222,8 @@
 									<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" />
 									<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" readonly />
 									<input type="text" id="u_addr" name="u_addr" readonly />
-									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1" />
-									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" readonly />
+									<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="Address" />
+									<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="Address" readonly />
 								</li>
 							</ul>
 					</div>
@@ -432,8 +429,8 @@
 					</div>
 					
 					<div>
-						<input type="button" class="join_ok_btn" onclick="join_ok(this.form)" value="가입하기" />
-						<input type="button" class="join_ok_btn" onclick="back()" value="취소" />
+						<input type="button" class="join_ok_btn" onclick="join_ok(this.form)" value="Join us" />
+						<input type="button" class="join_ok_btn" onclick="back()" value="Cancel" />
 					</div>
 				</form>
 			</div>

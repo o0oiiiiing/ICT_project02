@@ -119,7 +119,7 @@ $(document).ready(function() {
 							</div>
 						</form>
 					</li>
-					<li>${userVO.u_id}님 환영합니다.</li>
+					<li>${userVO.u_name}님 환영합니다.</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
@@ -139,7 +139,7 @@ $(document).ready(function() {
 									</div>
 								</form>
 							</li>
-							<li>${adminVO.a_id}님 환영합니다.</li>
+							<li>${adminVO.a_name}님 환영합니다.</li>
 							<li>|</li>
 							<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 						</ul>
