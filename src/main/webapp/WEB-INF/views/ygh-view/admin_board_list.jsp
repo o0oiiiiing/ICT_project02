@@ -42,10 +42,10 @@
 								<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
 								 <c:choose>
 										<c:when test="${k.active == 1}">
-											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[처리완료] ${k.bo_title}</a>
+											<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">[처리완료] ${k.bo_title}</a>
 										</c:when>
 										<c:otherwise>
-											<a href="board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+											<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
 									</c:otherwise></c:choose></td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
