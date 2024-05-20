@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 
@@ -416,6 +417,15 @@ public class JejuDAO5 {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return null;
+	}
+
+	public String myreviewtitle(String contentsid) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.myreview_title", contentsid);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
 		return null;
 	}
 

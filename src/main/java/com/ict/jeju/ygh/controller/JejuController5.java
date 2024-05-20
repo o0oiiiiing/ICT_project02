@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
@@ -825,8 +826,10 @@ public class JejuController5 {
  		ModelAndView mv = new ModelAndView("chm-view/myreview_list");
  		UserVO myvo = (UserVO) session.getAttribute("userVO");
  		
+ 		
  		// 페이징
  		int count3 = jejuService5.getTotalCount3(myvo.getU_idx());
+ 		System.out.println(count3);
  		paging.setTotalRecord(count3);
 
  		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
@@ -858,9 +861,14 @@ public class JejuController5 {
  		// DB
  		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
  		
+ 		
+ 		String contentsid = "";
+ 		String title = "";
+ 		
  		for (MyreviewVO k : myreview_list) {
- 			k.getU_idx();
- 			System.out.println(k.getU_idx());
+ 			contentsid = k.getContentsid();
+ 			title = jejuService5.myreviewtitle(contentsid);
+ 			k.setVi_title(title);
  		}
  		if (myreview_list != null) {
  			mv.addObject("myreview_list", myreview_list);
