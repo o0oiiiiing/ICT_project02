@@ -232,6 +232,14 @@
 		where u_idx = #{u_idx}
 	</update>
 	
+	<!-- 나의 리뷰 -->
+	<select id="myreview_list" resultType="myvo" parameterType="Map">
+		select * from Review_table 
+		where u_idx = #{u_idx}
+		order by re_regdate desc
+		limit #{limit} offset #{offset}
+	</select>
+	
 	
 </mapper>
 

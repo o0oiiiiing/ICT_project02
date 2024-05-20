@@ -18,7 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.chm.dao.Paging3;
 import com.ict.jeju.chm.service.CategoryService;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.ygh.dao.BoardVO;
+import com.ict.jeju.ygh.dao.CommentVO;
 
 @Controller
 public class CategoryController {
@@ -42,7 +45,6 @@ public class CategoryController {
 		// 페이징 기법
         // 전체 게시물의 수
         int count = categoryService.getTotalCount(vi_value);
-        System.out.println(count +"카운트");
         paging3.setTotalRecord(count);
 
         // 전체 페이지의 수
@@ -56,21 +58,15 @@ public class CategoryController {
         }
         // 현재 페이지 구함
         String cPage = request.getParameter("cPage");
-        System.out.println(cPage + "cpage");
         if (cPage == null) {
             paging3.setNowPage(1);
         } else {
             paging3.setNowPage(Integer.parseInt(cPage));
         }
 
-        // begin, end 구하기 (Oracle)
-        // offset 구하기
-        // offset = limit * (현재페이지-1);
-        // db에서 시작되는 위치라고 보면 편하다.
         paging3.setOffset(paging3.getNumPerPage() * (paging3.getNowPage() - 1));
 
         // 시작 블록 // 끝블록
-        //
         paging3.setBeginBlock(
                 (int) ((paging3.getNowPage() - 1) / paging3.getPagePerBlock()) * paging3.getPagePerBlock() + 1);
         paging3.setEndBlock(paging3.getBeginBlock() + paging3.getPagePerBlock() - 1);
@@ -83,16 +79,13 @@ public class CategoryController {
         
         // ,option_select
         List<CategoryVO> category_list = categoryService.getBoardList(paging3.getOffset(), paging3.getNumPerPage(),vi_value,option);
-        
-        System.out.println(category_list.size());
-        
+         
         if (category_list != null) {
             mv.addObject("category_list", category_list);
             mv.addObject("paging3", paging3);
             mv.addObject("cate_list" , cate_list);
             return mv;
         }
-        
 		return null;
 	}
 	
@@ -101,7 +94,6 @@ public class CategoryController {
 			, HttpServletRequest request ,@ModelAttribute("keyword")String keyword) {
 		ModelAndView mv = new ModelAndView("chm-view/searchlist");
 		int count = categoryService.getTotalCount2(keyword);
-        System.out.println(count +"카운트");
         paging3.setTotalRecord(count);
 
         // 전체 페이지의 수
@@ -113,8 +105,6 @@ public class CategoryController {
                 paging3.setTotalPage(paging3.getTotalPage() + 1);
             }
         }
-        
-        System.out.println(paging3.getTotalPage());
         
 		// 현재 페이지 구함
         String cPage = request.getParameter("cPage");
@@ -136,7 +126,6 @@ public class CategoryController {
         
         // ,option_select
         List<CategoryVO> searchList = categoryService.searchList(paging3.getOffset(), paging3.getNumPerPage(),keyword);
-        System.out.println(searchList.size());
         if (searchList != null) {
             mv.addObject("paging3", paging3);
             mv.addObject("searchList", searchList);
@@ -145,4 +134,5 @@ public class CategoryController {
         
 		return null;
 	}
+	
 }

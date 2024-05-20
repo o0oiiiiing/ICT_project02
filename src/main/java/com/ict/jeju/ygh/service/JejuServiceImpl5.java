@@ -11,6 +11,7 @@ import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.JejuDAO5;
+import com.ict.jeju.ygh.dao.MyreviewVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
@@ -235,6 +236,11 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public int userRestore(UserVO userVO) {
 		return jejuDAO5.userRestore(userVO);
+	}
+
+	@Override
+	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
+		return jejuDAO5.myreviewlist(offset, limit, u_idx);
 	}
 
 }

@@ -7,6 +7,7 @@ import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
+import com.ict.jeju.ygh.dao.MyreviewVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
@@ -118,5 +119,7 @@ public interface JejuService5 {
 
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
+	
+	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
 
 }

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>카테고리</title>
 <link rel="stylesheet" href="resources/chm-css/category.css?after">
 <link rel="stylesheet" href="resources/chm-css/map.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
@@ -123,7 +123,7 @@
 		
 			// 마커를 지도에 표시
 			marker.setMap(map);
-		
+			
 			// 마커를 중심으로 지도를 이동
 			map.setCenter(latlng);
 			
@@ -132,7 +132,6 @@
 					+ '    <div class="info">'
 					+ '        <div class="title">'
 					+ vt
-					+ '            <div class="close" onclick="marker_del()" title="닫기"></div>'
 					+ '        </div>'
 					+ '        <div class="body">'
 					+ '            <div class="img">'

@@ -293,12 +293,14 @@
 			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
 					<p>${k.u_name} 님</p>
-					<p>나의 리뷰 ${k.review_count}</p>
+					<p>나의 리뷰 <a href="myreview_list.do?">${k.review_count}</a></p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
 					<!-- 경화 -->
 					<button onclick="board_list()">문의내역</button>
 					<button onclick="report_list()">신고내역</button>
+					
+					
 					
 				</c:forEach>
 			</div>

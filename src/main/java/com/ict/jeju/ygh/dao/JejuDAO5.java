@@ -406,4 +406,17 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			map.put("u_idx", Integer.parseInt(u_idx));
+			return sqlSessionTemplate.selectList("Board_table.myreview_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
 }
