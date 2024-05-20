@@ -65,8 +65,7 @@
 	<h1>안녕</h1>
 	<a href="home">박다현</a>
 	<a href="user_update.do">회원정보수정(비밀번호변경)</a>
-	<a href="admin_list.do">나의여행(관리자)</a>
-	<a href="all_list.do">게시판</a>
+	
 	
 	<form action="admin_insert">
     	<input type="submit" value="관리자 장소추가"> 
