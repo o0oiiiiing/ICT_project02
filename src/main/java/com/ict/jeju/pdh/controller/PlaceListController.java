@@ -1,7 +1,9 @@
 package com.ict.jeju.pdh.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,11 +50,33 @@ public class PlaceListController {
 	public ModelAndView home() {
 		 ModelAndView mv = new ModelAndView("pdh-view/home");
 		List<PlaceListVO> popularList = placeListService.popularList();
-		if (popularList != null) {
-			mv.addObject("popularList", popularList);
-			return mv;
-		}
-		return null;
+		List<PlaceListVO> allList = placeListService.allList();
+		if (popularList != null && allList!=null) {
+            Random random = new Random();
+            
+            // 관광지 목록과 음식점 목록을 따로 분리
+            List<PlaceListVO> touristSpots = new ArrayList<>();
+            List<PlaceListVO> restaurants = new ArrayList<>();
+            for (PlaceListVO place : allList) {
+                if ("관광지".equals(place.getVi_value())) {
+                    touristSpots.add(place);
+                } else if ("음식점".equals(place.getVi_value())) {
+                    restaurants.add(place);
+                }
+            }
+            
+            PlaceListVO randomTour = touristSpots.get(random.nextInt(touristSpots.size()));
+            PlaceListVO randomRestaurant = restaurants.get(random.nextInt(restaurants.size()));
+
+            mv.addObject("popularList", popularList);
+            mv.addObject("allList", allList);
+            mv.addObject("randomTour", randomTour);
+            mv.addObject("randomRestaurant", randomRestaurant);
+
+            return mv;
+        }
+
+        return null;
 	}
 
 	@RequestMapping("detail")
