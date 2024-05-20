@@ -38,8 +38,13 @@ public class PlaceListController {
 	private QaPaging qaPaging;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
+	
 	@RequestMapping("/")
+    public String rootRedirect() {
+        return "redirect:home";
+    }
+	
+	@RequestMapping("/home")
 	public ModelAndView home() {
 		 ModelAndView mv = new ModelAndView("pdh-view/home");
 		List<PlaceListVO> popularList = placeListService.popularList();
