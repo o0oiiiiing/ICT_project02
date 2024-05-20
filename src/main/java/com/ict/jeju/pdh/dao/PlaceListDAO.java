@@ -100,4 +100,24 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
+	
+	// 리뷰 작성하기
+	public int reviewWrite(ReviewVO reviewVO) {
+		try {
+			return sqlSessionTemplate.insert("place.reviewWrite", reviewVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 리뷰 이미지 삽입하기
+	public int imageInsert(ReviewVO reviewVO) {
+		try {
+			return sqlSessionTemplate.insert("place.imageInsert", reviewVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }

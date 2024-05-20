@@ -1,7 +1,27 @@
 package com.ict.jeju.pdh.dao;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewVO {
-	private String re_idx, u_idx, pic_idx, report_idx, contentsid, re_content, re_grade, re_regdate;
+	private String re_idx, u_idx, report_idx, contentsid, re_content, re_grade, re_regdate;
+	private String pic_idx, pic_file;
+	private MultipartFile[] images;
+	
+	public String getPic_file() {
+		return pic_file;
+	}
+
+	public void setPic_file(String pic_file) {
+		this.pic_file = pic_file;
+	}
+
+	public MultipartFile[] getImages() {
+		return images;
+	}
+
+	public void setImages(MultipartFile[] images) {
+		this.images = images;
+	}
 
 	public String getRe_idx() {
 		return re_idx;
