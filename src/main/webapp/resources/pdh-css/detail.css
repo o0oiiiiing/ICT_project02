@@ -302,7 +302,6 @@
 
 .qa_write__container {
 	width: 650px;
-	height: 520px;
 	background-color: white;
 	margin: 0 auto;
 	border-radius: 20px;
@@ -332,7 +331,7 @@
 	padding-top: 20px;
 }
 
-.qa_write__button {
+.qa_write__button, .review_write__button {
 	border: none;
 	font-family: 'GmarketSansMedium';
 	width: 100px;

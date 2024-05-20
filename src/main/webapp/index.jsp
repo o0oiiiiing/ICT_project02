@@ -30,7 +30,7 @@
 	        <div class="util login_util">
 	          <ul class="info">
 	            <li>${userVO.u_name }님</li>
-	            <li>보유 포인트: <fmt:formatNumber value="${userVO.u_point}" pattern="#,##0" /></li>
+	            <%-- <li>보유 포인트: <fmt:formatNumber value="${userVO.u_point}" pattern="#,##0" /></li> --%>
 	            <li><a href="logout_go.do">로그아웃</a></li>
 	            <li><a href="mypage_page.do">마이페이지</a></li>
 	            <li><a href="basket_page.do">장바구니</a></li>
