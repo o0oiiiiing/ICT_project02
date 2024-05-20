@@ -277,7 +277,7 @@ public class JejuController5 {
 
 	// 사용자 Q&A 작성
 	@PostMapping("board_write_ok.do")
-	public ModelAndView boardWriteOk(BoardVO bovo) {
+	public ModelAndView boardWriteOk(@ModelAttribute("cPage") String cPage, BoardVO bovo) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:board_list.do");
 
@@ -438,7 +438,7 @@ public class JejuController5 {
 
 	// 사용자 신고 작성
 	@PostMapping("report_write_ok.do")
-	public ModelAndView reportWriteOk(ReportVO revo) {
+	public ModelAndView reportWriteOk(@ModelAttribute("cPage2") String cPage2,ReportVO revo) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:report_list.do");
 
@@ -693,13 +693,6 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-	/*
-	 * // 회원관리 페이지 이동
-	 * 
-	 * @GetMapping("user_list.do") public ModelAndView userList() { return new
-	 * ModelAndView("ygh-view/user_list"); }
-	 */
-
 	// 회원관리
 	@RequestMapping("user_list.do")
 	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
@@ -812,6 +805,7 @@ public class JejuController5 {
     	return new ModelAndView("ygh-view/error");
     }
     
+    // 회원상세정보
     @RequestMapping("user_detail.do")
     public ModelAndView userDetail(@ModelAttribute("u_idx") String u_idx) {
     	ModelAndView mv = new ModelAndView("ygh-view/user_detail");
@@ -875,4 +869,5 @@ public class JejuController5 {
  		}
  		return new ModelAndView("ygh-view/error");
  	}
+
 }

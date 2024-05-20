@@ -29,24 +29,35 @@
 			  	background-position: center;
 			  	background-size: cover;
 			}
+			.find_pwd_container {
+				position: relative;
+			  	z-index: 1;
+			  	background: white;
+			  	max-width: 360px;
+			  	max-height: 450px;
+			  	margin: 0 auto 150px;
+			  	padding: 45px;
+			  	text-align: center;
+			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			}
 		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="find_pwd_page">
-			<div class="find_pwd_container" style="opacity: 0.9; height: 400px;">
-				<form method="post" action="email_send_ok.do">
+			<div class="find_pwd_container">
+				<form action="find_pwd_go.do" method="post">
 				<h3 class="find_pwd_text">비밀번호 찾기</h3>
 					<div class="find_pwd_box">
 						<ul>
 							<li>
-								<input type="text" name="u_id" placeholder="아이디를 입력하세요" />
+								<input type="text" name="u_id" placeholder="ID" />
 							</li>
 							<li>
-								<input type="email" name="u_email" placeholder="이메일을 입력하세요" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" />
+								<input type="email" name="u_email" placeholder="E-Mail" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" />
 							</li>
 							<li>
-								<input type="submit" class="find_pwd_btn" value="임시 비밀번호 발급 받기" />
+								<input type="submit" class="find_pwd_btn" value="Send to your E-Mail" />
 							</li>
 							<li>
 								<input type="button" class="find_pwd_btn" onclick="back()" value="Cancel">
@@ -54,7 +65,7 @@
 						</ul>
 					</div>
 					<div class="find_pwd_link_box">
-						<a href="login_go.do" >로그인 &nbsp; &nbsp;</a> 
+						<a href="login_go.do" >Login &nbsp; &nbsp;</a> 
 					</div>
 				</form>
 			</div>

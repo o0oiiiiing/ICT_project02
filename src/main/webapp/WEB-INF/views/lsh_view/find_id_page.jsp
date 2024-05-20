@@ -41,25 +41,36 @@
 			  	background-position: center;
 			  	background-size: cover;
 			}
+			.find_id_container {
+				position: relative;
+			  	z-index: 1;
+			  	background: white;
+			  	max-width: 360px;
+			  	max-height: 450px;
+			  	margin: 0 auto 150px;
+			  	padding: 45px;
+			  	text-align: center;
+			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			}
 		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="find_id_page">
-			<div class="find_id_container" style="opacity: 0.9; height: 400px;">
+			<div class="find_id_container">
 				<form method="post">
 				<h3 class="find_id_text">아이디 찾기</h3>
 					<div class="find_id_box">
 						<ul>
 							<li>
-								<input type="text" id="u_name"  name="u_name" placeholder="이름을 입력하세요" required>
+								<input type="text" id="u_name"  name="u_name" placeholder="Name" required>
 							</li>
 							<li>
-								<input type="email" id="u_email" name="u_email" placeholder="가입하신 이메일을 입력하세요"  
+								<input type="email" id="u_email" name="u_email" placeholder="E-Mail"  
 											pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" required>
 							</li>
 							<li>
-								<input type="button" class="find_id_btn" value="아이디 찾기" onclick="findID_ok(this.form)">
+								<input type="button" class="find_id_btn" value="find your ID" onclick="findID_ok(this.form)">
 							</li>
 							<li>
 								<input type="button" class="find_id_btn" onclick="back()" value="Cancel">
@@ -68,8 +79,8 @@
 					</div>
 					
 					<div class="find_id_link_box">
-						<a href="login_go.do" >로그인 &nbsp; &nbsp; | </a> 
-						<a href="findpwd_go.do" >비밀번호 찾기</a>
+						<a href="login_go.do" >Login &nbsp; | </a> 
+						<a href="findpwd_go.do" >find your Password</a>
 					</div>
 				</form>
 			</div>

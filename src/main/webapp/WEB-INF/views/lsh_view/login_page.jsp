@@ -8,12 +8,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>LOGIN | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<link href="resources/lsh_css/login_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
 				if (f.u_id.value === '' || f.u_pwd.value === '') {
-					alert("다시 입력하세요");
+					alert("입력한 정보를 확인해주세요.");
 					return;
 				}
 				f.action="login_ok.do";
@@ -35,15 +34,97 @@
 			  	background-position: center;
 			  	background-size: cover;
 			}
+			.login_container {
+				position: relative;
+			  	z-index: 1;
+			  	background: white;
+			  	max-width: 360px;
+			  	max-height: 450px;
+			  	margin: 0 auto 150px;
+			  	padding: 45px;
+			  	text-align: center;
+			  	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			  	overflow: auto;
+			}
+			.login_container::-webkit-scrollbar {
+				width: 7px;
+			}
+			
+			.login_container::-webkit-scrollbar-thumb {
+				height: 30%;
+				background: #a5deeb;
+				border-radius: 10px;
+			}
+			
+			.login_container::-webkit-scrollbar-track {
+				background: rgba(33, 122, 244, .1);
+			}
+			.login_box input {
+			  	outline: 0;
+			  	background: lightgray;
+			  	width: 100%;
+			  	border: 0;
+			  	margin: 0 0 15px;
+			  	padding: 15px;
+			  	box-sizing: border-box;
+			  	font-size: 14px;
+			  	border-radius: 10px;
+			}
+			
+			.login_btn {
+			  	text-transform: uppercase;
+			  	outline: 0;
+			  	width: 100%;
+			  	border: 0;
+			  	padding: 15px;
+			  	color: #6c6c6c;
+			  	font-size: 14px;
+			  	-webkit-transition: all 0.3 ease;
+			  	transition: all 0.3 ease;
+			  	cursor: pointer;
+			  	border-radius: 10px;
+			}
+			
+			.login_btn:hover, .login_btn:active, .login_btn:focus {
+				background: #b6dedc;
+			}
+			
+			.login_text{
+				padding: 20px;
+				font-weight: bold;
+			}
+			
+			.login_sns_btn{
+				margin: 10px;
+				width: 300px;
+				height: 45px;
+			}
+			
+			.login_sns {
+				margin-top: 15px;
+				text-decoration: none;
+				color: #6c6c6c;
+			}
+			
+			.login_find a {
+				margin: 15px 0 0 0;
+				text-decoration: none;
+				color: #6c6c6c;
+			}
+			
+			.login_find {
+				margin: o auto;
+				margin-top: 15px;
+			}
 		</style>
 	</head>
 	<body>
 		<%@include file="../common/header.jsp" %>
 		<section class="login_page">
-			<div class="login_box" style="opacity: 0.85;">
+			<div class="login_container">
 				<form method="post" class="login_form">
 					<h3 class="login_text">Login</h3>
-					<div>
+					<div class="login_box">
 						<ul>
 							<li>
 								<input type="text" id="u_id" name="u_id" class="login_box_input" placeholder="ID" required />
@@ -58,8 +139,8 @@
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do" >아이디 찾기 &nbsp;&nbsp; | </a>
-						<a href="findpwd_go.do" >비밀번호 찾기</a>
+						<a href="findID_go.do" >find your ID &nbsp;&nbsp; | </a>
+						<a href="findpwd_go.do" >&nbsp;&nbsp;find your Password</a>
 					</div>
 					
 					<div class="login_sns">

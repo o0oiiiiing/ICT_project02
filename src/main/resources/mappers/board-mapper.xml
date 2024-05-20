@@ -151,6 +151,11 @@
 		where u_idx = #{u_idx}
 	</update>
 	
+	<!-- 사용자 Q&A 페이징 -->
+	<select id="count3" resultType="int" parameterType="String">
+		select count(*) from Board_table where u_idx = #{u_idx}
+	</select>
+	
 	<!-- 사용자 Q&A 전체보기 -->
 	<select id="board_list" resultType="bovo" parameterType="Map">
 		select * from Board_table 
@@ -159,9 +164,9 @@
 		limit #{limit} offset #{offset} 
 	</select>
 	
-	<!-- 사용자 Q&A 페이징 -->
-	<select id="count3" resultType="int" parameterType="String">
-		select count(*) from Board_table where u_idx = #{u_idx}
+	<!-- 사용자 신고 페이징 -->
+	<select id="count4" resultType="int" parameterType="String">
+		select count(*) from Report_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 사용자 신고 전체보기 -->
@@ -170,11 +175,6 @@
 		where u_idx = #{u_idx}	
 		order by report_regdate desc
 		limit #{limit} offset #{offset} 	
-	</select>
-	
-	<!-- 사용자 신고 페이징 -->
-	<select id="count4" resultType="int" parameterType="String">
-		select count(*) from Report_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 관리자 전체 Q&A 페이징 -->
@@ -213,16 +213,19 @@
 		limit #{limit} offset #{offset} 
 	</select>
 	
+	<!-- 관리자 상세보기 -->
 	<select id="admin_detail" parameterType="String" resultType="adminVO">
 		select * from Admin_table where a_idx = #{a_idx}
 	</select>
 	
+	<!-- 회원관리 삭제 -->
 	<update id="user_delete" parameterType="userVO">
 		update User_table
 		set active = 1, u_del = #{u_del}, out_regdate = sysdate(), u_restore = #{u_restore}
 		where u_idx = #{u_idx}
 	</update>
 	
+	<!-- 회원관리 복구 -->
 	<update id="user_Restore" parameterType="userVO">
 		update User_table
 		set active = 0, u_restore = #{u_restore}, out_regdate = #{out_regdate}, u_del = #{u_del}, re_regdate = sysdate()

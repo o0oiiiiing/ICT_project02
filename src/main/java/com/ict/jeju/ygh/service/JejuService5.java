@@ -40,13 +40,15 @@ public interface JejuService5 {
 
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo);
+
 	public int commentUpdate(String bo_idx);
-	
+
 	// Q&A 답글 삭제
 	public int commentDelete(CommentVO comvo);
 
 	// 신고 답글 작성
 	public int replyInsert(ReplyVO repvo);
+
 	public int replyUpdate(String report_idx);
 
 	// 신고 답글 삭제
@@ -81,35 +83,43 @@ public interface JejuService5 {
 
 	// 사용자 Q&A 페이징
 	public int getTotalCount3(String u_idx);
+
 	// 사용자 Q&A 전체보기
 	public List<BoardVO> boardList(int offset, int limit, String u_idx);
 
 	// 사용자 신고 페이징
 	public int getTotalCount4(String u_idx);
+
 	// 사용자 신고 전체보기
 	public List<ReportVO> reportList(int offset, int limit, String u_idx);
-	
+
 	// 관지자 전체 Q&A 페이징
 	public int getTotalCount5();
+
 	// 관지자 전체 Q&A 전체보기
 	public List<BoardVO> adminBoardlist2(int offset, int limit);
-	
+
 	// 관지자 전체 신고 페이징
 	public int getTotalCount6();
+
 	// 관지자 전체 신고 전체보기
 	public List<ReportVO> adminReportlist2(int offset, int limit);
-	
-	
+
 	// 회원관리 페이징
 	public int getTotalCount7();
-	// 관지자 전체 신고 페이징
+
+	// 회원관리 전체보기
 	public List<UserVO> userList(int offset, int limit);
+
 	// 관리자 상세보기
 	public AdminVO adminDetail(String a_idx);
+
+	// 회원관리 삭제
 	public int userDelete(UserVO userVO);
+
+	// 회원관리 복구
 	public int userRestore(UserVO userVO);
 	
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
-	
-	
+
 }

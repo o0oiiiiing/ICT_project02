@@ -91,7 +91,6 @@ public class SignController {
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
-
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 	    mv.setViewName("lsh_view/login_page");
@@ -198,8 +197,8 @@ public class SignController {
 	}
   
 	// 비밀번호 찾기 이메일 인증번호 발송 및 DB업데이트
-	@PostMapping("email_send_ok.do")
-	public ModelAndView SendMailOK(UserVO userVO, String u_email) {
+	@PostMapping("find_pwd_go.do")
+	public ModelAndView SendMailOK(UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		try {
@@ -227,7 +226,7 @@ public class SignController {
 					return mv;
 				}
 			}
-			mv.addObject("msg", "다시 입력하세요.");
+			mv.addObject("msg", "입력한 정보를 확인해주세요.");
 			mv.setViewName("lsh_view/find_pwd_page");
 			return mv;
 		} catch (Exception e) {
