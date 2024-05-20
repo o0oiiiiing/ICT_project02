@@ -31,7 +31,7 @@
 	    var cPage2Field = document.createElement("input");
 	    cPage2Field.setAttribute("type", "hidden");
 	    cPage2Field.setAttribute("name", "cPage2");
-	    cPage2Field.setAttribute("value", cPage2);
+	    cPage2Field.setAttribute("value", paging2.nowPage2);
 	    form.appendChild(cPage2Field);
 	
 	    document.body.appendChild(form);

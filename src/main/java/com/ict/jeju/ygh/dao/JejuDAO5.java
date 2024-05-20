@@ -130,10 +130,10 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// Q&A 답글 삭제
-	public int commentDelete(CommentVO comvo) {
+	// Q&A 답글 수정
+	public int commentUpdateOk(CommentVO comvo) {
 		try {
-			return sqlSessionTemplate.delete("Board_table.comment_delete", comvo);
+			return sqlSessionTemplate.update("Board_table.comment_update_ok", comvo);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -405,7 +405,8 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-
+	
+	// 나의 리뷰
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
@@ -413,6 +414,29 @@ public class JejuDAO5 {
 			map.put("limit", limit);
 			map.put("u_idx", Integer.parseInt(u_idx));
 			return sqlSessionTemplate.selectList("Board_table.myreview_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 회원현황
+	public List<UserVO> userTotal() {
+		try {
+			List<UserVO> result = sqlSessionTemplate.selectList("Board_table.user_total");
+	        return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	
+	// 일일 가입자 수
+	public List<UserVO> joinUser() {
+		try {
+	        List<UserVO> result = sqlSessionTemplate.selectList("Board_table.join_user");
+	        return result;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
