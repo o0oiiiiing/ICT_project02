@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
 <link href="resources/wyy-css/infowindow.css" rel="stylesheet" />
 <link href="resources/common-css/reset.css" rel="stylesheet" />
@@ -275,7 +278,7 @@
 			location.href="report_list.do"
 		}
 </script>
-<title>나의 여행</title>
+<title>MY TRIP | Jeju_travel</title>
 </head>
 <body>
 	<div>
