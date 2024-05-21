@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		<div id="board_h">
 			<h1>내가 쓴 리뷰</h1>
 		</div>
+		<input type="hidden" value="${vi_value}" id="v_title" class="v_value">
 		<form method="post">
 		<table>
 			<thead>
@@ -47,9 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
 					<th class="subject">카테고리</th>
 					<th class="writer">리뷰 제목</th>
 					<th class="reg">날짜</th>
-					<th class="grade">별점</th>
-					
-				</tr>
+					<th class="grade">별점</th>				
+			</tr>
 			</thead>
 			<tbody>
 				<c:choose>
@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", function() {
 						<c:forEach var="k" items="${myreview_list}" varStatus="vs">
 							<tr>
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage + vs.index)}</td>
-								<td>${k.contentsid}</td>
+								<%-- <td>${k.contentsid}</td> --%>
+								<td>${k.vi_title}</td>
 								<td>${k.re_content}</td>
 								<td>${k.re_regdate.substring(0,10)}</td>
 								<td class="grade_star">${k.re_grade}</td>

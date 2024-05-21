@@ -57,7 +57,12 @@
 		<!-- DB에서 가져와서 c:foreach 반복문 돌릴 관광지 카테고리 보여주는 구간  -->
 		<div class="wrapper_bottom">
 			<div class="wrapper_left">
-				<c:forEach var="k" items="${searchList}">
+				<c:choose>
+					<c:when test="${empty searchList}">
+						<p>검색 결과가 없습니다.</p>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="k" items="${searchList}">
 					<div class="category_box" onclick="toggleCollapse(this)" class="category_box">
 						<img src='${k.vi_image}' class="category_img">
 						<p class="category_id">${k.vi_value}</p>
@@ -77,6 +82,8 @@
 						<input type="hidden" value="0" class="chk">
 					</div>
 				</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<!-- 5c981699760a3bdf28409228b0baa4e5 -->
 			<!-- 지도 -->
