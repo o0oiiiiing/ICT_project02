@@ -18,6 +18,7 @@
 			if (msg !== "") {
 				alert(msg);
 			}
+			
 			function back() {
 				window.history.back();
 			}
