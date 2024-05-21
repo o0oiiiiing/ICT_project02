@@ -17,6 +17,7 @@
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd&libraries=services"></script>
 <title>ADMIN | Jeju_travel</title>
 <script type="text/javascript">
+	
 	let idChk = false;
 	//아이디 중복 여부
 	function id_doublechk() {
@@ -41,15 +42,55 @@
 		});
 		return false;
 	}
-	
+/* 	
 	function submitForm() {
 		if (idChk) {
 			$('form').submit();
 		} else {
 			alert("콘텐츠 ID 중복 확인을 해주세요.");
 		}
-	}
-		 
+	} */
+	// 유효성검사
+ 	function submitForm(f) {
+		if (f.contentsid === '' || f.contents_idchk === '' || f.vi_title === ''|| f.vi_intro === '' || f.vi_address === '' 
+				|| f.vi_phoneno === ''|| f.vi_image === ''|| f.vi_thumbnail === '') {
+			alert("필수 항목을 입력하세요.");
+			return false;
+		} else if (f.contentsid.value === '') {
+			alert("콘텐츠ID를 입력하세요.");
+			f.contentsid.focus();
+			return false;
+		} else if (!idChk) {
+			alert("콘텐츠ID 중복 확인을 해주세요.");
+			f.contents_idchk.focus();
+	        return false;
+		} else if (f.vi_title.value === '') {
+			alert("장소이름을 입력하세요.");
+			f.vi_title.focus();
+			return false;
+		} else if (f.vi_intro.value === '') {
+			alert("장소소개를 입력하세요.");
+			f.vi_intro.focus();
+			return false;
+		} else if (f.vi_address.value === '') {
+			alert("주소 찾기 버튼을 이용해주세요.");
+			f.input_button.focus();
+			return false;
+		} else if (f.vi_phoneno.value.length !== 11) {
+			alert("전화번호는  '-'을 제외한 11자리로 입력하세요.");
+			f.vi_phoneno.focus();
+			return false;
+		} else if (f.vi_image.value === '') {
+			alert("장소 이미지 링크를 입력하세요.");
+			f.vi_image.focus();
+			return false;
+		} else if (f.vi_thumbnail.value === '') {
+			alert("장소 썸네일 링크를 입력하세요.");
+			f.vi_thumbnail.focus();
+			return false;
+		}
+		f.submit();
+	} 
 </script>
 <script>
     function sample4_execDaumPostcode() {
@@ -68,8 +109,8 @@
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
 
-            document.getElementById("sample4_roadAddress").value = roadAddr;
-            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            document.getElementById("vi_roadaddress").value = roadAddr;
+            document.getElementById("vi_address").value = data.jibunAddress;
 
             // 위도경도 가지고오는 함수 호출
             getAddressCoordinates(roadAddr);
@@ -90,22 +131,33 @@ function getAddressCoordinates(address) {
         }
     });
 }
+function checkInput() {
+    var contentsidInput = document.getElementById("contentsid");
+    var contentsIdCheckBtn = document.getElementById("contents_idchk");
 
+    if (contentsidInput.value.trim() === "") {
+        contentsIdCheckBtn.disabled = true;
+    } else {
+        contentsIdCheckBtn.disabled = false;
+    }
+}
 </script>
+
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
 	<form action="admin_insert_ok" method="post" >
 		<div class="admin_result">
-		<h3 style="margin-bottom: 30px; font-size: 28px; font-weight: bold;">장소 추가</h3>
+		<h3>장소 추가</h3>
 		<br>
 		<div class="name_category">
 			<p>카테고리 : </p>
 			<p>콘텐츠 ID : </p>
 			<p>장소 이름 : </p>
+			<p>장소 소개 : </p>
+			<br>
 			<p>지번 주소 : </p>
 			<p>도로명 주소 : </p>
-			<p>장소 소개 : </p>
 			<p>위도 : </p>
 			<p>경도 : </p>
 			<p>전화번호 : </p>
@@ -123,40 +175,40 @@ function getAddressCoordinates(address) {
 				</select>
 			</p>
 			<p>
-				<input type="text"  class="admin_input" id="contentsid" name="contentsid" required>
-				<input type="button" class="join_btn" id="contents_idchk"  value="중복 확인" onclick="id_doublechk()"/>
+				<input type="text"  class="admin_input" id="contentsid" name="contentsid" required oninput="checkInput()">
+				<input type="button" class="join_btn" id="contents_idchk"  name="contents_idchk" value="중복 확인" onclick="id_doublechk()" disabled/>
 			</p>
 			<p>
-				<input type="text"  class="admin_input" name="vi_title" required>
+				<input type="text"  class="admin_input" id= "vi_title" name="vi_title" required>
 			</p>
 			<p>
-				<input type="text" class="admin_input" id="sample4_jibunAddress"name="vi_address" required>
-				<input type="button" id="input_button" onclick="sample4_execDaumPostcode()" value="주소 찾기">
+				<input type="text"  class="admin_input" id="vi_intro" name="vi_intro" required >
 			</p>
 			<p>
-				<input type="text" class="admin_input" id="sample4_roadAddress" name="vi_roadaddress" required>
+				<input type="button" id="input_button" name="input_button" onclick="sample4_execDaumPostcode()" value="주소 찾기">
+				<input type="text" class="admin_input" id="vi_address"name="vi_address" required readonly>
 			</p>
 			<p>
-				<input type="text"  class="admin_input" name="vi_intro" required>
+				<input type="text" class="admin_input" id="vi_roadaddress" name="vi_roadaddress" required readonly>
 			</p>
 			<p>
-				<input type="text"  class="admin_input" name="vi_latitude" id="vi_latitude" required>
+				<input type="text"  class="admin_input" name="vi_latitude" id="vi_latitude" required readonly>
 			</p>
 			<p>
-				<input type="text" class="admin_input" name="vi_longitude" id="vi_longitude" required>
+				<input type="text" class="admin_input" name="vi_longitude" id="vi_longitude" required readonly>
 			</p>
 			<p>
-				<input type="text" class="admin_input" name="vi_phoneno" required>
+				<input type="text" class="admin_input" id = "vi_phoneno" name="vi_phoneno" required>
 			</p>
 			<p>
-				<input type="text" class="admin_input" name="vi_image" required>
+				<input type="text" class="admin_input" id="vi_image" name="vi_image" required>
 			</p>
 			<p>
-				<input type="text" class="admin_input" name="vi_thumbnail" required>
+				<input type="text" class="admin_input" id="vi_thumbnail" name="vi_thumbnail" required>
 			</p>
 			<p>
-				<input type="button" id="input_submit" value="제출" onclick="submitForm()" >
-				<input type="reset" id="input_submit" value="취소" onclick="history.go(-1)">
+				<input type="button" id="input_submit" value="제출" onclick="submitForm(this.form)" >
+				<input type="button" id="input_submit" value="취소" onclick="history.go(-1)">
 			</p>
 		</div>
 		</div>

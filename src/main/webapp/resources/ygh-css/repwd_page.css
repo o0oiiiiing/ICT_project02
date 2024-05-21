@@ -1,40 +1,66 @@
 #repwd_wrap {
-	width: 400px;
-	/* position: absolute; left: 50%; top: 50%;
-    transform: translate(-50%, -50%); */
-	margin: 0 auto;
-	margin-bottom: 200px;
+    width: 80%;
+    max-width: 600px;
+    margin: 200px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
 }
 
 #repwd_wrap>form>h1 {
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 2px solid black;
-	padding-bottom: 20px;
-	margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: #333;
 }
 
-#repwd_wrap>form input[type="password"] {
-	width: 98%;
-	height: 40px;
-	margin-top: 5px;
-	margin-bottom: 10px;
+#repwd_box {
+    margin-bottom: 20px;
 }
 
-#repwd_ok {
-	width: 49%;
-	margin-top: 20px;
-	margin-right: 7px;
-	height: 40px;
-	font-size: 15px;
-	float: left;
+#repwd_box input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-#repwd_no {
-	width: 49%;
-	margin-top: 20px;
-	height: 40px;
-	font-size: 15px;
+#msg {
+    margin: 10px 0;
+    color: red;
+    font-size: 14px;
+}
 
+#repwd_wrap input[type="submit"],
+#repwd_wrap input[type="button"] {
+    width: calc(50% - 10px);
+    padding: 10px;
+    margin: 10px 5px;
+    background-color: darkgray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+#repwd_wrap input[type="button"]:hover,
+#repwd_wrap input[type="submit"]:hover {
+    background-color: gray;
+}
+
+@media (max-width: 600px) {
+    #repwd_wrap input[type="submit"],
+    #repwd_wrap input[type="button"] {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
