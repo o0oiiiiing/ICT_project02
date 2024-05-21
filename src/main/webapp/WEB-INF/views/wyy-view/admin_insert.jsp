@@ -6,13 +6,16 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="resources/common-css/reset.css" rel="stylesheet" />
 <link href="resources/wyy-css/admin_insert.css" rel="stylesheet" />
 <!-- 다음 주소 api  -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 카카오 api -->
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd&libraries=services"></script>
-<title>관리자 장소추가</title>
+<title>ADMIN | Jeju_travel</title>
 <script type="text/javascript">
 	let idChk = false;
 	//아이디 중복 여부

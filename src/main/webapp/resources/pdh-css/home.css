@@ -201,3 +201,73 @@
 	width: 550px;
 	margin: 20px auto 0 auto;
 }
+#pop_info_1 {
+  position: fixed;
+  top: 57%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1001;
+  display: none;
+}
+#pop_info_2 {
+  position: fixed;
+  top: 43%;
+  left: 37%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+  display: none;
+}
+
+.pop_inner {
+  text-align: center;
+}
+
+.pop_inner p {
+  font-family: 'NanumSquare';
+  font-size: 24px;
+  color: black;
+}
+
+.pop_inner img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.pop_inner a {
+  font-family: 'NanumSquare';
+  display: block;
+  margin-top: 20px;
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+.pop_inner a:hover {
+  text-decoration: underline;
+}
+
+.pop_inner button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 팝업 닫기 버튼 위치 조정 */
+.pop_inner .btn_close {
+  position: absolute;
+  top: -7px;
+  right: 10px;
+}
