@@ -12,6 +12,9 @@ public interface PlaceListService {
 	// 조회수 순으로 장소 20개 가져오기
 	public List<PlaceListVO> popularList();
 	
+	// 전체 장소 가져오기
+	public List<PlaceListVO> allList();
+	
 	// 장소 상세보기
 	public PlaceListVO placeDetail(String contentsid);
 	
