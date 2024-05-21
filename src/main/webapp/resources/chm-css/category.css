@@ -155,3 +155,19 @@ ol li {
   width: 50vw; 
   height: 2.3vh; 
 }
+
+.not_search{
+	width: 54.1vw;
+  	height: 60.5vh;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.not_search_box{
+	margin-right: 10vw;
+}
+
+.keyword {
+	font-size: 32px;
+}
