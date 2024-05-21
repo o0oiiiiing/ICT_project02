@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
-import com.ict.jeju.pdh.dao.QaPagingVO;
+import com.ict.jeju.pdh.dao.ImagesVO;
+import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 
@@ -73,7 +74,7 @@ public class PlaceListServiceImpl implements PlaceListService {
 	
 	// 장소의 Q&A 가져오기
 	@Override
-	public List<QaVO> qaList(QaPagingVO qaPagingVO) {
+	public List<QaVO> qaList(PagingVO qaPagingVO) {
 		return placeListDAO.qaList(qaPagingVO);
 	}
 	
@@ -82,10 +83,17 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public int reviewWrite(ReviewVO reviewVO) {
 		return placeListDAO.reviewWrite(reviewVO);
 	}
-
+	
+	// 리뷰 이미지 삽입
 	@Override
-	public int imageInsert(ReviewVO reviewVO) {
-		return placeListDAO.imageInsert(reviewVO);
+	public int imageInsert(ImagesVO imagesVO) {
+		return placeListDAO.imageInsert(imagesVO);
+	}
+	
+	// 장소의 리뷰 가져오기
+	@Override
+	public List<ReviewVO> reviewList(PagingVO rPagingVO) {
+		return placeListDAO.reviewList(rPagingVO);
 	}
 
 	
