@@ -153,7 +153,7 @@
 	
 	<!-- 사용자 Q&A 페이징 -->
 	<select id="count3" resultType="int" parameterType="String">
-		select count(*) from Board_table where u_idx = #{u_idx}
+		select count(*) from Review_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 사용자 Q&A 전체보기 -->
@@ -240,6 +240,10 @@
 		limit #{limit} offset #{offset}
 	</select>
 	
-	
+	<select id="myreview_title" parameterType="String" resultType="String">
+		SELECT vi_title
+		FROM Visitjeju_table 
+		where contentsid = #{contentsid}
+	</select>
 </mapper>
 
