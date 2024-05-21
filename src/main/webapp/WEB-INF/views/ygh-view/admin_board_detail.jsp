@@ -6,10 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADMIN | Jeju_travel</title>
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<title>나의 여행(관리자)</title>
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>"
 	rel='stylesheet' />
@@ -37,9 +34,27 @@
 			comment_btn.style.display = "none";
 		}
 	}
+	
+	// 답글수정 버튼 클릭 시
+	function comment_update(f) {
+		let comment_box3 = document.getElementById("comment_box3");
+		let comment_btn3 = document.getElementById("comment_btn3");
+		let comment_box = document.getElementById("comment_box");
+		let comment_btn = document.getElementById("comment_btn");
+		if (comment_box3.style.display === "none" || comment_btn3.style.display === "none") {
+			comment_box3.style.display = "block";
+			comment_btn3.style.display = "block";
+			comment_box.style.display = "none";
+			comment_btn.style.display = "none";
+		} else {
+			comment_box3.style.display = "none";
+			comment_btn3.style.display = "none";
+		}
+		f.action = "comment_update.do";
+	}
 
-	function comment_delete(f) {
-		f.action = "comment_delete.do";
+	function comment_update_ok(f) {
+		f.action = "comment_update_ok.do";
 		f.submit();
 	}
 </script>
@@ -142,7 +157,7 @@
 					</table>
 				</div>
 				<div id="comment_btn">
-					<input type="button" value="댓글삭제" onclick="comment_delete(this.form)"> 
+					<input type="button" value="답글수정" onclick="comment_update(this.form)"> 
 					<input type="hidden" name="com_idx" value="${k.com_idx}"> 
 					<input type="hidden" name="bo_idx" value="${k.bo_idx}">
 					<input type="hidden" name="cPage" value="${cPage}">
@@ -153,6 +168,33 @@
 			<br>
 		</c:forEach>
 	</div>
+	
+	<%-- 답글 수정 --%>
+	<form method="post">
+		<div id="comment_box3" style="display: none;" >
+		<c:forEach var="k" items="${com_list}">
+			<table>
+				<tr>
+					<th colspan="2" style="text-align: left;">답변하기</th>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td><input type="text" name="com_writer" value="${k.com_writer}"></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td><textarea rows="10" cols="100" name="com_content">${k.com_content}</textarea>
+					</td>
+				</tr>
+			</table>
+		</c:forEach>
+		</div>
+		<div id="comment_btn3" style="display: none;">
+			<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
+			<input type="hidden" name="cPage" value="${cPage}">
+			<input type="button" value="수정" onclick="comment_update_ok(this.form)" />
+		</div>
+	</form>
 
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"

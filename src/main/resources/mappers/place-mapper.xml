@@ -10,10 +10,6 @@
 		order by vi_hit desc
 		limit 20
 	</select>
-	<select id="allList" resultType="PlaceListVO">
-		select *
-		from Visitjeju_table
-	</select>
 	
 	<select id="placeDetail" parameterType="String" resultType="PlaceListVO">
 		select * 

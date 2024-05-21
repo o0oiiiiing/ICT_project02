@@ -6,10 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPDATE_PW | Jeju_travel</title>
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<title>비밀번호 변경</title>
 <link href="<c:url value="/resources/ygh-css/repwd_page.css"/>" rel='stylesheet' />
 <link href="<c:url value="resources/common-css/footer.css"/>" rel='stylesheet' />
 <script type="text/javascript">
@@ -57,7 +54,7 @@
 			</div>
 			<input type="hidden" value="${userVO.u_idx}" name="u_idx">
 			<input type="submit" id="repwd_ok" value="확인" onclick="repwd_go(this.form)">
-			<input type="button" id="repwd_no" value="취소" onclick="history.go(-1)">
+			<input type="submit" id="repwd_no" value="취소" onclick="">
 		</form>
 	</div>
 

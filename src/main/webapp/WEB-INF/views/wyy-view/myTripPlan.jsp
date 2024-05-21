@@ -5,9 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="resources/wyy-css/myTripPlan.css" rel="stylesheet" />
 <link href="resources/wyy-css/infowindow.css" rel="stylesheet" />
 <link href="resources/common-css/reset.css" rel="stylesheet" />
@@ -92,11 +89,11 @@
 			         	
 			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
 			            var markerImages = {
-			            		'관광지': 'https://cdn-icons-png.flaticon.com/512/3420/3420238.png',	// 관광지
-			            		'쇼핑': 'https://cdn-icons-png.flaticon.com/512/3081/3081648.png',	// 쇼핑
-			            		'숙박': 'https://cdn-icons-png.flaticon.com/512/6556/6556054.png', 	// 숙박
-			            		'음식점': 'https://cdn-icons-png.flaticon.com/512/5964/5964382.png',	// 음식 
-			            		'축제/행사': 'https://cdn-icons-png.flaticon.com/512/2445/2445246.png'	// 축제/행사
+			            		'관광지': 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
+			            		'쇼핑': 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
+			            		'숙박': 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
+			            		'음식점': 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
+			            		'축제/행사': 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
 			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
@@ -178,11 +175,11 @@
 			         	
 			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
 			            var markerImages = {
-			            		'관광지': 'https://cdn-icons-png.flaticon.com/512/3420/3420238.png',	// 관광지
-			            		'쇼핑': 'https://cdn-icons-png.flaticon.com/512/3081/3081648.png',	// 쇼핑
-			            		'숙박': ' https://cdn-icons-png.flaticon.com/512/6556/6556054.png', 	// 숙박
-			            		'음식점': 'https://cdn-icons-png.flaticon.com/512/5964/5964382.png',	// 음식 
-			            		'축제/행사': 'https://cdn-icons-png.flaticon.com/512/2445/2445246.png'	// 축제/행사
+			            		'관광지': 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png',	// 관광지
+			            		'쇼핑': 'https://maps.gstatic.com/mapfiles/ms2/micons/green-dot.png',	// 쇼핑
+			            		'숙박': 'https://maps.gstatic.com/mapfiles/ms2/micons/pink-dot.png', 	// 숙박
+			            		'음식점': 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png',	// 음식 
+			            		'축제/행사': 'https://maps.gstatic.com/mapfiles/ms2/micons/purple-dot.png'	// 축제/행사
 			            	};
 			            
 			         	// 카테고리에 따라 마커를 생성하고 지도에 표시하는 함수
@@ -278,7 +275,7 @@
 			location.href="report_list.do"
 		}
 </script>
-<title>MY TRIP | Jeju_travel</title>
+<title>나의 여행</title>
 </head>
 <body>
 	<div>

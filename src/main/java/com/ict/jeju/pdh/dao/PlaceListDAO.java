@@ -23,17 +23,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
-	// 전체 장소 보기
-	public List<PlaceListVO> allList() {
-		try {
-			return sqlSessionTemplate.selectList("place.allList");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-	
+
 	// 장소 상세보기
 	public PlaceListVO placeDetail(String contentsid) {
 		try {

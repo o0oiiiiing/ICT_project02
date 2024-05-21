@@ -62,10 +62,13 @@
 		where bo_idx = #{bo_idx}
 	</update>
 	
-	<!-- Q&A 답글 삭제 -->
-	<delete id="comment_delete" parameterType="comvo">
-		delete from Comment_table where com_idx = #{com_idx}
-	</delete>
+	<!-- Q&A 답글 수정 -->
+	<update id="comment_update_ok" parameterType="String">
+		update Comment_table
+		set com_writer = #{com_writer}, com_content = #{com_content}, com_regdate=sysdate()
+		where bo_idx = #{bo_idx}
+	</update>
+	
 	
 	<!-- 신고 답글 가져오기 -->	
 	<select id="replylist" resultType="repvo" parameterType="String">
@@ -239,11 +242,28 @@
 		order by re_regdate desc
 		limit #{limit} offset #{offset}
 	</select>
+	<!-- 회원현황 -->
+	<select id="user_total" resultType="userVO">
+		SELECT
+		    SUM(CASE WHEN active = 0 THEN 1 ELSE 0 END) AS inactiveUsers,
+		    SUM(CASE WHEN active = 1 THEN 1 ELSE 0 END) AS activeUsers
+		FROM User_table
+	</select>
 	
+	<!-- 일일 가입자 수 -->
+	<select id="join_user" resultType="userVO">
+		SELECT DATE(u_regdate) AS join_date, COUNT(*) AS user_count
+		FROM User_table
+		WHERE u_regdate >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+		GROUP BY DATE(u_regdate)
+		ORDER BY join_date
+	</select>
+
 	<select id="myreview_title" parameterType="String" resultType="String">
 		SELECT vi_title
 		FROM Visitjeju_table 
 		where contentsid = #{contentsid}
 	</select>
+
 </mapper>
 

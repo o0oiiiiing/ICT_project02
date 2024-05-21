@@ -37,10 +37,10 @@ public class JejuController5 {
 	@Autowired
 	private Paging2 paging2;
 
-	// 이동
-	@GetMapping("index.do")
+	// 대시보드 이동
+	@GetMapping("dashboard.do")
 	public ModelAndView index() {
-		return new ModelAndView("ygh-view/index");
+		return new ModelAndView("ygh-view/dashboard");
 	}
 	
 	// 비밀번호 변경
@@ -168,13 +168,29 @@ public class JejuController5 {
 		int result2 = jejuService5.commentUpdate(bo_idx);
 		return mv;
 	}
+	
+	@RequestMapping("comment_update.do")
+	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail");
+		// 상세보기
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
 
-	// Q&A 답글 삭제
-	@PostMapping("comment_delete.do")
-	public ModelAndView commentDelete(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
+		if (bovo != null) {
+			// 댓글 가져오기
+			List<CommentVO> com_list = jejuService5.commentList(bo_idx);
+			mv.addObject("com_list", com_list);
+			mv.addObject("bovo", bovo);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// Q&A 답글 수정
+	@PostMapping("comment_update_ok.do")
+	public ModelAndView commentUpdateOk(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
 			CommentVO comvo) {
 		ModelAndView mv = new ModelAndView();
-		int result = jejuService5.commentDelete(comvo);
+		int result = jejuService5.commentUpdateOk(comvo);
 		if (result > 0) {
 			mv.setViewName("redirect:admin_board_detail.do");
 			return mv;
@@ -404,8 +420,7 @@ public class JejuController5 {
 		}
 
 		// DB
-		List<ReportVO> report_list = jejuService5.reportList(paging2.getOffset(), paging2.getNumPerPage2(),
-				uvo.getU_idx());
+		List<ReportVO> report_list = jejuService5.reportList(paging2.getOffset(), paging2.getNumPerPage2(), uvo.getU_idx());
 		if (report_list != null) {
 			mv.addObject("report_list", report_list);
 			mv.addObject("paging2", paging2);
@@ -433,20 +448,22 @@ public class JejuController5 {
 
 	// 사용자 신고 작성
 	@GetMapping("report_write_go.do")
-	public ModelAndView reportWriteGo() {
+	public ModelAndView reportWriteGo(@ModelAttribute("cPage2") String cPage2) {
 		return new ModelAndView("ygh-view/report_write");
 	}
 
 	// 사용자 신고 작성
 	@PostMapping("report_write_ok.do")
-	public ModelAndView reportWriteOk(@ModelAttribute("cPage2") String cPage2,ReportVO revo) {
+	public ModelAndView reportWriteOk(@ModelAttribute("cPage2") String cPage2,ReportVO revo, HttpSession session) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:report_list.do");
-
+			UserVO uvo = (UserVO) session.getAttribute("userVO");
 			revo.setReport_pwd(passwordEncoder.encode(revo.getReport_pwd()));
 
 			int result = jejuService5.reportWriteOk(revo);
 			if (result > 0) {
+				mv.addObject("cPage2", cPage2);
+				mv.addObject("report_list", jejuService5.reportList(paging2.getOffset(), paging2.getNumPerPage2(), uvo.getU_idx()));
 				return mv;
 			}
 		} catch (Exception e) {
