@@ -122,6 +122,7 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	// Q&A 답글 작성
 	public int commentUpdate(String bo_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.comment_update", bo_idx);
@@ -131,10 +132,10 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// Q&A 답글 삭제
-	public int commentDelete(CommentVO comvo) {
+	// Q&A 답글 수정
+	public int commentUpdateOk(CommentVO comvo) {
 		try {
-			return sqlSessionTemplate.delete("Board_table.comment_delete", comvo);
+			return sqlSessionTemplate.update("Board_table.comment_update_ok", comvo);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -151,9 +152,20 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	// 신고 답글 작성
 	public int replyUpdate(String report_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.reply_update", report_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
+	// 신고 답글 수정
+	public int replyUpdateOk(ReplyVO repvo) {
+		try {
+			return sqlSessionTemplate.update("Board_table.reply_update_ok", repvo);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -355,9 +367,9 @@ public class JejuDAO5 {
 	}
 
 	// 회원관리 페이징
-	public int getTotalCount7() {
+	public int getTotalCount7(String filter) {
 		try {
-			return sqlSessionTemplate.selectOne("Board_table.count7");
+			return sqlSessionTemplate.selectOne("Board_table.count7", filter);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -365,11 +377,12 @@ public class JejuDAO5 {
 	}
 
 	// 회원관리 전체보기
-	public List<UserVO> userList(int offset, int limit) {
+	public List<UserVO> userList(int offset, int limit, String filter) {
 		try {
-			Map<String, Integer> map = new HashMap<String, Integer>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("offset", offset);
 			map.put("limit", limit);
+			map.put("filter", filter);
 			return sqlSessionTemplate.selectList("Board_table.user_list", map);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -425,7 +438,29 @@ public class JejuDAO5 {
 			return sqlSessionTemplate.selectOne("Board_table.myreview_title", contentsid);
 		} catch (Exception e) {
 			System.out.println(e);
-		}		
+		}
+		return null;
+	}
+
+	// 회원현황
+	public List<UserVO> userTotal() {
+		try {
+			List<UserVO> result = sqlSessionTemplate.selectList("Board_table.user_total");
+			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	// 일일 가입자 수
+	public List<UserVO> joinUser() {
+		try {
+			List<UserVO> result = sqlSessionTemplate.selectList("Board_table.join_user");
+			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 

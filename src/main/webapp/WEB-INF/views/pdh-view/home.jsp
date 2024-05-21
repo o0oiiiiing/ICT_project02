@@ -63,7 +63,6 @@ $(document).ready(function() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="index.do" class="a_tag">부트</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=관광지&option=option1" class="a_tag">관광지</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=음식점&option=option1" class="a_tag">음식점</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=숙박&option=option1" class="a_tag">숙박</a></li>

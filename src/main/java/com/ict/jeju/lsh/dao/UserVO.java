@@ -1,9 +1,41 @@
 package com.ict.jeju.lsh.dao;
 
 public class UserVO {
-	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, 
-								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate,
-								active, u_report, step, u_del, out_regdate, u_restore, re_regdate, u_profile_img;
+	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2,
+			u_gender, u_addr, u_state, u_regdate, active, u_report, step, u_del, out_regdate, u_restore, re_regdate,
+			u_profile_img, join_date, user_count, inactiveUsers, activeUsers;
+
+	public String getJoin_date() {
+		return join_date;
+	}
+
+	public void setJoin_date(String join_date) {
+		this.join_date = join_date;
+	}
+
+	public String getUser_count() {
+		return user_count;
+	}
+
+	public void setUser_count(String user_count) {
+		this.user_count = user_count;
+	}
+
+	public String getInactiveUsers() {
+		return inactiveUsers;
+	}
+
+	public void setInactiveUsers(String inactiveUsers) {
+		this.inactiveUsers = inactiveUsers;
+	}
+
+	public String getActiveUsers() {
+		return activeUsers;
+	}
+
+	public void setActiveUsers(String activeUsers) {
+		this.activeUsers = activeUsers;
+	}
 
 	public String getU_profile_img() {
 		return u_profile_img;
@@ -36,7 +68,7 @@ public class UserVO {
 	public void setOut_regdate(String out_regdate) {
 		this.out_regdate = out_regdate;
 	}
-	
+
 	public String getU_del() {
 		return u_del;
 	}
@@ -180,5 +212,5 @@ public class UserVO {
 	public void setU_regdate(String u_regdate) {
 		this.u_regdate = u_regdate;
 	}
-	
+
 }

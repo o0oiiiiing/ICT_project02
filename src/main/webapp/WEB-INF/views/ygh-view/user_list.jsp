@@ -15,7 +15,7 @@
 <!-- jQuery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" >
 	let msg = "${msg}";
 	if (msg !== "") {
 	    alert(msg);
@@ -117,10 +117,24 @@
  	    });
  	});
 	
-	function out_user_list() {
-		location.href="out_user_list.do";
+	// 필터
+	function userFilter() {
+	    let allactive = document.getElementById('allactive').checked;
+	    let isActive = document.getElementById('active').checked;
+	    let isInactive = document.getElementById('inactive').checked;
+	    
+	    if (isActive) {
+		    location.href = "user_list.do?filter=active";
+		} else if (isInactive) {
+		    location.href = "user_list.do?filter=inactive";
+		} else if (allactive) {
+		    location.href = "user_list.do?filter=allactive";
+		}
+	    
+	    
+	    
 	}
-	
+
 	
 </script>
 </head>
@@ -129,9 +143,13 @@
 
 	<div id="user_t">
 		<div id="user_h">
-			<button>전체회원</button>
-			<button>현재회원</button>
-			<button onclick="out_user_list()">탈퇴회원</button>
+			<h1>회원관리</h1>
+			<div class="filters">
+				<label><input type="checkbox" id="allactive" name="filter" value="allactive"> 전체회원</label>
+				<label><input type="checkbox" id="active" name="filter" value="active"> 활성회원</label>
+				<label><input type="checkbox" id="inactive" name="filter" value="inactive"> 탈퇴회원</label>
+				<button onclick="userFilter()">적용</button>
+			</div>
 		</div>
 		<div>
 			<table>

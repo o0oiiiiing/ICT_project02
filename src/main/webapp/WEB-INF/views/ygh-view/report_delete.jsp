@@ -14,17 +14,22 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	 $(document).ready(function() {
 		let pwdchk = "${pwdchk}";
 		if (pwdchk == 'fail') {
 			alert("비밀번호 틀림");
 			return;
 		}
-	});
+	}); 
 </script>
 <script type="text/javascript">
 	function report_list(f) {
 		f.action="report_list.do";
+		f.submit();
+	}
+
+	function report_detail(f) {
+		f.action = "report_detail.do";
 		f.submit();
 	}
 	
@@ -53,6 +58,7 @@
 				<input type="hidden" value="${revo.report_idx}" name="report_idx"> 
 				<input type="hidden" value="${cPage2}" name="cPage2"> 
 				<input type="button" value="목록" onclick="report_list(this.form)" /> 
+				<input type="button" value="취소" onclick="report_detail(this.form)" />
 				<input type="button" value="삭제" onclick="report_delete_ok(this.form)" />
 			</div>
 	</form>

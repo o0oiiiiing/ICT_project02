@@ -42,15 +42,20 @@ public interface JejuService5 {
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo);
 
+	// Q&A 답글 작성
 	public int commentUpdate(String bo_idx);
 
-	// Q&A 답글 삭제
-	public int commentDelete(CommentVO comvo);
+	// Q&A 답글 수정
+	public int commentUpdateOk(CommentVO comvo);
 
 	// 신고 답글 작성
 	public int replyInsert(ReplyVO repvo);
 
+	// 신고 답글 작성
 	public int replyUpdate(String report_idx);
+
+	// 신고 답글 수정
+	public int replyUpdateOk(ReplyVO repvo);
 
 	// 신고 답글 삭제
 	public int replyDelete(ReplyVO repvo);
@@ -107,10 +112,10 @@ public interface JejuService5 {
 	public List<ReportVO> adminReportlist2(int offset, int limit);
 
 	// 회원관리 페이징
-	public int getTotalCount7();
+	public int getTotalCount7(String filter);
 
 	// 회원관리 전체보기
-	public List<UserVO> userList(int offset, int limit);
+	public List<UserVO> userList(int offset, int limit, String filter);
 
 	// 관리자 상세보기
 	public AdminVO adminDetail(String a_idx);
@@ -120,9 +125,15 @@ public interface JejuService5 {
 
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
-	
+
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
 
 	public String myreviewtitle(String contentsid);
+
+	// 회원현황
+	public List<UserVO> userTotal();
+
+	// 일일 가입자 수
+	public List<UserVO> joinUser();
 
 }
