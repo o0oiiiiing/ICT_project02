@@ -44,8 +44,8 @@ public interface JejuService5 {
 
 	public int commentUpdate(String bo_idx);
 
-	// Q&A 답글 삭제
-	public int commentDelete(CommentVO comvo);
+	// Q&A 답글 수정
+	public int commentUpdateOk(CommentVO comvo);
 
 	// 신고 답글 작성
 	public int replyInsert(ReplyVO repvo);
@@ -121,7 +121,14 @@ public interface JejuService5 {
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
 	
+	// 나의 리뷰
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
+	
+	// 회원현황
+	public List<UserVO> userTotal();
+	
+	// 일일 가입자 수
+	public List<UserVO> joinUser();
 
 	public String myreviewtitle(String contentsid);
 

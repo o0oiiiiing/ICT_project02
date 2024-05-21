@@ -4,9 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <title>Insert title here</title>
 <script type="text/javascript">
 /*

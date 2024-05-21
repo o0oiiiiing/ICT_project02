@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 여행(관리자)</title>
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
 <!-- jQuery -->
@@ -123,6 +120,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 				<td style="border-right: 1px solid lightgray">아이콘</td>
 				<td>아이콘</td>
 				<td>아이콘</td>
+				<td>아이콘</td>
 				
 			</tr>
 			<tr>
@@ -132,6 +130,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 				<a href="#">신고</a></td>
 				<td><a href="user_list.do">회원관리</a></td>
 				<td><a href="admin_insert">일정 추가</a></td>
+				<td><a href="dashboard.do">대시보드</a></td>
 				
 				<c:if test="${adminVO.a_status == '1'}">
 					<td><a href="admin_join.do">관리자 생성</a></td>

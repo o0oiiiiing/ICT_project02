@@ -14,9 +14,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
 	rel="stylesheet" />
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- 폰트 적용 -->
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <!-- css 적용 -->
@@ -50,8 +47,40 @@ $(document).ready(function() {
     
 });
 
+// 팝업
+/*  $(document).ready(function() {
+    $('.btn_open').click(function() {
+      var targetID = $(this).attr('href');
+      $(targetID).show();
+    });
+
+    $('.btn_close').click(function() {
+      $(this).closest('.pop_wrap').hide();
+    });
+  });  */
+
 </script>
 
+<style type="text/css">
+#pop_info_1{
+	width: 500px;
+    height: 500px;
+    z-index: 2;
+    position: absolute;
+    top: 26%;
+    left: 40%;
+    display: none;
+}
+#pop_info_2{
+	width: 500px;
+    height: 500px;
+    z-index: 1;
+    position: absolute;
+    top: 16%;
+    left: 28%;
+    display: none;
+}
+</style>
 </head>
 
 <body>
@@ -63,7 +92,6 @@ $(document).ready(function() {
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="index.do" class="a_tag">부트</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=관광지&option=option1" class="a_tag">관광지</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=음식점&option=option1" class="a_tag">음식점</a></li>
 			<li class="nav_list"><a href="category_page.do?vi_value=숙박&option=option1" class="a_tag">숙박</a></li>
@@ -138,30 +166,24 @@ $(document).ready(function() {
 			</c:otherwise>
 		</c:choose>
 	</header>
-
+	
 	<!-- 팝업1 -->
 <div id="pop_info_1" class="pop_wrap" name="popup1">
   <div class="pop_inner">
-    <p class="dsc1">실시간 추천 관광지</p>
-    <br>
-  	<img src="${randomTour.vi_image}" style="width: 500px; height: 350px;">
-    <a href="detail?contentsid=${randomTour.contentsid}" class="dsc"><${randomTour.vi_title}> 바로가기</a>
-    <br><br>
+  	<img src="resources/common-image/haehae.png" style="width: 100%">
+    <p class="dsc">성산일출봉 바로가기!</p>
     <input type="checkbox" name="today_close1" />오늘만 이 창을 열지 않음
-    <button type="button" class="btn_close">X</button>
+    <button type="button" class="btn_close">닫기</button>
   </div>
 </div>
 
 <!-- 팝업2 -->
 <div id="pop_info_2" class="pop_wrap" name="popup2">
-  <div class="pop_inner">
-    <p class="dsc1">실시간 추천 음식점</p>
-    <br>
-  	<img src="${randomRestaurant.vi_image}" style="width: 500px; height: 350px;">
-    <a href="detail?contentsid=${randomRestaurant.contentsid}" class="dsc"><${randomRestaurant.vi_title}> 바로가기</a>
-    <br><br>
-    <input type="checkbox" name="today_close1" />오늘만 이 창을 열지 않음
-    <button type="button" class="btn_close">X</button>
+  <div class="pop_inner" >
+  	<img src="resources/common-image/haehae2.png" style="width: 100%">
+    <p class="dsc">한라산 바로가기!</p>
+    <input type="checkbox" name="today_close2" />오늘만 이 창을 열지 않음
+    <button type="button" class="btn_close">닫기</button>
   </div>
 </div>
 

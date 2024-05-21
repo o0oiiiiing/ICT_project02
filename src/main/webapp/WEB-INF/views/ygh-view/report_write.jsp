@@ -7,9 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>신고 게시판 등록</title>
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/board_write.css"/>" rel='stylesheet' />
@@ -23,6 +20,7 @@
 		f.action = "report_write_ok.do";
 		f.submit();
 	}
+	
 </script>
 </head>
 <body>
@@ -56,6 +54,7 @@
 		</div>
 		<div id="board_write_btn">
 			<input type="hidden" name="u_idx" value="${userVO.u_idx}">
+			<input type="hidden" name="cPage2" value="${paging2.nowPage2}">
 			<input type="button" value="목록" onclick="report_list(this.form)" /> 
 			<input type="button" value="확인" onclick="report_write_ok(this.form)" />
 		</div>
