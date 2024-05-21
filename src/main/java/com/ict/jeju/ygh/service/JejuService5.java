@@ -132,6 +132,4 @@ public interface JejuService5 {
 
 	public String myreviewtitle(String contentsid);
 
-	public String myreviewtitle(String contentsid);
-
 }

@@ -36,7 +36,7 @@ public class UserVO {
 
 	public void setUser_count(String user_count) {
 		this.user_count = user_count;
-
+	}
 	public String getU_profile_img() {
 		return u_profile_img;
 	}
