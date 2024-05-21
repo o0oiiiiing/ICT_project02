@@ -60,8 +60,8 @@
 				<c:choose>
 					<c:when test="${empty searchList}">
 						<div class="not_search">
-							<img src="/images/not_search.png" class="not_found">
-							<div class="not_search_box"><span class="keyword">${keyword}</span><span>에 대한 검색 결과가 없습니다.</span></div>
+							<img src="resources/chm-css/images/not_search.png" class="not_found">
+							<div class="not_search_box"><span class="keyword">"${keyword}"</span><span>에 대한 검색 결과가 없습니다.</span></div>
 						</div>
 					</c:when>
 					<c:otherwise>

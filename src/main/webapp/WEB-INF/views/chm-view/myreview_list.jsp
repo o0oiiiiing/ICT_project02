@@ -10,28 +10,6 @@
 <link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-document.addEventListener("DOMContentLoaded", function() {
-    var starElements = document.querySelectorAll('.re_grade');
-    var gradeStarElements = document.querySelectorAll('.grade_star');
-
-    starElements.forEach(function(starElement, index) {
-        var star = starElement.value;
-        if (star == "1") {
-            gradeStarElements[index].innerText = "★☆☆☆☆";
-        } else if (star == "2") {
-            gradeStarElements[index].innerText = "★★☆☆☆";
-        } else if (star == "3") {
-            gradeStarElements[index].innerText = "★★★☆☆";
-        } else if (star == "4") {
-            gradeStarElements[index].innerText = "★★★★☆";
-        } else if (star == "5") {
-            gradeStarElements[index].innerText = "★★★★★";
-        }
-    });
-});
-</script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
@@ -66,7 +44,23 @@ document.addEventListener("DOMContentLoaded", function() {
 								<td>${k.vi_title}</td>
 								<td>${k.re_content}</td>
 								<td>${k.re_regdate.substring(0,10)}</td>
-								<td class="grade_star">${k.re_grade}</td>
+								<c:choose>
+									<c:when test="${k.re_grade == 1}">
+										<td><span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span></td>
+									</c:when>
+									<c:when test="${k.re_grade == 2}">
+										<td><span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span></td>
+									</c:when>
+									<c:when test="${k.re_grade == 3}">
+										<td><span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span></td>
+									</c:when>
+									<c:when test="${k.re_grade == 4}">
+										<td><span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span></td>
+									</c:when>
+									<c:otherwise>
+										<td><span style="color: #FFDF6B;">★★★★★</span></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 							<input type="hidden" value="${k.re_grade}" class="re_grade">
 						</c:forEach>
@@ -75,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<ol class="paging">
 							<!-- 이전 버튼 -->
 							<c:choose>

@@ -238,12 +238,14 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int userRestore(UserVO userVO) {
 		return jejuDAO5.userRestore(userVO);
 	}
-
+	
+	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	@Override
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
 		return jejuDAO5.myreviewlist(offset, limit, u_idx);
 	}
-
+	
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	@Override
 	public String myreviewtitle(String contentsid) {
 		return jejuDAO5.myreviewtitle(contentsid);
