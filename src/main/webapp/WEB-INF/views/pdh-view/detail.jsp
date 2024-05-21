@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>DETAIL | Jeju_travel</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- 구글 아이콘 -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
