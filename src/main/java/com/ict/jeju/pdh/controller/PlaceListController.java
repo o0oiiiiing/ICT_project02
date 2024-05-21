@@ -1,6 +1,10 @@
 package com.ict.jeju.pdh.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPaging;
@@ -35,16 +39,43 @@ public class PlaceListController {
 	private QaPaging qaPaging;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
-	@RequestMapping("home")
+	
+	@RequestMapping("/")
+    public String rootRedirect() {
+        return "redirect:home";
+    }
+	
+	@RequestMapping("/home")
 	public ModelAndView home() {
-		ModelAndView mv = new ModelAndView("pdh-view/home");
+		 ModelAndView mv = new ModelAndView("pdh-view/home");
 		List<PlaceListVO> popularList = placeListService.popularList();
-		if (popularList != null) {
-			mv.addObject("popularList", popularList);
-			return mv;
-		}
-		return null;
+		List<PlaceListVO> allList = placeListService.allList();
+		if (popularList != null && allList!=null) {
+            Random random = new Random();
+            
+            // 관광지 목록과 음식점 목록을 따로 분리
+            List<PlaceListVO> touristSpots = new ArrayList<>();
+            List<PlaceListVO> restaurants = new ArrayList<>();
+            for (PlaceListVO place : allList) {
+                if ("관광지".equals(place.getVi_value())) {
+                    touristSpots.add(place);
+                } else if ("음식점".equals(place.getVi_value())) {
+                    restaurants.add(place);
+                }
+            }
+            
+            PlaceListVO randomTour = touristSpots.get(random.nextInt(touristSpots.size()));
+            PlaceListVO randomRestaurant = restaurants.get(random.nextInt(restaurants.size()));
+
+            mv.addObject("popularList", popularList);
+            mv.addObject("allList", allList);
+            mv.addObject("randomTour", randomTour);
+            mv.addObject("randomRestaurant", randomRestaurant);
+
+            return mv;
+        }
+
+        return null;
 	}
 
 	@RequestMapping("detail")
@@ -86,6 +117,7 @@ public class PlaceListController {
 			qaPaging.setNowPage(1);
 		} else {
 			qaPaging.setNowPage(Integer.parseInt(cPage));
+			mv.addObject("cPage", cPage);
 		}
 
 		// offset 구하기
@@ -127,20 +159,43 @@ public class PlaceListController {
 
 	@PostMapping("qaWrite")
 	public ModelAndView qaWrite(QaVO qaVO, @ModelAttribute("contentsid") String contentsid) {
-		System.out.println(contentsid);
-		// Q&A 작성 삽입
 		// 비밀번호 암호화
 		if (qaVO.getBo_pwd() != null) {
 			qaVO.setBo_pwd(passwordEncoder.encode(qaVO.getBo_pwd()));
 		}
+		
+		// Q&A 작성 삽입
 		placeListService.qaWrite(qaVO);
 		return new ModelAndView("redirect:detail");
 	}
-	
-	/*
-	 * @PostMapping("reviewWrite") public ModelAndView reviewWrite(ReviewVO
-	 * reviewVO) { MultipartFile[] images = }
-	 */
+
+	@PostMapping("reviewWrite")
+	public ModelAndView reviewWrite(HttpServletRequest request, ReviewVO reviewVO, @ModelAttribute("contentsid") String contentsid) {
+		MultipartFile[] images = reviewVO.getImages();
+		String path = request.getSession().getServletContext().getRealPath("resources/upload");
+		try {
+			if (images.length > 0) {
+				for (MultipartFile k : images) {
+					// 파일 이름 지정
+					UUID uuid = UUID.randomUUID();
+					String f_name = uuid.toString() + "_" + k.getOriginalFilename();
+					reviewVO.setPic_file(f_name);
+					
+					// 파일 업로드(복사)
+					byte[] in = k.getBytes();
+					File out = new File(path, f_name);
+					FileCopyUtils.copy(in, out);
+					placeListService.imageInsert(reviewVO);
+				}
+			}	
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		// review 작성 삽입
+		placeListService.reviewWrite(reviewVO);
+		return new ModelAndView("redirect:detail");
+	}
 
 	// 일정 추가하기
 	// 로그인 여부에 따라서 다르게 처리하기
@@ -148,18 +203,5 @@ public class PlaceListController {
 	public ModelAndView addSchedule(String contentsid) {
 		return new ModelAndView("wyy-view/calendar_add");
 	}
-
-	// 검색하기
-//	@PostMapping("search")
-//	public ModelAndView search(String keyword) {
-//		ModelAndView mv = new ModelAndView("chm-view/searchlist");
-//		List<PlaceListVO> searchList = placeListService.searchList(keyword);
-//		if (searchList != null) {
-//			mv.addObject("searchList", searchList);
-//			return mv;
-//		}
-//		return null;
-//	}
-
 
 }

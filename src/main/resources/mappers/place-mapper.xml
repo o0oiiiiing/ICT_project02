@@ -10,6 +10,10 @@
 		order by vi_hit desc
 		limit 20
 	</select>
+	<select id="allList" resultType="PlaceListVO">
+		select *
+		from Visitjeju_table
+	</select>
 	
 	<select id="placeDetail" parameterType="String" resultType="PlaceListVO">
 		select * 
@@ -63,6 +67,19 @@
 		limit #{limit}
 		offset #{offset}
 	</select>
+	
+	<insert id="reviewWrite" parameterType="ReviewVO">
+		insert into Review_table(u_idx, contentsid, re_content, re_grade, re_regdate) 
+		values(#{u_idx}, #{contentsid}, #{re_content}, #{re_grade}, sysdate()) 
+	</insert>
+	
+	<insert id="imageInsert" parameterType="ReviewVO">
+		<selectKey keyProperty="re_idx" resultType="String" order="BEFORE">
+			SELECT (IFNULL(MAX(re_idx),0)) as re_idx FROM Review_table
+	    </selectKey>
+	    INSERT INTO Picture_table (re_idx, pic_file)
+	    VALUES (#{re_idx}, #{pic_file})
+	</insert>
 
 </mapper>
 

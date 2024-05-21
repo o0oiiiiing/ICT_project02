@@ -23,7 +23,17 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-
+	
+	// 전체 장소 보기
+	public List<PlaceListVO> allList() {
+		try {
+			return sqlSessionTemplate.selectList("place.allList");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	// 장소 상세보기
 	public PlaceListVO placeDetail(String contentsid) {
 		try {
@@ -99,5 +109,25 @@ public class PlaceListDAO {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	// 리뷰 작성하기
+	public int reviewWrite(ReviewVO reviewVO) {
+		try {
+			return sqlSessionTemplate.insert("place.reviewWrite", reviewVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 리뷰 이미지 삽입하기
+	public int imageInsert(ReviewVO reviewVO) {
+		try {
+			return sqlSessionTemplate.insert("place.imageInsert", reviewVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 }

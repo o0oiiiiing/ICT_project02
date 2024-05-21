@@ -5,10 +5,14 @@ import java.util.List;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 
 public interface PlaceListService {
 	// 조회수 순으로 장소 20개 가져오기
 	public List<PlaceListVO> popularList();
+	
+	// 전체 장소 가져오기
+	public List<PlaceListVO> allList();
 	
 	// 장소 상세보기
 	public PlaceListVO placeDetail(String contentsid);
@@ -33,7 +37,10 @@ public interface PlaceListService {
 	
 	// 장소의 Q&A 가져오기
 	public List<QaVO> qaList(QaPagingVO qaPagingVO);
-
 	
+	// 리뷰 작성하기
+	public int reviewWrite(ReviewVO reviewVO);
 	
+	// 리뷰 이미지 삽입하기
+	public int imageInsert(ReviewVO reviewVO);
 }

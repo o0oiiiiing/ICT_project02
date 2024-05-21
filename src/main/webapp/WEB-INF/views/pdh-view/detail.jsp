@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>DETAIL | Jeju_travel</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- 구글 아이콘 -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -55,7 +58,21 @@
 	border-radius: 10px;
 }
 </style>
+<script>
+    // 페이지 로드 시 history.scrollRestoration을 'manual'로 설정
+    history.scrollRestoration = 'manual';
+    document.addEventListener('DOMContentLoaded', function() {
+        let cPage = "${cPage}"
+        if (cPage != "") {
+        	window.scrollTo(0, sessionStorage.getItem('scrollPosition'));
+		}
 
+        // 페이지 언로드 시 현재 스크롤 위치 저장
+        window.addEventListener('beforeunload', function() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        });
+    });
+</script>
 <script type="text/javascript">
 	// 링크 복사하기 버튼
 	function copyLink() {
@@ -341,12 +358,13 @@
 									<c:choose>
 										<c:when test="${k.disclosure == '0'}">
 											<td style="text-align: center;">공개</td>
+											<td style="text-align: center;">${k.bo_title}</td>
 										</c:when>
 										<c:otherwise>
 											<td style="text-align: center;">비공개</td>
+											<td style="text-align: center; color: #9E9E9E;">비밀글입니다.</td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: center;">${k.bo_title}</td>
 									<td style="text-align: center;">${k.bo_writer}</td>
 									<td style="text-align: center;">${k.bo_regdate.substring(0,10)}</td>
 									<c:choose>
@@ -426,7 +444,7 @@
 
 	<!-- Q&A 작성하는 영역 -->
 	<form id="qa_write" method="post" action="qaWrite">
-		<div class="qa_write__container">
+		<div class="qa_write__container" style="height: 510px;">
 			<p class="qa_wrtie__title">Q&A 작성</p>
 			<div class="qa_write__content">
 				<table style="margin: 0 auto;">
@@ -459,33 +477,34 @@
 					type="hidden" value="${userVO.u_name}" name="u_name"> <input
 					class="qa_write__button" type="reset" value="취소">
 				<button type="button" class="qa_write__button"
-					onclick="test(this.form)">등록</button>
+					onclick="qaWrite(this.form)">등록</button>
 			</div>
 		</div>
 	</form>
 
 	<!-- 리뷰 작성하는 영역 -->
-	<form id="review_write" method="post" action="qaWrite">
-		<div class="qa_write__container">
+	<form id="review_write" method="post" action="reviewWrite">
+		<div class="qa_write__container" style="height: 490px;">
 			<p class="qa_wrtie__title">리뷰 작성</p>
+			<p style="font-family: 'NanumSquare'; text-align: center;">별점을 입력해주세요.</p>
 			<div class="qa_write__content">
 				<fieldset>
-					<input type="radio" name="starRating" value="1" id="rate1"><label for="rate1">★</label>
-					<input type="radio" name="starRating" value="2" id="rate2"><label for="rate2">★</label>
-					<input type="radio" name="starRating" value="3" id="rate3"><label for="rate3">★</label>
-					<input type="radio" name="starRating" value="4" id="rate4"><label for="rate4">★</label>
-					<input type="radio" name="starRating" value="5" id="rate5"><label for="rate5">★</label>
+					<input type="radio" name="re_grade" value="5" id="rate1"><label for="rate1">★</label>
+					<input type="radio" name="re_grade" value="4" id="rate2"><label for="rate2">★</label>
+					<input type="radio" name="re_grade" value="3" id="rate3"><label for="rate3">★</label>
+					<input type="radio" name="re_grade" value="2" id="rate4"><label for="rate4">★</label>
+					<input type="radio" name="re_grade" value="1" id="rate5"><label for="rate5">★</label>
 				</fieldset>
-					<input type="file" name="" multiple style="display: block; margin-left: 21px;"> 
 					<br>
-					<textarea style="width: 600px; height: 250px; display: block; margin: 0 auto;"></textarea>
+					<input type="file" name="images" multiple style="display: block; margin-left: 21px;"> 
+					<br>
+					<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
 			</div>
 			<div class="qa_write__buttons">
 				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
-					type="hidden" value="${userVO.u_name}" name="u_name"> <input
-					class="qa_write__button" type="reset" value="취소">
-				<button type="button" class="qa_write__button"
-					onclick="test(this.form)">등록</button>
+					class="review_write__button" type="reset" value="취소">
+				<button type="button" class="review_write__button"
+					onclick="reviewWrite(this.form)">등록</button>
 			</div>
 		</div>
 	</form>
@@ -575,7 +594,7 @@
 	}
     
     // Q&A 내용 입력안할 시에 alert 뜨기
-    function test(f) {
+    function qawWrite(f) {
 	    var editorContent = $('#summernote').summernote('code');
 	    var titleInput = document.querySelector('input[name="bo_title"]');
 	    console.log(editorContent)
@@ -587,6 +606,23 @@
 	        return false;
 		} else {
 	    	f.action = "qaWrite?contentsid=${placeDetail.contentsid}";
+			f.submit();
+	    }
+	}
+    
+    // review 내용 입력안할 시에 alert 뜨기
+    function reviewWrite(f) {
+    	var reviewContent = document.getElementById('review-content').value.trim();
+    	var reGradeChecked = document.querySelector('input[name="re_grade"]:checked');
+	    
+	    if (!reGradeChecked) {
+	    	alert("별점을 선택해주세요.");
+            return false;
+	    } else if (!reviewContent) {
+	    	alert("리뷰 내용을 작성해주세요.");
+	        return false;
+		} else {
+	    	f.action = "reviewWrite?contentsid=${placeDetail.contentsid}";
 			f.submit();
 	    }
 	}

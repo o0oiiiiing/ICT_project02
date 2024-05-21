@@ -9,6 +9,7 @@ import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 
 @Service
 public class PlaceListServiceImpl implements PlaceListService {
@@ -20,6 +21,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public List<PlaceListVO> popularList() {
 		return placeListDAO.popularList();
+	}
+	
+	// 전체 리스트 가져오기
+	@Override
+	public List<PlaceListVO> allList() {
+		return placeListDAO.allList();
 	}
 
 	// 장소 상세보기
@@ -69,5 +76,18 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public List<QaVO> qaList(QaPagingVO qaPagingVO) {
 		return placeListDAO.qaList(qaPagingVO);
 	}
+	
+	// 리뷰 작성하기
+	@Override
+	public int reviewWrite(ReviewVO reviewVO) {
+		return placeListDAO.reviewWrite(reviewVO);
+	}
+
+	@Override
+	public int imageInsert(ReviewVO reviewVO) {
+		return placeListDAO.imageInsert(reviewVO);
+	}
+
+	
 
 }

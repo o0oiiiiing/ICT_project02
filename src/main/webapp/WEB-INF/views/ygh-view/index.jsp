@@ -10,6 +10,9 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Charts - SB Admin</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="/resources/ygh-css/css/styles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
