@@ -22,12 +22,6 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public List<PlaceListVO> popularList() {
 		return placeListDAO.popularList();
 	}
-	
-	// 전체 리스트 가져오기
-	@Override
-	public List<PlaceListVO> allList() {
-		return placeListDAO.allList();
-	}
 
 	// 장소 상세보기
 	@Override
@@ -87,7 +81,5 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public int imageInsert(ReviewVO reviewVO) {
 		return placeListDAO.imageInsert(reviewVO);
 	}
-
-	
 
 }

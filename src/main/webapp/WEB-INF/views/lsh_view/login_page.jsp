@@ -8,9 +8,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>LOGIN | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
-		<!-- 파비콘 -->
-		<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {

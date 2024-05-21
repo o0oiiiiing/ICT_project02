@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEARCH | Jeju_travel</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="resources/chm-css/category.css?after">
 <link rel="stylesheet" href="resources/chm-css/map.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">

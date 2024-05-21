@@ -9,10 +9,7 @@
 		text-align: center;
 	}
 </style>
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<title>SCHEDULE | Jeju_travel</title>
+<title>일정 추가하기</title>
 </head>
 <body>
 	<div class="cal_addAll">
