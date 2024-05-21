@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPaging;
