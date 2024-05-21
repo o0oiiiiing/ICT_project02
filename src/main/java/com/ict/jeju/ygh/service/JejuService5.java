@@ -3,6 +3,7 @@ package com.ict.jeju.ygh.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -121,5 +122,7 @@ public interface JejuService5 {
 	public int userRestore(UserVO userVO);
 	
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
+
+	public String myreviewtitle(String contentsid);
 
 }
