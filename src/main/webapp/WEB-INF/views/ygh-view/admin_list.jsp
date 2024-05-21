@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 여행(관리자)</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
 <!-- jQuery -->

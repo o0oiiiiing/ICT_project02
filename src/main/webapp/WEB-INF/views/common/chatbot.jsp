@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CHATBOT | Jeju_travel</title>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- 폰트? -->
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
