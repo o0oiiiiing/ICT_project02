@@ -453,4 +453,13 @@ public class JejuDAO5 {
 		return null;
 	}
 
+	public String myreviewtitle(String contentsid) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.myreview_title", contentsid);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+		return null;
+	}
+
 }

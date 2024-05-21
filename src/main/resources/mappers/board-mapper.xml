@@ -258,6 +258,7 @@
 		GROUP BY DATE(u_regdate)
 		ORDER BY join_date
 	</select>
+
 	<select id="myreview_title" parameterType="String" resultType="String">
 		SELECT vi_title
 		FROM Visitjeju_table 
