@@ -63,7 +63,8 @@
     history.scrollRestoration = 'manual';
     document.addEventListener('DOMContentLoaded', function() {
         let cPage = "${cPage}"
-        if (cPage != "") {
+        let rCPage = "${rCPage}"
+        if (cPage != "" || rCPage != "") {
         	window.scrollTo(0, sessionStorage.getItem('scrollPosition'));
 		}
 
@@ -430,7 +431,7 @@
 			<!-- 내용 -->
 			<div class="review_title__section">
 				<p class="qa_title">
-					리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
+					리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점
 				</p>
 				<input class="write_r_button" type="button" value="리뷰작성">
 			</div>
@@ -462,25 +463,71 @@
 										<span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span>
 									</c:when>
 									<c:otherwise>
-										<span style="color: #FFDF6B;">★★★★★</span>
+										<span style="color: #FFDF6B;" class="star">★★★★★</span>
 									</c:otherwise>
 								</c:choose>
 							</div>
 							<div class="review-content__right">
-								<p>${k.re_content}</p>
-								<c:if test="${not empty k.imageList}">
-									<c:forEach var="j" items="${k.imageList}">
-										<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${j.pic_file}">
-									</c:forEach>
-								</c:if>
+								<c:choose>
+									<c:when test="${empty k.imageList}">
+										<div class="review-content__text" style="height: 260px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div><p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></div>
+									</c:when>
+									<c:otherwise>
+										<div class="review-content__text" style="height: 100px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div></div>
+										<div class="images">
+											<c:forEach var="j" items="${k.imageList}">
+												<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${j.pic_file}">
+											</c:forEach>
+											<p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></p>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
-						<!-- <p>신고하기</p> 이거 css로 위치 맞추기 -->
 						<hr class="hr">
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<!-- 페이징 -->
+		<ol class="paging">
+			<!-- 이전 버튼 -->
+			<c:choose>
+				<c:when test="${rPaging.beginBlock <= rPaging.pagePerBlock}">
+					<li class="disable">이전</li>
+				</c:when>
+				<c:otherwise>
+					<li><a class="able"
+						href="detail?rCPage=${rPaging.beginBlock - rPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
+				</c:otherwise>
+			</c:choose>
+
+			<!-- 페이지번호들 -->
+			<c:forEach begin="${rPaging.beginBlock}" end="${rPaging.endBlock}"
+				step="1" var="k">
+				<c:choose>
+					<c:when test="${k == rPaging.nowPage}">
+						<li class="now">${k}</li>
+					</c:when>
+					<c:otherwise>
+						<li><a class="other_page"
+							href="detail?rCPage=${k}&contentsid=${placeDetail.contentsid}">${k}</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<!-- 이후 버튼 -->
+			<c:choose>
+				<c:when test="${rPaging.endBlock >= rPaging.totalPage}">
+					<li class="disable">다음</li>
+				</c:when>
+				<c:otherwise>
+					<li><a class="able"
+						href="detail?rCPage=${rPaging.beginBlock + rPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
+				</c:otherwise>
+			</c:choose>
+		</ol>
 	</div>
 
 	<!-- Q&A 작성하는 영역 -->
@@ -536,11 +583,12 @@
 					<input type="radio" name="re_grade" value="2" id="rate4"><label for="rate4">★</label>
 					<input type="radio" name="re_grade" value="1" id="rate5"><label for="rate5">★</label>
 				</fieldset>
-					<br>
-					<input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
-					<p id="fileCountMessage" style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p> 
-					<br>
-					<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
+				<br>
+				<input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
+				<p id="fileCountMessage" style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p> 
+				<br>
+				<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
+				<div id="charCount">0/350</div>
 			</div>
 			<div class="qa_write__buttons">
 				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
@@ -681,6 +729,28 @@
             fileCountMessage.textContent = ''; // Clear any previous messages
         }
     });
+    
+    // 리뷰 글자 수 제한하기
+    document.addEventListener('DOMContentLoaded', function() {
+    	const form = document.getElementById('review_write');
+        const textarea = document.getElementById('review-content');
+        const charCount = document.getElementById('charCount');
+        const maxLength = 350; // 최대 문자 수 제한
+        function updateCharCount() {
+            const text = textarea.value;
+            if (text.length > maxLength) {
+                textarea.value = text.substring(0, maxLength); // 최대 문자 수를 초과하면 자르기
+            }
+            charCount.textContent = textarea.value.length+"/"+maxLength;
+        }
+
+        textarea.addEventListener('input', updateCharCount);
+
+        form.addEventListener('reset', function() {
+            setTimeout(updateCharCount, 0); // reset 이벤트 후에 문자 수를 업데이트
+        });
+    });
+
 </script>
 </body>
 
