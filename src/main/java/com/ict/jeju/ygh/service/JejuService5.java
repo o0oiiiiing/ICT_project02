@@ -3,6 +3,7 @@ package com.ict.jeju.ygh.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -128,5 +129,7 @@ public interface JejuService5 {
 	
 	// 일일 가입자 수
 	public List<UserVO> joinUser();
+
+	public String myreviewtitle(String contentsid);
 
 }

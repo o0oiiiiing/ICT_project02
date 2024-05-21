@@ -25,14 +25,19 @@
 		<%@include file="../common/header.jsp" %>
 		<section class="findID_chk_page">
 			<div class="findID_chk_container">
-				<h2 class="findID_chk_text">아이디 찾기 결과</h2>
+				<h2 class="findID_chk_text">아이디 찾기</h2>
 				<c:choose>
 					<c:when test="${empty find_list}">
 						<p class="findID_chk_result">해당 아이디는 존재하지 않습니다.</p>
 					</c:when>
 			        <c:otherwise>
 			        	<c:forEach var="k" items="${find_list}">
-				            <p class="findID_chk_result">ID : ${k.u_id} </p>
+			        		<c:if test="${k.active == 0}">
+					            <p class="findID_chk_result">ID : ${k.u_id} </p>
+			        		</c:if>
+				            <c:if test="${k.active == 1}">
+				            	<p class="findID_chk_result">이미 탈퇴한 회원입니다.</p>
+				            </c:if>
 			        	</c:forEach>
 			        </c:otherwise>
 				</c:choose>

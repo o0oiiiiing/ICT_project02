@@ -3,7 +3,15 @@ package com.ict.jeju.ygh.dao;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MyreviewVO {
-	private String u_idx , pic_idx , report_idx , contentsid, re_content,re_grade, re_regdate;
+	private String u_idx , pic_idx , report_idx , contentsid, re_content,re_grade, re_regdate,vi_title;
+	
+	
+	public String getVi_title() {
+		return vi_title;
+	}
+	public void setVi_title(String vi_title) {
+		this.vi_title = vi_title;
+	}
 	private MultipartFile file;
 	
 	public String getU_idx() {

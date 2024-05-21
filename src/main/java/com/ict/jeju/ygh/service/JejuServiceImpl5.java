@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -256,4 +257,10 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public List<UserVO> joinUser() {
 		return jejuDAO5.joinUser();
 	}
+
+	@Override
+	public String myreviewtitle(String contentsid) {
+		return jejuDAO5.myreviewtitle(contentsid);
+	}
+
 }

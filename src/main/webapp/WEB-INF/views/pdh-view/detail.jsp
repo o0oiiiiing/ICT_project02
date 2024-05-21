@@ -432,10 +432,51 @@
 				<input class="write_r_button" type="button" value="리뷰작성">
 			</div>
 			<hr class="hr">
-			<p
-				style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
-				존재하지 않습니다.</p>
-			<hr class="hr">
+			<c:choose>
+				<c:when test="${empty reviewList}">
+					<p style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
+						존재하지 않습니다.</p>
+					<hr class="hr">
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="k" items="${reviewList}">
+						<div class="review-content">
+							<div class="review-content__left">
+								<img style="width: 150px; height: 150px;" alt="프로필사진" src="resources/upload/${k.u_profile_img}">
+								<p>${k.u_name}</p>
+								<p>${k.re_regdate.substring(0,10)}</p>
+								<c:choose>
+									<c:when test="${k.re_grade == 1}">
+										<span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span>
+									</c:when>
+									<c:when test="${k.re_grade == 2}">
+										<span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span>
+									</c:when>
+									<c:when test="${k.re_grade == 3}">
+										<span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span>
+									</c:when>
+									<c:when test="${k.re_grade == 4}">
+										<span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span>
+									</c:when>
+									<c:otherwise>
+										<span style="color: #FFDF6B;">★★★★★</span>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="review-content__right">
+								<p>${k.re_content}</p>
+								<c:if test="${not empty k.imageList}">
+									<c:forEach var="j" items="${k.imageList}">
+										<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${j.pic_file}">
+									</c:forEach>
+								</c:if>
+							</div>
+						</div>
+						<!-- <p>신고하기</p> 이거 css로 위치 맞추기 -->
+						<hr class="hr">
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
@@ -480,8 +521,8 @@
 	</form>
 
 	<!-- 리뷰 작성하는 영역 -->
-	<form id="review_write" method="post" action="reviewWrite">
-		<div class="qa_write__container" style="height: 490px;">
+	<form id="review_write" method="post" action="reviewWrite" enctype="multipart/form-data">
+		<div class="qa_write__container" style="height: 510px;">
 			<p class="qa_wrtie__title">리뷰 작성</p>
 			<p style="font-family: 'NanumSquare'; text-align: center;">별점을 입력해주세요.</p>
 			<div class="qa_write__content">
@@ -493,7 +534,8 @@
 					<input type="radio" name="re_grade" value="1" id="rate5"><label for="rate5">★</label>
 				</fieldset>
 					<br>
-					<input type="file" name="images" multiple style="display: block; margin-left: 21px;"> 
+					<input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
+					<p id="fileCountMessage" style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p> 
 					<br>
 					<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
 			</div>
@@ -623,6 +665,19 @@
 			f.submit();
 	    }
 	}
+    
+    // review 사진 5장으로 제한
+    document.getElementById('review_images').addEventListener('change', function(event) {
+        const input = event.target;
+        const fileCountMessage = document.getElementById('fileCountMessage');
+
+        if (input.files.length > 5) {
+            fileCountMessage.textContent = '사진은 최대 5장까지만 첨부가 가능합니다.';
+            input.value = ''; // Clear the input
+        } else {
+            fileCountMessage.textContent = ''; // Clear any previous messages
+        }
+    });
 </script>
 </body>
 
