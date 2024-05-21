@@ -1,26 +1,35 @@
 package com.ict.jeju.pdh.dao;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 public class ReviewVO {
-	private String re_idx, u_idx, report_idx, contentsid, re_content, re_grade, re_regdate;
-	private String pic_idx, pic_file;
-	private MultipartFile[] images;
+	private String re_idx, u_idx, contentsid, re_content, re_grade, re_regdate, u_profile_img, u_name;
 	
-	public String getPic_file() {
-		return pic_file;
+	List<ImagesVO> imageList;
+	
+	public String getU_name() {
+		return u_name;
 	}
 
-	public void setPic_file(String pic_file) {
-		this.pic_file = pic_file;
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
 	}
 
-	public MultipartFile[] getImages() {
-		return images;
+	
+	public String getU_profile_img() {
+		return u_profile_img;
 	}
 
-	public void setImages(MultipartFile[] images) {
-		this.images = images;
+	public void setU_profile_img(String u_profile_img) {
+		this.u_profile_img = u_profile_img;
+	}
+
+	public List<ImagesVO> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<ImagesVO> imageList) {
+		this.imageList = imageList;
 	}
 
 	public String getRe_idx() {
@@ -37,22 +46,6 @@ public class ReviewVO {
 
 	public void setU_idx(String u_idx) {
 		this.u_idx = u_idx;
-	}
-
-	public String getPic_idx() {
-		return pic_idx;
-	}
-
-	public void setPic_idx(String pic_idx) {
-		this.pic_idx = pic_idx;
-	}
-
-	public String getReport_idx() {
-		return report_idx;
-	}
-
-	public void setReport_idx(String report_idx) {
-		this.report_idx = report_idx;
 	}
 
 	public String getContentsid() {
