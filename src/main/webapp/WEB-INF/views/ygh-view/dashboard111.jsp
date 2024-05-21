@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Charts - SB Admin</title>
-<link href="resources/ygh-css/css/styles.css" rel="stylesheet" />
+<title>관리자 대시보드</title>
+<link rel="stylesheet" href="/resources/ygh-css/css/styles.css" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -25,7 +25,7 @@
 	}, { once: true }); // 한 번만 실행되도록 옵션 추가
 </script>
 </head>
-<body class="sb-nav-fixed">
+<body>
 	<%@include file="../common/header.jsp"%>
 
 	<div id="layoutSidenav_content">
@@ -34,7 +34,7 @@
 				<h1 class="mt-4">관리자 대시보드</h1>
 				<h1 id="lastUpdated"></h1>
 			</div>
-
+			
 			<div class="row ">
 				<div class="col-lg-6">
 					<div class="card mb-4">
@@ -61,10 +61,9 @@
 		</main>
 	</div>
 	<%@include file="../common/footer.jsp"%>
-	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-	<script src="resources/ygh-css/assets/demo/chart-area-demo.js"></script>
-	<script src="resources/ygh-css/assets/demo/chart-pie-demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/resources/ygh-css/assets/demo/chart-area-demo.js"></script>
+	<script src="/resources/ygh-css/assets/demo/chart-pie-demo.js"></script>
 </body>
 </html>
