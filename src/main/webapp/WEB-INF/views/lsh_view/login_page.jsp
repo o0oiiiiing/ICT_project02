@@ -8,9 +8,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>LOGIN | Jeju_travel</title>
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
+		<!-- 파비콘 -->
+		<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
 			function login_ok(f) {
+				// 아이디, 비밀번호 입력하지 않을시 경고창
 				if (f.u_id.value === '' || f.u_pwd.value === '') {
 					alert("입력한 정보를 확인해주세요.");
 					return;

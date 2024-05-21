@@ -7,6 +7,9 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ADMIN | Jeju_travel</title>
+		<!-- 파비콘 -->
+		<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/admin_join.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -47,7 +50,10 @@
 				
 				let ok = "green";	
 				let no = "red";
-				if (a_pwd.value == a_pwdchk.value) {
+				if (a_pwd.value.length < 6) {
+					msg.style.color = no;
+					msg.innerHTML = "비밀번호는 6자리 이상으로 입력하세요.";
+				} else if (a_pwd.value == a_pwdchk.value) {
 					msg.style.color = ok;
 					msg.innerHTML = "비밀번호가 일치합니다."
 				} else {
@@ -61,16 +67,29 @@
 				if (f.a_id === '' || f.a_pwd === '' || f.a_pwdchk === '' || f.a_name === '' || f.a_email === '' || f.a_phone === '') {
 					alert("필수 항목을 입력하세요.");
 					return false;
+				} else if (f.a_id.value === '') {
+					alert("아이디를 입력하세요.");
+					f.a_id.focus();
+					return false;
 				} else if (! adminChk) {
 					alert("아이디 중복 확인을 해주세요.");
 					f.idChk.focus();
 			        return false;
-				} else if (f.a_phone.value.length !== 11) {
-					alert("전화번호는  '-'을 제외한 11자리로 입력하세요.");
-					f.u_phone.focus();
+				} else if (f.a_pwd.value === '') {
+					alert("비밀번호를 입력하세요.");
+					f.a_pwd.focus();
+					return false;
+				} else if (f.a_name.value === '') {
+					alert("이름을 입력하세요.");
+					f.a_name.focus();
 					return false;
 				} else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$/.test(f.a_email.value)) {
 					alert("이메일 형식을 확인하세요.");
+					f.a_email.focus();
+					return false;
+				} else if (f.a_phone.value.length !== 11) {
+					alert("전화번호는  '-'을 제외한 11자리로 입력하세요.");
+					f.a_phone.focus();
 					return false;
 				}
 				f.action = "admin_join_ok.do";
@@ -90,6 +109,7 @@
 					a_idchk.disabled = false;
 				}
 			}
+			
 			window.onload = function() {
 				chk_disabled(); 
 		        document.getElementById("a_id").addEventListener("input", chk_disabled);

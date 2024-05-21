@@ -37,12 +37,12 @@ public class JejuController5 {
 	@Autowired
 	private Paging2 paging2;
 
-	// 게시판 이동
-	@GetMapping("all_list.do")
-	public ModelAndView allList() {
+	// 이동
+	@GetMapping("index.do")
+	public ModelAndView index() {
 		return new ModelAndView("ygh-view/index");
 	}
-
+	
 	// 비밀번호 변경
 	@GetMapping("repwd_go.do")
 	public ModelAndView rePwd() {

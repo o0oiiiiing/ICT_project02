@@ -7,6 +7,9 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>SIGN UP | Jeju_travel</title>
+		<!-- 파비콘 -->
+		<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/join_page.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -46,7 +49,10 @@
 				
 				let ok = "green";	
 				let no = "red";
-				if (u_pwd.value == u_pwdchk.value) {
+				if (u_pwd.value.length < 6) {
+					msg.style.color = no;
+					msg.innerHTML = "비밀번호는 6자리 이상으로 입력하세요.";
+				} else if (u_pwd.value === u_pwdchk.value) {
 					msg.style.color = ok;
 					msg.innerHTML = "비밀번호가 일치합니다."
 				} else {
@@ -85,18 +91,25 @@
 						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detail_addr === '') {
 					alert("필수 항목들을 입력해주세요.");
 					return false;
-				} else if (! f.click_1.checked) {
-					alert("필수 이용 약관1에 동의해주세요.");
-					f.click_1.focus();
+				} else if (f.u_id.value === '') {
+					alert("아이디를 입력하세요");
+					f.u_id.focus();
 					return false;
-				} else if (! f.click_2.checked) {
-					alert("필수 이용 약관2에 동의해주세요.");
-					f.click_2.focus();
-					return false;
+				} else if (f.u_id.value.length > 4) {
+					alert();
+					f.u_id.focus
 				} else if (! idChk) {
 					alert("아이디 중복 확인을 하세요.");
 					f.idChk.focus();
-			        return false;
+			        return false; 
+				} else if (f.u_pwd.value === '') {
+					alert("비밀번호를 입력하세요");
+					f.u_pwd.focus();
+					return false;
+				} else if (f.u_name.value === '') {
+					alert("이름을 입력하세요");
+					f.u_name.focus();
+					return false;
 				} else if (f.u_birth.value === '') {
 					alert("생년월일 입력하세요.");
 					f.u_birth.focus();
@@ -107,15 +120,31 @@
 					return false;
 				} else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$/.test(f.u_email.value)) {
 					alert("이메일 형식을 확인하세요.");
+					f.u_email.focus();
+					return false;
+				} else if (f.u_postcode.value === '') {
+					alert("주소를 입력해주세요.");
+					f.u_postcode.focus();
+					return false;
+				} else if (! f.click_1.checked) {
+					alert("필수 이용 약관1에 동의해주세요.");
+					f.click_1.focus();
+					return false;
+				} else if (! f.click_2.checked) {
+					alert("필수 이용 약관2에 동의해주세요.");
+					f.click_2.focus();
 					return false;
 				}
 				f.action = "join_ok.do";
 				f.submit();
-			}
+			} 
 			
+			// 중복확인 버튼 활성화 및 비활성화
 			function chk_disabled() {
 				let u_id = document.getElementById('u_id').value;
 				let u_idchk = document.getElementById('u_idchk');
+				let n_uid = parseInt(u_id);
+				
 				let empty = "#b6dedc";
 				let basic = "lightgray";
 				if (u_id === '') {
@@ -126,6 +155,8 @@
 					u_idchk.disabled = false;
 				}
 			}
+			
+			// 중복확인 버튼 활성화 및 비활성화
 			window.onload = function() {
 				chk_disabled(); 
 		        document.getElementById("u_id").addEventListener("input", chk_disabled);
@@ -197,7 +228,7 @@
 								</li>
 								<li>
 									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="Password" />
-									<span id="msg" ></span>
+									<span id="msg"></span>
 								</li>
 								<li class="join_li_box" >
 									<input type="text" id="u_name" name="u_name" required placeholder="Name" />
@@ -206,9 +237,9 @@
 									<input type="date" id="u_birth" name="u_birth" value="생년월일" required data-placeholder="생년월일을 입력하세요" />
 								</li>
 								<li class="join_radio_btn">
-									<input  style="width: 50px;" type="radio" name="u_gender" value="1" checked />
+									<input  style="width: 50px;" type="radio" name="u_gender" value="M" checked />
 										<span class="join_radio_text">Male</span>
-									<input  style="width: 50px;" type="radio" name="u_gender" value="2" />
+									<input  style="width: 50px;" type="radio" name="u_gender" value="F" />
 										<span class="join_radio_text">Female</span>
 								</li>
 								<li>
