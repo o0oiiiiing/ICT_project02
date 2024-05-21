@@ -36,6 +36,15 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: '116angduk_honesty15';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/116angduk_honesty15.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .main_image {
 	width: 100%;
 	height: 600px;
@@ -363,4 +372,37 @@
 	width: 90%;
 	margin: 10px auto;
 	border: 1px solid #D9D9D9;
+}
+
+.star {
+	font-family: '116angduk_honesty15';
+	font-size: 30px;
+	letter-spacing: 5px;
+}
+
+.review-content {
+	width: 90%;
+	font-family: 'NanumSquare';
+	margin: 30px auto;
+	display: flex;
+}
+
+.review-content__left {
+	width: 200px;
+	text-align: center;
+	line-height: 32px;
+}
+
+.review-content__right {
+	width: 100%;
+}
+
+.review-content__right p {
+	height: 100px;
+	width: 99%;
+	background-color: pink;
+}
+
+.review-content__right img {
+	margin: 10px 10px 0 0;
 }

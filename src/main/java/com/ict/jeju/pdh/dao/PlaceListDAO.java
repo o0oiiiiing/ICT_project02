@@ -102,7 +102,7 @@ public class PlaceListDAO {
 	}
 	
 	// 장소의 Q&A 가져오기
-	public List<QaVO> qaList(QaPagingVO qaPagingVO) {
+	public List<QaVO> qaList(PagingVO qaPagingVO) {
 		try {
 			return sqlSessionTemplate.selectList("place.qaList", qaPagingVO);
 		} catch (Exception e) {
@@ -122,12 +122,22 @@ public class PlaceListDAO {
 	}
 	
 	// 리뷰 이미지 삽입하기
-	public int imageInsert(ReviewVO reviewVO) {
+	public int imageInsert(ImagesVO imagesVO) {
 		try {
-			return sqlSessionTemplate.insert("place.imageInsert", reviewVO);
+			return sqlSessionTemplate.insert("place.imageInsert", imagesVO);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return -1;
+	}
+	
+	// 장소의 리뷰 가져오기
+	public List<ReviewVO> reviewList(PagingVO rPagingVO) {
+		try {
+			return sqlSessionTemplate.selectList("place.reviewList", rPagingVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 }
