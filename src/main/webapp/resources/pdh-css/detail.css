@@ -391,7 +391,8 @@
 .review-content__left {
 	width: 200px;
 	text-align: center;
-	line-height: 31px;
+	line-height: 30px;
+	margin-right: 15px;
 }
 
 .review-content__right {
@@ -405,6 +406,7 @@
 .review-content__text {
 	width: 99%;
 	position: relative;
+	word-break: break-all;
 }
 
 .review-content__right img {

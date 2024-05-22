@@ -446,7 +446,7 @@
 					<c:forEach var="k" items="${reviewList}">
 						<div class="review-content">
 							<div class="review-content__left">
-								<img style="width: 150px; height: 150px;" alt="프로필사진" src="resources/upload/${k.u_profile_img}">
+								<img style="width: 130px; height: 130px; border-radius: 50%;" alt="프로필사진" src="resources/upload/${k.u_profile_img}">
 								<p>${k.u_name}</p>
 								<p>${k.re_regdate.substring(0,10)}</p>
 								<c:choose>
@@ -470,7 +470,7 @@
 							<div class="review-content__right">
 								<c:choose>
 									<c:when test="${empty k.imageList}">
-										<div class="review-content__text" style="height: 260px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div><p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></div>
+										<div class="review-content__text" style="height: 240px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div><p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></div>
 									</c:when>
 									<c:otherwise>
 										<div class="review-content__text" style="height: 100px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div></div>
@@ -598,6 +598,24 @@
 			</div>
 		</div>
 	</form>
+	
+	<!-- 신고 작성하는 영역 -->
+	<%-- <form id="declaration_write" method="post" action="declarationWrite">
+		<div class="qa_write__container" style="height: 510px;">
+			<p class="qa_wrtie__title">리뷰 작성</p>
+			<p style="font-family: 'NanumSquare'; text-align: center;">별점을 입력해주세요.</p>
+			<div class="qa_write__content">
+				<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
+				<div id="charCount">0/350</div>
+			</div>
+			<div class="qa_write__buttons">
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
+					class="review_write__button" type="reset" value="취소">
+				<button type="button" class="review_write__button"
+					onclick="reviewWrite(this.form)">등록</button>
+			</div>
+		</div>
+	</form> --%>
 
 	<div class="overlay"></div>
 	<script type="text/javascript">
@@ -684,7 +702,7 @@
 	}
     
     // Q&A 내용 입력안할 시에 alert 뜨기
-    function qawWrite(f) {
+    function qaWrite(f) {
 	    var editorContent = $('#summernote').summernote('code');
 	    var titleInput = document.querySelector('input[name="bo_title"]');
 	    console.log(editorContent)
@@ -741,7 +759,7 @@
             if (text.length > maxLength) {
                 textarea.value = text.substring(0, maxLength); // 최대 문자 수를 초과하면 자르기
             }
-            charCount.textContent = textarea.value.length+"/"+maxLength;
+            charCount.textContent = textarea.value.length + "/" + maxLength;
         }
 
         textarea.addEventListener('input', updateCharCount);
