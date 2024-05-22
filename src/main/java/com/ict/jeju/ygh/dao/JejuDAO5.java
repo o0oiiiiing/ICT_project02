@@ -222,26 +222,6 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// 신고 게시판 수정 (사용자)
-	public int reportUpdate(ReportVO revo) {
-		try {
-			return sqlSessionTemplate.update("Board_table.report_update", revo);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-
-	// 신고 게시판 삭제 (사용자)
-	public int reportDelete(ReportVO revo) {
-		try {
-			return sqlSessionTemplate.delete("Board_table.report_delete", revo);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-
 	// 회원정보 상세보기
 	public UserVO userDetail(String u_idx) {
 		try {

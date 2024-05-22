@@ -10,6 +10,22 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+#menubar table {
+	width: 500px;
+	margin: 10px auto 50px;
+}
+
+#menubar>h1 {
+	width: 800px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

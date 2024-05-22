@@ -1,5 +1,17 @@
-#board table {
+#menubar table {
+	width: 500px;
 	margin: 10px auto 50px;
+}
+
+#menubar>h1 {
+	width: 800px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
 }
 
 .tab_bar {
@@ -20,11 +32,11 @@
 }
 
 #user_h {
-	 width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
+	width: 1200px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
 }
 
 #user_h h1 {
@@ -34,13 +46,13 @@
 }
 
 .filters {
-    display: flex;
-    align-items: center;
-    font-family: 'GmarketSansMedium';
+	display: flex;
+	align-items: center;
+	font-family: 'GmarketSansMedium';
 }
 
 .filters label, .filters button {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 /* #user_h button {
@@ -56,7 +68,6 @@
 	border-top-right-radius: 10px;
 	font-family: 'GmarketSansMedium';
 } */
-
 #user_t a {
 	text-decoration: none;
 }

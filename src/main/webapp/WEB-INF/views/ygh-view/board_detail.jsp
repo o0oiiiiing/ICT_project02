@@ -62,13 +62,25 @@
 				</tbody>
 			</table>
 			</div>
-			<div id="board_detail_btn">
-				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-				<input type="hidden" value="${cPage}" name="cPage"> 
-				<input type="button" value="목록" onclick="board_list(this.form)" /> 
-				<input type="button" value="수정" onclick="board_update(this.form)" /> 
-				<input type="button" value="삭제" onclick="board_delete(this.form)" />
-			</div>
+			<c:choose>
+				<c:when test="${bovo.active eq 0}">
+					<div id="board_detail_btn">
+						<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+						<input type="hidden" value="${cPage}" name="cPage"> 
+						<input type="button" value="목록" onclick="board_list(this.form)" /> 
+						<input type="button" value="수정" onclick="board_update(this.form)" /> 
+						<input type="button" value="삭제" onclick="board_delete(this.form)" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="board_detail_btn">
+						<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+						<input type="hidden" value="${cPage}" name="cPage"> 
+						<input type="button" value="목록" onclick="board_list(this.form)" /> 
+						<input type="button" value="삭제" onclick="board_delete(this.form)" />
+					</div>
+				</c:otherwise>
+			</c:choose>
 	</form>
 	
 	<br><br><br>

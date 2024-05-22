@@ -72,12 +72,6 @@ public interface JejuService5 {
 	// 신고 게시판 작성 (사용자)
 	public int reportWriteOk(ReportVO revo);
 
-	// 신고 게시판 수정 (사용자)
-	public int reportUpdate(ReportVO revo);
-
-	// 신고 게시판 삭제 (사용자)
-	public int reportDelete(ReportVO revo);
-
 	// 회원정보 상세보기
 	public UserVO userDetail(String u_idx);
 

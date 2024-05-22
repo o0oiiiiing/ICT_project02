@@ -479,7 +479,6 @@ public class JejuController5 {
 			ModelAndView mv = new ModelAndView("redirect:report_list.do");
 			UserVO uvo = (UserVO) session.getAttribute("userVO");
 			
-			revo.setReport_pwd(passwordEncoder.encode(revo.getReport_pwd()));
 			int result = jejuService5.reportWriteOk(revo);
 			if (result > 0) {
 				return mv;
@@ -490,82 +489,6 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-	// 사용자 신고 수정
-	@PostMapping("report_update.do")
-	public ModelAndView reportUpdate(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx) {
-		ModelAndView mv = new ModelAndView("ygh-view/report_update");
-		ReportVO revo = jejuService5.reportDetail(report_idx);
-		if (revo != null) {
-			mv.addObject("revo", revo);
-			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 사용자 신고 수정
-	@PostMapping("report_update_ok.do")
-	public ModelAndView boardUpdateOk(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx, ReportVO revo) {
-		ModelAndView mv = new ModelAndView();
-
-		ReportVO revo2 = jejuService5.reportDetail(revo.getReport_idx());
-		String dpwd = revo2.getReport_pwd();
-
-		if (!passwordEncoder.matches(revo.getReport_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/report_update");
-			mv.addObject("pwdchk", "fail");
-			mv.addObject("revo", revo);
-			return mv;
-		} else {
-			int result = jejuService5.reportUpdate(revo);
-			if (result > 0) {
-				mv.setViewName("redirect:report_detail.do");
-				return mv;
-			}
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 사용자 신고 삭제
-	@PostMapping("report_delete.do")
-	public ModelAndView reportDelete(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx) {
-		ModelAndView mv = new ModelAndView("ygh-view/report_delete");
-		ReportVO revo = jejuService5.reportDetail(report_idx);
-
-		if (revo != null) {
-			mv.addObject("revo", revo);
-			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 사용자 신고 삭제
-	@PostMapping("report_delete_ok.do")
-	public ModelAndView reportDeleteOk(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx, ReportVO revo) {
-		ModelAndView mv = new ModelAndView();
-
-		ReportVO revo2 = jejuService5.reportDetail(revo.getReport_idx());
-		String dpwd = revo2.getReport_pwd();
-
-		if (!passwordEncoder.matches(revo.getReport_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/report_delete");
-			mv.addObject("pwdchk", "fail");
-			mv.addObject("msg", "비밀번호가 일치하지 않습니다.");
-			mv.addObject("revo", revo);
-			return mv;
-		} else {
-			// active 컬럼의 값을 1로 변경하자.
-			int result = jejuService5.reportDelete(revo2);
-			if (result > 0) {
-				mv.setViewName("redirect:report_list.do");
-				return mv;
-			}
-		}
-		return new ModelAndView("ygh-view/error");
-	}
 
 	// 회원정보수정
 	@GetMapping("user_update.do")

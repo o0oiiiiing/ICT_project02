@@ -140,18 +140,6 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.reportWriteOk(revo);
 	}
 
-	// 신고 게시판 수정 (사용자)
-	@Override
-	public int reportUpdate(ReportVO revo) {
-		return jejuDAO5.reportUpdate(revo);
-	}
-
-	// 신고 게시판 삭제 (사용자)
-	@Override
-	public int reportDelete(ReportVO revo) {
-		return jejuDAO5.reportDelete(revo);
-	}
-
 	// 회원정보 상세보기
 	@Override
 	public UserVO userDetail(String u_idx) {

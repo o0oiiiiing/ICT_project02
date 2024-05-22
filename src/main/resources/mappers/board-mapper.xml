@@ -131,18 +131,6 @@
 		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{u_idx})
 	</insert>
 	
-	<!-- 신고 게시판 수정 (사용자) -->
-	<update id="report_update" parameterType="revo">
-		update Report_table
-		set report_writer=#{report_writer}, report_title=#{report_title}, report_content=#{report_content}
-		where report_idx=#{report_idx}
-	</update>
-	
-	<!-- 신고 게시판 삭제 (사용자) -->
-	<delete id="report_delete" parameterType="revo">
-		delete from Report_table where report_idx = #{report_idx}
-	</delete>
-	
 	<!-- 회원정보 상세보기 -->
 	<select id="user_detail" parameterType="String" resultType="userVO">
 		select * from User_table where u_idx = #{u_idx}
