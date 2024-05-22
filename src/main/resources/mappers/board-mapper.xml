@@ -56,16 +56,20 @@
 		values(#{com_writer}, #{com_title}, #{com_content}, sysdate(), 1, #{bo_idx})
 	</insert>
 	
+	<!-- Q&A 답글 작성 -->
 	<update id="comment_update" parameterType="String">
 		update Board_table
 		set active = 1
 		where bo_idx = #{bo_idx}
 	</update>
 	
-	<!-- Q&A 답글 삭제 -->
-	<delete id="comment_delete" parameterType="comvo">
-		delete from Comment_table where com_idx = #{com_idx}
-	</delete>
+	<!-- Q&A 답글 수정 -->
+	<update id="comment_update_ok" parameterType="String">
+		update Comment_table
+		set com_writer = #{com_writer}, com_content = #{com_content}, com_regdate=sysdate()
+		where bo_idx = #{bo_idx}
+	</update>
+	
 	
 	<!-- 신고 답글 가져오기 -->	
 	<select id="replylist" resultType="repvo" parameterType="String">
@@ -78,9 +82,17 @@
 		values(#{report_idx}, #{rep_writer}, #{rep_title}, #{rep_content}, sysdate(), 1)
 	</insert>
 	
+	<!-- 신고 답글 작성 -->
 	<update id="reply_update" parameterType="String">
 		update Report_table
 		set active = 1
+		where report_idx = #{report_idx}
+	</update>
+	
+	<!-- 신고 답글 수정 -->
+	<update id="reply_update_ok" parameterType="String">
+		update Reply_table
+		set rep_writer = #{rep_writer}, rep_content = #{rep_content}, rep_regdate = sysdate()
 		where report_idx = #{report_idx}
 	</update>
 	
@@ -119,18 +131,6 @@
 		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{u_idx})
 	</insert>
 	
-	<!-- 신고 게시판 수정 (사용자) -->
-	<update id="report_update" parameterType="revo">
-		update Report_table
-		set report_writer=#{report_writer}, report_title=#{report_title}, report_content=#{report_content}
-		where report_idx=#{report_idx}
-	</update>
-	
-	<!-- 신고 게시판 삭제 (사용자) -->
-	<delete id="report_delete" parameterType="revo">
-		delete from Report_table where report_idx = #{report_idx}
-	</delete>
-	
 	<!-- 회원정보 상세보기 -->
 	<select id="user_detail" parameterType="String" resultType="userVO">
 		select * from User_table where u_idx = #{u_idx}
@@ -153,7 +153,7 @@
 	
 	<!-- 사용자 Q&A 페이징 -->
 	<select id="count3" resultType="int" parameterType="String">
-		select count(*) from Review_table where u_idx = #{u_idx}
+		select count(*) from Board_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 사용자 Q&A 전체보기 -->
@@ -202,13 +202,19 @@
 	</select>
 	
 	<!-- 회원관리 페이징 -->
-	<select id="count7" resultType="int">
+	<select id="count7" resultType="int" parameterType="String">
 		select count(*) from User_table
+		<if test="filter != null">
+			where active = #{filter}
+		</if>
 	</select>
 	
 	<!-- 회원관리 전체보기 -->
 	<select id="user_list" resultType="userVO" parameterType="Map">
 		select * from User_table 
+		<if test="filter != null">
+			where active = #{filter}
+		</if>
 		order by u_idx desc
 		limit #{limit} offset #{offset} 
 	</select>
@@ -245,6 +251,23 @@
 		SELECT vi_title
 		FROM Visitjeju_table 
 		where contentsid = #{contentsid}
+	</select>
+	
+	<!-- 회원현황 -->
+	<select id="user_total" resultType="userVO">
+		SELECT
+		    SUM(CASE WHEN active = 0 THEN 1 ELSE 0 END) AS activeUsers,
+		    SUM(CASE WHEN active = 1 THEN 1 ELSE 0 END) AS inactiveUsers
+		FROM User_table
+	</select>
+	
+	<!-- 일일 가입자 수 -->
+	<select id="join_user" resultType="userVO">
+		SELECT DATE(u_regdate) AS join_date, COUNT(*) AS user_count
+		FROM User_table
+		WHERE u_regdate >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+		GROUP BY DATE(u_regdate)
+		ORDER BY join_date
 	</select>
 </mapper>
 

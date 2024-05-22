@@ -15,7 +15,7 @@
 <!-- jQuery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" >
 	let msg = "${msg}";
 	if (msg !== "") {
 	    alert(msg);
@@ -117,21 +117,63 @@
  	    });
  	});
 	
-	function out_user_list() {
-		location.href="out_user_list.do";
+	// 필터
+	function userFilter() {
+	    let allactive = document.getElementById('allactive').checked;
+	    let isActive = document.getElementById('active').checked;
+	    let isInactive = document.getElementById('inactive').checked;
+	    
+	    if (isActive) {
+		    location.href = "user_list.do?filter=active";
+		} else if (isInactive) {
+		    location.href = "user_list.do?filter=inactive";
+		} else if (allactive) {
+		    location.href = "user_list.do?filter=allactive";
+		}
+	    
+	    
+	    
 	}
-	
+
 	
 </script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
+	
+	<div id="menubar">
+		<h1>나의 여행(관리자)</h1>
+		<table>
+			<tr>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+			</tr>
+			<tr>
+				<td><a href="dashboard.do">대시보드</a></td>
+				<td><a href="user_list.do">회원관리</a></td>
+				<td><a href="admin_list.do">Q&A</a></td>
+				<td><a href="admin_list.do">신고</a></td>
+				<td><a href="admin_insert">일정 추가</a></td>
+				
+				<c:if test="${adminVO.a_status == '1'}">
+					<td><a href="admin_join.do">관리자 생성</a></td>
+				</c:if>
+			</tr>
+		</table>
+	</div>
+	
 	<div id="user_t">
 		<div id="user_h">
-			<button>전체회원</button>
-			<button>현재회원</button>
-			<button onclick="out_user_list()">탈퇴회원</button>
+			<h1>회원관리</h1>
+			<div class="filters">
+				<label><input type="checkbox" id="allactive" name="filter" value="allactive"> 전체회원</label>
+				<label><input type="checkbox" id="active" name="filter" value="active"> 활성회원</label>
+				<label><input type="checkbox" id="inactive" name="filter" value="inactive"> 탈퇴회원</label>
+				<button onclick="userFilter()">적용</button>
+			</div>
 		</div>
 		<div>
 			<table>

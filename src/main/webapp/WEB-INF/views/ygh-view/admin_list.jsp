@@ -115,32 +115,26 @@ function admin_report_detail_go(report_idx, cPage2) {
 
 <%@include file="../common/header.jsp"%>
 
-	<div id="board">
+	<div id="menubar">
 		<h1>나의 여행(관리자)</h1>
 		<table>
 			<tr>
-				<td style="border-right: 1px solid lightgray">아이콘</td>
-				<td style="border-right: 1px solid lightgray">아이콘</td>
 				<td>아이콘</td>
 				<td>아이콘</td>
-				
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
 			</tr>
 			<tr>
-				<td style="border-right: 1px solid lightgray">
-				<a href="#">미답변 Q&A</a></td>
-				<td style="border-right: 1px solid lightgray">
-				<a href="#">신고</a></td>
+				<td><a href="dashboard.do">대시보드</a></td>
 				<td><a href="user_list.do">회원관리</a></td>
+				<td><a href="admin_list.do">Q&A</a></td>
+				<td><a href="admin_list.do">신고</a></td>
 				<td><a href="admin_insert">일정 추가</a></td>
 				
 				<c:if test="${adminVO.a_status == '1'}">
 					<td><a href="admin_join.do">관리자 생성</a></td>
 				</c:if>
-			</tr>
-			<tr>
-				<td style="border-right: 1px solid lightgray">(${paging.totalRecord})</td>
-				<td style="border-right: 1px solid lightgray">(${paging2.totalRecord})</td>
-				<td>()</td>
 			</tr>
 		</table>
 	</div>
@@ -229,10 +223,10 @@ function admin_report_detail_go(report_idx, cPage2) {
 	</div>
 	
 	
-	<div class="tab_bar2">신고</div>
+	<div class="tab_bar2">미답변 신고</div>
 		<div id="report_t">
 			<table>
-			<caption>신고 (${paging2.totalRecord}) <button onclick="admin_report_list()">전체</button></caption>
+			<caption>미답변 신고 (${paging2.totalRecord}) <button onclick="admin_report_list()">전체</button></caption>
 				<thead>
 					<tr>
 						<th class="no">번호</th>

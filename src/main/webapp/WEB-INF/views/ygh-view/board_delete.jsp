@@ -27,6 +27,11 @@
 		f.action="board_list.do";
 		f.submit();
 	}
+
+	function board_detail(f) {
+		f.action = "board_detail.do";
+		f.submit();
+	}
 	
 	function board_delete_ok(f) {
 		f.action="board_delete_ok.do";
@@ -50,9 +55,10 @@
 			</table>
 			</div>
 			<div id="board_detail_btn">
-				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-				<input type="hidden" value="${cPage}" name="cPage"> 
+				<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
+				<input type="hidden" name="cPage" value="${cPage}">
 				<input type="button" value="목록" onclick="board_list(this.form)" /> 
+				<input type="button" value="취소" onclick="board_detail(this.form)" />
 				<input type="button" value="삭제" onclick="board_delete_ok(this.form)" />
 			</div>
 	</form>

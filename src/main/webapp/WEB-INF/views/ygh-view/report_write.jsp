@@ -42,11 +42,6 @@
 						<td><input type="text" name="report_writer" /></td>
 					</tr>
 					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" name="report_pwd" size="12" /></td>
-					</tr>
-
-					<tr>
 						<th>내용</th>
 						<td><textarea rows="10" cols="60" id="report_content"
 								name="report_content" style="margin: 5px;"></textarea></td>

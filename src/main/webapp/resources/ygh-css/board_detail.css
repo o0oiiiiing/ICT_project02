@@ -53,35 +53,35 @@
 	cursor: pointer;
 }
 
-#comment_box table {
+#comment_box table, #comment_box3 table {
 	width: 1000px;
 	margin: auto;
 	border-collapse: collapse
 }
 
-#comment_box table tr {
+#comment_box table tr, #comment_box3 table tr {
 	text-align: center;
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
 
-#comment_box table th {
+#comment_box table th, #comment_box3 table th {
 	text-align: center;
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
 
-#comment_box input[type="text"], textarea {
+#comment_box input[type="text"], textarea, #comment_box3 input[type="text"] {
 	border: 1px solid lightgray;
 	text-align: left;
 }
 
-#comment_btn {
+#comment_btn, #comment_btn3 {
     text-align: center;
     margin-top: 10px;
 }
 
-#comment_btn input[type="button"] {
+#comment_btn input[type="button"], #comment_btn3 input[type="button"] {
 	display: inline-block;
 	width: 80px;
 	margin: 0 5px;

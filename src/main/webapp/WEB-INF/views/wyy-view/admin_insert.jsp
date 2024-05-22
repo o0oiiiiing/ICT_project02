@@ -146,6 +146,31 @@ function checkInput() {
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
+
+	<div id="menubar">
+		<h1>나의 여행(관리자)</h1>
+		<table>
+			<tr>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+				<td>아이콘</td>
+			</tr>
+			<tr>
+				<td><a href="dashboard.do">대시보드</a></td>
+				<td><a href="user_list.do">회원관리</a></td>
+				<td><a href="admin_list.do">Q&A</a></td>
+				<td><a href="admin_list.do">신고</a></td>
+				<td><a href="admin_insert">일정 추가</a></td>
+				
+				<c:if test="${adminVO.a_status == '1'}">
+					<td><a href="admin_join.do">관리자 생성</a></td>
+				</c:if>
+			</tr>
+		</table>
+	</div>
+	
 	<form action="admin_insert_ok" method="post" >
 		<div class="admin_result">
 		<h3>장소 추가</h3>
