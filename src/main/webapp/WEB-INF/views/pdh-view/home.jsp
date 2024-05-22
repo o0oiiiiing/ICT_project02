@@ -160,7 +160,7 @@ $(document).ready(function() {
   	<img src="${randomRestaurant.vi_image}" style="width: 500px; height: 350px;">
     <a href="detail?contentsid=${randomRestaurant.contentsid}" class="dsc"><${randomRestaurant.vi_title}> 바로가기</a>
     <br><br>
-    <input type="checkbox" name="today_close1" />오늘만 이 창을 열지 않음
+    <input type="checkbox" name="today_close2" />오늘만 이 창을 열지 않음
     <button type="button" class="btn_close">X</button>
   </div>
 </div>
