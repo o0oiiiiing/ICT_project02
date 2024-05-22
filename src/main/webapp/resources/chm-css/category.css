@@ -94,6 +94,8 @@
 }
 
 .category_box.collapsed {
+  margin-top: -20px;
+  padding-top: 20px;
   transform: scale(0.9);
   box-shadow: 0px 0px 10px rgba(0, 0, 0.0, 0.8); 
   background-color: snow;

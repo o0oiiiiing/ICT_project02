@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +41,15 @@
 						<c:forEach var="k" items="${myreview_list}" varStatus="vs">
 							<tr>
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage + vs.index)}</td>
-								<%-- <td>${k.contentsid}</td> --%>
 								<td>${k.vi_title}</td>
-								<td>${k.re_content}</td>
+								<c:choose>
+    								<c:when test="${fn:length(k.re_content) >= 8}">
+    									<td><span>${k.re_content.substring(0, 8)}...</span></td>
+    								</c:when>
+								    <c:otherwise>
+								        <td>${k.re_content}</td>
+								    </c:otherwise>
+								</c:choose>
 								<td>${k.re_regdate.substring(0,10)}</td>
 								<c:choose>
 									<c:when test="${k.re_grade == 1}">
@@ -78,7 +85,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
-										<a href="admin_board_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
+										<a href="myreview_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -91,7 +98,7 @@
 										<li class="now">${k}</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="admin_board_list.do?cPage=${k}">${k}</a></li>
+										<li><a href="myreview_list.do?cPage=${k}">${k}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -102,7 +109,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="admin_board_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
+										href="myreview_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
