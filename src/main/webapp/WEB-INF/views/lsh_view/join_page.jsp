@@ -45,7 +45,7 @@
 			function pwdchk_go() {
 				let u_pwd = document.getElementById('u_pwd');
 				let u_pwdchk = document.getElementById('u_pwdchk');
-				let msg = document.getElementById('msg');
+				let msg = document.getElementById('pwd_msg');
 				
 				let ok = "green";	
 				let no = "red";
@@ -95,9 +95,6 @@
 					alert("아이디를 입력하세요");
 					f.u_id.focus();
 					return false;
-				} else if (f.u_id.value.length > 4) {
-					alert();
-					f.u_id.focus
 				} else if (! idChk) {
 					alert("아이디 중복 확인을 하세요.");
 					f.idChk.focus();
@@ -150,6 +147,9 @@
 				if (u_id === '') {
 					u_idchk.style.background = basic;
 					u_idchk.disabled = true;
+				} else if (u_id.length < 4) {
+					u_idchk.style.background = basic;
+					u_idchk.disabled = true;
 				} else {
 					u_idchk.style.background = empty;
 					u_idchk.disabled = false;
@@ -159,7 +159,7 @@
 			// 중복확인 버튼 활성화 및 비활성화
 			window.onload = function() {
 				chk_disabled(); 
-		        document.getElementById("u_id").addEventListener("input", chk_disabled);
+				document.getElementById("u_id").addEventListener("input", chk_disabled);
 		    };
 		</script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -221,14 +221,15 @@
 							<ul>
 								<li>
 									<input type="text"  id="u_id" name="u_id" required placeholder="ID" />
+									<span id="id_msg"></span>
 									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</li>
 								<li>
 									<input type="password" id="u_pwd" name="u_pwd" required placeholder="Password" />
 								</li>
 								<li>
-									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="Password" />
-									<span id="msg"></span>
+									<input type="password" id="u_pwdchk" name="u_pwdchk" required oninput="pwdchk_go()" placeholder="Password Check" />
+									<span id="pwd_msg"></span>
 								</li>
 								<li class="join_li_box" >
 									<input type="text" id="u_name" name="u_name" required placeholder="Name" />
