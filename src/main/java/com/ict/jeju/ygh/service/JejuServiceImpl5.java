@@ -21,16 +21,28 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Autowired
 	private JejuDAO5 jejuDAO5;
 
-	// 관리자 Q&A 페이징
+	// 관리자 미답변 Q&A 페이징
 	@Override
 	public int getTotalCount() {
 		return jejuDAO5.getTotalCount();
 	}
 
-	// 관리자 Q&A 전체보기
+	// 관리자 미답변 Q&A 전체보기
 	@Override
 	public List<BoardVO> adminBoardList(int offset, int limit) {
 		return jejuDAO5.adminBoardList(offset, limit);
+	}
+	
+	// 관리자 답변 Q&A 페이징
+	@Override
+	public int getTotalCount8() {
+		return jejuDAO5.getTotalCount8();
+	}
+	
+	// 관리자 답변 Q&A 전체보기
+	@Override
+	public List<BoardVO> adminBoardList2(int offset, int limit) {
+		return jejuDAO5.adminBoardList2(offset, limit);
 	}
 
 	// 관리자 Q&A 상세보기
@@ -39,16 +51,28 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.boardDetail(bo_idx);
 	}
 
-	// 관리자 신고 페이징
+	// 관리자 미답변 신고 페이징
 	@Override
 	public int getTotalCount2() {
 		return jejuDAO5.getTotalCount2();
 	}
 
-	// 관리자 신고 전체보기
+	// 관리자 미답변 신고 전체보기
 	@Override
 	public List<ReportVO> adminReportList(int offset, int limit) {
 		return jejuDAO5.adminReportList(offset, limit);
+	}
+	
+	// 관리자 답변 신고 페이징
+	@Override
+	public int getTotalCount9() {
+		return jejuDAO5.getTotalCount9();
+	}
+	
+	// 관리자 답변 신고 전체보기
+	@Override
+	public List<ReportVO> adminReportList2(int offset, int limit) {
+		return jejuDAO5.adminReportList2(offset, limit);
 	}
 
 	// 관리자 신고 상세보기
@@ -180,30 +204,6 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public List<ReportVO> reportList(int offset, int limit, String u_idx) {
 		return jejuDAO5.reportList(offset, limit, u_idx);
-	}
-
-	// 관지자 전체 Q&A 페이징
-	@Override
-	public int getTotalCount5() {
-		return jejuDAO5.getTotalCount5();
-	}
-
-	// 관지자 전체 Q&A 전체보기
-	@Override
-	public List<BoardVO> adminBoardlist2(int offset, int limit) {
-		return jejuDAO5.adminBoardlist2(offset, limit);
-	}
-
-	// 관지자 전체 신고 페이징
-	@Override
-	public int getTotalCount6() {
-		return jejuDAO5.getTotalCount6();
-	}
-
-	// 관지자 전체 신고 전체보기
-	@Override
-	public List<ReportVO> adminReportlist2(int offset, int limit) {
-		return jejuDAO5.adminReportlist2(offset, limit);
 	}
 
 	// 회원관리 페이징

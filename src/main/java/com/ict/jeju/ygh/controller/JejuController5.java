@@ -1,6 +1,8 @@
 package com.ict.jeju.ygh.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.chm.dao.CategoryVO;
@@ -49,7 +53,7 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/repwd_page");
 	}
 
-	// 관리자 게시판
+	// 관리자 미답변 게시판
 	@RequestMapping("admin_list.do")
 	public ModelAndView adminList(HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_list");
@@ -117,6 +121,84 @@ public class JejuController5 {
 		// DB
 		List<BoardVO> board_list = jejuService5.adminBoardList(paging.getOffset(), paging.getNumPerPage2());
 		List<ReportVO> report_list = jejuService5.adminReportList(paging2.getOffset(), paging2.getNumPerPage2());
+		if (board_list != null && report_list != null) {
+			mv.addObject("board_list", board_list);
+			mv.addObject("paging", paging);
+			mv.addObject("report_list", report_list);
+			mv.addObject("paging2", paging2);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 관리자 답변 게시판
+	@RequestMapping("admin_list2.do")
+	public ModelAndView adminList2(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_list2");
+
+		// 페이징 미답변 Q&A
+		int count8 = jejuService5.getTotalCount8();
+		paging.setTotalRecord(count8);
+
+		if (paging.getTotalRecord() <= paging.getNumPerPage2()) {
+			paging.setTotalPage(1);
+		} else {
+			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage2());
+			if (paging.getTotalRecord() % paging.getNumPerPage2() != 0) {
+				paging.setTotalPage(paging.getTotalPage() + 1);
+			}
+		}
+
+		String cPage = request.getParameter("cPage");
+		if (cPage == null) {
+			paging.setNowPage(1);
+		} else {
+			paging.setNowPage(Integer.parseInt(cPage));
+		}
+
+		paging.setOffset(paging.getNumPerPage2() * (paging.getNowPage() - 1));
+
+		paging.setBeginBlock(
+				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+
+		if (paging.getEndBlock() > paging.getTotalPage()) {
+			paging.setEndBlock(paging.getTotalPage());
+		}
+
+		// 페이징 신고
+		int count9 = jejuService5.getTotalCount9();
+		paging2.setTotalRecord(count9);
+
+		if (paging2.getTotalRecord() <= paging2.getNumPerPage2()) {
+			paging2.setTotalPage(1);
+		} else {
+			paging2.setTotalPage(paging2.getTotalRecord() / paging2.getNumPerPage2());
+			if (paging2.getTotalRecord() % paging2.getNumPerPage2() != 0) {
+				paging2.setTotalPage(paging2.getTotalPage() + 1);
+			}
+		}
+
+		String cPage2 = request.getParameter("cPage2");
+		if (cPage2 == null) {
+			paging2.setNowPage2(1);
+		} else {
+			paging2.setNowPage2(Integer.parseInt(cPage2));
+		}
+
+		paging2.setOffset(paging2.getNumPerPage2() * (paging2.getNowPage2() - 1));
+
+		paging2.setBeginBlock(
+				(int) ((paging2.getNowPage2() - 1) / paging2.getPagePerBlock()) * paging2.getPagePerBlock() + 1);
+		paging2.setEndBlock(paging2.getBeginBlock() + paging2.getPagePerBlock() - 1);
+
+		if (paging2.getEndBlock() > paging2.getTotalPage()) {
+			paging2.setEndBlock(paging2.getTotalPage());
+		}
+
+		// DB
+		List<BoardVO> board_list = jejuService5.adminBoardList2(paging.getOffset(), paging.getNumPerPage2());
+		List<ReportVO> report_list = jejuService5.adminReportList2(paging2.getOffset(), paging2.getNumPerPage2());
 		if (board_list != null && report_list != null) {
 			mv.addObject("board_list", board_list);
 			mv.addObject("paging", paging);
@@ -209,7 +291,7 @@ public class JejuController5 {
 		int result2 = jejuService5.replyUpdate(report_idx);
 		return mv;
 	}
-	
+
 	// 신고 답글 수정 가져오기
 	@RequestMapping("reply_update.do")
 	public ModelAndView reply_update_ok(@ModelAttribute("cPage2") String cPage2, String report_idx) {
@@ -229,8 +311,8 @@ public class JejuController5 {
 
 	// 신고 답글 수정
 	@PostMapping("reply_update_ok.do")
-	public ModelAndView replyUpdateOk(@ModelAttribute("cPage2") String cPage2, @ModelAttribute("report_idx") String report_idx,
-			ReplyVO repvo) {
+	public ModelAndView replyUpdateOk(@ModelAttribute("cPage2") String cPage2,
+			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo) {
 		ModelAndView mv = new ModelAndView();
 		int result = jejuService5.replyUpdateOk(repvo);
 		if (result > 0) {
@@ -245,7 +327,7 @@ public class JejuController5 {
 	public ModelAndView boardlist(HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("ygh-view/board_list");
 		UserVO uvo = (UserVO) session.getAttribute("userVO");
-		
+
 		// 페이징
 		int count3 = jejuService5.getTotalCount3(uvo.getU_idx());
 		paging.setTotalRecord(count3);
@@ -318,8 +400,6 @@ public class JejuController5 {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:board_list.do");
 
-			// 비밀번호 암호화
-			bovo.setBo_pwd(passwordEncoder.encode(bovo.getBo_pwd()));
 			int result = jejuService5.boardWriteOk(bovo);
 			if (result > 0) {
 				return mv;
@@ -347,21 +427,10 @@ public class JejuController5 {
 	public ModelAndView boardUpdateOk(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
 			BoardVO bovo) {
 		ModelAndView mv = new ModelAndView();
-
-		BoardVO bovo2 = jejuService5.boardDetail(bovo.getBo_idx());
-		String dpwd = bovo2.getBo_pwd();
-
-		if (!passwordEncoder.matches(bovo.getBo_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/board_update");
-			mv.addObject("pwdchk", "fail");
-			mv.addObject("bovo", bovo);
+		int result = jejuService5.boardUpdate(bovo);
+		if (result > 0) {
+			mv.setViewName("redirect:board_detail.do");
 			return mv;
-		} else {
-			int result = jejuService5.boardUpdate(bovo);
-			if (result > 0) {
-				mv.setViewName("redirect:board_detail.do");
-				return mv;
-			}
 		}
 		return new ModelAndView("ygh-view/error");
 	}
@@ -383,7 +452,7 @@ public class JejuController5 {
 	public ModelAndView boardDeleteOk(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
 			BoardVO bovo) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		BoardVO bovo2 = jejuService5.boardDetail(bovo.getBo_idx());
 		String dpwd = bovo2.getBo_pwd();
 
@@ -478,7 +547,7 @@ public class JejuController5 {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:report_list.do");
 			UserVO uvo = (UserVO) session.getAttribute("userVO");
-			
+
 			int result = jejuService5.reportWriteOk(revo);
 			if (result > 0) {
 				return mv;
@@ -489,7 +558,6 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-
 	// 회원정보수정
 	@GetMapping("user_update.do")
 	public ModelAndView userUpdate(HttpSession session) {
@@ -497,7 +565,6 @@ public class JejuController5 {
 
 		UserVO uvo = (UserVO) session.getAttribute("userVO");
 		UserVO userVO = jejuService5.userDetail(uvo.getU_idx());
-
 		if (userVO != null) {
 			mv.addObject("userVO", userVO);
 			return mv;
@@ -507,9 +574,8 @@ public class JejuController5 {
 
 	// 회원정보수정
 	@PostMapping("user_update_ok.do")
-	public ModelAndView userUpdate(UserVO userVO, HttpSession session) {
-		ModelAndView mv = new ModelAndView("redirect:myTripPlan");
-
+	public ModelAndView userUpdate(UserVO userVO, HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("redirect:user_update.do");
 		UserVO uvo = (UserVO) session.getAttribute("userVO");
 		String dpwd = uvo.getU_pwd();
 
@@ -519,13 +585,33 @@ public class JejuController5 {
 			mv.addObject("userVO", userVO);
 			return mv;
 		} else {
-			int result = jejuService5.userUpdate(userVO);
-			if (result > 0) {
-				return mv;
+			try {
+				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+				MultipartFile file = userVO.getFile();
+				if (file.isEmpty()) {
+					userVO.setU_profile_img(userVO.getU_profile_img());
+				} else {
+					UUID uuid = UUID.randomUUID();
+					String u_profile_img = uuid.toString() + "_" + file.getOriginalFilename();
+					userVO.setU_profile_img(u_profile_img);
+
+					byte[] in = file.getBytes();
+					File out = new File(path, u_profile_img);
+					FileCopyUtils.copy(in, out);
+				}
+				int result = jejuService5.userUpdate(userVO);
+				if (result > 0) {
+					mv.addObject("userVO", userVO);
+					return mv;
+				}
+			} catch (Exception e) {
+				System.out.println(e);
 			}
 		}
 		return new ModelAndView("ygh-view/error");
 	}
+
+
 
 	// 비밀번호 변경
 	@PostMapping("repwd_go.do")
@@ -559,115 +645,20 @@ public class JejuController5 {
 		}
 	}
 
-	// 관지라 전체 Q&A 게시판
-	@RequestMapping("admin_board_list.do")
-	public ModelAndView adminBoardlist(HttpServletRequest request, HttpSession session) {
-		ModelAndView mv = new ModelAndView("ygh-view/admin_board_list");
-		UserVO uvo = (UserVO) session.getAttribute("userVO");
-
-		// 페이징
-		int count5 = jejuService5.getTotalCount5();
-		paging.setTotalRecord(count5);
-
-		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
-			paging.setTotalPage(1);
-		} else {
-			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
-			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
-				paging.setTotalPage(paging.getTotalPage() + 1);
-			}
-		}
-
-		String cPage = request.getParameter("cPage");
-		if (cPage == null) {
-			paging.setNowPage(1);
-		} else {
-			paging.setNowPage(Integer.parseInt(cPage));
-		}
-
-		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
-
-		paging.setBeginBlock(
-				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
-		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
-
-		if (paging.getEndBlock() > paging.getTotalPage()) {
-			paging.setEndBlock(paging.getTotalPage());
-		}
-
-		// DB
-		List<BoardVO> board_list = jejuService5.adminBoardlist2(paging.getOffset(), paging.getNumPerPage());
-		for (BoardVO k : board_list) {
-			k.getBo_idx();
-		}
-		if (board_list != null) {
-			mv.addObject("board_list", board_list);
-			mv.addObject("paging", paging);
-			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 관리자 전체 신고 게시판
-	@RequestMapping("admin_report_list.do")
-	public ModelAndView adminReportlist(HttpServletRequest request, HttpSession session) {
-		ModelAndView mv = new ModelAndView("ygh-view/admin_report_list");
-		UserVO uvo = (UserVO) session.getAttribute("userVO");
-
-		// 페이징
-		int count6 = jejuService5.getTotalCount6();
-		paging2.setTotalRecord(count6);
-
-		if (paging2.getTotalRecord() <= paging2.getNumPerPage()) {
-			paging2.setTotalPage(1);
-		} else {
-			paging2.setTotalPage(paging2.getTotalRecord() / paging2.getNumPerPage());
-			if (paging2.getTotalRecord() % paging2.getNumPerPage() != 0) {
-				paging2.setTotalPage(paging2.getTotalPage() + 1);
-			}
-		}
-
-		String cPage2 = request.getParameter("cPage2");
-		if (cPage2 == null) {
-			paging2.setNowPage2(1);
-		} else {
-			paging2.setNowPage2(Integer.parseInt(cPage2));
-		}
-
-		paging2.setOffset(paging2.getNumPerPage() * (paging2.getNowPage2() - 1));
-
-		paging2.setBeginBlock(
-				(int) ((paging2.getNowPage2() - 1) / paging2.getPagePerBlock()) * paging2.getPagePerBlock() + 1);
-		paging2.setEndBlock(paging2.getBeginBlock() + paging2.getPagePerBlock() - 1);
-
-		if (paging2.getEndBlock() > paging2.getTotalPage()) {
-			paging2.setEndBlock(paging2.getTotalPage());
-		}
-
-		// DB
-		List<ReportVO> report_list = jejuService5.adminReportlist2(paging2.getOffset(), paging2.getNumPerPage());
-		if (report_list != null) {
-			mv.addObject("report_list", report_list);
-			mv.addObject("paging2", paging2);
-			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
 	// 회원관리 - 전체회원
 	@RequestMapping("user_list.do")
 	public ModelAndView userList(HttpServletRequest request, HttpSession session, String filter) {
 		ModelAndView mv = new ModelAndView("ygh-view/user_list");
-		
+
 		if (filter == null) {
-		} else if( filter.equals("active")){
+		} else if (filter.equals("active")) {
 			filter = "0";
-		} else if( filter.equals("inactive")){
+		} else if (filter.equals("inactive")) {
 			filter = "1";
 		} else {
 			filter = null;
 		}
-		
+
 		// 페이징
 		int count7 = jejuService5.getTotalCount7(filter);
 		paging.setTotalRecord(count7);
@@ -708,8 +699,6 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
-
-	
 
 	// 회원관리 삭제
 	@PostMapping("user_del_ok.do")
@@ -779,7 +768,7 @@ public class JejuController5 {
 
 	// 회원상세정보
 	@RequestMapping("user_detail.do")
-	public ModelAndView userDetail(@ModelAttribute("u_idx") String u_idx) {
+	public ModelAndView userDetail(@ModelAttribute("cPage") String cPage, @ModelAttribute("u_idx") String u_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/user_detail");
 
 		System.out.println(u_idx);
@@ -829,24 +818,24 @@ public class JejuController5 {
 		}
 
 		// DB
- 		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
- 		
- 		
- 		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
- 		String contentsid = "";
- 		String title = "";
- 		
- 		for (MyreviewVO k : myreview_list) {
- 			contentsid = k.getContentsid();
- 			title = jejuService5.myreviewtitle(contentsid);
- 			k.setVi_title(title);
- 		}
- 		if (myreview_list != null) {
- 			mv.addObject("myreview_list", myreview_list);
- 			mv.addObject("paging", paging);
- 			return mv;
- 		}
- 		return new ModelAndView("ygh-view/error");
- 	}
+		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
+				myvo.getU_idx());
+
+		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
+		String contentsid = "";
+		String title = "";
+
+		for (MyreviewVO k : myreview_list) {
+			contentsid = k.getContentsid();
+			title = jejuService5.myreviewtitle(contentsid);
+			k.setVi_title(title);
+		}
+		if (myreview_list != null) {
+			mv.addObject("myreview_list", myreview_list);
+			mv.addObject("paging", paging);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
 
 }

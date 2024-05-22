@@ -72,7 +72,7 @@
 			f.u_email.focus();
 			return false;
 		}
-		f.action = "user_update_ok.do";
+		f.action = "user_update_ok.do?u_profile_img=${userVO.u_profile_img}";
 		f.submit();
 	}
 	
@@ -90,10 +90,11 @@
 <%@include file="../common/header.jsp"%>
 
 	<div id="update_wrap">
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<h1>회원정보수정</h1>
 			<div id="update_box">
 			<div class="update_category">
+				<p>프로필</p>
 				<p>아이디</p>
 				<p>이름</p>
 				<p>전화번호</p>
@@ -105,6 +106,8 @@
 				<p>비밀번호 확인</p>
 			</div>
 			<div class="update_input">
+				<input type="file" name="file" id="file" value=""><img src="/resources/upload/${userVO.u_profile_img}"><br>
+				<input type="hidden" name="old_f_name" id="old_f_name" value="${userVO.u_profile_img}"><br>
 				<input type="text" name="u_id" id="u_id" value="${userVO.u_id}" readonly><br>
 				<input type="text" name="u_name" id="u_name" value="${userVO.u_name}" readonly><br>
 				<input type="text" name="u_phone" id="u_phone" value="${userVO.u_phone}" title="- 를 제외한 11자리를 입력해 주세요."><br>

@@ -17,7 +17,7 @@ public class JejuDAO5 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	// 관리자 Q&A 페이징
+	// 관리자 미답변 Q&A 페이징
 	public int getTotalCount() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count");
@@ -27,13 +27,36 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// 관리자 Q&A 전체보기
+	// 관리자 미답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("offset", offset);
 			map.put("limit", limit);
 			return sqlSessionTemplate.selectList("Board_table.admin_board_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 관리자 답변 Q&A 페이징
+	public int getTotalCount8() {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.count8");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 관리자 답변 Q&A 전체보기
+	public List<BoardVO> adminBoardList2(int offset, int limit) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			return sqlSessionTemplate.selectList("Board_table.admin_board_list2", map);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -50,7 +73,7 @@ public class JejuDAO5 {
 		return null;
 	}
 
-	// 관리자 신고 페이징
+	// 관리자 미답변 신고 페이징
 	public int getTotalCount2() {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.count2");
@@ -60,13 +83,36 @@ public class JejuDAO5 {
 		return -1;
 	}
 
-	// 관리자 신고 전체보기
+	// 관리자 미답변 신고 전체보기
 	public List<ReportVO> adminReportList(int offset, int limit) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("offset", offset);
 			map.put("limit", limit);
 			return sqlSessionTemplate.selectList("Board_table.admin_report_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 관리자 답변 신고 페이징
+	public int getTotalCount9() {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.count9");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 관리자 답변 신고 전체보기
+	public List<ReportVO> adminReportList2(int offset, int limit) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", offset);
+			map.put("limit", limit);
+			return sqlSessionTemplate.selectList("Board_table.admin_report_list2", map);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -294,52 +340,6 @@ public class JejuDAO5 {
 			map.put("limit", limit);
 			map.put("u_idx", Integer.parseInt(u_idx));
 			return sqlSessionTemplate.selectList("Board_table.report_list", map);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-
-	// 관지자 전체 Q&A 페이징
-	public int getTotalCount5() {
-		try {
-			return sqlSessionTemplate.selectOne("Board_table.count5");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-
-	// 관지자 전체 Q&A 전체보기
-	public List<BoardVO> adminBoardlist2(int offset, int limit) {
-		try {
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("offset", offset);
-			map.put("limit", limit);
-			return sqlSessionTemplate.selectList("Board_table.admin_board_list2", map);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-
-	// 관지자 전체 신고 페이징
-	public int getTotalCount6() {
-		try {
-			return sqlSessionTemplate.selectOne("Board_table.count6");
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return -1;
-	}
-
-	// 관지자 전체 신고 전체보기
-	public List<ReportVO> adminReportlist2(int offset, int limit) {
-		try {
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			map.put("offset", offset);
-			map.put("limit", limit);
-			return sqlSessionTemplate.selectList("Board_table.admin_report_list2", map);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

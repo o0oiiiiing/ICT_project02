@@ -22,8 +22,8 @@
 	}
 
  	// 회원상세정보
-  	function showUserDetail(u_idx) {
-		location.href="user_detail.do?u_idx="+u_idx;
+  	function showUserDetail(u_idx, cPage) {
+		location.href="user_detail.do?u_idx="+u_idx+"&cPage="+cPage;
  	}  
 	
 	// 계정 삭제
@@ -154,8 +154,8 @@
 			<tr>
 				<td><a href="dashboard.do">대시보드</a></td>
 				<td><a href="user_list.do">회원관리</a></td>
-				<td><a href="admin_list.do">Q&A</a></td>
-				<td><a href="admin_list.do">신고</a></td>
+				<td><a href="admin_list2.do">답변</a></td>
+				<td><a href="admin_list.do">미답변</a></td>
 				<td><a href="admin_insert">일정 추가</a></td>
 				
 				<c:if test="${adminVO.a_status == '1'}">
@@ -207,7 +207,7 @@
 									<td class="${activeRow}">${k.out_regdate.substring(0,10)}</td>
 									<td class="${activeRow}">${k.u_report}</td>
 									<td class="${activeRow}">
-										<button class="user_button" onclick="showUserDetail(${k.u_idx})">상세정보</button>
+										<button class="user_button" onclick="showUserDetail('${k.u_idx}', '${paging.nowPage}')">상세정보</button>
 									</td>
 									<td><c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
 										<c:choose>
@@ -298,6 +298,7 @@
 						<div class="del_buttons">
 							<input type="hidden" value="${k.u_idx}" name="u_idx"> 
 							<input type="hidden" value="${adminVO.a_idx}" name="a_idx"> 
+							<input type="hidden" value="${adminVO.a_name}" name="a_name"> 
 							<input type="hidden" value="${paging.nowPage}" name="cPage"> 
 							<input class="del_button" type="reset" value="취소">
 							<button class="del_button" onclick="user_del_ok(this.form)">삭제</button>
@@ -332,6 +333,7 @@
 						<div class="restore_buttons">
 							<input type="hidden" value="${k.u_idx}" name="u_idx"> 
 							<input type="hidden" value="${adminVO.a_idx}" name="a_idx"> 
+							<input type="hidden" value="${adminVO.a_name}" name="a_name"> 
 							<input type="hidden" value="${paging.nowPage}" name="cPage"> 
 							<input class="restore_button2" type="reset" value="취소">
 							<button class="restore_button2" onclick="user_restore_ok(this.form)">복구</button>

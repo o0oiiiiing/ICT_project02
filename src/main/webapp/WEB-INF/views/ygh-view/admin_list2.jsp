@@ -17,21 +17,20 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
-	let tabState = sessionStorage.getItem('tabState');
-    if (tabState != 'show') {
+	let tabState3 = sessionStorage.getItem('tabState3');
+    if (tabState3 != 'show') {
         $("#board_t").show();
     } else {
         $("#board_t").hide();
     }
     
     $(".tab_bar").click(function() {
-    	if ($("#board_t").css("display") == "none") {
-    		$("#board_t").show();
-    		// 탭 상태를 세션 스토리지에 저장
-    		sessionStorage.setItem('tabState', 'show');
-		} else {
+    	if ($("#board_t").css("display") == "block") {
     		$("#board_t").hide();
-    		sessionStorage.setItem('tabState', 'hide');
+    		sessionStorage.setItem('tabState3', 'hide');
+		} else {
+    		$("#board_t").show();
+    		sessionStorage.setItem('tabState3', 'show');
 		}
     });
    
@@ -39,21 +38,20 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
-	let tabState2 = sessionStorage.getItem('tabState2');
-    if (tabState2 != 'show') {
+	let tabState4 = sessionStorage.getItem('tabState4');
+    if (tabState4 != 'show') {
         $("#report_t").show();
     } else {
         $("#report_t").hide();
     }
     
     $(".tab_bar2").click(function() {
-    	if ($("#report_t").css("display") == "none") {
-    		$("#report_t").show();
-    		// 탭 상태를 세션 스토리지에 저장
-    		sessionStorage.setItem('tabState2', 'show');
-		} else {
+    	if ($("#report_t").css("display") == "block") {
     		$("#report_t").hide();
-    		sessionStorage.setItem('tabState2', 'hide');
+    		sessionStorage.setItem('tabState4', 'hide');
+		} else {
+    		$("#report_t").show();
+    		sessionStorage.setItem('tabState4', 'show');
 		}
     });
 });
@@ -131,10 +129,10 @@ function admin_report_detail_go(report_idx, cPage2) {
 		</table>
 	</div>
 	
-	<div class="tab_bar">미답변 Q&A</div>
+	<div class="tab_bar">답변 Q&A</div>
 	<div id="board_t">
 		<table>
-			<caption>미답변 Q&A (${paging.totalRecord})</caption>
+			<caption>답변 Q&A (${paging.totalRecord})</caption>
 			
 			<thead>
 				<tr>
@@ -157,7 +155,6 @@ function admin_report_detail_go(report_idx, cPage2) {
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
 								<td style="text-align: left;">
 									<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
-									<%-- <a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a> --%>
 									<a href="#" onclick="admin_board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a>
 								</td>
 								<td>${k.bo_writer}</td>
@@ -215,10 +212,10 @@ function admin_report_detail_go(report_idx, cPage2) {
 	</div>
 	
 	
-	<div class="tab_bar2">미답변 신고</div>
+	<div class="tab_bar2">답변 신고</div>
 		<div id="report_t">
 			<table>
-			<caption>미답변 신고 (${paging2.totalRecord})</caption>
+			<caption>답변 신고 (${paging2.totalRecord})</caption>
 				<thead>
 					<tr>
 						<th class="no">번호</th>

@@ -160,8 +160,8 @@ function checkInput() {
 			<tr>
 				<td><a href="dashboard.do">대시보드</a></td>
 				<td><a href="user_list.do">회원관리</a></td>
-				<td><a href="admin_list.do">Q&A</a></td>
-				<td><a href="admin_list.do">신고</a></td>
+				<td><a href="admin_list2.do">답변</a></td>
+				<td><a href="admin_list.do">미답변</a></td>
 				<td><a href="admin_insert">일정 추가</a></td>
 				
 				<c:if test="${adminVO.a_status == '1'}">

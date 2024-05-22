@@ -3,9 +3,26 @@ package com.ict.jeju.ygh.dao;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
-	private String bo_idx, u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, groups, step, lev, bo_regdate, f_name, old_f_name;
+	private String bo_idx, u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, groups, step, lev,
+			bo_regdate, f_name, old_f_name, u_name;
 	private MultipartFile file;
-	
+
+	public String getU_name() {
+		return u_name;
+	}
+
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
+	}
+
+	public String getBo_pwd() {
+		return bo_pwd;
+	}
+
+	public void setBo_pwd(String bo_pwd) {
+		this.bo_pwd = bo_pwd;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -70,14 +87,6 @@ public class BoardVO {
 		this.bo_content = bo_content;
 	}
 
-	public String getBo_pwd() {
-		return bo_pwd;
-	}
-
-	public void setBo_pwd(String bo_pwd) {
-		this.bo_pwd = bo_pwd;
-	}
-
 	public String getBo_hit() {
 		return bo_hit;
 	}
@@ -126,9 +135,4 @@ public class BoardVO {
 		this.bo_regdate = bo_regdate;
 	}
 
-	
-
-	
-	
-	
 }
