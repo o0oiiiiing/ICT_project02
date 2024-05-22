@@ -63,6 +63,15 @@
 	}
 
 	function user_update_ok(f) {
+		if (f.u_phone.value.length !== 11) {
+			alert("전화번호는 '-'을 제외한 11자리를 입력해 주세요.");
+			f.u_phone.focus();
+			return false;
+		} else if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,}$/.test(f.u_email.value)) {
+			alert("이메일 형식을 확인하세요.");
+			f.u_email.focus();
+			return false;
+		}
 		f.action = "user_update_ok.do";
 		f.submit();
 	}
@@ -103,9 +112,9 @@
 				pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" title="이메일 양식" ><br>
 				<input type="text" id="u_postcode" name="u_postcode" placeholder="우편번호" value="${userVO.u_postcode}" readonly /> 
 				<input type="button" class="join_btn" onclick="execDaumPostcode()" value="우편번호 찾기" id="find_postcode"/> <br> 
-				<input type="text" id="u_addr" name="u_addr" placeholder="도로명주소" value="${userVO.u_addr}"  /><br> 
+				<input type="text" id="u_addr" name="u_addr" placeholder="도로명주소" value="${userVO.u_addr}"  readonly/><br> 
 				<input type="text" id="u_detail_addr" name="u_detail_addr" placeholder="상세주소1" value="${userVO.u_detail_addr}"   /><br>
-				<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" value="${userVO.u_detail_addr2}"  /><br>
+				<input type="text" id="u_detail_addr2" name="u_detail_addr2" placeholder="상세주소2" value="${userVO.u_detail_addr2}"  readonly /><br>
 				<input type="password" name="u_pwd" id="u_pwd" ><br>     
 			</div>
 			<div class="update_submit">

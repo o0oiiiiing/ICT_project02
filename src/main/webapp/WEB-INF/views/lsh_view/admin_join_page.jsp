@@ -169,7 +169,7 @@
 									<input type="password" id="a_pwd" name="a_pwd" required placeholder="Password" />
 								</li>
 								<li>
-									<input type="password" id="a_pwdchk" name="a_pwdchk" required oninput="pwdchk_go()" placeholder="Password" />
+									<input type="password" id="a_pwdchk" name="a_pwdchk" required oninput="pwdchk_go()" placeholder="Password Check" />
 									<span id="msg" ></span>
 								</li>
 								<li class="admin_join_li_box" >
