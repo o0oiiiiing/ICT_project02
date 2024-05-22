@@ -1,9 +1,21 @@
 package com.ict.jeju.lsh.dao;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserVO {
 	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, 
 								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate,
 								active, u_report, step, u_del, out_regdate, u_restore, re_regdate, u_profile_img;
+
+	private MultipartFile user_profile;
+	
+	public MultipartFile getUser_profile() {
+		return user_profile;
+	}
+
+	public void setUser_profile(MultipartFile user_profile) {
+		this.user_profile = user_profile;
+	}
 
 	public String getU_profile_img() {
 		return u_profile_img;

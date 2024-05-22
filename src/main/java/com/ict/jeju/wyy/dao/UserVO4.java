@@ -8,8 +8,6 @@ public class UserVO4 {
 	private String bo_idx;
 	private String like_active_count, review_count;
 	
-	
-	
 	public String getReview_count() {
 		return review_count;
 	}

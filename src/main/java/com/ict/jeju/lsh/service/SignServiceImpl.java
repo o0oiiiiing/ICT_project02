@@ -84,6 +84,7 @@ public class SignServiceImpl implements SignService {
 			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
 			br.close();
 			bw.close();
+			System.out.println(refresh_token);
 		} catch (Exception e) {
 			System.out.println("getting token err : "+e);
 		}
@@ -163,6 +164,7 @@ public class SignServiceImpl implements SignService {
 			refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
 			br.close();
 			bw.close();
+			System.out.println(refresh_token);
 		} catch (Exception e) {
 			System.out.println("naver token err : "+e);
 		}
