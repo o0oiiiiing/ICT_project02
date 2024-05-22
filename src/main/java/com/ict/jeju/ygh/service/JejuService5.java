@@ -119,9 +119,11 @@ public interface JejuService5 {
 
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
-
+	
+	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
-
+    
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	public String myreviewtitle(String contentsid);
 
 	// 회원현황

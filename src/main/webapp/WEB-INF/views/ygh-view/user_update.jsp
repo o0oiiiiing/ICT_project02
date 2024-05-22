@@ -72,6 +72,10 @@
 	}
 	
 </script>
+<style type="text/css">
+
+	
+</style>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>

@@ -88,15 +88,15 @@
 				<div id="clickLatlng"></div>
 			</div>
 		</div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script>
 	let markers = [];
 	let infos = [];
 		var mapContainer = document.getElementById('map'); // 지도를 표시할 div
 		var mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(33.36132, 126.54195), // 지도의 중심좌표
 			// 지도의 확대 레벨
-			level : 3
+			level : 10
 		};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성

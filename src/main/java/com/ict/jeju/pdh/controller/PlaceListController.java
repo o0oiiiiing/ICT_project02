@@ -150,8 +150,8 @@ public class PlaceListController {
 		// Q&A 리스트 가져오기
 		List<QaVO> qaList = placeListService.qaList(qaPagingVO);
 
-		// Q&A 페이징
-		rPaging.setTotalRecord(qaNum);
+		// 리뷰 페이징
+		rPaging.setTotalRecord(reviewNum);
 
 		// 전체 페이지 수 구하기
 		if (rPaging.getTotalRecord() <= rPaging.getNumPerPage()) {
@@ -234,8 +234,11 @@ public class PlaceListController {
 		placeListService.reviewWrite(reviewVO);
 		MultipartFile[] images = imagesVO.getImages();
 		String path = request.getSession().getServletContext().getRealPath("resources/upload");
+		for (MultipartFile k : images) {
+			System.out.println(k);
+		}
 		try {
-			if (images.length > 0) {
+			if (!images[0].isEmpty()) {
 				for (MultipartFile k : images) {
 					// 파일 이름 지정
 					UUID uuid = UUID.randomUUID();

@@ -829,23 +829,24 @@ public class JejuController5 {
 		}
 
 		// DB
-		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
-				myvo.getU_idx());
-
-		String contentsid = "";
-		String title = "";
-
-		for (MyreviewVO k : myreview_list) {
-			contentsid = k.getContentsid();
-			title = jejuService5.myreviewtitle(contentsid);
-			k.setVi_title(title);
-		}
-		if (myreview_list != null) {
-			mv.addObject("myreview_list", myreview_list);
-			mv.addObject("paging", paging);
-			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
+ 		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
+ 		
+ 		
+ 		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
+ 		String contentsid = "";
+ 		String title = "";
+ 		
+ 		for (MyreviewVO k : myreview_list) {
+ 			contentsid = k.getContentsid();
+ 			title = jejuService5.myreviewtitle(contentsid);
+ 			k.setVi_title(title);
+ 		}
+ 		if (myreview_list != null) {
+ 			mv.addObject("myreview_list", myreview_list);
+ 			mv.addObject("paging", paging);
+ 			return mv;
+ 		}
+ 		return new ModelAndView("ygh-view/error");
+ 	}
 
 }

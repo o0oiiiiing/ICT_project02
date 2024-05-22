@@ -400,6 +400,7 @@ public class JejuDAO5 {
 		return -1;
 	}
 
+	// 나의 리뷰 글 목록 및 페이징
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
 		try {
 			Map<String, Integer> map = new HashMap<String, Integer>();
@@ -412,7 +413,8 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-
+	
+	// 나의 리뷰 contentsid ( contentsid 를 이용해서 vi_title 값 가져오기위함)
 	public String myreviewtitle(String contentsid) {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.myreview_title", contentsid);
