@@ -11,7 +11,7 @@
 
 	.admin_result{
 		text-align: center;
-  		margin: 135px auto; 
+  		margin: 80px auto; 
 	    padding: 20px;
 	    border-radius: 8px;
 	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -96,7 +96,21 @@
 .join_btn:hover, #input_button:hover, #input_submit:hover {
     background-color: gray;
 }
+#menubar table {
+	width: 30%;
+	margin: 10px auto 50px;
+}
 
+#menubar>h1 {
+	width: 60%;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
 @media (max-width: 768px) {
     .name_category p, .input_category p {
         flex-direction: column;

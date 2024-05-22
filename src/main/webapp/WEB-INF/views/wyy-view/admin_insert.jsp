@@ -42,14 +42,7 @@
 		});
 		return false;
 	}
-/* 	
-	function submitForm() {
-		if (idChk) {
-			$('form').submit();
-		} else {
-			alert("콘텐츠 ID 중복 확인을 해주세요.");
-		}
-	} */
+
 	// 유효성검사
  	function submitForm(f) {
 		if (f.contentsid === '' || f.contents_idchk === '' || f.vi_title === ''|| f.vi_intro === '' || f.vi_address === '' 
@@ -90,6 +83,7 @@
 			return false;
 		}
 		f.submit();
+		alert("추가되었습니다.")
 	} 
 </script>
 <script>
