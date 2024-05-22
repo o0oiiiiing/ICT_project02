@@ -8,7 +8,7 @@ public class ReviewPaging {
 	private int nowBlock = 1;
 
 	// 한페이지당 3개
-	private int numPerPage = 3;
+	private int numPerPage = 5;
 	// 한블록당 5페이지
 	private int pagePerBlock = 5;
 	// DB의 게시물의 수
