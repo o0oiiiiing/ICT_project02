@@ -59,7 +59,10 @@
 			<div class="wrapper_left">
 				<c:choose>
 					<c:when test="${empty searchList}">
-						<p>검색 결과가 없습니다.</p>
+						<div class="not_search">
+							<img src="resources/chm-css/images/not_search.png" class="not_found">
+							<div class="not_search_box"><span class="keyword">"${keyword}"</span><span>에 대한 검색 결과가 없습니다.</span></div>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${searchList}">
@@ -227,7 +230,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-
+							
 							<!-- 이후 버튼 -->
 							<c:choose>
 								<c:when test="${paging3.endBlock >= paging3.totalPage}">

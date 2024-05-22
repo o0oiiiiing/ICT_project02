@@ -820,7 +820,9 @@ public class JejuController5 {
     	return new ModelAndView("ygh-view/error");
     }
     
-    // 나의 리뷰
+    
+    
+    // 나의 리뷰 - 최현민
  	@RequestMapping("myreview_list.do")
  	public ModelAndView myreviewlist(HttpServletRequest request, HttpSession session) {
  		ModelAndView mv = new ModelAndView("chm-view/myreview_list");
@@ -862,6 +864,7 @@ public class JejuController5 {
  		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
  		
  		
+ 		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
  		String contentsid = "";
  		String title = "";
  		
