@@ -13,9 +13,8 @@
 	padding: 5px;
 }
 
-
 #report_t {
-	display: none;
+	display: block;
 }
 
 #report_t table {

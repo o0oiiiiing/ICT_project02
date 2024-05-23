@@ -1,30 +1,46 @@
 @charset "UTF-8";
 
+#menubar table {
+	width: 500px;
+	margin: 10px auto 50px;
+}
+
+#menubar>h1 {
+	width: 800px;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
 .admin_join_box input {
-  	outline: 0;
-  	background: lightgray;
-  	width: 100%;
-  	border: 0;
-  	margin: 0 0 15px;
-  	padding: 15px;
-  	box-sizing: border-box;
-  	font-size: 14px;
-  	border-radius: 10px;
+	outline: 0;
+	background: lightgray;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+	border-radius: 10px;
 }
 
 .admin_join_btn {
-  	text-transform: uppercase;
-  	outline: 0;
-  	width: 100%;
-  	border: 0;
-  	padding: 15px;
-  	font-size: 14px;
-  	-webkit-transition: all 0.3 ease;
-  	transition: all 0.3 ease;
-  	cursor: pointer;
+	text-transform: uppercase;
+	outline: 0;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
 }
 
-.admin_join_text{
+.admin_join_text {
 	padding: 20px;
 	font-weight: bold;
 }
@@ -33,22 +49,22 @@
 	margin-top: 10px;
 }
 
-.admin_join_ok_btn{
+.admin_join_ok_btn {
 	text-transform: uppercase;
-  	outline: 0;
-  	width: 100%;
-  	border: 0;
-  	padding: 15px;
-  	color: #6c6c6c;
-  	font-size: 14px;
-  	-webkit-transition: all 0.3 ease;
-  	transition: all 0.3 ease;
-  	cursor: pointer;
-  	margin-top: 20px;
-  	border-radius: 10px;
+	outline: 0;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #6c6c6c;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+	margin-top: 20px;
+	border-radius: 10px;
 }
 
-.admin_join_ok_btn:hover, .admin_join_ok_btn:active, .admin_join_ok_btn:focus {
+.admin_join_ok_btn:hover, .admin_join_ok_btn:active, .admin_join_ok_btn:focus
+	{
 	background: #b6dedc;
 }
-

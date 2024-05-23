@@ -15,7 +15,7 @@
 
 
 #board_t {
-	display: none;
+	display: block;
 }
 
 #board_t table {

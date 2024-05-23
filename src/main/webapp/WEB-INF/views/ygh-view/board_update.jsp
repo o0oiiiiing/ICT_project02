@@ -16,15 +16,6 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		let pwdchk = "${pwdchk}";
-		if (pwdchk == 'fail') {
-			alert("비밀번호 틀림");
-			return;
-		}
-	});
-</script>
-<script type="text/javascript">
 	function board_list(f) {
 		f.action = "board_list.do";
 		f.submit();
@@ -52,16 +43,6 @@
 						<th>제목</th>
 						<td><input type="text" name="bo_title" size="50"
 							value="${bovo.bo_title}" /></td>
-					</tr>
-
-					<tr>
-						<th>작성자</th>
-						<td><input type="text" name="bo_writer"
-							value="${bovo.bo_writer}" /></td>
-					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" name="bo_pwd"></td>
 					</tr>
 					<tr>
 						<th>내용</th>

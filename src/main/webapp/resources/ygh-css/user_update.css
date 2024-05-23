@@ -1,105 +1,103 @@
 #update_wrap {
-    width: 80%;
-    max-width: 600px;
-    margin: 100px auto 200px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: 'Arial', sans-serif;
+	width: 80%;
+	max-width: 600px;
+	margin: 100px auto 200px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	font-family: 'Arial', sans-serif;
 }
 
-#update_wrap>form>h1 {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 2px solid black;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    color: #333;
+#update_wrap h1 {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+	color: #333;
+}
+
+#update_box {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
 }
 
 #repwd_go {
-    width: 49%;
-    margin-top: 20px;
-    height: 40px;
-    font-size: 15px;
+	width: 49%;
+	margin-top: 20px;
+	height: 40px;
+	font-size: 15px;
 }
 
-.update_category {
-    width: 20%;
-    text-align: right;
-    display: inline-block;
-    vertical-align: top;
-    line-height: 48px;
+#update_box th {
+	font-weight: bold;
 }
 
-.update_category p {
-    margin: 10px 0;
-    font-weight: bold;
-    color: #555;
+#update_box input[type="text"], #update_box input[type="email"],
+	#update_box input[type="password"] {
+	width: calc(100% - 20px);
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-sizing: border-box;
 }
 
-.update_input {
-    width: 45%;
-    text-align: left;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 10px;
-    margin-top: 6px;
+#update_box input[readonly] {
+	background-color: #eee;
+	cursor: not-allowed;
 }
 
-.update_input input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
+#update_box #u_postcode {
+	flex: 1;
+	margin-right: 10px;
+	margin-left: 10px;
 }
 
-.update_input input[readonly] {
-    background-color: #eee;
-    cursor: not-allowed;
+#update_box #find_postcode {
+	margin-right: 10px;
 }
 
-#find_postcode {
-    width: 38%;
-}
-
-#u_postcode {
-    width: 53%;
-}
-
-input[type="button"] {
-    background-color: darkgray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-}
-
-input[type="button"]:hover {
-    background-color: gray;
+#update_box input[type="button"] {
+	background-color: darkgray;
+	color: white;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	border-radius: 5px;
+	height: 40px;
+	margin: 10px 0;
 }
 
 .update_submit input[type="button"] {
-    width: calc(50% - 10px);
-    margin: 10px 5px 0;
-    padding: 10px;
+	background-color: darkgray;
+	color: white;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	border-radius: 5px;
+	width: calc(50% - 10px);
+	margin: 10px 5px 0;
+	padding: 10px;
 }
 
-@media (max-width: 600px) {
-    .update_category,
-    .update_input {
-        width: 100%;
-        box-sizing: border-box;
-    }
+#update_wrap input[type="button"]:hover {
+	background-color: gray;
+}
 
-    .update_submit input[type="button"] {
-        width: 100%;
-        margin: 10px 0;
-    }
+.update_submit input[type="button"] {
+	width: calc(50% - 10px);
+	margin: 10px 5px 0;
+	padding: 10px;
+}
+
+@media ( max-width : 600px) {
+	.update_submit input[type="button"] {
+		width: 100%;
+		margin: 10px 0;
+	}
 }

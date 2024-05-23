@@ -44,8 +44,8 @@
 					</tr>
 
 					<tr>
-						<th>작성자</th>
-						<td>${bovo.bo_writer}</td>
+						<th>장소</th>
+						<td><a href="detail?contentsid=${bovo.contentsid}">작성페이지 바로가기</a></td>
 					</tr>
 
 					<tr>

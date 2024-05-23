@@ -4,15 +4,28 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board_table">
-	<!-- 관리자 Q&A 페이징 -->
+	<!-- 관리자 미답변 Q&A 페이징 -->
 	<select id="count" resultType="int">
 		select count(*) from Board_table where active = 0
 	</select>
 	
-	<!-- 관리자 Q&A 전체보기 -->
+	<!-- 관리자 미답변 Q&A 전체보기 -->
 	<select id="admin_board_list" resultType="bovo" parameterType="Map">
 		select * from Board_table 
 		where active = 0
+		order by bo_regdate desc
+		limit #{limit} offset #{offset} 
+	</select>
+	
+	<!-- 관리자 답변 Q&A 페이징 -->
+	<select id="count8" resultType="int">
+		select count(*) from Board_table where active = 1
+	</select>
+	
+	<!-- 관리자 답변 Q&A 전체보기 -->
+	<select id="admin_board_list2" resultType="bovo" parameterType="Map">
+		select * from Board_table 
+		where active = 1
 		order by bo_regdate desc
 		limit #{limit} offset #{offset} 
 	</select>
@@ -22,15 +35,28 @@
 		select * from Board_table where bo_idx = #{bo_idx}
 	</select>
 	
-	<!-- 관리자 신고 페이징 -->
+	<!-- 관리자 미답변 신고 페이징 -->
 	<select id="count2" resultType="int">
 		select count(*) from Report_table where active = 0
 	</select>
 	
-	<!-- 관리자 신고 전체보기 -->
+	<!-- 관리자 미답변 신고 전체보기 -->
 	<select id="admin_report_list" resultType="revo" parameterType="Map">
 		select * from Report_table 
 		where active = 0
+		order by report_regdate desc
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<!-- 관리자 답변 신고 페이징 -->
+	<select id="count9" resultType="int">
+		select count(*) from Report_table where active = 1
+	</select>
+	
+	<!-- 관리자 답변 신고 전체보기 -->
+	<select id="admin_report_list2" resultType="revo" parameterType="Map">
+		select * from Report_table 
+		where active = 1
 		order by report_regdate desc
 		limit #{limit} offset #{offset}
 	</select>
@@ -70,7 +96,6 @@
 		where bo_idx = #{bo_idx}
 	</update>
 	
-	
 	<!-- 신고 답글 가져오기 -->	
 	<select id="replylist" resultType="repvo" parameterType="String">
 		select * from Reply_table where report_idx = #{report_idx}
@@ -106,14 +131,14 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(bo_idx),0)+1) as groups FROM Board_table
         </selectKey>
-		insert into Board_table(bo_writer, bo_title, bo_content, bo_pwd, bo_regdate, u_idx)
-		values(#{bo_writer}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{u_idx})
+		insert into Board_table(u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_regdate)
+		values(#{u_idx}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate())
 	</insert>
 	
 	<!-- Q&A 게시판 수정 (사용자) -->
 	<update id="board_update" parameterType="bovo">
 		update Board_table
-		set bo_writer=#{bo_writer}, bo_title=#{bo_title}, bo_content=#{bo_content}
+		set bo_title=#{bo_title}, bo_content=#{bo_content}
 		where bo_idx=#{bo_idx}
 	</update>
 	
@@ -127,8 +152,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(report_idx),0)+1) as groups FROM Report_table
         </selectKey>
-		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, report_pwd, u_idx)
-		values(#{report_title}, #{report_content}, #{report_writer}, sysdate(), #{step}, #{report_pwd}, #{u_idx})
+		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, u_idx)
+		values(#{report_title}, #{report_content}, #{u_name}, sysdate(), #{step}, #{u_idx})
 	</insert>
 	
 	<!-- 회원정보 상세보기 -->
@@ -140,7 +165,7 @@
 	<update id="user_update" parameterType="userVO">
 		update User_table
 		set u_phone=#{u_phone}, u_email=#{u_email}, u_postcode=#{u_postcode}, u_addr=#{u_addr}, 
-		 u_detail_addr=#{u_detail_addr}, u_detail_addr2=#{u_detail_addr2}
+		 u_detail_addr=#{u_detail_addr}, u_detail_addr2=#{u_detail_addr2}, u_profile_img=#{u_profile_img}
 		where u_idx = #{u_idx}
 	</update>
 	
@@ -176,31 +201,7 @@
 		order by report_regdate desc
 		limit #{limit} offset #{offset} 	
 	</select>
-	
-	<!-- 관리자 전체 Q&A 페이징 -->
-	<select id="count5" resultType="int">
-		select count(*) from Board_table
-	</select>
-	
-	<!-- 관리자 Q&A 전체보기 -->
-	<select id="admin_board_list2" resultType="bovo" parameterType="Map">
-		select * from Board_table 
-		order by bo_regdate desc
-		limit #{limit} offset #{offset} 
-	</select>
-	
-	<!-- 관리자 전체 신고 페이징 -->
-	<select id="count6" resultType="int">
-		select count(*) from Report_table
-	</select>
-	
-	<!-- 관리자 신고 전체보기 -->
-	<select id="admin_report_list2" resultType="revo" parameterType="Map">
-		select * from Report_table 
-		order by report_regdate desc
-		limit #{limit} offset #{offset} 
-	</select>
-	
+
 	<!-- 회원관리 페이징 -->
 	<select id="count7" resultType="int" parameterType="String">
 		select count(*) from User_table
@@ -227,14 +228,14 @@
 	<!-- 회원관리 삭제 -->
 	<update id="user_delete" parameterType="userVO">
 		update User_table
-		set active = 1, u_del = #{u_del}, out_regdate = sysdate(), u_restore = #{u_restore}
+		set active = 1, u_del = #{u_del}, out_regdate = sysdate(), u_restore = #{u_restore}, re_regdate = #{re_regdate}, out_admin = #{a_name}, re_admin = null
 		where u_idx = #{u_idx}
 	</update>
 	
 	<!-- 회원관리 복구 -->
 	<update id="user_Restore" parameterType="userVO">
 		update User_table
-		set active = 0, u_restore = #{u_restore}, out_regdate = #{out_regdate}, u_del = #{u_del}, re_regdate = sysdate()
+		set active = 0, u_restore = #{u_restore}, re_regdate = sysdate(), u_del = #{u_del}, out_regdate = #{out_regdate}, re_admin = #{a_name}, out_admin = null
 		where u_idx = #{u_idx}
 	</update>
 	

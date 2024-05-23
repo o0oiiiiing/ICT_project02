@@ -36,16 +36,6 @@
 						<th>제목</th>
 						<td><input type="text" name="bo_title" size="50" /></td>
 					</tr>
-
-					<tr>
-						<th>작성자</th>
-						<td><input type="text" name="bo_writer" /></td>
-					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" name="bo_pwd" size="12" /></td>
-					</tr>
-
 					<tr>
 						<th>내용</th>
 						<td><textarea rows="10" cols="60" id="bo_content"
@@ -56,6 +46,7 @@
 		</div>
 		<div id="board_write_btn">
 			<input type="hidden" name="u_idx" value="${userVO.u_idx}">
+			<input type="hidden" name="u_name" value="${userVO.u_name}">
 			<input type="button" value="목록" onclick="board_list(this.form)" /> 
 			<input type="button" value="확인" onclick="board_write_ok(this.form)" />
 		</div>
