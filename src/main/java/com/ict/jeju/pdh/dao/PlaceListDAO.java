@@ -23,7 +23,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
+
 	// 전체 장소 보기
 	public List<PlaceListVO> allList() {
 		try {
@@ -33,7 +33,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
+
 	// 장소 상세보기
 	public PlaceListVO placeDetail(String contentsid) {
 		try {
@@ -52,7 +52,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	public int qaNum(String contentsid) {
 		try {
 			return sqlSessionTemplate.selectOne("place.qaNum", contentsid);
@@ -80,7 +80,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 검색하기
 	public List<PlaceListVO> searchList(String keyword) {
 		try {
@@ -90,7 +90,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
+
 	// Q&A 작성하기
 	public int qaWrite(QaVO qaVO) {
 		try {
@@ -100,7 +100,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 장소의 Q&A 가져오기
 	public List<QaVO> qaList(PagingVO qaPagingVO) {
 		try {
@@ -110,7 +110,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
+
 	// 리뷰 작성하기
 	public int reviewWrite(ReviewVO reviewVO) {
 		try {
@@ -120,7 +120,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 리뷰 이미지 삽입하기
 	public int imageInsert(ImagesVO imagesVO) {
 		try {
@@ -130,7 +130,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 장소의 리뷰 가져오기
 	public List<ReviewVO> reviewList(PagingVO rPagingVO) {
 		try {
@@ -140,7 +140,7 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
-	
+
 	// 신고하기
 	public int reportWrite(ReportVO reportVO) {
 		try {
@@ -150,7 +150,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 평균 별점 가져오기
 	public double reviewAvg(String contentsid) {
 		try {
@@ -160,7 +160,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 신고 당한 사람 신고 수 늘리기
 	public int reportSu(ReportVO reportVO) {
 		try {
@@ -170,7 +170,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 위시리스트 추가
 	public int addWish(WishVO wishVO) {
 		try {
@@ -180,7 +180,7 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-	
+
 	// 위시리스트 삭제
 	public int removeWish(WishVO wishVO) {
 		try {
@@ -189,5 +189,15 @@ public class PlaceListDAO {
 			System.out.println(e);
 		}
 		return -1;
+	}
+
+	// 좋아요 여부 확인
+	public WishVO confirmLike(WishVO wishVO) {
+		try {
+			return sqlSessionTemplate.selectOne("place.confirmLike", wishVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 }

@@ -61,4 +61,7 @@ public interface PlaceListService {
 	
 	// 위시리스트에 제거하기
 	public int removeWish(WishVO wishVO);
+	
+	// 좋아요 여부 확인
+	public WishVO confirmLike(WishVO wishVO);
 }

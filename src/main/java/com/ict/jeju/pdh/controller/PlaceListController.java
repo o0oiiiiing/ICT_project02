@@ -91,7 +91,7 @@ public class PlaceListController {
 
 	@RequestMapping("detail")
 	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session,
-			HttpServletRequest request) {
+			HttpServletRequest request, WishVO wishVO) {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
 
@@ -202,7 +202,22 @@ public class PlaceListController {
 
 		// 리뷰 리스트 가져오기
 		List<ReviewVO> reviewList = placeListService.reviewList(rPagingVO);
-
+		
+		// Like_table에서 좋아요 했는지 확인
+		if (userVO != null) {
+			wishVO.setU_idx(userVO.getU_idx());
+			wishVO.setContentsid(contentsid);
+			WishVO confirmLike = placeListService.confirmLike(wishVO);
+			if (confirmLike == null) {
+				System.out.println("null");
+				mv.addObject("check", "0");
+			} else {			
+				System.out.println("not null");
+				mv.addObject("check", "1");
+			}
+			
+		}
+		
 		if (placeDetail != null) {
 			mv.addObject("placeDetail", placeDetail);
 			mv.addObject("likeNum", likeNum);

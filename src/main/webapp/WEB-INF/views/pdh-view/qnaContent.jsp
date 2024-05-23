@@ -40,7 +40,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${qaList}">
-							<tr>
+							<tr onclick="qaDetailOpen(this)">
 								<c:choose>
 									<c:when test="${k.disclosure == '0'}">
 										<td style="text-align: center;">공개</td>
@@ -62,6 +62,18 @@
 									</c:otherwise>
 								</c:choose>
 							</tr>
+							<tr style="display: none;" class="qaDetail">
+								<td colspan="5">내용 : ${k.bo_content}</td>
+							</tr>
+							<c:choose>
+								<c:when test="${not empty k.comments}">
+									<c:forEach var="j" items="${k.comments}">
+										<tr style="display: none;" class="comment">
+											<td colspan="5">댓글 : ${j.com_content}</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+							</c:choose>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -107,5 +119,20 @@
 			</c:choose>
 		</ol>
 	</div>
+	
+	<script type="text/javascript">
+		function qaDetailOpen(el) {
+ 			var qaDetails = el.parentElement.querySelectorAll('.qaDetail');
+			var comments = el.parentElement.querySelectorAll('.comment');
+			
+			for (var i = 0; i < qaDetails.length; i++) {
+				qaDetails[i].style.display = "block";
+		    }
+
+		    for (var j = 0; j < comments.length; j++) {
+		        comments[j].style.display = "block";
+		    }
+		}
+	</script>
 </body>
 </html>

@@ -120,6 +120,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public int removeWish(WishVO wishVO) {
 		return placeListDAO.removeWish(wishVO);
+	}
+	
+	// 좋아요 여부 확인
+	@Override
+	public WishVO confirmLike(WishVO wishVO) {
+		return placeListDAO.confirmLike(wishVO);
 	}	
 
 }

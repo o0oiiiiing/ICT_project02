@@ -180,30 +180,30 @@
 		    });
 	    });
 	});
-	
-	function goWishlist() {
+
+	function goWishList() {
 		var wish = document.querySelector('.favorite');
-		
 		if ("${userVO}" == "") {
 			alert("로그인 후 이용 가능합니다.")
-			location.href="login_go.do"
+			location.href = "login_go.do"
 		} else {
 			// 스타일이 이미 적용되어 있는지 확인
 	        if (wish.style.fontVariationSettings === '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400') {
 	            // 이미 스타일이 적용되어 있다면 다른 스타일로 변경 또는 제거
-	            wish.style.fontVariationSettings = '';
+	            /* wish.style.fontVariationSettings = ''; */
 	            console.log("${placeDetail.contentsid}")
 	            alert("좋아요한 여행지에서 제거되었습니다.");
 	            location.href = "removeWish?contentsid=${placeDetail.contentsid}";
 	        } else {
 	            // 스타일이 적용되어 있지 않다면 스타일 적용
-	            wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400';
+	            /* wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400'; */
 	            console.log("${placeDetail.contentsid}")
 	            alert("좋아요한 여행지에 추가되었습니다.");
 	            location.href = "addWish?contentsid=${placeDetail.contentsid}";
 	        }
 		}
 	}
+	
 	
 </script>
 </head>
@@ -219,7 +219,7 @@
 		<tbody>
 			<tr class="icons-section">
 				<td class="border-right"><span
-					class="material-symbols-outlined icon favorite" onclick="goWishlist()">favorite</span></td>
+					class="material-symbols-outlined icon favorite" onclick="goWishList()">favorite</span></td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">calendar_today</span></td>
 				<td class="border-right"><span
@@ -250,6 +250,21 @@
 			</tr>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		if ("${check}"==1) {
+			var wish = document.querySelector('.favorite');
+			console.log(1,wish);
+			console.log(2,"${check}");
+			wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400';
+		} else if ("${check}"==0) {
+			var wish = document.querySelector('.favorite');
+			console.log(3,"${check}");
+			wish.style.fontVariationSettings = '"FILL" 0, "GRAD" 0, "opsz" 24, "wght" 400';		
+		}else {
+			var wish = document.querySelector('.favorite');
+			wish.style.fontVariationSettings = '"FILL" 0, "GRAD" 0, "opsz" 24, "wght" 400';	
+		}
+	</script>
 
 	<!-- 상세정보 보여주는 영역 -->
 	<%@include file="../pdh-view/detailContent.jsp"%>
