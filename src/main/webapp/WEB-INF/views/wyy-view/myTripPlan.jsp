@@ -263,12 +263,8 @@
 		
 	    // 정보수정 창 이동
 	    function mytripPlan_userUpdate(u_idx){
-	    	// 나중에 u_idx 넣지말고 user_update.do 에서 세션으로 받기
 	    	location.href = "user_update.do?u_idx="+u_idx;
 	    }
-	    function chatbotgo() {
-			
-		}
 	    
 	    // 경화
 	    function board_list() {
@@ -291,10 +287,10 @@
 		<hr>
 		</div>
 		<div class="myTrip_profile">
-			<img src="resources/common-image/profile.png" width="150px"
-				height="150px" style="margin: auto 30px;">
-			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
+					<img src="/resources/upload/${k.u_profile_img}" width="150px"
+						height="150px" style="margin: auto 30px;" class="profile-image">
+			<div class="myTrip_profile_content">
 					<p>${k.u_name} 님</p>
 					<p>나의 리뷰 <a href="myreview_list.do?">${k.review_count}</a></p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
@@ -302,11 +298,15 @@
 					<!-- 경화 -->
 					<button onclick="board_list()">문의내역</button>
 					<button onclick="report_list()">신고내역</button>
-					
-					
-					
-				</c:forEach>
 			</div>
+				</c:forEach>
+		</div>
+		<div class="icon-info" style="text-align: left;">
+			관광지 : <img src="https://cdn-icons-png.flaticon.com/512/3420/3420238.png" style="width:30px; height: 30px;">&nbsp;&nbsp;
+			쇼핑 : <img src="https://cdn-icons-png.flaticon.com/512/3081/3081648.png" style="width:30px; height: 30px;">&nbsp;&nbsp;
+			숙박 : <img src="https://cdn-icons-png.flaticon.com/512/6556/6556054.png" style="width:30px; height: 30px;">&nbsp;&nbsp;
+			음식점 : <img src="https://cdn-icons-png.flaticon.com/512/5964/5964382.png" style="width:30px; height: 30px;">&nbsp;&nbsp;
+			축제/행사 : <img src="https://cdn-icons-png.flaticon.com/512/2445/2445246.png" style="width:30px; height: 30px;">
 		</div>
 		<!-- 카카오 지도 -->
 		<div id="map"></div>
@@ -327,9 +327,9 @@
 		<div class="modal">
 			<div class="screen">
 			<form action="calSave" method="post">
-				<p>일정 제목 : <input type="text" name="c_title" ></p>
-				<p>시작 날짜 : <input type="date" name="c_start"></p>
-				<p>끝 날짜 : <input type="date" name="c_end"></p> 
+				<p>일정 제목  <input type="text" name="c_title" ></p>
+				<p>시작 날짜  <input type="date" name="c_start"></p>
+				<p>끝 날짜  <input type="date" name="c_end"></p> 
 				<input type="submit" value="일정추가">
 				<input type="hidden" name="contentsid" id="contentsid" >	
 				<button type="button" value="close" class="btn modal--close" onclick="closeModal()">Close</button>

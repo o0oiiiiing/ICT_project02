@@ -14,8 +14,8 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-	function user_list() {
-		location.href="user_list.do";
+	function user_list(cPage) {
+		location.href="user_list.do?cPage="+cPage;
 	}
 </script>
 </head>
@@ -25,32 +25,36 @@
 	 <div id="user_detail">
 		<div class="user_container">
 			<div class="user_content">
-				<table style="margin: auto;">
+				<table>
 				<caption>회원정보</caption>
 					<tbody>
-						<tr><td style="width: 40%">아이디</td><td>${uvo.u_id}</td></tr>
-						<tr><td>이름</td><td>${uvo.u_name}</td></tr>
-						<tr><td>생년월일</td><td>${uvo.u_birth}</td></tr>
-						<tr><td>이메일</td><td>${uvo.u_email}</td></tr>
-						<tr><td>전화번호</td><td>${uvo.u_phone}</td></tr>
-						<tr><td>우편번호</td><td>${uvo.u_postcode}</td></tr>
-						<tr><td>주소</td><td>${uvo.u_addr}</td></tr>
-						<tr><td>상세주소</td><td>${uvo.u_detail_addr}</td></tr>
-						<tr><td>상세주소2</td><td>${uvo.u_detail_addr2}</td></tr>
-						<tr><td>성별</td><td>${uvo.u_gender}</td></tr>
-						<tr><td>신고누적</td><td>${uvo.u_report}</td></tr>
-						<tr><td>가입일</td><td>${uvo.u_regdate.substring(0,10)}</td></tr>
-						<tr><td>탈퇴일</td><td>${uvo.out_regdate.substring(0,10)}</td></tr>
-						<tr><td>탈퇴사유</td><td>${uvo.u_del}</td></tr>
-						<tr><td>복구일</td><td>${uvo.re_regdate}</td></tr>
-						<tr><td>복구사유</td><td>${uvo.u_restore}</td></tr>
+						<%-- <tr><th >프로필</th><td colspan="2">${uvo.u_profile_img}</td></tr> --%>
+						<tr><th >아이디</th><td colspan="2">${uvo.u_id}</td></tr>
+						<tr><th>이름</th><td colspan="2">${uvo.u_name}</td></tr>
+						<tr><th>생년월일</th><td colspan="2">${uvo.u_birth}</td></tr>
+						<tr><th>이메일</th><td colspan="2">${uvo.u_email}</td></tr>
+						<tr><th>전화번호</th><td colspan="2">${uvo.u_phone}</td></tr>
+						<tr><th>우편번호</th><td colspan="2">${uvo.u_postcode}</td></tr>
+						<tr><th style="vertical-align: middle;">주소</th><td colspan="2">${uvo.u_addr} ${uvo.u_detail_addr} ${uvo.u_detail_addr2}</td></tr>
+						<tr><th>성별</th><td colspan="2">${uvo.u_gender}</td></tr>
+						<tr><th>신고누적</th><td colspan="2">${uvo.u_report}</td></tr>
+						<tr><th>가입일</th><td colspan="2">${uvo.u_regdate.substring(0,10)}</td></tr>
+					</tbody>
+				</table>
+				<br>
+				<table>
+					<tbody>
+						<tr><th>탈퇴사유</th><th>탈퇴일</th><th>처리관리자</th></tr>
+						<tr><td>${uvo.u_del}</td><td>${uvo.out_regdate.substring(0,10)}</td><td>${uvo.out_admin}</td></tr>
+						<tr><th>복구사유</th><th>복구일</th><th>처리관리자</th></tr>
+						<tr><td>${uvo.u_restore}</td><td>${uvo.re_regdate.substring(0,10)}</td><td>${uvo.re_admin}</td></tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="user_buttons">
 				<input type="hidden" value="${k.u_idx}" name="u_idx"> 
-				<input type="hidden" value="${paging.nowPage}" name="cPage"> 
-				<input type="button" class="user_button" value="닫기" onclick="user_list()">
+				<%-- <input type="hidden" value="${cPage}" name="cPage">  --%>
+				<input type="button" class="user_button" value="닫기" onclick="user_list('${cPage}')">
 			</div>
 		</div>
 		</div>

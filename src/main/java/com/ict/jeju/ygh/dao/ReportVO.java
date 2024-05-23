@@ -1,7 +1,16 @@
 package com.ict.jeju.ygh.dao;
 
 public class ReportVO {
-	private String report_idx, report_title, report_content, active, report_writer, report_regdate, step, report_pwd, lev, groups, u_idx;
+	private String report_idx, report_title, report_content, active, report_writer, report_regdate, step, report_pwd,
+			lev, groups, u_idx, u_name;
+
+	public String getU_name() {
+		return u_name;
+	}
+
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
+	}
 
 	public String getU_idx() {
 		return u_idx;
@@ -90,5 +99,5 @@ public class ReportVO {
 	public void setReport_regdate(String report_regdate) {
 		this.report_regdate = report_regdate;
 	}
-	
+
 }

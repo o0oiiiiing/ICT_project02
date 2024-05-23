@@ -14,20 +14,32 @@ import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
 public interface JejuService5 {
-	// 관리자 Q&A 페이징
+	// 관리자 미답변 Q&A 페이징 
 	public int getTotalCount();
 
-	// 관리자 Q&A 전체보기
+	// 관리자 미답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList(int offset, int limit);
+	
+	// 관리자 답변 Q&A 페이징
+	public int getTotalCount8();
+	
+	// 관리자 답변 Q&A 전체보기
+	public List<BoardVO> adminBoardList2(int offset, int limit);
 
 	// 관리자 Q&A 상세보기
 	public BoardVO boardDetail(String bo_idx);
 
-	// 관리자 신고 페이징
+	// 관리자 미답변 신고 페이징
 	public int getTotalCount2();
 
-	// 관리자 신고 전체보기
+	// 관리자 미답변 신고 전체보기
 	public List<ReportVO> adminReportList(int offset, int limit);
+	
+	// 관리자 답변 신고 페이징
+	public int getTotalCount9();
+	
+	// 관리자 답변 신고 전체보기
+	public List<ReportVO> adminReportList2(int offset, int limit);
 
 	// 관리자 신고 상세보기
 	public ReportVO reportDetail(String report_idx);
@@ -93,18 +105,6 @@ public interface JejuService5 {
 
 	// 사용자 신고 전체보기
 	public List<ReportVO> reportList(int offset, int limit, String u_idx);
-
-	// 관지자 전체 Q&A 페이징
-	public int getTotalCount5();
-
-	// 관지자 전체 Q&A 전체보기
-	public List<BoardVO> adminBoardlist2(int offset, int limit);
-
-	// 관지자 전체 신고 페이징
-	public int getTotalCount6();
-
-	// 관지자 전체 신고 전체보기
-	public List<ReportVO> adminReportlist2(int offset, int limit);
 
 	// 회원관리 페이징
 	public int getTotalCount7(String filter);

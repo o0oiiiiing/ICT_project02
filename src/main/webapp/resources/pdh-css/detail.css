@@ -286,7 +286,7 @@
 	background-color: #D9D9D9;
 }
 
-#qa_write, #review_write {
+#qa_write, #review_write, #report_write {
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -428,5 +428,16 @@
 
 .declaration {
 	color: #D9D9D9;
-	margin-right: 3px;
+}
+
+.report-button {
+	color: #D9D9D9;
+	border: none;
+	font-family: 'NanumSquare';
+	background-color: transparent;
+	font-size: 18px;
+}
+
+.report-button:hover {
+	color: pink;
 }

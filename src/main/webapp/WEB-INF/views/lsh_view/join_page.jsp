@@ -215,13 +215,12 @@
 		<%@include file="../common/header.jsp" %>
 		<section class="join_page">
 			<div class="join_container">
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 					<h3 class="join_text">Sign Up</h3>
 						<div class="join_box">
 							<ul>
 								<li>
 									<input type="text"  id="u_id" name="u_id" required placeholder="ID" />
-									<span id="id_msg"></span>
 									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</li>
 								<li>
@@ -233,6 +232,9 @@
 								</li>
 								<li class="join_li_box" >
 									<input type="text" id="u_name" name="u_name" required placeholder="Name" />
+								</li>
+								<li>
+									<input type="file" id="user_profile" name="user_profile" />
 								</li>
 								<li>
 									<input type="date" id="u_birth" name="u_birth" value="생년월일" required data-placeholder="생년월일을 입력하세요" />

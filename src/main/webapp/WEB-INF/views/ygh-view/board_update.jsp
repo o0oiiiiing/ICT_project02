@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q&A 게시판 수정</title>
+<title>Q&A | Jeju_travel</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
@@ -15,15 +15,6 @@
 <link href="<c:url value="/resources/ygh-css/board_write.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		let pwdchk = "${pwdchk}";
-		if (pwdchk == 'fail') {
-			alert("비밀번호 틀림");
-			return;
-		}
-	});
-</script>
 <script type="text/javascript">
 	function board_list(f) {
 		f.action = "board_list.do";
@@ -52,16 +43,6 @@
 						<th>제목</th>
 						<td><input type="text" name="bo_title" size="50"
 							value="${bovo.bo_title}" /></td>
-					</tr>
-
-					<tr>
-						<th>작성자</th>
-						<td><input type="text" name="bo_writer"
-							value="${bovo.bo_writer}" /></td>
-					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" name="bo_pwd"></td>
 					</tr>
 					<tr>
 						<th>내용</th>
