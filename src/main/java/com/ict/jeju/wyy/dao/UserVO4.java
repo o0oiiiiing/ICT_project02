@@ -7,9 +7,7 @@ public class UserVO4 {
 	private String like_idx, like_active;
 	private String bo_idx;
 	private String like_active_count, review_count;
-	
-	
-	
+
 	public String getU_profile_img() {
 		return u_profile_img;
 	}

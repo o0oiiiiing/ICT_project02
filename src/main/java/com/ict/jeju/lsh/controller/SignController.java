@@ -1,18 +1,23 @@
 package com.ict.jeju.lsh.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.lsh.dao.UserVO;
@@ -158,11 +163,30 @@ public class SignController {
 
 	// 회원가입
 	@PostMapping("join_ok.do")
-	public ModelAndView getJoinOK(UserVO userVO) {
-		userVO.setU_pwd(passwordEncoder.encode(userVO.getU_pwd()));
-		int res = signService.getJoinOK(userVO);
-		if (res > 0) {
-			return new ModelAndView("redirect:login_go.do");
+	public ModelAndView getJoinOK(UserVO userVO, HttpServletRequest request) {
+		try {
+			ModelAndView mv = new ModelAndView("redirect:home");
+			String path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
+			String basic_img_path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
+			MultipartFile user_profile = userVO.getUser_profile();
+			if (user_profile.isEmpty()) {
+				userVO.setU_profile_img(basic_img_path+"/profile.png");
+			} else {
+				UUID uuid = UUID.randomUUID();
+				String u_profile_img = uuid.toString()+"_"+user_profile.getOriginalFilename();
+				userVO.setU_profile_img(u_profile_img);
+				
+				byte [] in = user_profile.getBytes();
+				File out = new File(path, u_profile_img);
+				FileCopyUtils.copy(in, out);
+			}
+			userVO.setU_pwd(passwordEncoder.encode(userVO.getU_pwd()));
+			int res = signService.getJoinOK(userVO);
+			if (res > 0) {
+				return mv;
+			}
+		} catch (Exception e) {
+			System.out.println("join err : "+e);
 		}
 		return null;
 	}

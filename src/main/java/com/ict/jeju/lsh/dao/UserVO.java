@@ -80,6 +80,16 @@ public class UserVO {
 		this.activeUsers = activeUsers;
 	}
 
+	private MultipartFile user_profile;
+	
+	public MultipartFile getUser_profile() {
+		return user_profile;
+	}
+
+	public void setUser_profile(MultipartFile user_profile) {
+		this.user_profile = user_profile;
+	}
+
 	public String getU_profile_img() {
 		return u_profile_img;
 	}

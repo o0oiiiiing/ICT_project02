@@ -9,8 +9,8 @@
     </select>
     
     <insert id="join" parameterType="userVO">
-    	INSERT INTO User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate)
-    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_birth}, #{u_email}, #{u_phone}, #{u_postcode}, #{u_detail_addr}, #{u_detail_addr2}, #{u_addr}, #{u_gender}, '홈페이지_가입', sysdate())
+    	INSERT INTO User_table(u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate, u_profile_img)
+    	 VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_birth}, #{u_email}, #{u_phone}, #{u_postcode}, #{u_detail_addr}, #{u_detail_addr2}, #{u_addr}, #{u_gender}, '홈페이지_가입', sysdate(), #{u_profile_img})
     </insert>
     
     <select id="id_chk" parameterType="String" resultType="int">
