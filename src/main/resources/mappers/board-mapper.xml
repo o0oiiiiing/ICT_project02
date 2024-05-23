@@ -244,7 +244,7 @@
 		SELECT * FROM Review_table 
 		WHERE u_idx = #{u_idx}
 		ORDER BY re_regdate DESC
-		LIMIT #{limit} OFFSET #{offset}
+		limit #{limit} offset #{offset}
 	</select>
 	
 	<!-- 나의 리뷰 contentsid를 이용해서 vi_title 값 가져오기  - 최현민 -->
@@ -252,6 +252,19 @@
 		SELECT vi_title
 		FROM Visitjeju_table 
 		where contentsid = #{contentsid}
+	</select>
+	
+	<!-- 나의 리뷰 count -->
+	<select id="myreview_count" resultType="uvo4">
+    	select u.*,
+       		(select count(*) from Like_table where u_idx=#{u_idx}) as like_active_count,
+       		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count
+			from User_table u where u.u_idx=#{u_idx}
+	</select>		
+	
+	<!-- 나의 리뷰 디테일 -->
+	<select id="myreview_detail_list" resultType="myvo" parameterType="String">
+		select * from Review_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 회원현황 -->
@@ -269,6 +282,11 @@
 		WHERE u_regdate >= DATE_SUB(NOW(), INTERVAL 7 DAY)
 		GROUP BY DATE(u_regdate)
 		ORDER BY join_date
+	</select>
+	
+	<!-- 사용자 Q&A 페이징 -->
+	<select id="count10" resultType="int" parameterType="String">
+		select count(*) from Review_table where u_idx = #{u_idx}
 	</select>
 </mapper>
 

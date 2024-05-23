@@ -33,9 +33,18 @@
     </select>
     
     <select id="searchList" parameterType="Map" resultType="caVO">
-    	select * 
-		from Visitjeju_table 
-		where vi_title like CONCAT('%', #{keyword}, '%')
-		limit #{limit} offset #{offset}
+    	select * from Visitjeju_table where vi_title like CONCAT('%', #{keyword}, '%')
+			<choose>
+    			<when test="option == 'option1'">
+    				 ORDER BY vi_hit DESC
+    			</when>
+    			<when test="option == 'option2'">
+    				 ORDER BY vi_title ASC
+    			</when>
+    			<otherwise>
+    				 ORDER BY vi_title DESC
+    			</otherwise>
+    		</choose>
+			limit #{limit} offset #{offset}
     </select>
 </mapper>

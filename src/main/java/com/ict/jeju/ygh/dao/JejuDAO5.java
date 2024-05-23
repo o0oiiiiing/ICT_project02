@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 
 @Repository
 public class JejuDAO5 {
@@ -423,6 +424,26 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
+	// 나의 리뷰 count
+	public List<UserVO4> myreviewCount(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectList("Board_table.myreview_count", u_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 나의 리뷰 페이징 카운트
+	public int getTotalCount10(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.count10", u_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 
 	// 회원현황
 	public List<UserVO> userTotal() {
@@ -440,6 +461,26 @@ public class JejuDAO5 {
 		try {
 			List<UserVO> result = sqlSessionTemplate.selectList("Board_table.join_user");
 			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	// 나의 리뷰 리스트 디테일
+	public UserVO myreview_detail(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.myreview_detail", u_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 나의 리뷰 리스트 디테일 페이지에 가져갈 리뷰 리스트
+	public List<MyreviewVO> myreview_detail_list(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list",u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

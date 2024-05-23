@@ -91,7 +91,7 @@ public class CategoryController {
 	
 	@RequestMapping("search")
 	public ModelAndView search(HttpSession session 
-			, HttpServletRequest request ,@ModelAttribute("keyword")String keyword) {
+			, HttpServletRequest request ,@ModelAttribute("keyword")String keyword,@ModelAttribute("option")String option) {
 		ModelAndView mv = new ModelAndView("chm-view/searchlist");
 		int count = categoryService.getTotalCount2(keyword);
         paging3.setTotalRecord(count);
@@ -125,7 +125,7 @@ public class CategoryController {
         }
         
         // ,option_select
-        List<CategoryVO> searchList = categoryService.searchList(paging3.getOffset(), paging3.getNumPerPage(),keyword);
+        List<CategoryVO> searchList = categoryService.searchList(paging3.getOffset(), paging3.getNumPerPage(),keyword, option);
         if (searchList != null) {
             mv.addObject("paging3", paging3);
             mv.addObject("searchList", searchList);

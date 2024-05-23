@@ -6,6 +6,7 @@ import java.util.Map;
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
@@ -125,11 +126,26 @@ public interface JejuService5 {
     
 	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	public String myreviewtitle(String contentsid);
+	
+	// 나의 리뷰 카운터
+	public List<UserVO4> myreviewCount(String u_idx);
+	
+	// 나의 리뷰 페이징 카운트 
+	public int getTotalCount10(String u_idx);
 
+	// 나의 리뷰 디테일
+	public UserVO myreview_detail(String u_idx);
+	
+	// 나의 리뷰 디테일에 가져가는 나의 리뷰 리스트
+	public List<MyreviewVO> myreview_detail_list(String u_idx);
+	
 	// 회원현황
 	public List<UserVO> userTotal();
 
 	// 일일 가입자 수
 	public List<UserVO> joinUser();
+
+
+	
 
 }

@@ -38,8 +38,8 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	
 	@Override
-	public List<CategoryVO> searchList(int offset, int limit , String keyword) {
-		return categoryDAO.searchList(offset , limit, keyword);
+	public List<CategoryVO> searchList(int offset, int limit , String keyword , String option) {
+		return categoryDAO.searchList(offset , limit, keyword , option);
 		
 	}
 }

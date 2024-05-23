@@ -2,7 +2,7 @@
 
 .background{
   width: 95vw; 
-  height: 70.5vh; 
+  height: 72.5vh; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,19 +122,21 @@
 
 .wrapper_footer{
   width: 100%;
-  height: 4.3vh; 
+  height: 6.3vh; 
   display: flex;
   flex-direction: row;
   margin: 0;
 }
 
 .footer_left{
-  width: 43.2vw; 
+  width: 51.2vw; 
   height: 4.3vh; 
   display:flex;
   flex-direction:row;
   
   margin:0;
+  padding-left: 0.5vw;
+  padding-top: 1vh;
   align-items : center;
   justify-content: center;
 }
@@ -152,8 +154,8 @@ ol li {
 }
 
 .footer_right{
-  width: 50vw; 
-  height: 4.3vh; 
+  width: 41vw; 
+  height: 6.3vh; 
 }
 
 .not_search{
