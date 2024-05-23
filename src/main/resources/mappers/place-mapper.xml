@@ -120,6 +120,16 @@
 		from Review_table 
 		where contentsid = #{contentsid} 
 	</select>
+	
+	<insert id="addWish" parameterType="WishVO">
+		insert into Like_table(u_idx, contentsid) 
+		values(#{u_idx}, #{contentsid}) 
+	</insert>
+	
+	<delete id="removeWish" parameterType="WishVO">
+		delete from Like_table 
+		where u_idx = #{u_idx} AND contentsid = #{contentsid}
+	</delete>
 
 </mapper>
 

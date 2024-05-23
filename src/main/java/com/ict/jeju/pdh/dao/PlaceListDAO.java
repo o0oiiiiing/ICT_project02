@@ -160,4 +160,34 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
+	
+	// 신고 당한 사람 신고 수 늘리기
+	public int reportSu(ReportVO reportVO) {
+		try {
+			return sqlSessionTemplate.update("place.reportSu", reportVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 위시리스트 추가
+	public int addWish(WishVO wishVO) {
+		try {
+			return sqlSessionTemplate.insert("place.addWish", wishVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 위시리스트 삭제
+	public int removeWish(WishVO wishVO) {
+		try {
+			return sqlSessionTemplate.delete("place.removeWish", wishVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }

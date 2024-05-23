@@ -42,6 +42,6 @@ public interface MytripService {
 	public int adminInsert(VisitJejuVO vo4);
 	
 	// 관리자 일정 추가 중복체크
-	public String idCheck(String contentsid) ;
+	public String idCheck(String contentsid);
 	
 }

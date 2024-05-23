@@ -14,9 +14,7 @@
 <link rel="icon" href="resources/common-image/favicon.ico"
 	type="image/x-icon">
 <!-- 구글 아이콘 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-	rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <!-- 폰트 적용 -->
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
@@ -27,6 +25,18 @@
 <link rel="stylesheet" href="resources/pdh-css/paging.css" />
 <link rel="stylesheet" href="resources/pdh-css/starRating.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
+<link rel="stylesheet" href="resources/common-css/chatbot.css" />
+
+<style type="text/css">
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+</style>
+
 <!-- jQuery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -34,32 +44,6 @@
 <script src="/resources/common-js/summernote-ko-KR.min.js"></script>
 <script src="/resources/common-js/summernote-lite.js"></script>
 <link rel="stylesheet" href="/resources/common-css/summernote-lite.css">
-
-<!-- 챗봇 css -->
-<style type="text/css">
-#chatbot_image {
-	width: 50px;
-	height: 50px;
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	z-index: 99;
-	line-height: 60px;
-	cursor: pointer;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-	border-radius: 50%;
-}
-
-.chatbot_modal {
-	position: fixed;
-	bottom: 20px;
-	right: 80px;
-	z-index: 2;
-	background-color: white;
-	display: none;
-	border-radius: 10px;
-}
-</style>
 <script>
     // 페이지 로드 시 history.scrollRestoration을 'manual'로 설정
     history.scrollRestoration = 'manual';
@@ -88,11 +72,6 @@
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
 		alert("링크가 복사되었습니다.")
-	}
-	
-	// 일정 추가하기 버튼
-	function addSchedule() {
-		location.href = "addSchedule?contentsid=${placeDetail.contentsid}";
 	}
 	
 	// 아이콘 눌렀을 때 텍스트박스 글 지우기
@@ -178,8 +157,6 @@
 				var mIdx = document.querySelector('.mIdx');
 				realReIdx.value = reIdx_v;
 				mIdx.value = uIdx_v;
-				console.log(realReIdx.value)
-				console.log(mIdx.value)
 		        // 요소의 display를 토글
 		        if ("${userVO}" == "") {
 					alert("로그인 후 이용 가능합니다.")
@@ -204,70 +181,37 @@
 	    });
 	});
 	
+	function goWishlist() {
+		var wish = document.querySelector('.favorite');
+		
+		if ("${userVO}" == "") {
+			alert("로그인 후 이용 가능합니다.")
+			location.href="login_go.do"
+		} else {
+			// 스타일이 이미 적용되어 있는지 확인
+	        if (wish.style.fontVariationSettings === '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400') {
+	            // 이미 스타일이 적용되어 있다면 다른 스타일로 변경 또는 제거
+	            wish.style.fontVariationSettings = '';
+	            console.log("${placeDetail.contentsid}")
+	            alert("좋아요한 여행지에서 제거되었습니다.");
+	            location.href = "removeWish?contentsid=${placeDetail.contentsid}";
+	        } else {
+	            // 스타일이 적용되어 있지 않다면 스타일 적용
+	            wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400';
+	            console.log("${placeDetail.contentsid}")
+	            alert("좋아요한 여행지에 추가되었습니다.");
+	            location.href = "addWish?contentsid=${placeDetail.contentsid}";
+	        }
+		}
+	}
+	
 </script>
 </head>
 <body>
 	<img class="main_image" src="${placeDetail.vi_image}">
-	<header class="header">
-		<ul class="nav">
-			<li>
-				<h1 class="title">
-					<a href="home" class="a_tag">제주여행</a>
-				</h1>
-			</li>
-			<li class="nav_list"><a
-				href="category_page.do?vi_value=관광지&option=option1" class="a_tag">관광지</a></li>
-			<li class="nav_list"><a
-				href="category_page.do?vi_value=음식점&option=option1" class="a_tag">음식점</a></li>
-			<li class="nav_list"><a
-				href="category_page.do?vi_value=숙박&option=option1" class="a_tag">숙박</a></li>
-			<li class="nav_list"><a
-				href="category_page.do?vi_value=쇼핑&option=option1" class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a
-				href="category_page.do?vi_value=축제/행사&option=option1" class="a_tag">축제/행사</a></li>
-			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의
-					여행</a></li>
-		</ul>
-
-		<c:choose>
-			<c:when test="${loginChk == 'ok'}">
-				<ul class="nav-list__right" style="width: 600px;">
-					<li>
-						<form method="post" action="search">
-							<div class="search-bar">
-								<span class="material-symbols-outlined search-icon">search</span>
-								<input class="search-field" type="text" name="keyword" value=""
-									placeholder="검색어를 입력해주세요." /> <span
-									class="material-symbols-outlined delete-icon"
-									onclick="clearInput()">close</span>
-							</div>
-						</form>
-					</li>
-					<li>${userVO.u_name}님환영합니다.</li>
-					<li>|</li>
-					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
-				</ul>
-			</c:when>
-			<c:otherwise>
-				<ul class="nav-list__right" style="width: 500px;">
-					<li>
-						<form method="post" action="search">
-							<div class="search-bar">
-								<span class="material-symbols-outlined search-icon">search</span>
-								<input class="search-field" type="text" name="keyword" value=""
-									placeholder="검색어를 입력해주세요." /> <span
-									class="material-symbols-outlined delete-icon"
-									onclick="clearInput()">close</span>
-							</div>
-						</form>
-					</li>
-					<li><a href="login_go.do" class="a_tag">로그인</a></li>
-					<li>|</li>
-					<li><a href="join_go.do" class="a_tag">회원가입</a></li>
-				</ul>
-			</c:otherwise>
-		</c:choose>
-	</header>
+	
+	<!-- 헤더 -->
+	<%@include file="../pdh-view/detailHeader.jsp"%>
 
 	<p class="place_name">${placeDetail.vi_title}</p>
 
@@ -275,7 +219,7 @@
 		<tbody>
 			<tr class="icons-section">
 				<td class="border-right"><span
-					class="material-symbols-outlined icon">favorite</span></td>
+					class="material-symbols-outlined icon favorite" onclick="goWishlist()">favorite</span></td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">calendar_today</span></td>
 				<td class="border-right"><span
@@ -296,7 +240,7 @@
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
-					type="button" value="추가하기" onclick="addSchedule()"></td>
+					type="button" value="추가하기" onclick="openModal(${placeDetail.contentsid})"></td>
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${reviewNum}" pattern="#,##0" /></td>
 				<td class="icons-number border-right"><fmt:formatNumber
@@ -307,427 +251,47 @@
 		</tbody>
 	</table>
 
-	<div>
-		<div class="detail-section">
-			<div class="detail-section__bar">
-				<p class="detail-title">상세정보</p>
-				<span class="material-symbols-outlined expand_icon">expand_more</span>
-			</div>
-			<div>
-				<div id="map"></div>
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
-				<script>
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	<!-- 상세정보 보여주는 영역 -->
+	<%@include file="../pdh-view/detailContent.jsp"%>
+		
+	<!-- Q&A 내용 보여주는 영역 -->
+	<%@include file="../pdh-view/qnaContent.jsp"%>
+	
+	<!-- 리뷰 내용 보여주는 영역 -->
+	<%@include file="../pdh-view/reviewContent.jsp"%>
+	
+	<!-- Q&A 내용 작성하는 영역 -->
+	<%@include file="../pdh-view/qnaWrite.jsp"%>
+	
+	<!-- 리뷰 내용 작성하는 영역 -->
+	<%@include file="../pdh-view/reviewWrite.jsp"%>
+	
+	<!-- 신고 내용 작성하는 영역 -->
+	<%@include file="../pdh-view/reportWrite.jsp"%>
+	
+	<!-- 일정 추가하는 영역 -->
+	<%@include file="../pdh-view/addSchedule.jsp"%>
 
-					mapOption = {
-						center : new kakao.maps.LatLng(${placeDetail.vi_latitude}, ${placeDetail.vi_longitude}), // 지도의 중심좌표
-						level : 4
-					// 지도의 확대 레벨
-					};
-
-					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-					var map = new kakao.maps.Map(mapContainer, mapOption);
-					
-					// 마커 표시하기
-					// 마커가 표시될 위치입니다 
-					var markerPosition = new kakao.maps.LatLng(${placeDetail.vi_latitude}, ${placeDetail.vi_longitude});
-
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker({
-						position : markerPosition
-					});
-
-					marker.setMap(map);
-					
-					// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-					var iwContent = '<div style="padding:5px;">${placeDetail.vi_title}</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-					iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-					// 인포윈도우를 생성합니다
-					var infowindow = new kakao.maps.InfoWindow({
-						content : iwContent,
-						removable : iwRemoveable
-					});
-
-					// 마커에 mouseover 이벤트를 등록합니다
-					kakao.maps.event.addListener(marker, 'mouseover', function() {
-						// 마커 위에 인포윈도우를 표시합니다
-						infowindow.open(map, marker);
-					});
-					
-					// mouse나가면 인포윈도우 없애기
-					kakao.maps.event.addListener(marker, 'mouseout', function() {
-						// 마커 위에 인포윈도우를 제거
-						infowindow.close();
-					});
-				</script>
-			</div>
-		</div>
-
-		<div class="detail-section">
-			<div class="detail-section__bar">
-				<p class="detail-title">Q&A</p>
-				<span class="material-symbols-outlined expand_icon">expand_more</span>
-			</div>
-			<!-- 내용 -->
-			<div class="qa_title__section">
-				<p class="qa_title">
-					Q&A <span style="color: #FFBB36;">(${qaNum})</span>
-				</p>
-				<input class="write_button" type="button" value="질문작성">
-			</div>
-			<table class="qa_table">
-				<thead>
-					<tr>
-						<td style="width: 10%">공개 여부</td>
-						<td style="width: 40%">제목</td>
-						<td style="width: 20%">작성자</td>
-						<td style="width: 20%">작성일</td>
-						<td style="width: 10%">답변 여부</td>
-					</tr>
-				</thead>
-				<tbody>
-					<c:choose>
-						<c:when test="${empty qaList}">
-							<tr>
-								<td colspan="5" style="text-align: center;">Q&A가 존재하지 않습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="k" items="${qaList}">
-								<tr>
-									<c:choose>
-										<c:when test="${k.disclosure == '0'}">
-											<td style="text-align: center;">공개</td>
-											<td style="text-align: center;">${k.bo_title}</td>
-										</c:when>
-										<c:otherwise>
-											<td style="text-align: center;">비공개</td>
-											<td style="text-align: center; color: #9E9E9E;">비밀글입니다.</td>
-										</c:otherwise>
-									</c:choose>
-									<td style="text-align: center;">${k.bo_writer}</td>
-									<td style="text-align: center;">${k.bo_regdate.substring(0,10)}</td>
-									<c:choose>
-										<c:when test="${k.active == '0'}">
-											<td style="text-align: center;">N</td>
-										</c:when>
-										<c:otherwise>
-											<td style="text-align: center; color: #FFBB36;">Y</td>
-										</c:otherwise>
-									</c:choose>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-			<!-- 페이징 -->
-			<ol class="paging">
-				<!-- 이전 버튼 -->
-				<c:choose>
-					<c:when test="${qaPaging.beginBlock <= qaPaging.pagePerBlock}">
-						<li class="disable">이전</li>
-					</c:when>
-					<c:otherwise>
-						<li><a class="able"
-							href="detail?cPage=${qaPaging.beginBlock - qaPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
-					</c:otherwise>
-				</c:choose>
-
-				<!-- 페이지번호들 -->
-				<c:forEach begin="${qaPaging.beginBlock}" end="${qaPaging.endBlock}"
-					step="1" var="k">
-					<c:choose>
-						<c:when test="${k == qaPaging.nowPage}">
-							<li class="now">${k}</li>
-						</c:when>
-						<c:otherwise>
-							<li><a class="other_page"
-								href="detail?cPage=${k}&contentsid=${placeDetail.contentsid}">${k}</a>
-							</li>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<!-- 이후 버튼 -->
-				<c:choose>
-					<c:when test="${qaPaging.endBlock >= qaPaging.totalPage}">
-						<li class="disable">다음</li>
-					</c:when>
-					<c:otherwise>
-						<li><a class="able"
-							href="detail?cPage=${qaPaging.beginBlock + qaPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
-					</c:otherwise>
-				</c:choose>
-			</ol>
-		</div>
-
-		<div class="detail-section">
-			<div class="detail-section__bar">
-				<p class="detail-title">리뷰</p>
-				<span class="material-symbols-outlined expand_icon">expand_more</span>
-			</div>
-			<!-- 내용 -->
-			<div class="review_title__section">
-				<p class="qa_title">
-					<c:choose>
-						<c:when test="${reviewAvg != null}">
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : ${reviewAvg}
-						</c:when>
-						<c:otherwise>
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
-						</c:otherwise>
-					</c:choose>
-				</p>
-				<input class="write_r_button" type="button" value="리뷰작성">
-			</div>
-			<hr class="hr">
-			<c:choose>
-				<c:when test="${empty reviewList}">
-					<p
-						style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
-						존재하지 않습니다.</p>
-					<hr class="hr">
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${reviewList}">
-						<div class="review-content">
-							<div class="review-content__left">
-								<img style="width: 130px; height: 130px; border-radius: 50%;"
-									alt="프로필사진" src="resources/upload/${k.u_profile_img}">
-								<p>${k.u_name}</p>
-								<p>${k.re_regdate.substring(0,10)}</p>
-								<c:choose>
-									<c:when test="${k.re_grade == 1}">
-										<span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span>
-									</c:when>
-									<c:when test="${k.re_grade == 2}">
-										<span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span>
-									</c:when>
-									<c:when test="${k.re_grade == 3}">
-										<span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span>
-									</c:when>
-									<c:when test="${k.re_grade == 4}">
-										<span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span>
-									</c:when>
-									<c:otherwise>
-										<span style="color: #FFDF6B;" class="star">★★★★★</span>
-									</c:otherwise>
-								</c:choose>
-							</div>
-							<div class="review-content__right">
-								<c:choose>
-									<c:when test="${empty k.imageList}">
-										<div class="review-content__text" style="height: 240px;">
-											<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
-											<p class="report">
-												<span class="material-symbols-outlined declaration">notifications</span>
-												<input class="report-button" type="button" value="신고하기">
-												<input type="hidden" class="re_idx" value="${k.re_idx}">
-												<input type="hidden" class="u_idx" value="${k.u_idx}">
-											</p>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div class="review-content__text" style="height: 100px;">
-											<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
-										</div>
-										<div class="images">
-											<c:forEach var="j" items="${k.imageList}">
-												<img style="width: 150px; height: 150px;" alt="사진"
-													src="resources/upload/${j.pic_file}">
-											</c:forEach>
-											<p class="report">
-												<span class="material-symbols-outlined declaration">notifications</span>
-												<input class="report-button" type="button" value="신고하기">
-												<input type="hidden" class="re_idx" value="${k.re_idx}">
-												<input type="hidden" class="u_idx" value="${k.u_idx}">
-											</p>
-										</div>
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</div>
-						<hr class="hr">
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<!-- 페이징 -->
-		<ol class="paging">
-			<!-- 이전 버튼 -->
-			<c:choose>
-				<c:when test="${rPaging.beginBlock <= rPaging.pagePerBlock}">
-					<li class="disable">이전</li>
-				</c:when>
-				<c:otherwise>
-					<li><a class="able"
-						href="detail?rCPage=${rPaging.beginBlock - rPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
-				</c:otherwise>
-			</c:choose>
-
-			<!-- 페이지번호들 -->
-			<c:forEach begin="${rPaging.beginBlock}" end="${rPaging.endBlock}"
-				step="1" var="k">
-				<c:choose>
-					<c:when test="${k == rPaging.nowPage}">
-						<li class="now">${k}</li>
-					</c:when>
-					<c:otherwise>
-						<li><a class="other_page"
-							href="detail?rCPage=${k}&contentsid=${placeDetail.contentsid}">${k}</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-			<!-- 이후 버튼 -->
-			<c:choose>
-				<c:when test="${rPaging.endBlock >= rPaging.totalPage}">
-					<li class="disable">다음</li>
-				</c:when>
-				<c:otherwise>
-					<li><a class="able"
-						href="detail?rCPage=${rPaging.beginBlock + rPaging.pagePerBlock}&contentsid=${placeDetail.contentsid}">이전</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ol>
-	</div>
-
-	<!-- Q&A 작성하는 영역 -->
-	<form id="qa_write" method="post" action="qaWrite">
-		<div class="qa_write__container" style="height: 510px;">
-			<p class="qa_wrtie__title">Q&A 작성</p>
-			<div class="qa_write__content">
-				<table style="margin: 0 auto;">
-					<tbody>
-						<tr>
-							<td>제목</td>
-							<td colspan="2"><input style="width: 420px;" type="text"
-								name="bo_title" required></td>
-						</tr>
-						<tr>
-							<td style="width: 149px; text-align: center;">
-								<div style="display: inline-block; margin-right: 7px;">
-									<input type="radio" name="disclosure" value="0"
-										onclick="handleDisclosure()" checked="checked">공개 <input
-										type="radio" name="disclosure" value="1"
-										onclick="handleDisclosure()">비공개
-								</div>
-							</td>
-							<td style="width: 449px;">비밀번호 : <input
-								style="width: 200px;" type="password" name="bo_pwd"
-								disabled="disabled" id="passwordInput" required="required"></td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-				<textarea id="summernote" name="bo_content" maxlength="1000"></textarea>
-			</div>
-			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
-					type="hidden" value="${userVO.u_name}" name="u_name"> <input
-					class="qa_write__button" type="reset" value="취소">
-				<button type="button" class="qa_write__button"
-					onclick="qaWrite(this.form)">등록</button>
-			</div>
-		</div>
-	</form>
-
-	<!-- 리뷰 작성하는 영역 -->
-	<form id="review_write" method="post" action="reviewWrite"
-		enctype="multipart/form-data">
-		<div class="qa_write__container" style="height: 510px;">
-			<p class="qa_wrtie__title">리뷰 작성</p>
-			<p style="font-family: 'NanumSquare'; text-align: center;">별점을
-				입력해주세요.</p>
-			<div class="qa_write__content">
-				<fieldset>
-					<input type="radio" name="re_grade" value="5" id="rate1"><label for="rate1">★</label> 
-					<input type="radio" name="re_grade" value="4" id="rate2"><label for="rate2">★</label>
-					<input type="radio" name="re_grade" value="3" id="rate3"><label for="rate3">★</label>
-					<input type="radio" name="re_grade" value="2" id="rate4"><label for="rate4">★</label>
-					<input type="radio" name="re_grade" value="1" id="rate5"><label for="rate5">★</label>
-				</fieldset>
-				<br> <input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
-				<p id="fileCountMessage"
-					style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p>
-				<br>
-				<textarea name="re_content" id="review-content"
-					style="width: 600px; height: 200px; display: block; margin: 0 auto;"
-					placeholder="내용을 입력해주세요."></textarea>
-				<div id="charCount">0/350</div>
-			</div>
-			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx">
-				<input class="review_write__button" type="reset" value="취소">
-				<button type="button" class="review_write__button" onclick="reviewWrite(this.form)">등록</button>
-			</div>
-		</div>
-	</form>
-
-	<!-- 신고 작성하는 영역 -->
-	<form id="report_write" method="post" action="reportWrite">
-		<div class="qa_write__container" style="height: 430px;">
-			<p class="qa_wrtie__title">신고하기</p>
-			<div class="qa_write__content">
-				<p>
-					제목 : <input type="text" name="report_title" id="report_title" placeholder="제목을 입력해주세요.">
-				</p>
-				<br>
-				<textarea name="report_content" id="report_content"
-					style="width: 600px; height: 200px; display: block; margin: 0 auto;"
-					placeholder="내용을 입력해주세요."></textarea>
-				<div id="charCount2">0/500</div>
-			</div>
-			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx">
-				<input type="hidden" value="${userVO.u_name}" name="report_writer">
-				<input type="hidden" value="" name="re_idx" class="reIdx">
-				<input type="hidden" value="" name="m_idx" class="mIdx">
-				<input class="review_write__button" type="reset" value="취소">
-				<button type="button" class="review_write__button" onclick="reportWrite(this.form)">등록</button>
-			</div>
-		</div>
-	</form>
-
+	<!-- 뒷배경용 div -->
 	<div class="overlay"></div>
-	<script type="text/javascript">
-		// summernote
-		$('#summernote').summernote({
-			height : 200, // 에디터 높이
-			width: 600,
-			minHeight : null, // 최소 높이
-			maxHeight : null, // 최대 높이
-			focus : true, // 에디터 로딩후 포커스를 맞출지 여부
-			lang : "ko-KR", // 한글 설정
-			placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
-			toolbar: [
-				['fontname', ['fontname']],
-				['fontsize', ['fontsize']],
-				['color', ['color']],
-				['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-				['para', ['ul', 'ol', 'paragraph']],
-				['height', ['height']]
-			],
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-		});
-	</script>
-
+	
+	<!-- 탑버튼 -->
 	<div>
 		<button id="scrollToTopButton">
 			<span class="material-symbols-outlined">expand_less</span>
 		</button>
 	</div>
+	
+	<!-- 챗봇 -->
 	<img src="resources/common-image/chatbot.png" id="chatbot_image"
 		class="chatbot_image">
 	<div class="chatbot_modal">
 		<%@include file="../common/chatbot.jsp"%>
 	</div>
+	
+	<!-- footer -->
 	<%@ include file="../common/footer.jsp"%>
+	
 	<script type="text/javascript">
 	// 클릭시에 한 번에 위로 올라가는 버튼
 	window.onscroll = function() { scrollFunction() };
@@ -790,6 +354,7 @@
 	        return false;
 		} else {
 	    	f.action = "qaWrite?contentsid=${placeDetail.contentsid}";
+	    	alert("질문이 등록되었습니다.")
 			f.submit();
 	    }
 	}
@@ -807,6 +372,7 @@
 	        return false;
 		} else {
 	    	f.action = "reviewWrite?contentsid=${placeDetail.contentsid}";
+	    	alert("리뷰 작성이 완료되었습니다.")
 			f.submit();
 	    }
 	}
@@ -815,17 +381,25 @@
     function reportWrite(f) {
     	var reportContent = document.getElementById('report_content').value.trim();
     	var reportTitle = document.getElementById('report_title').value.trim();
+    	var reporter = ${userVO.u_idx};
+    	var reported = f.querySelector(".qa_write__buttons").querySelector(".mIdx").value;
 	    
-	    if (!reportTitle) {
-	    	alert("제목을 입력해 주세요.");
-            return false;
-	    } else if (!reportContent) {
-	    	alert("신고 내용을 작성해주세요.");
-	        return false;
+    	if (reporter == reported) {
+			alert("본인의 리뷰는 신고할 수 없습니다.");
+			return false;
 		} else {
-	    	f.action = "reportWrite?contentsid=${placeDetail.contentsid}";
-			f.submit();
-	    }
+		    if (!reportTitle) {
+		    	alert("제목을 입력해 주세요.");
+	            return false;
+		    } else if (!reportContent) {
+		    	alert("신고 내용을 작성해주세요.");
+		        return false;
+			} else {
+		    	f.action = "reportWrite?contentsid=${placeDetail.contentsid}";
+		    	alert("신고가 완료되었습니다.")
+				f.submit();
+		    }
+		}
 	}
     
     // review 사진 5장으로 제한
