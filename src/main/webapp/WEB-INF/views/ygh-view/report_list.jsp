@@ -50,7 +50,7 @@
 	<div id="report_t">
 		<div id="report_h">
 			<h1>신고 게시판</h1>
-			<button onclick="report_write_go()">글쓰기</button>
+			<!-- <button onclick="report_write_go()">글쓰기</button> -->
 		</div>
 		<table>
 			<thead>

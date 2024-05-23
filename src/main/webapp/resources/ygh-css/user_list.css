@@ -55,6 +55,15 @@
 	margin-left: 10px;
 }
 
+.filters button {
+	font-family: 'GmarketSansMedium';
+	width: 50px;
+	height: 20px;
+	color: black;
+}
+
+
+
 /* #user_h button {
 	border: none;
 	background-color: #D9D9D9;

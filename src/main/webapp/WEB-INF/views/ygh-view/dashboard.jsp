@@ -10,6 +10,8 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>관리자 대시보드</title>
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
@@ -31,31 +33,24 @@
 </head>
 <body class="sb-nav-fixed">
 	<%@include file="../common/header.jsp"%>
-	
+
 	<div id="menubar">
 		<h1>나의 여행(관리자)</h1>
 		<table>
 			<tr>
-				<td>아이콘</td>
-				<td>아이콘</td>
-				<td>아이콘</td>
-				<td>아이콘</td>
-				<td>아이콘</td>
-			</tr>
-			<tr>
-				<td><a href="dashboard.do">대시보드</a></td>
-				<td><a href="user_list.do">회원관리</a></td>
-				<td><a href="admin_list2.do">답변</a></td>
-				<td><a href="admin_list.do">미답변</a></td>
-				<td><a href="admin_insert">일정 추가</a></td>
-				
+
+				<td><span class="material-symbols-outlined">finance</span><br><a href="dashboard.do">대시보드</a></td>
+				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
+				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
+				<td><span class="material-symbols-outlined">mark_chat_unread</span><br><a href="admin_list.do">미답변</a></td>
+				<td><span class="material-symbols-outlined">calendar_add_on</span><br><a href="admin_insert">일정 추가</a></td>
 				<c:if test="${adminVO.a_status == '1'}">
-					<td><a href="admin_join.do">관리자 생성</a></td>
+					<td><span class="material-symbols-outlined">person_add</span><br><a href="admin_join.do">관리자 생성</a></td>
 				</c:if>
 			</tr>
 		</table>
 	</div>
-	
+
 	<div id="layoutSidenav_content">
 		<main class="container-fluid px-4">
 			<div class="container-comment">
@@ -89,9 +84,13 @@
 		</main>
 	</div>
 	<%@include file="../common/footer.jsp"%>
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
 	<script src="resources/ygh-css/assets/demo/chart-area-demo.js"></script>
 	<script src="resources/ygh-css/assets/demo/chart-pie-demo.js"></script>
 </body>

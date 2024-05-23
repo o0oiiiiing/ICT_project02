@@ -4,8 +4,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 	private String bo_idx, u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, groups, step, lev,
-			bo_regdate, f_name, old_f_name, u_name;
+			bo_regdate, f_name, old_f_name, u_name, contentsid, vi_title;
 	private MultipartFile file;
+
+	public String getVi_title() {
+		return vi_title;
+	}
+
+	public void setVi_title(String vi_title) {
+		this.vi_title = vi_title;
+	}
+
+	public String getContentsid() {
+		return contentsid;
+	}
+
+	public void setContentsid(String contentsid) {
+		this.contentsid = contentsid;
+	}
 
 	public String getU_name() {
 		return u_name;
