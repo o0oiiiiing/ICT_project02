@@ -49,16 +49,30 @@
 				
 				let ok = "green";	
 				let no = "red";
+				
+				let pwd_patten = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+				
 				if (u_pwd.value.length < 6) {
-					msg.style.color = no;
-					msg.innerHTML = "비밀번호는 6자리 이상으로 입력하세요.";
-				} else if (u_pwd.value === u_pwdchk.value) {
-					msg.style.color = ok;
-					msg.innerHTML = "비밀번호가 일치합니다."
-				} else {
-					msg.style.color = no;
-					msg.innerHTML = "비밀번호가 일치하지 않습니다."
-				}
+			        msg.style.color = no;
+			        msg.style.fontSize = "12px";
+			        msg.style.fontWeight = "bold";
+			        msg.innerHTML = "비밀번호는 6자리 이상으로 입력하세요.";
+			    } else if (!pwd_patten.test(u_pwd.value)) {
+			        msg.style.color = no;
+			        msg.style.fontSize = "12px";
+			        msg.style.fontWeight = "bold";
+			        msg.innerHTML = "비밀번호는 특수문자, 영문자, 숫자를 모두 포함해야 합니다.<br>특수문자는 '@, $, !, %, *, ?, &'만 사용 가능합니다.";
+			    } else if (u_pwd.value === u_pwdchk.value && u_pwdchk.value !== '') {
+			        msg.style.color = ok;
+			        msg.style.fontSize = "12px";
+			        msg.style.fontWeight = "bold";
+			        msg.innerHTML = "비밀번호가 일치합니다.";
+			    } else {
+			        msg.style.color = no;
+			        msg.style.fontSize = "12px";
+			        msg.style.fontWeight = "bold";
+			        msg.innerHTML = "비밀번호가 일치하지 않습니다.";
+			    }
 			}
 			
 			// 약관 전체 동의 확인필요
@@ -87,28 +101,28 @@
 			
 			// 유효성검사
 			function join_ok(f) {
-				if (f.u_id === '' || f.u_pwd === '' || f.u_pwdchk === '' || f.u_name === '' || f.u_birth === '' || 
-						f.u_email === '' || f.u_phone === '' || f.u_addr === '' || f.u_detail_addr === '') {
+				if (f.u_id === '' || f.u_pwd === '' || f.u_pwdchk === '' || f.u_name === '' || f.u_birth === '' || 	f.u_email === '' 
+						|| f.u_phone === '' || f.u_addr === '' || f.u_detail_addr === '') {
 					alert("필수 항목들을 입력해주세요.");
 					return false;
-				} else if (f.u_id.value === '') {
-					alert("아이디를 입력하세요");
+				} else if (!/^[a-zA-Z0-9]{4,}$/.test(f.u_id.value)) {
+					alert("아이디는 영문자와 숫자로 이루어진 최소 4자 이상이어야 합니다.");
 					f.u_id.focus();
 					return false;
 				} else if (! idChk) {
 					alert("아이디 중복 확인을 하세요.");
 					f.idChk.focus();
 			        return false; 
-				} else if (f.u_pwd.value === '') {
-					alert("비밀번호를 입력하세요");
+				} else if (!/(?=.*\d)(?=.*[a-zA-Z])(?=.*\W).{6,}/.test(f.u_pwd.value)) {
+					alert("비밀번호는 최소 6자 이상이어야 하며, 영문자, 숫자, 특수문자를 모두 포함해야 합니다.");
 					f.u_pwd.focus();
 					return false;
-				} else if (f.u_name.value === '') {
-					alert("이름을 입력하세요");
+				} else if (!/^[a-zA-Z가-힣]+$/.test(f.u_name.value)) {
+					alert("이름은 한글과 영문 대소문자만 허용됩니다.");
 					f.u_name.focus();
 					return false;
 				} else if (f.u_birth.value === '') {
-					alert("생년월일 입력하세요.");
+					alert("생년월일을 선택하세요.");
 					f.u_birth.focus();
 					return false;
 				} else if (f.u_phone.value.length !== 11) {
@@ -140,20 +154,23 @@
 			function chk_disabled() {
 				let u_id = document.getElementById('u_id').value;
 				let u_idchk = document.getElementById('u_idchk');
-				let n_uid = parseInt(u_id);
+				
+			    // u_id에서 공백과 특수문자를 제거한 새로운 문자열 생성
+			    let cid = u_id.replace(/\s/g, ''); // 공백 제거
+			    cid = cid.replace(/[^a-zA-Z0-9]/g, ''); // 영문자와 숫자만 허용
 				
 				let empty = "#b6dedc";
 				let basic = "lightgray";
-				if (u_id === '') {
-					u_idchk.style.background = basic;
-					u_idchk.disabled = true;
-				} else if (u_id.length < 4) {
-					u_idchk.style.background = basic;
-					u_idchk.disabled = true;
-				} else {
-					u_idchk.style.background = empty;
-					u_idchk.disabled = false;
-				}
+				if (cid === '') {
+			        u_idchk.style.background = basic;
+			        u_idchk.disabled = true;
+			    } else if (cid.length < 4) {
+			        u_idchk.style.background = basic;
+			        u_idchk.disabled = true;
+			    } else {
+			        u_idchk.style.background = empty;
+			        u_idchk.disabled = false;
+			    }
 			}
 			
 			// 중복확인 버튼 활성화 및 비활성화

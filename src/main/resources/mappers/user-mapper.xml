@@ -14,7 +14,7 @@
     </insert>
     
     <select id="id_chk" parameterType="String" resultType="int">
-    	SELECT COUNT(*) FROM User_table WHERE u_id = #{u_id} 
+    	SELECT COUNT(*) FROM User_table WHERE u_id = #{u_id}
     </select>
    
    <update id="chgpwd" parameterType="userVO">

@@ -146,6 +146,7 @@ input[type='date']::before {
   margin-bottom: 15px;
   color: #777777;
   padding-left: 15px;
+  font-size: 15px;
 }
 
 .join_file_upload_btn:hover {
