@@ -162,15 +162,15 @@ public class SignController {
 	}
 
 	// 회원가입
-	// 이미지 기본값 설정못함 ㅠㅠ
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO, HttpServletRequest request) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:home");
 			String path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
+			String basic_img_path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
 			MultipartFile user_profile = userVO.getUser_profile();
 			if (user_profile.isEmpty()) {
-				userVO.setU_profile_img("");
+				userVO.setU_profile_img(basic_img_path+"/profile.png");
 			} else {
 				UUID uuid = UUID.randomUUID();
 				String u_profile_img = uuid.toString()+"_"+user_profile.getOriginalFilename();
