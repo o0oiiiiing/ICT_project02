@@ -13,20 +13,32 @@ import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
 public interface JejuService5 {
-	// 관리자 Q&A 페이징
+	// 관리자 미답변 Q&A 페이징 
 	public int getTotalCount();
 
-	// 관리자 Q&A 전체보기
+	// 관리자 미답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList(int offset, int limit);
+	
+	// 관리자 답변 Q&A 페이징
+	public int getTotalCount8();
+	
+	// 관리자 답변 Q&A 전체보기
+	public List<BoardVO> adminBoardList2(int offset, int limit);
 
 	// 관리자 Q&A 상세보기
 	public BoardVO boardDetail(String bo_idx);
 
-	// 관리자 신고 페이징
+	// 관리자 미답변 신고 페이징
 	public int getTotalCount2();
 
-	// 관리자 신고 전체보기
+	// 관리자 미답변 신고 전체보기
 	public List<ReportVO> adminReportList(int offset, int limit);
+	
+	// 관리자 답변 신고 페이징
+	public int getTotalCount9();
+	
+	// 관리자 답변 신고 전체보기
+	public List<ReportVO> adminReportList2(int offset, int limit);
 
 	// 관리자 신고 상세보기
 	public ReportVO reportDetail(String report_idx);
@@ -42,15 +54,20 @@ public interface JejuService5 {
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo);
 
+	// Q&A 답글 작성
 	public int commentUpdate(String bo_idx);
 
-	// Q&A 답글 삭제
-	public int commentDelete(CommentVO comvo);
+	// Q&A 답글 수정
+	public int commentUpdateOk(CommentVO comvo);
 
 	// 신고 답글 작성
 	public int replyInsert(ReplyVO repvo);
 
+	// 신고 답글 작성
 	public int replyUpdate(String report_idx);
+
+	// 신고 답글 수정
+	public int replyUpdateOk(ReplyVO repvo);
 
 	// 신고 답글 삭제
 	public int replyDelete(ReplyVO repvo);
@@ -66,12 +83,6 @@ public interface JejuService5 {
 
 	// 신고 게시판 작성 (사용자)
 	public int reportWriteOk(ReportVO revo);
-
-	// 신고 게시판 수정 (사용자)
-	public int reportUpdate(ReportVO revo);
-
-	// 신고 게시판 삭제 (사용자)
-	public int reportDelete(ReportVO revo);
 
 	// 회원정보 상세보기
 	public UserVO userDetail(String u_idx);
@@ -94,23 +105,11 @@ public interface JejuService5 {
 	// 사용자 신고 전체보기
 	public List<ReportVO> reportList(int offset, int limit, String u_idx);
 
-	// 관지자 전체 Q&A 페이징
-	public int getTotalCount5();
-
-	// 관지자 전체 Q&A 전체보기
-	public List<BoardVO> adminBoardlist2(int offset, int limit);
-
-	// 관지자 전체 신고 페이징
-	public int getTotalCount6();
-
-	// 관지자 전체 신고 전체보기
-	public List<ReportVO> adminReportlist2(int offset, int limit);
-
 	// 회원관리 페이징
-	public int getTotalCount7();
+	public int getTotalCount7(String filter);
 
 	// 회원관리 전체보기
-	public List<UserVO> userList(int offset, int limit);
+	public List<UserVO> userList(int offset, int limit, String filter);
 
 	// 관리자 상세보기
 	public AdminVO adminDetail(String a_idx);
@@ -121,8 +120,16 @@ public interface JejuService5 {
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
 	
+	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
-
+    
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	public String myreviewtitle(String contentsid);
+
+	// 회원현황
+	public List<UserVO> userTotal();
+
+	// 일일 가입자 수
+	public List<UserVO> joinUser();
 
 }

@@ -134,6 +134,4 @@ public class JejuController {
 		int result = calendarService4.adminInsert(vo4);
 		return mv;
 	}
-	
-	
 }

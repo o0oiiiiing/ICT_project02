@@ -18,16 +18,6 @@
 		f.action="report_list.do";
 		f.submit();
 	}
-	
-	function report_update(f) {
-		f.action="report_update.do";
-		f.submit();
-	}
-	
-	function report_delete(f) {
-		f.action="report_delete.do";
-		f.submit();
-	}
 
 </script>
 </head>
@@ -67,8 +57,6 @@
 				<input type="hidden" value="${revo.report_idx}" name="report_idx"> 
 				<input type="hidden" value="${cPage2}" name="cPage2"> 
 				<input type="button" value="목록" onclick="report_list(this.form)" /> 
-				<input type="button" value="수정" onclick="report_update(this.form)" /> 
-				<input type="button" value="삭제" onclick="report_delete(this.form)" />
 			</div>
 	</form>
 	

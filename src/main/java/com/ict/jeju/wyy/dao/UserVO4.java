@@ -2,12 +2,18 @@ package com.ict.jeju.wyy.dao;
 
 public class UserVO4 {
 	private String u_idx, u_name, u_id, u_pwd, u_birth, u_email, u_phone;
-	private String u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate;
+	private String u_postcode, u_detail_addr, u_detail_addr2, u_addr, u_gender, u_state, u_regdate, u_profile_img;
 	private String c_idx, c_status;
 	private String like_idx, like_active;
 	private String bo_idx;
 	private String like_active_count, review_count;
-	
+
+	public String getU_profile_img() {
+		return u_profile_img;
+	}
+	public void setU_profile_img(String u_profile_img) {
+		this.u_profile_img = u_profile_img;
+	}
 	public String getReview_count() {
 		return review_count;
 	}

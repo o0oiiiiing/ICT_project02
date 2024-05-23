@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q&A 게시판 삭제</title>
+<title>Q&A | Jeju_travel</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
@@ -25,6 +25,11 @@
 <script type="text/javascript">
 	function board_list(f) {
 		f.action="board_list.do";
+		f.submit();
+	}
+
+	function board_detail(f) {
+		f.action = "board_detail.do";
 		f.submit();
 	}
 	
@@ -50,9 +55,10 @@
 			</table>
 			</div>
 			<div id="board_detail_btn">
-				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-				<input type="hidden" value="${cPage}" name="cPage"> 
+				<input type="hidden" name="bo_idx" value="${bovo.bo_idx}">
+				<input type="hidden" name="cPage" value="${cPage}">
 				<input type="button" value="목록" onclick="board_list(this.form)" /> 
+				<input type="button" value="취소" onclick="board_detail(this.form)" />
 				<input type="button" value="삭제" onclick="board_delete_ok(this.form)" />
 			</div>
 	</form>

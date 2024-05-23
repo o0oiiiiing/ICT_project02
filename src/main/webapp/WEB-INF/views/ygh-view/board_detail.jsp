@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Q&A 게시판 목록</title>
+<title>Q&A | Jeju_travel</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
@@ -44,8 +44,8 @@
 					</tr>
 
 					<tr>
-						<th>작성자</th>
-						<td>${bovo.bo_writer}</td>
+						<th>장소</th>
+						<td><a href="detail?contentsid=${bovo.contentsid}">작성페이지 바로가기</a></td>
 					</tr>
 
 					<tr>
@@ -62,13 +62,25 @@
 				</tbody>
 			</table>
 			</div>
-			<div id="board_detail_btn">
-				<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
-				<input type="hidden" value="${cPage}" name="cPage"> 
-				<input type="button" value="목록" onclick="board_list(this.form)" /> 
-				<input type="button" value="수정" onclick="board_update(this.form)" /> 
-				<input type="button" value="삭제" onclick="board_delete(this.form)" />
-			</div>
+			<c:choose>
+				<c:when test="${bovo.active eq 0}">
+					<div id="board_detail_btn">
+						<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+						<input type="hidden" value="${cPage}" name="cPage"> 
+						<input type="button" value="목록" onclick="board_list(this.form)" /> 
+						<input type="button" value="수정" onclick="board_update(this.form)" /> 
+						<input type="button" value="삭제" onclick="board_delete(this.form)" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="board_detail_btn">
+						<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
+						<input type="hidden" value="${cPage}" name="cPage"> 
+						<input type="button" value="목록" onclick="board_list(this.form)" /> 
+						<input type="button" value="삭제" onclick="board_delete(this.form)" />
+					</div>
+				</c:otherwise>
+			</c:choose>
 	</form>
 	
 	<br><br><br>

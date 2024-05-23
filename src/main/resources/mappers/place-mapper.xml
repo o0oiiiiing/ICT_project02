@@ -109,6 +109,17 @@
 		from Picture_table
 		where re_idx = #{re_idx}
 	</select>
+	
+	<insert id="reportWrite" parameterType="ReportVO">
+		insert into Report_table(u_idx, re_idx, m_idx, report_title, report_content, report_writer, report_regdate) 
+		values(#{u_idx}, #{re_idx}, #{m_idx}, #{report_title}, #{report_content}, #{report_writer}, sysdate()) 
+	</insert>
+	
+	<select id="reviewAvg" parameterType="String" resultType="double">
+		select AVG(re_grade) 
+		from Review_table 
+		where contentsid = #{contentsid} 
+	</select>
 
 </mapper>
 

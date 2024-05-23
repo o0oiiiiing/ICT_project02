@@ -8,9 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>신고 게시판</title>
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link href="<c:url value="/resources/ygh-css/report_list.css"/>" rel='stylesheet' />
+<link rel="shortcut icon" href="resources/common-image/favicon.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico"
+	type="image/x-icon">
+<link href="<c:url value="/resources/ygh-css/report_list.css"/>"
+	rel='stylesheet' />
 <!-- jQuery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -18,28 +21,28 @@
 	function report_write_go() {
 		location.href = "report_write_go.do"
 	}
-	
+
 	// a링크 postmapping 으로 변경
 	function report_detail_go(report_idx, cPage2) {
-	    var form = document.createElement("form");
-	    form.setAttribute("method", "post");
-	    form.setAttribute("action", "report_detail.do");
-	
-	    var report_idxField = document.createElement("input");
-	    report_idxField.setAttribute("type", "hidden");
-	    report_idxField.setAttribute("name", "report_idx");
-	    report_idxField.setAttribute("value", report_idx);
-	    form.appendChild(report_idxField);
-	
-	    var cPage2Field = document.createElement("input");
-	    cPage2Field.setAttribute("type", "hidden");
-	    cPage2Field.setAttribute("name", "cPage2");
-	    cPage2Field.setAttribute("value", cPage2);
-	    form.appendChild(cPage2Field);
-	
-	    document.body.appendChild(form);
-	    form.submit();
-	}	
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "report_detail.do");
+
+		var report_idxField = document.createElement("input");
+		report_idxField.setAttribute("type", "hidden");
+		report_idxField.setAttribute("name", "report_idx");
+		report_idxField.setAttribute("value", report_idx);
+		form.appendChild(report_idxField);
+
+		var cPage2Field = document.createElement("input");
+		cPage2Field.setAttribute("type", "hidden");
+		cPage2Field.setAttribute("name", "cPage2");
+		cPage2Field.setAttribute("value", cPage2);
+		form.appendChild(cPage2Field);
+
+		document.body.appendChild(form);
+		form.submit();
+	}
 </script>
 </head>
 <body>
@@ -47,15 +50,15 @@
 	<div id="report_t">
 		<div id="report_h">
 			<h1>신고 게시판</h1>
-			<button onclick="report_write_go()">글쓰기</button>
+			<!-- <button onclick="report_write_go()">글쓰기</button> -->
 		</div>
 		<table>
 			<thead>
 				<tr>
 					<th class="no">번호</th>
 					<th class="subject">제목</th>
-					<th class="writer">글쓴이</th>
-					<th class="reg">날짜</th>
+					<th class="reg">작성일</th>
+					<th class="writer">답변여부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,19 +72,22 @@
 						<c:forEach var="k2" items="${report_list}" varStatus="vs">
 							<tr>
 								<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
-								<td style="text-align: left;"><c:forEach begin="1"
-										end="${k2.step}">&nbsp;[Re]</c:forEach> <c:choose>
-										<c:when test="${k2.active == 1}">
-											<%-- <a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">[답변완료] ${k2.report_title}</a> --%>
-											<a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">[답변완료] ${k2.report_title}</a>
-										</c:when>
-										<c:otherwise>
-											<%-- <a href="report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a> --%>
-											 <a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
-										</c:otherwise>
-									</c:choose></td>
-								<td>${k2.report_writer}</td>
+
+								<td style="text-align: left;">
+									<a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
+								</td>
+
 								<td>${k2.report_regdate.substring(0,10)}</td>
+
+								<c:choose>
+									<c:when test="${k2.active == '0'}">
+										<td>N</td>
+									</c:when>
+									<c:otherwise>
+										<td style="color: #FFBB36;">Y</td>
+									</c:otherwise>
+								</c:choose>
+								
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -111,8 +117,7 @@
 										<li class="now">${k2}</li>
 									</c:when>
 									<c:otherwise>
-										<li><a
-											href="report_list.do?cPage2=${k2}">${k2}</a></li>
+										<li><a href="report_list.do?cPage2=${k2}">${k2}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>

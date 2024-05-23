@@ -3,9 +3,82 @@ package com.ict.jeju.lsh.dao;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UserVO {
-	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, 
-								u_detail_addr, u_detail_addr2, u_gender, u_addr, u_state, u_regdate,
-								active, u_report, step, u_del, out_regdate, u_restore, re_regdate, u_profile_img;
+	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2,
+			u_gender, u_addr, u_state, u_regdate, active, u_report, step, u_del, out_regdate, u_restore, re_regdate,
+			u_profile_img, join_date, user_count, inactiveUsers, activeUsers, out_admin, re_admin, a_name, old_f_name;
+	private MultipartFile file;
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public String getOld_f_name() {
+		return old_f_name;
+	}
+
+	public void setOld_f_name(String old_f_name) {
+		this.old_f_name = old_f_name;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getA_name() {
+		return a_name;
+	}
+
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
+
+	public String getOut_admin() {
+		return out_admin;
+	}
+
+	public void setOut_admin(String out_admin) {
+		this.out_admin = out_admin;
+	}
+
+	public String getRe_admin() {
+		return re_admin;
+	}
+
+	public void setRe_admin(String re_admin) {
+		this.re_admin = re_admin;
+	}
+
+	public String getJoin_date() {
+		return join_date;
+	}
+
+	public void setJoin_date(String join_date) {
+		this.join_date = join_date;
+	}
+
+	public String getUser_count() {
+		return user_count;
+	}
+
+	public void setUser_count(String user_count) {
+		this.user_count = user_count;
+	}
+
+	public String getInactiveUsers() {
+		return inactiveUsers;
+	}
+
+	public void setInactiveUsers(String inactiveUsers) {
+		this.inactiveUsers = inactiveUsers;
+	}
+
+	public String getActiveUsers() {
+		return activeUsers;
+	}
+
+	public void setActiveUsers(String activeUsers) {
+		this.activeUsers = activeUsers;
+	}
 
 	private MultipartFile user_profile;
 	
@@ -48,7 +121,7 @@ public class UserVO {
 	public void setOut_regdate(String out_regdate) {
 		this.out_regdate = out_regdate;
 	}
-	
+
 	public String getU_del() {
 		return u_del;
 	}
@@ -192,5 +265,5 @@ public class UserVO {
 	public void setU_regdate(String u_regdate) {
 		this.u_regdate = u_regdate;
 	}
-	
+
 }

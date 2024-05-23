@@ -21,16 +21,28 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Autowired
 	private JejuDAO5 jejuDAO5;
 
-	// 관리자 Q&A 페이징
+	// 관리자 미답변 Q&A 페이징
 	@Override
 	public int getTotalCount() {
 		return jejuDAO5.getTotalCount();
 	}
 
-	// 관리자 Q&A 전체보기
+	// 관리자 미답변 Q&A 전체보기
 	@Override
 	public List<BoardVO> adminBoardList(int offset, int limit) {
 		return jejuDAO5.adminBoardList(offset, limit);
+	}
+	
+	// 관리자 답변 Q&A 페이징
+	@Override
+	public int getTotalCount8() {
+		return jejuDAO5.getTotalCount8();
+	}
+	
+	// 관리자 답변 Q&A 전체보기
+	@Override
+	public List<BoardVO> adminBoardList2(int offset, int limit) {
+		return jejuDAO5.adminBoardList2(offset, limit);
 	}
 
 	// 관리자 Q&A 상세보기
@@ -39,16 +51,28 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.boardDetail(bo_idx);
 	}
 
-	// 관리자 신고 페이징
+	// 관리자 미답변 신고 페이징
 	@Override
 	public int getTotalCount2() {
 		return jejuDAO5.getTotalCount2();
 	}
 
-	// 관리자 신고 전체보기
+	// 관리자 미답변 신고 전체보기
 	@Override
 	public List<ReportVO> adminReportList(int offset, int limit) {
 		return jejuDAO5.adminReportList(offset, limit);
+	}
+	
+	// 관리자 답변 신고 페이징
+	@Override
+	public int getTotalCount9() {
+		return jejuDAO5.getTotalCount9();
+	}
+	
+	// 관리자 답변 신고 전체보기
+	@Override
+	public List<ReportVO> adminReportList2(int offset, int limit) {
+		return jejuDAO5.adminReportList2(offset, limit);
 	}
 
 	// 관리자 신고 상세보기
@@ -79,15 +103,17 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int commentInsert(CommentVO comvo) {
 		return jejuDAO5.commentInsert(comvo);
 	}
+
+	// Q&A 답글 작성
 	@Override
 	public int commentUpdate(String bo_idx) {
 		return jejuDAO5.commentUpdate(bo_idx);
 	}
 
-	// Q&A 답글 삭제
+	// Q&A 답글 수정
 	@Override
-	public int commentDelete(CommentVO comvo) {
-		return jejuDAO5.commentDelete(comvo);
+	public int commentUpdateOk(CommentVO comvo) {
+		return jejuDAO5.commentUpdateOk(comvo);
 	}
 
 	// 신고 답글 작성
@@ -95,10 +121,17 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int replyInsert(ReplyVO repvo) {
 		return jejuDAO5.replyInsert(repvo);
 	}
-	
+
+	// 신고 답글 작성
 	@Override
 	public int replyUpdate(String report_idx) {
 		return jejuDAO5.replyUpdate(report_idx);
+	}
+
+	// 신고 답글 수정
+	@Override
+	public int replyUpdateOk(ReplyVO repvo) {
+		return jejuDAO5.replyUpdateOk(repvo);
 	}
 
 	// 신고 답글 삭제
@@ -131,30 +164,18 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.reportWriteOk(revo);
 	}
 
-	// 신고 게시판 수정 (사용자)
-	@Override
-	public int reportUpdate(ReportVO revo) {
-		return jejuDAO5.reportUpdate(revo);
-	}
-
-	// 신고 게시판 삭제 (사용자)
-	@Override
-	public int reportDelete(ReportVO revo) {
-		return jejuDAO5.reportDelete(revo);
-	}
-
 	// 회원정보 상세보기
 	@Override
 	public UserVO userDetail(String u_idx) {
 		return jejuDAO5.userDetail(u_idx);
 	}
-	
+
 	// 회원정보수정
 	@Override
 	public int userUpdate(UserVO userVO) {
 		return jejuDAO5.userUpdate(userVO);
 	}
-	
+
 	// 비밀번호변경
 	@Override
 	public int rePwd(UserVO uvo) {
@@ -166,7 +187,7 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int getTotalCount3(String u_idx) {
 		return jejuDAO5.getTotalCount3(u_idx);
 	}
-	
+
 	// 사용자 Q&A 전체보기
 	@Override
 	public List<BoardVO> boardList(int offset, int limit, String u_idx) {
@@ -178,47 +199,23 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int getTotalCount4(String u_idx) {
 		return jejuDAO5.getTotalCount4(u_idx);
 	}
-	
+
 	// 사용자 신고 전체보기
 	@Override
 	public List<ReportVO> reportList(int offset, int limit, String u_idx) {
 		return jejuDAO5.reportList(offset, limit, u_idx);
 	}
 
-	// 관지자 전체 Q&A 페이징
-	@Override
-	public int getTotalCount5() {
-		return jejuDAO5.getTotalCount5();
-	}
-
-	// 관지자 전체 Q&A 전체보기
-	@Override
-	public List<BoardVO> adminBoardlist2(int offset, int limit) {
-		return jejuDAO5.adminBoardlist2(offset, limit);
-	}
-
-	// 관지자 전체 신고 페이징
-	@Override
-	public int getTotalCount6() {
-		return jejuDAO5.getTotalCount6();
-	}
-	
-	// 관지자 전체 신고 전체보기
-	@Override
-	public List<ReportVO> adminReportlist2(int offset, int limit) {
-		return jejuDAO5.adminReportlist2(offset, limit);
-	}
-
 	// 회원관리 페이징
 	@Override
-	public int getTotalCount7() {
-		return jejuDAO5.getTotalCount7();
+	public int getTotalCount7(String filter) {
+		return jejuDAO5.getTotalCount7(filter);
 	}
 
 	// 회원관리 전체보기
 	@Override
-	public List<UserVO> userList(int offset, int limit) {
-		return jejuDAO5.userList(offset, limit);
+	public List<UserVO> userList(int offset, int limit, String filter) {
+		return jejuDAO5.userList(offset, limit, filter);
 	}
 
 	// 관리자 상세보기
@@ -226,27 +223,41 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public AdminVO adminDetail(String a_idx) {
 		return jejuDAO5.adminDetail(a_idx);
 	}
-	
+
 	// 회원관리 삭제
 	@Override
 	public int userDelete(UserVO userVO) {
 		return jejuDAO5.userDelete(userVO);
 	}
-	
+
 	// 회원관리 복구
 	@Override
 	public int userRestore(UserVO userVO) {
 		return jejuDAO5.userRestore(userVO);
 	}
-
+	
+	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	@Override
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx) {
 		return jejuDAO5.myreviewlist(offset, limit, u_idx);
 	}
-
+	
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	@Override
 	public String myreviewtitle(String contentsid) {
 		return jejuDAO5.myreviewtitle(contentsid);
+	}
+
+	// 회원현황
+	@Override
+	public List<UserVO> userTotal() {
+		return jejuDAO5.userTotal();
+	}
+
+	// 일일 가입자 수
+	@Override
+	public List<UserVO> joinUser() {
+		return jejuDAO5.joinUser();
 	}
 
 }

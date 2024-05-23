@@ -7,23 +7,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원관리</title>
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link href="<c:url value="/resources/ygh-css/user_list.css"/>"
-	rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/user_list.css"/>" rel='stylesheet' />
 <!-- jQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" >
 	let msg = "${msg}";
 	if (msg !== "") {
 	    alert(msg);
 	}
 
  	// 회원상세정보
-  	function showUserDetail(u_idx) {
-		location.href="user_detail.do?u_idx="+u_idx;
+  	function showUserDetail(u_idx, cPage) {
+		location.href="user_detail.do?u_idx="+u_idx+"&cPage="+cPage;
  	}  
 	
 	// 계정 삭제
@@ -117,21 +117,55 @@
  	    });
  	});
 	
-	function out_user_list() {
-		location.href="out_user_list.do";
+	// 필터
+	function userFilter() {
+	    let allactive = document.getElementById('allactive').checked;
+	    let isActive = document.getElementById('active').checked;
+	    let isInactive = document.getElementById('inactive').checked;
+	    
+	    if (isActive) {
+		    location.href = "user_list.do?filter=active";
+		} else if (isInactive) {
+		    location.href = "user_list.do?filter=inactive";
+		} else if (allactive) {
+		    location.href = "user_list.do?filter=allactive";
+		}
+	    
+	    
+	    
 	}
-	
+
 	
 </script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-
+	
+	<div id="menubar">
+		<h1>나의 여행(관리자)</h1>
+		<table>
+			<tr>
+				<td><span class="material-symbols-outlined">finance</span><br><a href="dashboard.do">대시보드</a></td>
+				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
+				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
+				<td><span class="material-symbols-outlined">mark_chat_unread</span><br><a href="admin_list.do">미답변</a></td>
+				<td><span class="material-symbols-outlined">calendar_add_on</span><br><a href="admin_insert">일정 추가</a></td>
+				<c:if test="${adminVO.a_status == '1'}">
+					<td><span class="material-symbols-outlined">person_add</span><br><a href="admin_join.do">관리자 생성</a></td>
+				</c:if>
+			</tr>
+		</table>
+	</div>
+	
 	<div id="user_t">
 		<div id="user_h">
-			<button>전체회원</button>
-			<button>현재회원</button>
-			<button onclick="out_user_list()">탈퇴회원</button>
+			<h1>회원관리</h1>
+			<div class="filters">
+				<label><input type="radio" id="allactive" name="filter" value="allactive"> 전체회원</label>
+				<label><input type="radio" id="active" name="filter" value="active"> 활성회원</label>
+				<label><input type="radio" id="inactive" name="filter" value="inactive"> 탈퇴회원</label>
+				<button onclick="userFilter()"><span class="material-symbols-outlined">search</span></button>
+			</div>
 		</div>
 		<div>
 			<table>
@@ -165,7 +199,7 @@
 									<td class="${activeRow}">${k.out_regdate.substring(0,10)}</td>
 									<td class="${activeRow}">${k.u_report}</td>
 									<td class="${activeRow}">
-										<button class="user_button" onclick="showUserDetail(${k.u_idx})">상세정보</button>
+										<button class="user_button" onclick="showUserDetail('${k.u_idx}', '${paging.nowPage}')">상세정보</button>
 									</td>
 									<td><c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
 										<c:choose>
@@ -256,6 +290,7 @@
 						<div class="del_buttons">
 							<input type="hidden" value="${k.u_idx}" name="u_idx"> 
 							<input type="hidden" value="${adminVO.a_idx}" name="a_idx"> 
+							<input type="hidden" value="${adminVO.a_name}" name="a_name"> 
 							<input type="hidden" value="${paging.nowPage}" name="cPage"> 
 							<input class="del_button" type="reset" value="취소">
 							<button class="del_button" onclick="user_del_ok(this.form)">삭제</button>
@@ -290,6 +325,7 @@
 						<div class="restore_buttons">
 							<input type="hidden" value="${k.u_idx}" name="u_idx"> 
 							<input type="hidden" value="${adminVO.a_idx}" name="a_idx"> 
+							<input type="hidden" value="${adminVO.a_name}" name="a_name"> 
 							<input type="hidden" value="${paging.nowPage}" name="cPage"> 
 							<input class="restore_button2" type="reset" value="취소">
 							<button class="restore_button2" onclick="user_restore_ok(this.form)">복구</button>
