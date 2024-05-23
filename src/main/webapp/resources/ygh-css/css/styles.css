@@ -95,11 +95,6 @@
   --bs-highlight-bg: #fff3cd;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   :root {
@@ -371,7 +366,7 @@ optgroup,
 textarea {
   margin: 0;
   font-family: inherit;
-  font-size: inherit;
+  /* font-size: inherit; */
   line-height: inherit;
 }
 
