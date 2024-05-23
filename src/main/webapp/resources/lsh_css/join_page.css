@@ -134,3 +134,33 @@ input[type='date']::before {
 	background: #b6dedc;
 }
 
+.join_file_upload_btn {
+  max-width: 100%;
+  height: 45px;
+  background: lightgray;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  color: #777777;
+  padding-left: 15px;
+}
+
+.join_file_upload_btn:hover {
+    background: #b6dedc;
+  }
+
+.join_file_upload {
+  display: none;
+}
+
+#prev_img {
+	height: 150px;
+	width: 150px;
+	margin-bottom: 15px;
+	display: none;
+}
+
+
