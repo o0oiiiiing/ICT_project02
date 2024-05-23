@@ -9,8 +9,10 @@
 <meta charset="UTF-8">
 <title>DETAIL | Jeju_travel</title>
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
-<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="resources/common-image/favicon.ico"
+	type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico"
+	type="image/x-icon">
 <!-- 구글 아이콘 -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -109,12 +111,14 @@
 	    
 	});
 	
-	// q&a영역, review영역 버튼 클릭할 때 보이게 하기
+	// q&a영역, review영역, 신고영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
 	    var reviewButton = document.querySelector('.write_r_button');
+	    var reportButtons= document.querySelectorAll('.report-button');
 	    var qaWriteDiv = document.getElementById('qa_write');
 	    var reviewWriteDiv = document.getElementById('review_write');
+	    var reportWriteDiv = document.getElementById('report_write');
 	    var overlay = document.querySelector(".overlay")
 
 	    writeButton.addEventListener('click', function() {
@@ -162,7 +166,44 @@
 		        }
 	        })
 	    });
+	    
+	    reportButtons.forEach(function(button) {
+	    	button.addEventListener('click', function() {
+		    	// input type의 hidden의 value 바꾸기
+				var reIdx = this.nextElementSibling;
+		    	var uIdx = reIdx.nextElementSibling;
+		    	let reIdx_v = reIdx.value
+		    	let uIdx_v = uIdx.value
+				var realReIdx = document.querySelector('.reIdx');
+				var mIdx = document.querySelector('.mIdx');
+				realReIdx.value = reIdx_v;
+				mIdx.value = uIdx_v;
+				console.log(realReIdx.value)
+				console.log(mIdx.value)
+		        // 요소의 display를 토글
+		        if ("${userVO}" == "") {
+					alert("로그인 후 이용 가능합니다.")
+					location.href="login_go.do"
+					return 
+				} else {
+			        if (reportWriteDiv.style.display === 'block') {
+			        	reportWriteDiv.style.display = 'none';
+			        	overlay.style.display = 'none';
+			        } else {
+			        	reportWriteDiv.style.display = 'block';
+			        	overlay.style.display = 'block';
+			        }
+				}
+		        overlay.addEventListener('click', function() {
+		        	if (reportWriteDiv.style.display === 'block') {
+		        		reportWriteDiv.style.display = 'none';
+			        	overlay.style.display = 'none';
+			        }
+		        })
+		    });
+	    });
 	});
+	
 </script>
 </head>
 <body>
@@ -174,16 +215,16 @@
 					<a href="home" class="a_tag">제주여행</a>
 				</h1>
 			</li>
-			<li class="nav_list"><a href="category_page.do?vi_value=관광지&option=option1"
-				class="a_tag">관광지</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=음식점&option=option1"
-				class="a_tag">음식점</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=숙박&option=option1"
-				class="a_tag">숙박</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=쇼핑&option=option1"
-				class="a_tag">쇼핑</a></li>
-			<li class="nav_list"><a href="category_page.do?vi_value=축제/행사&option=option1"
-				class="a_tag">축제/행사</a></li>
+			<li class="nav_list"><a
+				href="category_page.do?vi_value=관광지&option=option1" class="a_tag">관광지</a></li>
+			<li class="nav_list"><a
+				href="category_page.do?vi_value=음식점&option=option1" class="a_tag">음식점</a></li>
+			<li class="nav_list"><a
+				href="category_page.do?vi_value=숙박&option=option1" class="a_tag">숙박</a></li>
+			<li class="nav_list"><a
+				href="category_page.do?vi_value=쇼핑&option=option1" class="a_tag">쇼핑</a></li>
+			<li class="nav_list"><a
+				href="category_page.do?vi_value=축제/행사&option=option1" class="a_tag">축제/행사</a></li>
 			<li class="nav_list"><a href="myTripPlan" class="a_tag">나의
 					여행</a></li>
 		</ul>
@@ -202,7 +243,7 @@
 							</div>
 						</form>
 					</li>
-					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>${userVO.u_name}님환영합니다.</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
@@ -431,14 +472,22 @@
 			<!-- 내용 -->
 			<div class="review_title__section">
 				<p class="qa_title">
-					리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점
+					<c:choose>
+						<c:when test="${reviewAvg != null}">
+							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : ${reviewAvg}
+						</c:when>
+						<c:otherwise>
+							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
+						</c:otherwise>
+					</c:choose>
 				</p>
 				<input class="write_r_button" type="button" value="리뷰작성">
 			</div>
 			<hr class="hr">
 			<c:choose>
 				<c:when test="${empty reviewList}">
-					<p style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
+					<p
+						style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
 						존재하지 않습니다.</p>
 					<hr class="hr">
 				</c:when>
@@ -446,7 +495,8 @@
 					<c:forEach var="k" items="${reviewList}">
 						<div class="review-content">
 							<div class="review-content__left">
-								<img style="width: 130px; height: 130px; border-radius: 50%;" alt="프로필사진" src="resources/upload/${k.u_profile_img}">
+								<img style="width: 130px; height: 130px; border-radius: 50%;"
+									alt="프로필사진" src="resources/upload/${k.u_profile_img}">
 								<p>${k.u_name}</p>
 								<p>${k.re_regdate.substring(0,10)}</p>
 								<c:choose>
@@ -470,15 +520,31 @@
 							<div class="review-content__right">
 								<c:choose>
 									<c:when test="${empty k.imageList}">
-										<div class="review-content__text" style="height: 240px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div><p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></div>
+										<div class="review-content__text" style="height: 240px;">
+											<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
+											<p class="report">
+												<span class="material-symbols-outlined declaration">notifications</span>
+												<input class="report-button" type="button" value="신고하기">
+												<input type="hidden" class="re_idx" value="${k.re_idx}">
+												<input type="hidden" class="u_idx" value="${k.u_idx}">
+											</p>
+										</div>
 									</c:when>
 									<c:otherwise>
-										<div class="review-content__text" style="height: 100px;"><div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div></div>
+										<div class="review-content__text" style="height: 100px;">
+											<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
+										</div>
 										<div class="images">
 											<c:forEach var="j" items="${k.imageList}">
-												<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${j.pic_file}">
+												<img style="width: 150px; height: 150px;" alt="사진"
+													src="resources/upload/${j.pic_file}">
 											</c:forEach>
-											<p class="report"><span class="material-symbols-outlined declaration">notifications</span><span>신고하기</span></p>
+											<p class="report">
+												<span class="material-symbols-outlined declaration">notifications</span>
+												<input class="report-button" type="button" value="신고하기">
+												<input type="hidden" class="re_idx" value="${k.re_idx}">
+												<input type="hidden" class="u_idx" value="${k.u_idx}">
+											</p>
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -571,51 +637,61 @@
 	</form>
 
 	<!-- 리뷰 작성하는 영역 -->
-	<form id="review_write" method="post" action="reviewWrite" enctype="multipart/form-data">
+	<form id="review_write" method="post" action="reviewWrite"
+		enctype="multipart/form-data">
 		<div class="qa_write__container" style="height: 510px;">
 			<p class="qa_wrtie__title">리뷰 작성</p>
-			<p style="font-family: 'NanumSquare'; text-align: center;">별점을 입력해주세요.</p>
+			<p style="font-family: 'NanumSquare'; text-align: center;">별점을
+				입력해주세요.</p>
 			<div class="qa_write__content">
 				<fieldset>
-					<input type="radio" name="re_grade" value="5" id="rate1"><label for="rate1">★</label>
+					<input type="radio" name="re_grade" value="5" id="rate1"><label for="rate1">★</label> 
 					<input type="radio" name="re_grade" value="4" id="rate2"><label for="rate2">★</label>
 					<input type="radio" name="re_grade" value="3" id="rate3"><label for="rate3">★</label>
 					<input type="radio" name="re_grade" value="2" id="rate4"><label for="rate4">★</label>
 					<input type="radio" name="re_grade" value="1" id="rate5"><label for="rate5">★</label>
 				</fieldset>
+				<br> <input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
+				<p id="fileCountMessage"
+					style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p>
 				<br>
-				<input id="review_images" type="file" name="images" multiple style="display: block; margin-left: 21px;">
-				<p id="fileCountMessage" style="color: red; margin: 5px 0 0 21px; font-size: 13px;"></p> 
-				<br>
-				<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
+				<textarea name="re_content" id="review-content"
+					style="width: 600px; height: 200px; display: block; margin: 0 auto;"
+					placeholder="내용을 입력해주세요."></textarea>
 				<div id="charCount">0/350</div>
 			</div>
 			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
-					class="review_write__button" type="reset" value="취소">
-				<button type="button" class="review_write__button"
-					onclick="reviewWrite(this.form)">등록</button>
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx">
+				<input class="review_write__button" type="reset" value="취소">
+				<button type="button" class="review_write__button" onclick="reviewWrite(this.form)">등록</button>
 			</div>
 		</div>
 	</form>
-	
+
 	<!-- 신고 작성하는 영역 -->
-	<%-- <form id="declaration_write" method="post" action="declarationWrite">
-		<div class="qa_write__container" style="height: 510px;">
-			<p class="qa_wrtie__title">리뷰 작성</p>
-			<p style="font-family: 'NanumSquare'; text-align: center;">별점을 입력해주세요.</p>
+	<form id="report_write" method="post" action="reportWrite">
+		<div class="qa_write__container" style="height: 430px;">
+			<p class="qa_wrtie__title">신고하기</p>
 			<div class="qa_write__content">
-				<textarea name="re_content" id="review-content" style="width: 600px; height: 200px; display: block; margin: 0 auto;" placeholder="내용을 입력해주세요."></textarea>
-				<div id="charCount">0/350</div>
+				<p>
+					제목 : <input type="text" name="report_title" id="report_title" placeholder="제목을 입력해주세요.">
+				</p>
+				<br>
+				<textarea name="report_content" id="report_content"
+					style="width: 600px; height: 200px; display: block; margin: 0 auto;"
+					placeholder="내용을 입력해주세요."></textarea>
+				<div id="charCount2">0/500</div>
 			</div>
 			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
-					class="review_write__button" type="reset" value="취소">
-				<button type="button" class="review_write__button"
-					onclick="reviewWrite(this.form)">등록</button>
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx">
+				<input type="hidden" value="${userVO.u_name}" name="report_writer">
+				<input type="hidden" value="" name="re_idx" class="reIdx">
+				<input type="hidden" value="" name="m_idx" class="mIdx">
+				<input class="review_write__button" type="reset" value="취소">
+				<button type="button" class="review_write__button" onclick="reportWrite(this.form)">등록</button>
 			</div>
 		</div>
-	</form> --%>
+	</form>
 
 	<div class="overlay"></div>
 	<script type="text/javascript">
@@ -735,6 +811,23 @@
 	    }
 	}
     
+    // 신고 내용 입력안할 시에 alert 뜨기
+    function reportWrite(f) {
+    	var reportContent = document.getElementById('report_content').value.trim();
+    	var reportTitle = document.getElementById('report_title').value.trim();
+	    
+	    if (!reportTitle) {
+	    	alert("제목을 입력해 주세요.");
+            return false;
+	    } else if (!reportContent) {
+	    	alert("신고 내용을 작성해주세요.");
+	        return false;
+		} else {
+	    	f.action = "reportWrite?contentsid=${placeDetail.contentsid}";
+			f.submit();
+	    }
+	}
+    
     // review 사진 5장으로 제한
     document.getElementById('review_images').addEventListener('change', function(event) {
         const input = event.target;
@@ -748,12 +841,17 @@
         }
     });
     
-    // 리뷰 글자 수 제한하기
+    // 리뷰, 신고 글자 수 제한하기
     document.addEventListener('DOMContentLoaded', function() {
     	const form = document.getElementById('review_write');
+    	const reportForm = document.getElementById('report_write');
         const textarea = document.getElementById('review-content');
+        const reportTextarea = document.getElementById('report_content');
         const charCount = document.getElementById('charCount');
+        const charCount2 = document.getElementById('charCount2');
         const maxLength = 350; // 최대 문자 수 제한
+        const maxLength2 = 500; // 최대 문자 수 제한
+        
         function updateCharCount() {
             const text = textarea.value;
             if (text.length > maxLength) {
@@ -767,6 +865,21 @@
         form.addEventListener('reset', function() {
             setTimeout(updateCharCount, 0); // reset 이벤트 후에 문자 수를 업데이트
         });
+        
+        function updateCharCount2() {
+            const text = reportTextarea.value;
+            if (text.length > maxLength2) {
+            	reportTextarea.value = text.substring(0, maxLength2); // 최대 문자 수를 초과하면 자르기
+            }
+            charCount2.textContent = reportTextarea.value.length + "/" + maxLength2;
+        }
+
+        reportTextarea.addEventListener('input', updateCharCount2);
+
+        form.addEventListener('reset', function() {
+            setTimeout(updateCharCount2, 0); // reset 이벤트 후에 문자 수를 업데이트
+        });
+        
     });
 
 </script>

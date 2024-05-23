@@ -28,6 +28,7 @@ import com.ict.jeju.pdh.dao.QaPaging;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
+import com.ict.jeju.pdh.dao.ReportVO;
 import com.ict.jeju.pdh.dao.ReviewPaging;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.service.PlaceListService;
@@ -55,32 +56,32 @@ public class PlaceListController {
 		ModelAndView mv = new ModelAndView("pdh-view/home");
 		List<PlaceListVO> popularList = placeListService.popularList();
 		List<PlaceListVO> allList = placeListService.allList();
-		if (popularList != null && allList!=null) {
-            Random random = new Random();
-            
-            // 관광지 목록과 음식점 목록을 따로 분리
-            List<PlaceListVO> touristSpots = new ArrayList<>();
-            List<PlaceListVO> restaurants = new ArrayList<>();
-            for (PlaceListVO place : allList) {
-                if ("관광지".equals(place.getVi_value())) {
-                    touristSpots.add(place);
-                } else if ("음식점".equals(place.getVi_value())) {
-                    restaurants.add(place);
-                }
-            }
-            
-            PlaceListVO randomTour = touristSpots.get(random.nextInt(touristSpots.size()));
-            PlaceListVO randomRestaurant = restaurants.get(random.nextInt(restaurants.size()));
+		if (popularList != null && allList != null) {
+			Random random = new Random();
 
-            mv.addObject("popularList", popularList);
-            mv.addObject("allList", allList);
-            mv.addObject("randomTour", randomTour);
-            mv.addObject("randomRestaurant", randomRestaurant);
+			// 관광지 목록과 음식점 목록을 따로 분리
+			List<PlaceListVO> touristSpots = new ArrayList<>();
+			List<PlaceListVO> restaurants = new ArrayList<>();
+			for (PlaceListVO place : allList) {
+				if ("관광지".equals(place.getVi_value())) {
+					touristSpots.add(place);
+				} else if ("음식점".equals(place.getVi_value())) {
+					restaurants.add(place);
+				}
+			}
 
-            return mv;
-        }
+			PlaceListVO randomTour = touristSpots.get(random.nextInt(touristSpots.size()));
+			PlaceListVO randomRestaurant = restaurants.get(random.nextInt(restaurants.size()));
 
-        return null;
+			mv.addObject("popularList", popularList);
+			mv.addObject("allList", allList);
+			mv.addObject("randomTour", randomTour);
+			mv.addObject("randomRestaurant", randomRestaurant);
+
+			return mv;
+		}
+
+		return null;
 	}
 
 	@RequestMapping("detail")
@@ -196,17 +197,21 @@ public class PlaceListController {
 
 		// 리뷰 리스트 가져오기
 		List<ReviewVO> reviewList = placeListService.reviewList(rPagingVO);
-		
-		
+
 		if (placeDetail != null) {
 			mv.addObject("placeDetail", placeDetail);
 			mv.addObject("likeNum", likeNum);
 			mv.addObject("qaNum", qaNum);
 			mv.addObject("reviewNum", reviewNum);
 			mv.addObject("qaList", qaList);
-			mv.addObject("reviewList",reviewList);
+			mv.addObject("reviewList", reviewList);
 			mv.addObject("qaPaging", qaPaging);
 			mv.addObject("rPaging", rPaging);
+			if (reviewList != null) {
+				// 평균 별점
+				double reviewAvg = (int) (placeListService.reviewAvg(contentsid) * 10) / 10.0;
+				mv.addObject("reviewAvg", reviewAvg);
+			}
 			return mv;
 		}
 		return null;
@@ -244,7 +249,7 @@ public class PlaceListController {
 					UUID uuid = UUID.randomUUID();
 					String f_name = uuid.toString() + "_" + k.getOriginalFilename();
 					imagesVO.setPic_file(f_name);
-					
+
 					// 파일 업로드(복사)
 					byte[] in = k.getBytes();
 					File out = new File(path, f_name);
@@ -255,6 +260,13 @@ public class PlaceListController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return new ModelAndView("redirect:detail");
+	}
+
+	@PostMapping("reportWrite")
+	public ModelAndView reportWrite(ReportVO reportVO, @ModelAttribute("contentsid") String contentsid) {
+		// 신고 작성 삽입
+		placeListService.reportWrite(reportVO);
 		return new ModelAndView("redirect:detail");
 	}
 

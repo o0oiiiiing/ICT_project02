@@ -10,6 +10,7 @@ import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
+import com.ict.jeju.pdh.dao.ReportVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 
 @Service
@@ -94,6 +95,18 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public List<ReviewVO> reviewList(PagingVO rPagingVO) {
 		return placeListDAO.reviewList(rPagingVO);
+	}
+	
+	// 신고하기
+	@Override
+	public int reportWrite(ReportVO reportVO) {
+		return placeListDAO.reportWrite(reportVO);
+	}
+	
+	// 평균 별점 가져오기
+	@Override
+	public double reviewAvg(String contentsid) {
+		return placeListDAO.reviewAvg(contentsid);
 	}
 
 	
