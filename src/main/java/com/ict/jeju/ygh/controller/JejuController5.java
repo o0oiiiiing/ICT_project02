@@ -19,6 +19,7 @@ import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
@@ -36,6 +37,7 @@ public class JejuController5 {
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
+	private UserVO userVO;
 
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
@@ -798,9 +800,8 @@ public class JejuController5 {
 		UserVO myvo = (UserVO) session.getAttribute("userVO");
 
 		// 페이징
-		int count3 = jejuService5.getTotalCount3(myvo.getU_idx());
-		System.out.println(count3);
-		paging.setTotalRecord(count3);
+		int count10 = jejuService5.getTotalCount10(myvo.getU_idx());
+		paging.setTotalRecord(count10);
 
 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
 			paging.setTotalPage(1);
@@ -831,6 +832,8 @@ public class JejuController5 {
 		// DB
  		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
  		
+ 		// user review count 가져오기 위함
+ 		List<UserVO4> review_count = jejuService5.myreviewCount(myvo.getU_idx());
  		
  		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
  		String contentsid = "";
@@ -841,12 +844,27 @@ public class JejuController5 {
  			title = jejuService5.myreviewtitle(contentsid);
  			k.setVi_title(title);
  		}
- 		if (myreview_list != null) {
+ 		
+ 		if (myreview_list != null && review_count != null) {
  			mv.addObject("myreview_list", myreview_list);
  			mv.addObject("paging", paging);
+ 			mv.addObject("review_count" , review_count);
  			return mv;
  		}
  		return new ModelAndView("ygh-view/error");
  	}
+	
+	// 나의 리뷰 디테일 페이지
+		@RequestMapping("myreview_detail.do")
+		public ModelAndView myreview_detail(@ModelAttribute("cPage") String cPage, String u_idx) {
+			ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
+			
+			List<MyreviewVO> myreview_detail_list = jejuService5.myreview_detail_list(u_idx);
+			if (myreview_detail_list != null) {
+				mv.addObject("myreview_detail_list", myreview_detail_list);
+				return mv;
+			}
+			return new ModelAndView("ygh-view/error");
+		}
 
 }

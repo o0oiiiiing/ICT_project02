@@ -13,8 +13,8 @@ public interface CategoryService {
 	//String option_select
 	List<CategoryVO> getBoardList(int offset, int numPerPage, String vi_value , String option);
 
-	public int getTotalCount2(String keyword);
+	public int getTotalCount2(String keyword );
 	
-	List<CategoryVO> searchList(int offset , int numPerPage, String keyword);
+	List<CategoryVO> searchList(int offset , int numPerPage, String keyword , String option);
 
 }

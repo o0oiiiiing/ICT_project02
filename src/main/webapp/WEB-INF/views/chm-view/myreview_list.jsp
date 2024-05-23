@@ -16,14 +16,15 @@
 <%@include file="../common/header.jsp"%>
 	<div id="board_t">
 		<div id="board_h">
-			<h1>내가 쓴 리뷰</h1>
+			<c:forEach var="k" items="${review_count}" varStatus="vs">
+			<h1>내가 쓴 리뷰</h1><span> 총 :&nbsp<mark>${k.review_count}</mark> 건</span>
+			</c:forEach>
 		</div>
 		<input type="hidden" value="${vi_value}" id="v_title" class="v_value">
 		<form method="post">
 		<table>
 			<thead>
 				<tr>
-					<th class="no">번호</th>
 					<th class="subject">카테고리</th>
 					<th class="writer">리뷰 제목</th>
 					<th class="reg">날짜</th>
@@ -33,6 +34,7 @@
 			<tbody>
 				<c:choose>
 					<c:when test="${empty myreview_list}">
+					 
 						<tr>
 							<td colspan="6"><h3>내가 작성한 리뷰가 존재하지 않습니다.</h3></td>
 						</tr>
@@ -40,14 +42,13 @@
 					<c:otherwise>
 						<c:forEach var="k" items="${myreview_list}" varStatus="vs">
 							<tr>
-								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage + vs.index)}</td>
 								<td>${k.vi_title}</td>
 								<c:choose>
     								<c:when test="${fn:length(k.re_content) >= 8}">
-    									<td><span>${k.re_content.substring(0, 8)}...</span></td>
+    									<td><a href="myreview_detail.do?&u_idx=${u_idx}"><span>${k.re_content.substring(0, 8)}...</span></a></td>
     								</c:when>
 								    <c:otherwise>
-								        <td>${k.re_content}</td>
+								        <td><a href="myreview_detail.do?&u_idx=${u_idx}">${k.re_content}</a></td>
 								    </c:otherwise>
 								</c:choose>
 								<td>${k.re_regdate.substring(0,10)}</td>

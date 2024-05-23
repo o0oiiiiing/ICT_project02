@@ -58,12 +58,13 @@ public class CategoryDAO {
 		return -1;
 	}
 	
-	public List<CategoryVO> searchList(int offset , int limit ,String keyword) {
+	public List<CategoryVO> searchList(int offset , int limit ,String keyword , String option) {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("offset", offset);
 			map.put("limit", limit);
 			map.put("keyword", keyword);
+			map.put("option", option);
 			return sqlsessionTemplate.selectList("category.searchList", map);
 		} catch (Exception e) {
 			System.out.println(e);

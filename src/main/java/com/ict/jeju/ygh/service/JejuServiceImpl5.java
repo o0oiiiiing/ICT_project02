@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
+import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.JejuDAO5;
@@ -247,7 +248,32 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public String myreviewtitle(String contentsid) {
 		return jejuDAO5.myreviewtitle(contentsid);
 	}
-
+	
+	// 나의 리뷰 count
+	@Override
+	public List<UserVO4> myreviewCount(String u_idx) {
+		return jejuDAO5.myreviewCount(u_idx);
+	}
+	
+	// 나의 리뷰 디테일 페이지
+	@Override
+	public UserVO myreview_detail(String u_idx) {
+		return jejuDAO5.myreview_detail(u_idx);
+	}
+	
+	// 나의 리뷰 디테일 페이지 갈떄 가져갈 리뷰 리스트
+	@Override
+	public List<MyreviewVO> myreview_detail_list(String u_idx) {
+		return jejuDAO5.myreview_detail_list(u_idx);
+	}
+	
+	// 나의 리뷰 페이징 카운트
+	@Override
+	public int getTotalCount10(String u_idx) {
+		return jejuDAO5.getTotalCount10(u_idx);
+	}
+	
+	
 	// 회원현황
 	@Override
 	public List<UserVO> userTotal() {
@@ -259,5 +285,7 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public List<UserVO> joinUser() {
 		return jejuDAO5.joinUser();
 	}
+
+	
 
 }

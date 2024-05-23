@@ -96,7 +96,7 @@
 		var mapOption = {
 			center : new kakao.maps.LatLng(33.36132, 126.54195), // 지도의 중심좌표
 			// 지도의 확대 레벨
-			level : 10
+			level : 9
 		};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
