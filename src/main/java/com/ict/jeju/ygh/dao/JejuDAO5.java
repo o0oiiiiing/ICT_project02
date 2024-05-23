@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.wyy.dao.UserVO4;
 
@@ -40,7 +41,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 관리자 답변 Q&A 페이징
 	public int getTotalCount8() {
 		try {
@@ -50,7 +51,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
 	// 관리자 답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList2(int offset, int limit) {
 		try {
@@ -96,7 +97,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 관리자 답변 신고 페이징
 	public int getTotalCount9() {
 		try {
@@ -106,7 +107,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
 	// 관리자 답변 신고 전체보기
 	public List<ReportVO> adminReportList2(int offset, int limit) {
 		try {
@@ -159,6 +160,16 @@ public class JejuDAO5 {
 		return null;
 	}
 
+	// 신고 리뷰 가져오기
+	public ReviewVO reviewDetail(String re_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.review_detail", re_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo) {
 		try {
@@ -203,6 +214,16 @@ public class JejuDAO5 {
 	public int replyUpdate(String report_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.reply_update", report_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
+	// 신고 답글 작성
+	public int userReport(ReplyVO repvo) {
+		try {
+			return sqlSessionTemplate.update("Board_table.user_report", repvo);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -414,7 +435,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 contentsid ( contentsid 를 이용해서 vi_title 값 가져오기위함)
 	public String myreviewtitle(String contentsid) {
 		try {
@@ -424,7 +445,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 count
 	public List<UserVO4> myreviewCount(String u_idx) {
 		try {
@@ -434,7 +455,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 페이징 카운트
 	public int getTotalCount10(String u_idx) {
 		try {
@@ -476,11 +497,11 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 리스트 디테일 페이지에 가져갈 리뷰 리스트
 	public List<MyreviewVO> myreview_detail_list(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list",u_idx);
+			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

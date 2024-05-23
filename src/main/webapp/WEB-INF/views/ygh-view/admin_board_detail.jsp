@@ -110,13 +110,8 @@ function comment_update_ok(f) {
 <form method="post">
 	<div id="comment_box" style="display: none;" >
 		<table>
-
 			<tr>
 				<th colspan="2" style="text-align: left;">답변하기</th>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="com_writer"></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -127,6 +122,7 @@ function comment_update_ok(f) {
 	</div>
 	<div id="comment_btn" style="display: none;">
 		<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
+		<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
 		<input type="hidden" name="cPage" value="${cPage}">
 		<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" />
 	</div>
@@ -163,6 +159,7 @@ function comment_update_ok(f) {
 				<input type="button" value="답글수정" onclick="comment_update(this.form)"> 
 				<input type="hidden" name="com_idx" value="${k.com_idx}"> 
 				<input type="hidden" name="bo_idx" value="${k.bo_idx}">
+				<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
 				<input type="hidden" name="cPage" value="${cPage}">
 			</div>
 		</form>
@@ -181,10 +178,6 @@ function comment_update_ok(f) {
 				<th colspan="2" style="text-align: left;">답변하기</th>
 			</tr>
 			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="com_writer" value="${k.com_writer}"></td>
-			</tr>
-			<tr>
 				<th>내용</th>
 				<td><textarea rows="10" cols="100" name="com_content">${k.com_content}</textarea>
 				</td>
@@ -194,6 +187,7 @@ function comment_update_ok(f) {
 	</div>
 	<div id="comment_btn3" style="display: none;">
 		<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
+		<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
 		<input type="hidden" name="cPage" value="${cPage}">
 		<input type="button" value="수정" onclick="comment_update_ok(this.form)" />
 	</div>

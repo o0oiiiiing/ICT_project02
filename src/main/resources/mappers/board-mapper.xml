@@ -78,8 +78,8 @@
 	
 	<!-- Q&A 답글 작성 -->
 	<insert id="comment_insert" parameterType="comvo">
-		insert into Comment_table(com_writer, com_title, com_content, com_regdate, com_status, bo_idx)
-		values(#{com_writer}, #{com_title}, #{com_content}, sysdate(), 1, #{bo_idx})
+		insert into Comment_table(bo_idx, com_writer, com_content, com_regdate)
+		values(#{bo_idx}, #{a_name}, #{com_content}, sysdate())
 	</insert>
 	
 	<!-- Q&A 답글 작성 -->
@@ -92,7 +92,7 @@
 	<!-- Q&A 답글 수정 -->
 	<update id="comment_update_ok" parameterType="String">
 		update Comment_table
-		set com_writer = #{com_writer}, com_content = #{com_content}, com_regdate=sysdate()
+		set com_writer = #{a_name}, com_content = #{com_content}, com_regdate=sysdate()
 		where bo_idx = #{bo_idx}
 	</update>
 	
@@ -101,10 +101,17 @@
 		select * from Reply_table where report_idx = #{report_idx}
 	</select>
 	
+	<!-- 신고 리뷰 가져오기 -->
+	<select id="review_detail" resultType="ReviewVO" parameterType="String">
+		select * from Review_table where re_idx = #{re_idx}
+	</select>
+	
+	
+	
 	<!-- 신고 답글 작성 -->
 	<insert id="reply_insert" parameterType="repvo">
-		insert into Reply_table(report_idx, rep_writer, rep_title, rep_content, rep_regdate, rep_status)
-		values(#{report_idx}, #{rep_writer}, #{rep_title}, #{rep_content}, sysdate(), 1)
+		insert into Reply_table(report_idx, rep_writer, rep_content, rep_regdate)
+		values(#{report_idx}, #{a_name}, #{rep_content}, sysdate())
 	</insert>
 	
 	<!-- 신고 답글 작성 -->
@@ -114,10 +121,18 @@
 		where report_idx = #{report_idx}
 	</update>
 	
+	<!-- 신고 답글 작성 -->
+	<update id="user_report" parameterType="repvo">
+		update User_table
+		set u_report = u_report +1
+		where u_idx = #{m_idx}
+	</update>
+	
+	
 	<!-- 신고 답글 수정 -->
 	<update id="reply_update_ok" parameterType="String">
 		update Reply_table
-		set rep_writer = #{rep_writer}, rep_content = #{rep_content}, rep_regdate = sysdate()
+		set rep_writer = #{a_name}, rep_content = #{rep_content}, rep_regdate = sysdate()
 		where report_idx = #{report_idx}
 	</update>
 	
@@ -152,8 +167,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(report_idx),0)+1) as groups FROM Report_table
         </selectKey>
-		insert into Report_table(report_title, report_content, report_writer, report_regdate, step, u_idx)
-		values(#{report_title}, #{report_content}, #{u_name}, sysdate(), #{step}, #{u_idx})
+		insert into Report_table(report_title, report_content, report_writer, report_regdate, u_idx)
+		values(#{report_title}, #{report_content}, #{u_name}, sysdate(), #{u_idx})
 	</insert>
 	
 	<!-- 회원정보 상세보기 -->

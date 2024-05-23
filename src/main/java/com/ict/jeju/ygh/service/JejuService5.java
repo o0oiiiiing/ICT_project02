@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -14,15 +15,15 @@ import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
 public interface JejuService5 {
-	// 관리자 미답변 Q&A 페이징 
+	// 관리자 미답변 Q&A 페이징
 	public int getTotalCount();
 
 	// 관리자 미답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList(int offset, int limit);
-	
+
 	// 관리자 답변 Q&A 페이징
 	public int getTotalCount8();
-	
+
 	// 관리자 답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList2(int offset, int limit);
 
@@ -34,10 +35,10 @@ public interface JejuService5 {
 
 	// 관리자 미답변 신고 전체보기
 	public List<ReportVO> adminReportList(int offset, int limit);
-	
+
 	// 관리자 답변 신고 페이징
 	public int getTotalCount9();
-	
+
 	// 관리자 답변 신고 전체보기
 	public List<ReportVO> adminReportList2(int offset, int limit);
 
@@ -51,6 +52,9 @@ public interface JejuService5 {
 
 	// 신고 답글 가져오기
 	public List<ReplyVO> replyList(String report_idx);
+
+	// 신고 리뷰 가져오기
+	public ReviewVO reviewDetail(String re_idx);
 
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo);
@@ -66,6 +70,9 @@ public interface JejuService5 {
 
 	// 신고 답글 작성
 	public int replyUpdate(String report_idx);
+
+	// 신고 답글 작성
+	public int userReport(ReplyVO repvo);
 
 	// 신고 답글 수정
 	public int replyUpdateOk(ReplyVO repvo);
@@ -120,32 +127,29 @@ public interface JejuService5 {
 
 	// 회원관리 복구
 	public int userRestore(UserVO userVO);
-	
+
 	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
-    
+
 	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
 	public String myreviewtitle(String contentsid);
-	
+
 	// 나의 리뷰 카운터
 	public List<UserVO4> myreviewCount(String u_idx);
-	
-	// 나의 리뷰 페이징 카운트 
+
+	// 나의 리뷰 페이징 카운트
 	public int getTotalCount10(String u_idx);
 
 	// 나의 리뷰 디테일
 	public UserVO myreview_detail(String u_idx);
-	
+
 	// 나의 리뷰 디테일에 가져가는 나의 리뷰 리스트
 	public List<MyreviewVO> myreview_detail_list(String u_idx);
-	
+
 	// 회원현황
 	public List<UserVO> userTotal();
 
 	// 일일 가입자 수
 	public List<UserVO> joinUser();
-
-
-	
 
 }
