@@ -19,6 +19,33 @@
 			<h1 class="footer-title">제주여행</h1>
 			<ul class="footer">
 				<li>
+					JejuTravel
+				</li>
+				<li>|</li>
+				<li>
+					대표자 : 김제주
+				</li>
+				<li>|</li>
+				<li>
+					사업자 등록번호 : 123-45-67890
+				</li>
+			</ul>
+			<ul class="footer">
+				<li>
+					<strong>Tel : 02-123-4567</strong>
+				</li>
+				<li>|</li>
+				<li>
+					Fax : 02-765-4321
+				</li>
+				<li>|</li>
+				<li>
+					개인정보관리 책임자 : 이제주
+				</li>
+			</ul>
+					<p class="footer">Address :  서울특별시 마포구 백범로 23, 3층 (신수동, 케이터틀)</p>
+			<ul class="footer">
+				<li>
 					<a href="privacyPolicy">개인정보 취급방침</a>
 				</li>
 				<li>|</li>
@@ -26,9 +53,7 @@
 					<a href="stipulation">이용약관</a>
 				</li>
 				<li>|</li>
-				<li>위치기반서비스 이용약관</li>
-				<li>|</li>
-				<li>틀린정보신고</li>
+				<li>JejuTravel. All rights reserved.</li>
 			</ul>
 		</div>
 	</footer>

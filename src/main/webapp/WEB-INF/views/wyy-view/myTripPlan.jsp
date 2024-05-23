@@ -287,11 +287,10 @@
 		<hr>
 		</div>
 		<div class="myTrip_profile">
-		<!-- 이미지 db꺼 가져오기 구현예정 -->
-			<img src="resources/common-image/profile.png" width="150px"
-				height="150px" style="margin: auto 30px;">
-			<div class="myTrip_profile_content">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
+					<img src="/resources/upload/${k.u_profile_img}" width="150px"
+						height="150px" style="margin: auto 30px;" class="profile-image">
+			<div class="myTrip_profile_content">
 					<p>${k.u_name} 님</p>
 					<p>나의 리뷰 <a href="myreview_list.do?">${k.review_count}</a></p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
@@ -299,11 +298,8 @@
 					<!-- 경화 -->
 					<button onclick="board_list()">문의내역</button>
 					<button onclick="report_list()">신고내역</button>
-					
-					
-					
-				</c:forEach>
 			</div>
+				</c:forEach>
 		</div>
 		<div class="icon-info" style="text-align: left;">
 			관광지 : <img src="https://cdn-icons-png.flaticon.com/512/3420/3420238.png" style="width:30px; height: 30px;">&nbsp;&nbsp;

@@ -43,22 +43,21 @@
 	padding: 30px;
     font-size: 26px;
 }
-.myTrip_profile {
+ .myTrip_profile {
 	width: 50%;
-	display: flex;
+	 display: flex;
 	margin: 30px auto;
 	background-color: #d9d9d9;
 }
-
 .myTrip_profile_content {
 	text-align: left;
-	margin-left: 40px;
 	padding: 50px;
 }
 
 .myTrip_profile_content p {
     margin-bottom: 10px;
-}
+} 
+
 
 #map {
 	width: 100%;
