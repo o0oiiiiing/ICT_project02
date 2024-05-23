@@ -140,4 +140,24 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
+	
+	// 신고하기
+	public int reportWrite(ReportVO reportVO) {
+		try {
+			return sqlSessionTemplate.insert("place.reportWrite", reportVO);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	// 평균 별점 가져오기
+	public double reviewAvg(String contentsid) {
+		try {
+			return sqlSessionTemplate.selectOne("place.reviewAvg", contentsid);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }
