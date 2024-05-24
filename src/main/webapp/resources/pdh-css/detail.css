@@ -439,5 +439,10 @@
 }
 
 .report-button:hover {
+	cursor: pointer;
 	color: pink;
+}
+
+.favorite {
+	cursor: pointer;
 }

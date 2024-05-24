@@ -1,7 +1,15 @@
 package com.ict.jeju.ygh.dao;
 
 public class CommentVO {
-	private String com_idx, com_title, com_content, com_regdate, com_status, com_writer, bo_idx;
+	private String com_idx, com_title, com_content, com_regdate, com_status, com_writer, bo_idx, a_name;
+
+	public String getA_name() {
+		return a_name;
+	}
+
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 
 	public String getBo_idx() {
 		return bo_idx;
@@ -58,5 +66,5 @@ public class CommentVO {
 	public void setCom_status(String com_status) {
 		this.com_status = com_status;
 	}
-	
+
 }

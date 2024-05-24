@@ -1,7 +1,36 @@
 package com.ict.jeju.pdh.dao;
 
+import java.util.List;
+
 public class QaVO {
 	private String bo_idx, u_idx, contentsid, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, bo_regdate, disclosure, u_name;
+	private String offset, limit;
+	List<CommentVO> comments;
+	
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+
+	public String getLimit() {
+		return limit;
+	}
+
+	public void setLimit(String limit) {
+		this.limit = limit;
+	}
+
+
+	public List<CommentVO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentVO> comments) {
+		this.comments = comments;
+	}
 
 	public String getU_name() {
 		return u_name;

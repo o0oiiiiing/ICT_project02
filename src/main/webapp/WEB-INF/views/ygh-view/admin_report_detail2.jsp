@@ -11,8 +11,8 @@
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- summer note -->
-<link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/pdh-css/detail.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/common-css/summernote-lite.css"/>"
+	rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/board_detail.css"/>"
 	rel='stylesheet' />
 <script type="text/javascript">
@@ -102,42 +102,8 @@ function report_ans_write_ok(f) {
 				<tr>
 					<th>내용</th>
 					<td>
-							<div class="review-content">
-								<div class="review-content__left">
-									<img style="width: 130px; height: 130px; border-radius: 50%;" alt="프로필사진" src="resources/upload/${ReviewVO.u_profile_img}">
-									<p>${ReviewVO.u_name}</p>
-									<p>${ReviewVO.re_regdate.substring(0,10)}</p>
-									<c:choose>
-										<c:when test="${ReviewVO.re_grade == 1}">
-											<span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span>
-										</c:when>
-										<c:when test="${ReviewVO.re_grade == 2}">
-											<span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span>
-										</c:when>
-										<c:when test="${ReviewVO.re_grade == 3}">
-											<span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span>
-										</c:when>
-										<c:when test="${ReviewVO.re_grade == 4}">
-											<span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span>
-										</c:when>
-										<c:otherwise>
-											<span style="color: #FFDF6B;" class="star">★★★★★</span>
-										</c:otherwise>
-									</c:choose>
-									
-								<div class="review-content__right">	
-									<div class="review-content__text" style="height: 100px;">
-										<p style="letter-spacing: 1px; line-height: 20px;">${ReviewVO.re_content}</p>
-									</div>
-								</div>
-									
-									<div class="images">
-											<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${ReviewVO.pic_file}">
-									</div>
-								</div>
-							</div>
-						
-						<textarea name="report_content" readonly style="width: 600px; height: 200px; margin: 0 auto;">${revo.report_content}</textarea>
+						<textarea rows="10" cols="60" id="report_content"
+							name="report_content" readonly style="margin: 5px;">${revo.report_content}</textarea>
 					</td>
 				</tr>
 			</tbody>

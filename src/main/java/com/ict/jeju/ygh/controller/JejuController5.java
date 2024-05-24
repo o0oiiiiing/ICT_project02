@@ -1,8 +1,11 @@
 package com.ict.jeju.ygh.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,15 +16,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ImagesVO;
+import com.ict.jeju.pdh.dao.PagingVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
+import com.ict.jeju.pdh.service.PlaceListService;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -36,13 +45,15 @@ public class JejuController5 {
 	@Autowired
 	private JejuService5 jejuService5;
 	@Autowired
+	private PlaceListService placeListService;
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
 	private UserVO userVO;
-
+	
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
 	public ModelAndView index() {
@@ -57,7 +68,7 @@ public class JejuController5 {
 
 	// 관리자 미답변 게시판
 	@RequestMapping("admin_list.do")
-	public ModelAndView adminList(HttpServletRequest request, HttpSession session) {
+	public ModelAndView adminList(HttpServletRequest request, HttpSession session, String re_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_list");
 
 		// 페이징 미답변 Q&A
@@ -128,6 +139,7 @@ public class JejuController5 {
 			mv.addObject("paging", paging);
 			mv.addObject("report_list", report_list);
 			mv.addObject("paging2", paging2);
+			mv.addObject("re_idx", re_idx);
 			return mv;
 		}
 		return new ModelAndView("ygh-view/error");
@@ -230,15 +242,19 @@ public class JejuController5 {
 
 	// 관리자 신고 상세보기
 	@RequestMapping("admin_report_detail.do")
-	public ModelAndView adminReportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx) {
+	public ModelAndView adminReportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx, String re_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail");
 		ReportVO revo = jejuService5.reportDetail(report_idx);
-
+		
+		
 		if (revo != null) {
 			// 댓글 가져오기
 			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
+			// 트랜잭션 사용 (리뷰, 이미지 테이블)
+			ReviewVO ReviewVO = jejuService5.reviewDetail(re_idx);
 			mv.addObject("rep_list", rep_list);
 			mv.addObject("revo", revo);
+			mv.addObject("ReviewVO", ReviewVO);
 			return mv;
 		}
 		return new ModelAndView("ygh-view/error");
@@ -247,16 +263,17 @@ public class JejuController5 {
 	// Q&A 답글 작성
 	@PostMapping("board_ans_write_ok.do")
 	public ModelAndView commentInsert(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx,
-			@ModelAttribute("cPage") String cPage) {
+			@ModelAttribute("cPage") String cPage, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView("redirect:admin_board_detail.do");
 		int result = jejuService5.commentInsert(comvo);
 		int result2 = jejuService5.commentUpdate(bo_idx);
+
 		return mv;
 	}
-
+	
 	// Q&A 답글 수정 가져오기
 	@RequestMapping("comment_update.do")
-	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx) {
+	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail");
 		// 상세보기
 		BoardVO bovo = jejuService5.boardDetail(bo_idx);
@@ -274,7 +291,7 @@ public class JejuController5 {
 	// Q&A 답글 수정
 	@PostMapping("comment_update_ok.do")
 	public ModelAndView commentUpdateOk(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
-			CommentVO comvo) {
+			CommentVO comvo, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView();
 		int result = jejuService5.commentUpdateOk(comvo);
 		if (result > 0) {
@@ -287,16 +304,22 @@ public class JejuController5 {
 	// 신고 답글 작성
 	@PostMapping("report_ans_write_ok.do")
 	public ModelAndView replyInsert(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx,
-			@ModelAttribute("cPage2") String cPage2) {
+			@ModelAttribute("cPage2") String cPage2, AdminVO adminVO, String report) {
 		ModelAndView mv = new ModelAndView("redirect:admin_report_detail.do");
+		
+		if (report.equals("reportOk")) {
+			int result3 = jejuService5.userReport(repvo);
+		}
+		
 		int result = jejuService5.replyInsert(repvo);
 		int result2 = jejuService5.replyUpdate(report_idx);
+
 		return mv;
 	}
 
 	// 신고 답글 수정 가져오기
 	@RequestMapping("reply_update.do")
-	public ModelAndView reply_update_ok(@ModelAttribute("cPage2") String cPage2, String report_idx) {
+	public ModelAndView reply_update_ok(@ModelAttribute("cPage2") String cPage2, String report_idx, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail");
 		// 상세보기
 		ReportVO revo = jejuService5.reportDetail(report_idx);
@@ -314,7 +337,7 @@ public class JejuController5 {
 	// 신고 답글 수정
 	@PostMapping("reply_update_ok.do")
 	public ModelAndView replyUpdateOk(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo) {
+			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView();
 		int result = jejuService5.replyUpdateOk(repvo);
 		if (result > 0) {

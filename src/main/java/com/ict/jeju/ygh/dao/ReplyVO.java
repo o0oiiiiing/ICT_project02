@@ -1,7 +1,15 @@
 package com.ict.jeju.ygh.dao;
 
 public class ReplyVO {
-	private String rep_idx, rep_title, rep_content, rep_regdate, rep_status, rep_writer, report_idx;
+	private String rep_idx, rep_title, rep_content, rep_regdate, rep_status, rep_writer, report_idx, a_name;
+
+	public String getA_name() {
+		return a_name;
+	}
+
+	public void setA_name(String a_name) {
+		this.a_name = a_name;
+	}
 
 	public String getRep_idx() {
 		return rep_idx;
@@ -59,6 +67,4 @@ public class ReplyVO {
 		this.report_idx = report_idx;
 	}
 
-	
-	
 }
