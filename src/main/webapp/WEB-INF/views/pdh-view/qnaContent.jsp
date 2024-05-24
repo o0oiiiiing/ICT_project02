@@ -63,7 +63,7 @@
 								</c:choose>
 							</tr>
 							<tr style="display: none;" class="qaDetail">
-								<td colspan="5">내용 : ${k.bo_content}</td>
+								<td colspan="5">내용${k.bo_content}</td>
 							</tr>
 							<c:choose>
 								<c:when test="${not empty k.comments}">
@@ -122,16 +122,13 @@
 	
 	<script type="text/javascript">
 		function qaDetailOpen(el) {
- 			var qaDetails = el.parentElement.querySelectorAll('.qaDetail');
-			var comments = el.parentElement.querySelectorAll('.comment');
-			
-			for (var i = 0; i < qaDetails.length; i++) {
-				qaDetails[i].style.display = "block";
-		    }
+ 			var qaDetails = el.nextElementSibling
+			var comments = qaDetails.nextElementSibling
+			console.log(qaDetails)
+			console.log(comments)
+			qaDetails.style.display = "table-row";
+	        comments.style.display = "table-row";
 
-		    for (var j = 0; j < comments.length; j++) {
-		        comments[j].style.display = "block";
-		    }
 		}
 	</script>
 </body>
