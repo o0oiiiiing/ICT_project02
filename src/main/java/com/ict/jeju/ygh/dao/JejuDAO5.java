@@ -6,7 +6,11 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
@@ -18,7 +22,9 @@ import com.ict.jeju.wyy.dao.UserVO4;
 public class JejuDAO5 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
 	// 관리자 미답변 Q&A 페이징
 	public int getTotalCount() {
 		try {
@@ -162,9 +168,25 @@ public class JejuDAO5 {
 
 	// 신고 리뷰 가져오기
 	public ReviewVO reviewDetail(String re_idx) {
+		ReviewVO ReviewVO = null;
+		TransactionDefinition def = new DefaultTransactionDefinition();
+		TransactionStatus status = transactionManager.getTransaction(def);
 		try {
-			return sqlSessionTemplate.selectOne("Board_table.review_detail", re_idx);
+			// 첫번째 결과 ReviewVO 에 담기
+			ReviewVO = sqlSessionTemplate.selectOne("Board_table.review_detail", re_idx);
+			
+			// 두번째 결과 imgDetailVO 에 담기
+			ReviewVO imgDetailVO = sqlSessionTemplate.selectOne("Board_table.image_detail", re_idx);
+			
+			// ReviewVO 에 imgDetailVO 결과 넣기
+			if (imgDetailVO != null) {
+				ReviewVO.setPic_file(imgDetailVO.getPic_file());
+			}
+			
+			transactionManager.commit(status);
+			return ReviewVO;
 		} catch (Exception e) {
+			transactionManager.rollback(status);
 			System.out.println(e);
 		}
 		return null;

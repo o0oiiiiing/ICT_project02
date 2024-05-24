@@ -132,9 +132,7 @@ function report_ans_write_ok(f) {
 								</div>
 									
 									<div class="images">
-										<c:forEach var="j" items="${ReviewVO.imageList}">
-											<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${j.pic_file}">
-										</c:forEach>
+											<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${ReviewVO.pic_file}">
 									</div>
 								</div>
 							</div>

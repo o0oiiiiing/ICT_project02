@@ -22,6 +22,7 @@ import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.service.PlaceListService;
@@ -244,6 +245,7 @@ public class JejuController5 {
 		if (revo != null) {
 			// 댓글 가져오기
 			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
+			// 트랜잭션 사용 (리뷰, 이미지 테이블)
 			ReviewVO ReviewVO = jejuService5.reviewDetail(re_idx);
 			mv.addObject("rep_list", rep_list);
 			mv.addObject("revo", revo);

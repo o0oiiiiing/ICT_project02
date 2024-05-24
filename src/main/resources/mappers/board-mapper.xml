@@ -105,7 +105,9 @@
 	<select id="review_detail" resultType="ReviewVO" parameterType="String">
 		select * from Review_table where re_idx = #{re_idx}
 	</select>
-	
+	<select id="image_detail" resultType="ReviewVO" parameterType="String">
+		select * from Picture_table where re_idx = #{re_idx}
+	</select>
 	
 	
 	<!-- 신고 답글 작성 -->
