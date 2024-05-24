@@ -145,8 +145,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 	
 	// 신고 답글 수정
 	@Override
-	public int userReport(ReplyVO repvo) {
-		return jejuDAO5.userReport(repvo);
+	public int userReport(String m_idx) {
+		return jejuDAO5.userReport(m_idx);
 	}
 
 	// 신고 답글 삭제
@@ -310,6 +310,11 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public List<UserVO> joinUser() {
 		return jejuDAO5.joinUser();
+	}
+
+	@Override
+	public UserVO userStatus(String m_idx) {
+		return jejuDAO5.userStatus(m_idx);
 	}
 
 	

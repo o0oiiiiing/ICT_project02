@@ -243,9 +243,9 @@ public class JejuDAO5 {
 	}
 
 	// 신고 답글 작성
-	public int userReport(ReplyVO repvo) {
+	public int userReport(String m_idx) {
 		try {
-			return sqlSessionTemplate.update("Board_table.user_report", repvo);
+			return sqlSessionTemplate.update("Board_table.user_report", m_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -542,6 +542,15 @@ public class JejuDAO5 {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.myreview_detail",re_idx);
 
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public UserVO userStatus(String m_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("Board_table.user_status", m_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

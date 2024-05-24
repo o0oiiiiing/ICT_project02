@@ -72,7 +72,7 @@ public interface JejuService5 {
 	public int replyUpdate(String report_idx);
 
 	// 신고 답글 작성
-	public int userReport(ReplyVO repvo);
+	public int userReport(String m_idx);
 
 	// 신고 답글 수정
 	public int replyUpdateOk(ReplyVO repvo);
@@ -154,5 +154,7 @@ public interface JejuService5 {
 
 	// 일일 가입자 수
 	public List<UserVO> joinUser();
+	
+	public UserVO userStatus(String m_idx);
 
 }

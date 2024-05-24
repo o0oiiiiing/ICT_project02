@@ -148,7 +148,7 @@
 				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
 				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
 				<td><span class="material-symbols-outlined">mark_chat_unread</span><br><a href="admin_list.do">미답변</a></td>
-				<td><span class="material-symbols-outlined">calendar_add_on</span><br><a href="admin_insert">일정 추가</a></td>
+				<td><span class="material-symbols-outlined">calendar_add_on</span><br><a href="admin_insert">장소추가</a></td>
 				<c:if test="${adminVO.a_status == '1'}">
 					<td><span class="material-symbols-outlined">person_add</span><br><a href="admin_join.do">관리자 생성</a></td>
 				</c:if>
@@ -164,7 +164,7 @@
 				<li><span class="material-symbols-outlined">manage_accounts</span><a href="user_list.do">회원관리</a></li>
 				<li><span class="material-symbols-outlined">mark_chat_read</span><a href="admin_list2.do">답변</a></li>
 				<li><span class="material-symbols-outlined">mark_chat_unread</span><a href="admin_list.do">미답변</a></li>
-				<li><span class="material-symbols-outlined">calendar_add_on</span><a href="admin_insert">일정 추가</a></li>
+				<li><span class="material-symbols-outlined">calendar_add_on</span><a href="admin_insert">장소추가</a></li>
 				<c:if test="${adminVO.a_status == '1'}">
 					<li><span class="material-symbols-outlined">person_add</span><a href="admin_join.do">관리자 생성</a></li>
 				</c:if>
@@ -207,7 +207,7 @@
 						<c:otherwise>
 							<c:forEach var="k" items="${user_list}" varStatus="vs">
 								<tr>
-									<c:set var="activeRow" value="${k.active == 1 ? 'active-row' : ''}" />
+									<c:set var="activeRow" value="${k.active == 1 || k.re_active == 1 ? 'active-row' : ''}" />
 									<td class="${activeRow}">${k.u_name}</td>
 									<td class="${activeRow}">${k.u_id}</td>
 									<td class="${activeRow}">${k.u_email}</td>
