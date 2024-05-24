@@ -166,7 +166,7 @@ public class SignController {
 	public ModelAndView getJoinOK(UserVO userVO, HttpServletRequest request) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:home");
-			String path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
 			MultipartFile user_profile = userVO.getUser_profile();
 			if (user_profile.isEmpty()) {
 				userVO.setU_profile_img("profile.jpg");
