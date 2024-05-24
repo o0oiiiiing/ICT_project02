@@ -12,6 +12,7 @@ import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 import com.ict.jeju.pdh.dao.ReportVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
+import com.ict.jeju.pdh.dao.WishVO;
 
 @Service
 public class PlaceListServiceImpl implements PlaceListService {
@@ -108,7 +109,23 @@ public class PlaceListServiceImpl implements PlaceListService {
 	public double reviewAvg(String contentsid) {
 		return placeListDAO.reviewAvg(contentsid);
 	}
-
 	
+	// 위시리스트 추가
+	@Override
+	public int addWish(WishVO wishVO) {
+		return placeListDAO.addWish(wishVO);
+	}
+	
+	// 위시리스트 제거
+	@Override
+	public int removeWish(WishVO wishVO) {
+		return placeListDAO.removeWish(wishVO);
+	}
+	
+	// 좋아요 여부 확인
+	@Override
+	public WishVO confirmLike(WishVO wishVO) {
+		return placeListDAO.confirmLike(wishVO);
+	}	
 
 }

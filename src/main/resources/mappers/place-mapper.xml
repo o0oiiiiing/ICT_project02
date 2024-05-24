@@ -10,6 +10,7 @@
 		order by vi_hit desc
 		limit 20
 	</select>
+	
 	<select id="allList" resultType="PlaceListVO">
 		select *
 		from Visitjeju_table
@@ -59,13 +60,33 @@
 		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{disclosure}) 
 	</insert>
 	
-	<select id="qaList" parameterType="PagingVO" resultType="QaVO">
+	<resultMap type="QaVO" id="qaMap">
+		<result column="bo_idx" property="bo_idx"/>
+		<result column="u_idx" property="u_idx"/>
+		<result column="bo_writer" property="bo_writer"/>
+		<result column="bo_title" property="bo_title"/>
+		<result column="bo_content" property="bo_content"/>
+		<result column="bo_pwd" property="bo_pwd"/>
+		<collection column="bo_idx" 
+			property="comments" 
+			javaType="java.util.List" 
+			ofType="CommentVO" 
+			select="qaCommentList" />
+	</resultMap>
+	
+	<select id="qaList" parameterType="PagingVO" resultMap="qaMap">
 		select * 
 		from Board_table 
 		where contentsid = #{contentsid} 
 		order by bo_regdate desc
 		limit #{limit}
 		offset #{offset}
+	</select>
+	
+	<select id="qaCommentList"  parameterType="String" resultType="CommentVO">
+		select * 
+		from Comment_table
+		where bo_idx = #{bo_idx}
 	</select>
 	
 	<insert id="reviewWrite" parameterType="ReviewVO">
@@ -119,6 +140,22 @@
 		select AVG(re_grade) 
 		from Review_table 
 		where contentsid = #{contentsid} 
+	</select>
+	
+	<insert id="addWish" parameterType="WishVO">
+		insert into Like_table(u_idx, contentsid) 
+		values(#{u_idx}, #{contentsid}) 
+	</insert>
+	
+	<delete id="removeWish" parameterType="WishVO">
+		delete from Like_table 
+		where u_idx = #{u_idx} AND contentsid = #{contentsid}
+	</delete>
+	
+	<select id="confirmLike" parameterType="WishVO" resultType="WishVO">
+		select * 
+		from Like_table 
+		where u_idx = #{u_idx} AND contentsid = #{contentsid}
 	</select>
 
 </mapper>
