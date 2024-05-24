@@ -51,7 +51,6 @@
 				let no = "red";
 				
 				let pwd_patten = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-				
 				if (u_pwd.value.length < 6) {
 			        msg.style.color = no;
 			        msg.style.fontSize = "12px";
@@ -190,8 +189,11 @@
 						prev_img.style.display = 'block';
 					};
 					file_reader.readAsDataURL(input.files[0]);
+				} else if (prev_img.src) {
+					prev_img.style.display = 'block';
 				} else {
 					prev_img.src = "";
+					prev_img.style.display = 'none';
 				}
 			}
 		</script>
@@ -270,7 +272,7 @@
 									<label for="user_profile">
 										<div class="join_file_upload_btn">Choose your profile Image</div>
 									</label>
-									<input type="file" id="user_profile" name="user_profile" accept="image/*" class="join_file_upload" onchange="read_prev_date(this)" />
+									<input type="file" id="user_profile" name="user_profile" accept="image/*" class="join_file_upload" onchange="read_prev_img(this)" />
 									<img id="prev_img" />
 								</li>
 								<li>
