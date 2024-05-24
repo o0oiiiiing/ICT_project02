@@ -124,7 +124,7 @@ public interface JejuService5 {
 	// 나의 리뷰 글 목록 및 페이징 - 최현민
 	public List<MyreviewVO> myreviewlist(int offset, int limit, String u_idx);
     
-	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 - 최현민
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기
 	public String myreviewtitle(String contentsid);
 	
 	// 나의 리뷰 카운터
@@ -133,11 +133,14 @@ public interface JejuService5 {
 	// 나의 리뷰 페이징 카운트 
 	public int getTotalCount10(String u_idx);
 
-	// 나의 리뷰 디테일
-	public UserVO myreview_detail(String u_idx);
-	
 	// 나의 리뷰 디테일에 가져가는 나의 리뷰 리스트
-	public List<MyreviewVO> myreview_detail_list(String u_idx);
+	public MyreviewVO myreview_detail(String re_idx);
+	
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 (detail)
+	public String myreviewtitle2(String contentsid);
+	
+	// 나의 리뷰 re_idx 가져와서 image 값 가져오기 (detail)
+	public String myreviewimage(String re_idx);
 	
 	// 회원현황
 	public List<UserVO> userTotal();

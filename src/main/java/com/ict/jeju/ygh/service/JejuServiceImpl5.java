@@ -256,16 +256,28 @@ public class JejuServiceImpl5 implements JejuService5 {
 	}
 	
 	// 나의 리뷰 디테일 페이지
-	@Override
-	public UserVO myreview_detail(String u_idx) {
-		return jejuDAO5.myreview_detail(u_idx);
-	}
+	/*
+	 * @Override public UserVO myreview_detail(String u_idx) { return
+	 * jejuDAO5.myreview_detail(u_idx); }
+	 */
 	
 	// 나의 리뷰 디테일 페이지 갈떄 가져갈 리뷰 리스트
 	@Override
-	public List<MyreviewVO> myreview_detail_list(String u_idx) {
-		return jejuDAO5.myreview_detail_list(u_idx);
+	public MyreviewVO myreview_detail(String re_idx) {
+		return jejuDAO5.myreview_detail(re_idx);
 	}
+	
+	// 나의 리뷰 contentsid 가져와서 vi_title 값 가져오기 (detail)
+	@Override
+	public String myreviewtitle2(String contentsid) {
+		return jejuDAO5.myreviewtitle(contentsid);
+	}
+	
+	// 나의 리뷰 re_idx 가져와서 image 값 가져오기 (detail)
+		@Override
+		public String myreviewimage(String re_idx) {
+			return jejuDAO5.myreviewimage(re_idx);
+		}
 	
 	// 나의 리뷰 페이징 카운트
 	@Override

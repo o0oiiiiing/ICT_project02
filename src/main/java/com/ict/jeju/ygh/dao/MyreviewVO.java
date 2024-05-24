@@ -1,9 +1,25 @@
 package com.ict.jeju.ygh.dao;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class MyreviewVO {
-	private String u_idx , contentsid , u_profile_img , u_name , re_content,re_grade,re_regdate ,vi_title;
+	private String re_idx, u_idx , contentsid , u_profile_img , u_name 
+	, re_content,re_grade,re_regdate ,vi_title, pic_file;
+
+	public String getPic_file() {
+		return pic_file;
+	}
+
+	public void setPic_file(String pic_file) {
+		this.pic_file = pic_file;
+	}
+
+	public String getRe_idx() {
+		return re_idx;
+	}
+
+	public void setRe_idx(String re_idx) {
+		this.re_idx = re_idx;
+	}
 
 	public String getVi_title() {
 		return vi_title;
