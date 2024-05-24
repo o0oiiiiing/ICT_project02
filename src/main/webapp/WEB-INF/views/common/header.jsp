@@ -114,9 +114,5 @@
 			</c:otherwise>
 		</c:choose>
 	</header>
-	<a class="nav-link nav-icons" href="javascript:void(0);" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	<i class="fas fa-fw fa-bell"></i><input type="hidden" value="${loginChk.u_Idx }" id="memIdSpan">
-	<span class="indicator" id="alarmIcon" style="display:none;"></span>
-</a>
 </body>
 </html>
