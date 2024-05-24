@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="resources/pdh-css/scroll-to-top-button.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
 <link rel="stylesheet" href="resources/common-css/chatbot.css" />
+
 <script type="text/javascript">
 // 아이콘 눌렀을 때 텍스트박스 글 지우기
 function clearInput() {

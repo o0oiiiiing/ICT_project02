@@ -61,7 +61,7 @@ function comment_update_ok(f) {
 	f.submit();
 }
 </script>
-</head>
+
 <body>
 <%@include file="../common/header.jsp"%>
 <form method="post">

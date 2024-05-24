@@ -167,10 +167,9 @@ public class SignController {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:home");
 			String path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
-			String basic_img_path = request.getSession().getServletContext().getRealPath("/resources/lsh_user_images");
 			MultipartFile user_profile = userVO.getUser_profile();
 			if (user_profile.isEmpty()) {
-				userVO.setU_profile_img(basic_img_path+"/profile.png");
+				userVO.setU_profile_img("profile.jpg");
 			} else {
 				UUID uuid = UUID.randomUUID();
 				String u_profile_img = uuid.toString()+"_"+user_profile.getOriginalFilename();
