@@ -65,7 +65,7 @@
 }
 
 .buttom_content {
-    border: 1px dashed gray;
+    border: 1px solid gray;
     width: 100%;
     min-height: 350px;
     height: auto;

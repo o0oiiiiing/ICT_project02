@@ -299,6 +299,11 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.getTotalCount10(u_idx);
 	}
 	
+	// 나의 리뷰 삭제
+	@Override
+	public int myreview_Delete(String re_idx) {
+		return jejuDAO5.myreviewDelete(re_idx);
+	}
 	
 	// 회원현황
 	@Override
@@ -311,6 +316,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public List<UserVO> joinUser() {
 		return jejuDAO5.joinUser();
 	}
+
+	
 
 	
 

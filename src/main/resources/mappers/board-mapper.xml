@@ -295,6 +295,16 @@
 		select count(*) from Review_table where u_idx = #{u_idx}
 	</select>
 	
+	<!-- 나의 리뷰 삭제1 -->
+	<delete id="myreview_delete1" parameterType="int">
+		DELETE FROM Picture_table WHERE re_idx = #{res}
+	</delete>
+	
+	<!-- 나의 리뷰 삭제2 -->
+	<delete id="myreview_delete2" parameterType="int">
+        DELETE FROM Review_table WHERE re_idx = #{res}
+	</delete>
+	
 	<!-- 회원현황 -->
 	<select id="user_total" resultType="userVO">
 		SELECT
@@ -311,6 +321,8 @@
 		GROUP BY DATE(u_regdate)
 		ORDER BY join_date
 	</select>
+	
+	
 	
 	
 </mapper>
