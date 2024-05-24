@@ -1,48 +1,8 @@
 package com.ict.jeju.ygh.dao;
 
 public class ReportVO {
-	private String report_idx, report_title, report_content, active, report_writer, report_regdate, step, report_pwd,
-			lev, groups, u_idx, u_name;
-
-	public String getU_name() {
-		return u_name;
-	}
-
-	public void setU_name(String u_name) {
-		this.u_name = u_name;
-	}
-
-	public String getU_idx() {
-		return u_idx;
-	}
-
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
-	}
-
-	public String getReport_pwd() {
-		return report_pwd;
-	}
-
-	public void setReport_pwd(String report_pwd) {
-		this.report_pwd = report_pwd;
-	}
-
-	public String getLev() {
-		return lev;
-	}
-
-	public void setLev(String lev) {
-		this.lev = lev;
-	}
-
-	public String getGroups() {
-		return groups;
-	}
-
-	public void setGroups(String groups) {
-		this.groups = groups;
-	}
+	private String report_idx, rep_idx, u_idx, re_idx, m_idx, report_title, report_content, report_writer, active,
+			report_regdate, u_name, step;
 
 	public String getStep() {
 		return step;
@@ -58,6 +18,38 @@ public class ReportVO {
 
 	public void setReport_idx(String report_idx) {
 		this.report_idx = report_idx;
+	}
+
+	public String getRep_idx() {
+		return rep_idx;
+	}
+
+	public void setRep_idx(String rep_idx) {
+		this.rep_idx = rep_idx;
+	}
+
+	public String getU_idx() {
+		return u_idx;
+	}
+
+	public void setU_idx(String u_idx) {
+		this.u_idx = u_idx;
+	}
+
+	public String getRe_idx() {
+		return re_idx;
+	}
+
+	public void setRe_idx(String re_idx) {
+		this.re_idx = re_idx;
+	}
+
+	public String getM_idx() {
+		return m_idx;
+	}
+
+	public void setM_idx(String m_idx) {
+		this.m_idx = m_idx;
 	}
 
 	public String getReport_title() {
@@ -76,14 +68,6 @@ public class ReportVO {
 		this.report_content = report_content;
 	}
 
-	public String getActive() {
-		return active;
-	}
-
-	public void setActive(String active) {
-		this.active = active;
-	}
-
 	public String getReport_writer() {
 		return report_writer;
 	}
@@ -92,12 +76,28 @@ public class ReportVO {
 		this.report_writer = report_writer;
 	}
 
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
 	public String getReport_regdate() {
 		return report_regdate;
 	}
 
 	public void setReport_regdate(String report_regdate) {
 		this.report_regdate = report_regdate;
+	}
+
+	public String getU_name() {
+		return u_name;
+	}
+
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
 	}
 
 }

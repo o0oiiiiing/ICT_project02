@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class commonController {
+public class CommonController {
 		// 개인정보 취급방침
 		@RequestMapping("privacyPolicy")
 		public ModelAndView privacyPolicy() {

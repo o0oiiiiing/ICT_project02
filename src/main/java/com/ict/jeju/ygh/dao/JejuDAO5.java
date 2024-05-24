@@ -6,10 +6,15 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.wyy.dao.UserVO4;
 
@@ -17,7 +22,9 @@ import com.ict.jeju.wyy.dao.UserVO4;
 public class JejuDAO5 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
 	// 관리자 미답변 Q&A 페이징
 	public int getTotalCount() {
 		try {
@@ -40,7 +47,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 관리자 답변 Q&A 페이징
 	public int getTotalCount8() {
 		try {
@@ -50,7 +57,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
 	// 관리자 답변 Q&A 전체보기
 	public List<BoardVO> adminBoardList2(int offset, int limit) {
 		try {
@@ -96,7 +103,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 관리자 답변 신고 페이징
 	public int getTotalCount9() {
 		try {
@@ -106,7 +113,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-	
+
 	// 관리자 답변 신고 전체보기
 	public List<ReportVO> adminReportList2(int offset, int limit) {
 		try {
@@ -159,6 +166,32 @@ public class JejuDAO5 {
 		return null;
 	}
 
+	// 신고 리뷰 가져오기
+	public ReviewVO reviewDetail(String re_idx) {
+		ReviewVO ReviewVO = null;
+		TransactionDefinition def = new DefaultTransactionDefinition();
+		TransactionStatus status = transactionManager.getTransaction(def);
+		try {
+			// 첫번째 결과 ReviewVO 에 담기
+			ReviewVO = sqlSessionTemplate.selectOne("Board_table.review_detail", re_idx);
+			
+			// 두번째 결과 imgDetailVO 에 담기
+			ReviewVO imgDetailVO = sqlSessionTemplate.selectOne("Board_table.image_detail", re_idx);
+			
+			// ReviewVO 에 imgDetailVO 결과 넣기
+			if (imgDetailVO != null) {
+				ReviewVO.setPic_file(imgDetailVO.getPic_file());
+			}
+			
+			transactionManager.commit(status);
+			return ReviewVO;
+		} catch (Exception e) {
+			transactionManager.rollback(status);
+			System.out.println(e);
+		}
+		return null;
+	}
+
 	// Q&A 답글 작성
 	public int commentInsert(CommentVO comvo) {
 		try {
@@ -203,6 +236,16 @@ public class JejuDAO5 {
 	public int replyUpdate(String report_idx) {
 		try {
 			return sqlSessionTemplate.update("Board_table.reply_update", report_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
+	// 신고 답글 작성
+	public int userReport(ReplyVO repvo) {
+		try {
+			return sqlSessionTemplate.update("Board_table.user_report", repvo);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -414,7 +457,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 contentsid ( contentsid 를 이용해서 vi_title 값 가져오기위함)
 	public String myreviewtitle(String contentsid) {
 		try {
@@ -424,7 +467,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 count
 	public List<UserVO4> myreviewCount(String u_idx) {
 		try {
@@ -434,7 +477,7 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 페이징 카운트
 	public int getTotalCount10(String u_idx) {
 		try {
@@ -476,11 +519,11 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
 	// 나의 리뷰 리스트 디테일 페이지에 가져갈 리뷰 리스트
 	public List<MyreviewVO> myreview_detail_list(String u_idx) {
 		try {
-			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list",u_idx);
+			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list", u_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

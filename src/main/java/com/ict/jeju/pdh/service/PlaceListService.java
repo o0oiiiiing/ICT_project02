@@ -8,6 +8,7 @@ import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
 import com.ict.jeju.pdh.dao.ReportVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
+import com.ict.jeju.pdh.dao.WishVO;
 
 public interface PlaceListService {
 	// 조회수 순으로 장소 20개 가져오기
@@ -54,4 +55,13 @@ public interface PlaceListService {
 	
 	// 평균 별점 가져오기
 	public double reviewAvg(String contentsid);
+	
+	// 위시리스트에 추가하기
+	public int addWish(WishVO wishVO);
+	
+	// 위시리스트에 제거하기
+	public int removeWish(WishVO wishVO);
+	
+	// 좋아요 여부 확인
+	public WishVO confirmLike(WishVO wishVO);
 }

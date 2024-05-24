@@ -1,8 +1,3 @@
-#menubar table {
-	width: 500px;
-	margin: 10px auto 50px;
-}
-
 .tab_bar {
 	background-color: lightgray;
 	width: 800px;
@@ -13,7 +8,6 @@
 	padding: 5px;
 }
 
-
 #board_t {
 	display: block;
 }
@@ -23,17 +17,6 @@
 	margin: 20px auto 50px;
 	border-collapse: collapse;
 	font-size: 14px;
-}
-
-#menubar>h1 {
-	width: 800px;
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 2px solid black;
-	padding-bottom: 20px;
-	margin: 0 auto;
-	margin-bottom: 30px;
 }
 
 #board_t table caption {
