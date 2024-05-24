@@ -45,10 +45,10 @@
 								<td>${k.vi_title}</td>
 								<c:choose>
     								<c:when test="${fn:length(k.re_content) >= 8}">
-    									<td><a href="myreview_detail.do?&u_idx=${u_idx}"><span>${k.re_content.substring(0, 8)}...</span></a></td>
+    									<td><a href="myreview_detail.do?&re_idx=${k.re_idx}"><span>${k.re_content.substring(0, 8)}...</span></a></td>
     								</c:when>
 								    <c:otherwise>
-								        <td><a href="myreview_detail.do?&u_idx=${u_idx}">${k.re_content}</a></td>
+								        <td><a href="myreview_detail.do?&re_idx=${k.re_idx}">${k.re_content}</a></td>
 								    </c:otherwise>
 								</c:choose>
 								<td>${k.re_regdate.substring(0,10)}</td>

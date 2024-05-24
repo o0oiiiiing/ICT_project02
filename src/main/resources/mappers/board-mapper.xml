@@ -271,6 +271,12 @@
 		where contentsid = #{contentsid}
 	</select>
 	
+	<select id="myreview_image" parameterType="String" resultType="String">
+		SELECT pic_file
+		FROM Picture_table 
+		where re_idx = #{re_idx}
+	</select>
+	
 	<!-- 나의 리뷰 count -->
 	<select id="myreview_count" resultType="uvo4">
     	select u.*,
@@ -280,8 +286,13 @@
 	</select>		
 	
 	<!-- 나의 리뷰 디테일 -->
-	<select id="myreview_detail_list" resultType="myvo" parameterType="String">
-		select * from Review_table where u_idx = #{u_idx}
+	<select id="myreview_detail" resultType="myvo" parameterType="String">
+		select * from Review_table where re_idx = #{re_idx}
+	</select>
+	
+	<!-- 나의 리뷰 페이징 카운트 -->
+	<select id="count10" resultType="int" parameterType="String">
+		select count(*) from Review_table where u_idx = #{u_idx}
 	</select>
 	
 	<!-- 회원현황 -->
@@ -301,9 +312,6 @@
 		ORDER BY join_date
 	</select>
 	
-	<!-- 사용자 Q&A 페이징 -->
-	<select id="count10" resultType="int" parameterType="String">
-		select count(*) from Review_table where u_idx = #{u_idx}
-	</select>
+	
 </mapper>
 

@@ -477,6 +477,26 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
+	
+	// 나의 리뷰 contentsid ( contentsid 를 이용해서 vi_title 값 가져오기위함)(detail)
+		public String myreviewtitle2(String contentsid) {
+			try {
+				return sqlSessionTemplate.selectOne("Board_table.myreview_title", contentsid);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return null;
+		}
+		
+		// 나의 리뷰 contentsid ( re_idx 를 이용해서 image 값 가져오기위함)(detail)
+			public String myreviewimage(String re_idx) {
+				try {
+					return sqlSessionTemplate.selectOne("Board_table.myreview_image", re_idx);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+					return null;
+			}
 
 	// 나의 리뷰 페이징 카운트
 	public int getTotalCount10(String u_idx) {
@@ -511,19 +531,17 @@ public class JejuDAO5 {
 	}
 
 	// 나의 리뷰 리스트 디테일
-	public UserVO myreview_detail(String u_idx) {
-		try {
-			return sqlSessionTemplate.selectOne("Board_table.myreview_detail", u_idx);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
+	/*
+	 * public UserVO myreview_detail(String u_idx) { try { return
+	 * sqlSessionTemplate.selectOne("Board_table.myreview_detail", u_idx); } catch
+	 * (Exception e) { System.out.println(e); } return null; }
+	 */
 
 	// 나의 리뷰 리스트 디테일 페이지에 가져갈 리뷰 리스트
-	public List<MyreviewVO> myreview_detail_list(String u_idx) {
+	public MyreviewVO myreview_detail(String re_idx) {
 		try {
-			return sqlSessionTemplate.selectList("Board_table.myreview_detail_list", u_idx);
+			return sqlSessionTemplate.selectOne("Board_table.myreview_detail",re_idx);
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}

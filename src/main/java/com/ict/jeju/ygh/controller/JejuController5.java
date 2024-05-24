@@ -868,12 +868,16 @@ public class JejuController5 {
 	
 	// 나의 리뷰 디테일 페이지
 		@RequestMapping("myreview_detail.do")
-		public ModelAndView myreview_detail(@ModelAttribute("cPage") String cPage, String u_idx) {
+		public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
 			ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
+			MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
 			
-			List<MyreviewVO> myreview_detail_list = jejuService5.myreview_detail_list(u_idx);
-			if (myreview_detail_list != null) {
-				mv.addObject("myreview_detail_list", myreview_detail_list);
+			if (reviewDetail != null) {
+				String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
+				String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
+				mv.addObject("title", title);
+				mv.addObject("reviewDetail", reviewDetail);
+				mv.addObject("image", image);
 				return mv;
 			}
 			return new ModelAndView("ygh-view/error");
