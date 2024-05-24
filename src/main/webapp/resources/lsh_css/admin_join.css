@@ -1,21 +1,5 @@
 @charset "UTF-8";
 
-#menubar table {
-	width: 500px;
-	margin: 10px auto 50px;
-}
-
-#menubar>h1 {
-	width: 800px;
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-	border-bottom: 2px solid black;
-	padding-bottom: 20px;
-	margin: 0 auto;
-	margin-bottom: 30px;
-}
-
 .admin_join_box input {
 	outline: 0;
 	background: lightgray;

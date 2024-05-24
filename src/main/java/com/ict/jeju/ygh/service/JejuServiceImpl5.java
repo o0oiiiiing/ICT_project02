@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
@@ -98,6 +99,13 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public List<ReplyVO> replyList(String report_idx) {
 		return jejuDAO5.replyList(report_idx);
 	}
+	
+	// 신고 리뷰 가져오기
+	@Override
+	public ReviewVO reviewDetail(String re_idx) {
+		return jejuDAO5.reviewDetail(re_idx);
+	}
+
 
 	// Q&A 답글 작성
 	@Override
@@ -133,6 +141,12 @@ public class JejuServiceImpl5 implements JejuService5 {
 	@Override
 	public int replyUpdateOk(ReplyVO repvo) {
 		return jejuDAO5.replyUpdateOk(repvo);
+	}
+	
+	// 신고 답글 수정
+	@Override
+	public int userReport(ReplyVO repvo) {
+		return jejuDAO5.userReport(repvo);
 	}
 
 	// 신고 답글 삭제
@@ -285,6 +299,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public List<UserVO> joinUser() {
 		return jejuDAO5.joinUser();
 	}
+
+	
 
 	
 

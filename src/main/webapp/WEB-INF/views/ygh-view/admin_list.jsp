@@ -14,6 +14,7 @@
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/ygh-css/admin_bar.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -60,7 +61,7 @@ $(document).ready(function() {
     });
 });
 
-//a링크 postmapping 으로 변경
+/* //a링크 postmapping 으로 변경
 function admin_board_detail_go(bo_idx, cPage) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -101,7 +102,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 
     document.body.appendChild(form);
     form.submit();
-}
+} */
 
 </script>
 </head>
@@ -109,11 +110,10 @@ function admin_report_detail_go(report_idx, cPage2) {
 
 <%@include file="../common/header.jsp"%>
 
-	<div id="menubar">
+ 	<div id="menubar">
 		<h1>나의 여행(관리자)</h1>
 		<table>
 			<tr>
-
 				<td><span class="material-symbols-outlined">finance</span><br><a href="dashboard.do">대시보드</a></td>
 				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
 				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
@@ -125,6 +125,23 @@ function admin_report_detail_go(report_idx, cPage2) {
 			</tr>
 		</table>
 	</div>
+	 
+	
+	<div id="inner_body">
+		<aside class="side_bar js-side_bar">
+			<ul>
+				<li><span class="material-symbols-outlined">finance</span><a href="dashboard.do">대시보드</a></li>
+				<li><span class="material-symbols-outlined">manage_accounts</span><a href="user_list.do">회원관리</a></li>
+				<li><span class="material-symbols-outlined">mark_chat_read</span><a href="admin_list2.do">답변</a></li>
+				<li><span class="material-symbols-outlined">mark_chat_unread</span><a href="admin_list.do">미답변</a></li>
+				<li><span class="material-symbols-outlined">calendar_add_on</span><a href="admin_insert">일정 추가</a></li>
+				<c:if test="${adminVO.a_status == '1'}">
+					<li><span class="material-symbols-outlined">person_add</span><a href="admin_join.do">관리자 생성</a></li>
+				</c:if>
+			</ul>
+		</aside>
+	</div>
+	
 	
 	<div class="tab_bar">미답변 Q&A</div>
 	<div id="board_t">
@@ -152,8 +169,8 @@ function admin_report_detail_go(report_idx, cPage2) {
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
 								<td style="text-align: left;">
 									<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
-									<%-- <a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a> --%>
-									<a href="#" onclick="admin_board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a>
+									<a href="admin_board_detail.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
+									<%-- <a href="#" onclick="admin_board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a> --%>
 								</td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
@@ -235,8 +252,8 @@ function admin_report_detail_go(report_idx, cPage2) {
 									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 									<td style="text-align: left;">
 										<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
-										<%-- <a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a> --%>
-										<a href="#" onclick="admin_report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
+										<a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}&re_idx=${k2.re_idx}">${k2.report_title}</a>
+										<%-- <a href="#" onclick="admin_report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a> --%>
 									</td>
 									<td>${k2.report_writer}</td>
 									<td>${k2.report_regdate.substring(0,10)}</td>

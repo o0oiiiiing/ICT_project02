@@ -14,6 +14,7 @@
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="resources/common-css/reset.css" rel="stylesheet" />
 <link href="resources/lsh_css/admin_join.css" rel="stylesheet" />
+<link href="resources/ygh-css/admin_bar.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function go_main() {
@@ -166,7 +167,6 @@
 		<h1>나의 여행(관리자)</h1>
 		<table>
 			<tr>
-
 				<td><span class="material-symbols-outlined">finance</span><br><a href="dashboard.do">대시보드</a></td>
 				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
 				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
@@ -178,6 +178,23 @@
 			</tr>
 		</table>
 	</div>
+	 
+	
+	<div id="inner_body">
+		<aside class="side_bar js-side_bar">
+			<ul>
+				<li><span class="material-symbols-outlined">finance</span><a href="dashboard.do">대시보드</a></li>
+				<li><span class="material-symbols-outlined">manage_accounts</span><a href="user_list.do">회원관리</a></li>
+				<li><span class="material-symbols-outlined">mark_chat_read</span><a href="admin_list2.do">답변</a></li>
+				<li><span class="material-symbols-outlined">mark_chat_unread</span><a href="admin_list.do">미답변</a></li>
+				<li><span class="material-symbols-outlined">calendar_add_on</span><a href="admin_insert">일정 추가</a></li>
+				<c:if test="${adminVO.a_status == '1'}">
+					<li><span class="material-symbols-outlined">person_add</span><a href="admin_join.do">관리자 생성</a></li>
+				</c:if>
+			</ul>
+		</aside>
+	</div>
+	
 
 	<section class="admin_join_page">
 		<div class="admin_join_container">
