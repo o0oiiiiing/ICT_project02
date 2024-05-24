@@ -1,8 +1,11 @@
 package com.ict.jeju.ygh.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,10 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
@@ -42,7 +47,7 @@ public class JejuController5 {
 	@Autowired
 	private Paging2 paging2;
 	private UserVO userVO;
-
+	
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
 	public ModelAndView index() {
@@ -251,9 +256,10 @@ public class JejuController5 {
 		ModelAndView mv = new ModelAndView("redirect:admin_board_detail.do");
 		int result = jejuService5.commentInsert(comvo);
 		int result2 = jejuService5.commentUpdate(bo_idx);
+
 		return mv;
 	}
-
+	
 	// Q&A 답글 수정 가져오기
 	@RequestMapping("comment_update.do")
 	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx) {
