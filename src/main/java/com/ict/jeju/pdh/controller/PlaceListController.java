@@ -260,9 +260,6 @@ public class PlaceListController {
 		placeListService.reviewWrite(reviewVO);
 		MultipartFile[] images = imagesVO.getImages();
 		String path = request.getSession().getServletContext().getRealPath("resources/upload");
-		for (MultipartFile k : images) {
-			System.out.println(k);
-		}
 		try {
 			if (!images[0].isEmpty()) {
 				for (MultipartFile k : images) {
@@ -287,6 +284,8 @@ public class PlaceListController {
 	// 신고 작성하기
 	@PostMapping("reportWrite")
 	public ModelAndView reportWrite(ReportVO reportVO, @ModelAttribute("contentsid") String contentsid) {
+		System.out.println(reportVO.getM_name());
+		System.out.println(reportVO.getM_id());
 		// 신고 작성 삽입
 		placeListService.reportWrite(reportVO);
 

@@ -63,13 +63,13 @@
 								</c:choose>
 							</tr>
 							<tr style="display: none;" class="qaDetail">
-								<td colspan="5">내용${k.bo_content}</td>
+								<td colspan="5">내용<br>${k.bo_content}</td>
 							</tr>
 							<c:choose>
 								<c:when test="${not empty k.comments}">
 									<c:forEach var="j" items="${k.comments}">
 										<tr style="display: none;" class="comment">
-											<td colspan="5">댓글 : ${j.com_content}</td>
+											<td colspan="5">ㄴ 답변 : ${j.com_content}</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -124,11 +124,14 @@
 		function qaDetailOpen(el) {
  			var qaDetails = el.nextElementSibling
 			var comments = qaDetails.nextElementSibling
-			console.log(qaDetails)
-			console.log(comments)
-			qaDetails.style.display = "table-row";
-	        comments.style.display = "table-row";
-
+			
+			if (qaDetails.style.display === "table-row" && comments.style.display === "table-row") {
+		        qaDetails.style.display = "none";
+		        comments.style.display = "none";
+		    } else {
+		        qaDetails.style.display = "table-row";
+		        comments.style.display = "table-row";
+		    }
 		}
 	</script>
 </body>
