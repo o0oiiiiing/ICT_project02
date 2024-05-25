@@ -22,6 +22,16 @@
 				f.action="login_ok.do";
 				f.submit();
 			}
+			
+			// 엔터키 활성화
+			document.addEventListener('keypress', function(e) {
+			    if (e.keyCode === 13) {
+			        if (document.activeElement.tagName === 'INPUT') {
+			            login_ok(document.activeElement.form);
+			        }
+			    }
+			});
+			
 			// 경고창
 			let msg = "${msg}";
 			if (msg !== "") {
@@ -159,6 +169,7 @@
 						<a href="admin_login.do">관리자로그인</a>
 					</div>
 				</form>
+						<a href="notification.do">모다알</a>
 			</div>
 		</section>
 		<%@include file="../common/footer.jsp" %>

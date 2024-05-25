@@ -43,6 +43,7 @@
     	 VALUES(#{nickname}, '정보 없음', #{name}, '정보 없음', #{email}, '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', '정보 없음', 'SNS_네이버', sysdate())
     </insert>
     
+    
 </mapper>
 
 
