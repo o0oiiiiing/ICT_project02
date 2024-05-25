@@ -15,9 +15,15 @@
 <link href="<c:url value="/resources/chm-css/myreview_detail.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 
-	function board_delete(f) {
-		f.action="myreview_delete.do";
-		f.submit();
+	function myreview_delete(re_idx) {
+		
+		 var result = confirm("정말 삭제하시겠습니까?");
+		    if (result) {
+		        alert("리뷰가 삭제되었습니다.");
+		        location.href = "myreview_delete.do?re_idx=" + re_idx;
+		    } else {
+		        alert("리뷰삭제가 취소되었습니다.");
+		    }
 	}
 
 </script>
@@ -32,7 +38,7 @@
 			<div class="wrapper_buttom">
 				<div class="buttom_image"><img src="/resources/upload/${image}" style="width: 500px; height: 460px;"></div>
 				<div class="buttom_comment">
-					<span class="buttom_title"><a href="detail?contentsid=${contentsid}">${title}</a></span>
+					<span class="buttom_title"><a href="detail?contentsid=${reviewDetail.contentsid}" style="color: inherit; text-decoration: none;">${title}</a></span>
 					<c:choose>
 					<c:when test="${reviewDetail.re_grade == 1}">
 						<span class="buttom_star">별점 : <span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span></span>
@@ -52,13 +58,17 @@
 					</c:choose>
 				</div>
 				<div class="buttom_content">
-					<div>${reviewDetail.re_content}</div>
+					<div style="font-family: monospace; font-size: 18px; font-weight: bold;">${reviewDetail.re_content}</div>
 				</div>
 			</div>
 			<div class="wrapper_footer">
-				<div class="footer_day">${reviewDetail.re_regdate.substring(0,10)}</div>
+				<div class="footer_day">작성 날짜 : ${reviewDetail.re_regdate.substring(0,10)}</div>
 			</div>
 		</div>
+				<div id="myreview_detail_btn">
+					<input type="hidden" value="${cPage}" name="cPage">
+					<input type="button" value="삭제" onclick="myreview_delete(${reviewDetail.re_idx})" />
+				</div>
 	</form>
 <%@include file="../common/footer.jsp"%>
 </body>

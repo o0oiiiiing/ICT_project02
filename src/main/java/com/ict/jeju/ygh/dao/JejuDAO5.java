@@ -541,13 +541,6 @@ public class JejuDAO5 {
 		return null;
 	}
 
-	// 나의 리뷰 리스트 디테일
-	/*
-	 * public UserVO myreview_detail(String u_idx) { try { return
-	 * sqlSessionTemplate.selectOne("Board_table.myreview_detail", u_idx); } catch
-	 * (Exception e) { System.out.println(e); } return null; }
-	 */
-
 	// 나의 리뷰 리스트 디테일 페이지에 가져갈 리뷰 리스트
 	public MyreviewVO myreview_detail(String re_idx) {
 		try {
@@ -558,7 +551,25 @@ public class JejuDAO5 {
 		}
 		return null;
 	}
-	
+
+	// 나의 리뷰 삭제
+	public int myreviewDelete(String re_idx) {
+		int reidx = Integer.parseInt(re_idx);
+		int result = 0;
+		TransactionDefinition def = new DefaultTransactionDefinition();
+		TransactionStatus status = transactionManager.getTransaction(def);
+		try {
+			result = sqlSessionTemplate.delete("Board_table.myreview_delete1",reidx);
+			result = sqlSessionTemplate.delete("Board_table.myreview_delete2",reidx);
+			transactionManager.commit(status);
+			return result;
+		} catch (Exception e) {
+			transactionManager.rollback(status);
+			System.out.println(e);
+		}
+		return -1;
+		
+
 	public UserVO userStatus(String m_idx) {
 		try {
 			return sqlSessionTemplate.selectOne("Board_table.user_status", m_idx);
