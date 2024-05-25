@@ -93,7 +93,7 @@
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
 	    var reviewButton = document.querySelector('.write_r_button');
-	    var reportButtons= document.querySelectorAll('.report-button');
+	    var reportButton = document.querySelectorAll('.report-button');
 	    var qaWriteDiv = document.getElementById('qa_write');
 	    var reviewWriteDiv = document.getElementById('review_write');
 	    var reportWriteDiv = document.getElementById('report_write');
@@ -145,17 +145,33 @@
 	        })
 	    });
 	    
-	    reportButtons.forEach(function(button) {
+	    reportButton.forEach(function(button) {
 	    	button.addEventListener('click', function() {
 		    	// input type의 hidden의 value 바꾸기
-				var reIdx = this.nextElementSibling;
-		    	var uIdx = reIdx.nextElementSibling;
+		    	console.log(this)
+				let reIdx = this.nextElementSibling;
+		    	console.log(reIdx)
+		    	let uIdx = reIdx.nextElementSibling;
+		    	console.log(uIdx)
+		    	let uId = uIdx.nextElementSibling;
+		    	console.log(uId)
+		    	let uName = uId.nextElementSibling;
 		    	let reIdx_v = reIdx.value
 		    	let uIdx_v = uIdx.value
+		    	let uId_v = uId.value
+		    	let uName_v = uName.value
 				var realReIdx = document.querySelector('.reIdx');
 				var mIdx = document.querySelector('.mIdx');
+				var mId = document.querySelector('.mId');
+				var mName = document.querySelector('.mName');
 				realReIdx.value = reIdx_v;
 				mIdx.value = uIdx_v;
+				console.log("test", uId_v)
+				console.log("test2", uName_v)
+				mId.value = uId_v;
+				mName.value = uName_v;
+				console.log("test", mName.value)
+				console.log("test2", mId.value)
 		        // 요소의 display를 토글
 		        if ("${userVO}" == "") {
 					alert("로그인 후 이용 가능합니다.")

@@ -90,8 +90,8 @@
 	</select>
 	
 	<insert id="reviewWrite" parameterType="ReviewVO">
-		insert into Review_table(u_idx, contentsid, u_profile_img, u_name, re_content, re_grade, re_regdate) 
-		values(#{u_idx}, #{contentsid}, #{u_profile_img}, #{u_name}, #{re_content}, #{re_grade}, sysdate()) 
+		insert into Review_table(u_idx, u_id, contentsid, u_profile_img, u_name, re_content, re_grade, re_regdate) 
+		values(#{u_idx}, #{u_id}, #{contentsid}, #{u_profile_img}, #{u_name}, #{re_content}, #{re_grade}, sysdate()) 
 	</insert>
 	
 	<insert id="imageInsert" parameterType="ImagesVO">
@@ -105,6 +105,8 @@
 	<resultMap type="ReviewVO" id="ReviewMap">
 		<result column="re_idx" property="re_idx"/>
 		<result column="u_idx" property="u_idx"/>
+		<result column="u_id" property="u_id"/>
+		<result column="u_name" property="u_name"/>
 		<result column="contentsid" property="contentsid"/>
 		<result column="re_content" property="re_content"/>
 		<result column="re_grade" property="re_grade"/>
@@ -132,8 +134,8 @@
 	</select>
 	
 	<insert id="reportWrite" parameterType="ReportVO">
-		insert into Report_table(u_idx, re_idx, m_idx, report_title, report_content, report_writer, report_regdate) 
-		values(#{u_idx}, #{re_idx}, #{m_idx}, #{report_title}, #{report_content}, #{report_writer}, sysdate()) 
+		insert into Report_table(u_idx, re_idx, m_idx, m_id, m_name, report_title, report_content, report_writer, report_regdate) 
+		values(#{u_idx}, #{re_idx}, #{m_idx}, #{m_id}, #{m_name}, #{report_title}, #{report_content}, #{report_writer}, sysdate()) 
 	</insert>
 	
 	<select id="reviewAvg" parameterType="String" resultType="double">
