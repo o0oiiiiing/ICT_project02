@@ -6,7 +6,16 @@ public class UserVO {
 	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2,
 			u_gender, u_addr, u_state, u_regdate, active, u_report, step, u_del, out_regdate, u_restore, re_regdate,
 			u_profile_img, join_date, user_count, inactiveUsers, activeUsers, out_admin, re_admin, a_name, old_f_name, bo_idx, report_idx;
+
 	private MultipartFile file;
+
+	public String getRe_active() {
+		return re_active;
+	}
+
+	public void setRe_active(String re_active) {
+		this.re_active = re_active;
+	}
 
 	public MultipartFile getFile() {
 		return file;
@@ -97,7 +106,7 @@ public class UserVO {
 	}
 
 	private MultipartFile user_profile;
-	
+
 	public MultipartFile getUser_profile() {
 		return user_profile;
 	}

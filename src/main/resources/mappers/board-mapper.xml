@@ -112,8 +112,12 @@
 	
 	<!-- 신고 답글 작성 -->
 	<insert id="reply_insert" parameterType="repvo">
-		insert into Reply_table(report_idx, rep_writer, rep_content, rep_regdate)
-		values(#{report_idx}, #{a_name}, #{rep_content}, sysdate())
+		insert into Reply_table(report_idx, rep_writer, rep_content, rep_regdate, active)
+		values(#{report_idx}, #{a_name}, #{rep_content}, sysdate(), 1)
+	</insert>
+	<insert id="reply_insert2" parameterType="repvo">
+		insert into Reply_table(report_idx, rep_writer, rep_content, rep_regdate, active)
+		values(#{report_idx}, #{a_name}, #{rep_content}, sysdate(), 0)
 	</insert>
 	
 	<!-- 신고 답글 작성 -->
@@ -124,12 +128,15 @@
 	</update>
 	
 	<!-- 신고 답글 작성 -->
-	<update id="user_report" parameterType="repvo">
+	<update id="user_report" parameterType="map">
 		update User_table
-		set u_report = u_report +1
+		set	u_report = u_report + 1,
+        re_active = case when u_report = 3 then 1 else active end,
+        u_del = case when u_report = 3 then '신고 누적 3회' else u_del end,
+        out_regdate = case when u_report = 3 then sysdate() else out_regdate end,
+        out_admin = case when u_report = 3 then #{a_name} else out_admin end
 		where u_idx = #{m_idx}
 	</update>
-	
 	
 	<!-- 신고 답글 수정 -->
 	<update id="reply_update_ok" parameterType="String">
@@ -231,7 +238,7 @@
 	<select id="user_list" resultType="userVO" parameterType="Map">
 		select * from User_table 
 		<if test="filter != null">
-			where active = #{filter}
+			where active = #{filter} or re_active = #{filter}
 		</if>
 		order by u_idx desc
 		limit #{limit} offset #{offset} 
@@ -312,6 +319,11 @@
 		ORDER BY join_date
 	</select>
 	
+	<select id="user_status" resultType="userVO" parameterType="String">
+		select *
+		from User_table
+		where u_idx = #{m_idx}
+	</select>
 	
 </mapper>
 

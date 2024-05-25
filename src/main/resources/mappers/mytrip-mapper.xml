@@ -38,7 +38,8 @@
     <select id="userList" resultType="uvo4" parameterType="map">
     	select u.*,
        		(select count(*) from Like_table where u_idx=#{u_idx}) as like_active_count,
-       		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count
+       		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count,
+       		(select count(*) from Report_table where u_idx=#{u_idx}) as report_count
 		from User_table u
 		where u.u_idx=#{u_idx}
 	</select>		
