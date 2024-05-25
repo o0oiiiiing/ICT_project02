@@ -73,6 +73,8 @@
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">
 											<input type="hidden" class="u_idx" value="${k.u_idx}">
+											<input type="hidden" class="u_id" value="${k.u_id}">
+											<input type="hidden" class="u_name" value="${k.u_name}">
 										</p>
 									</div>
 								</c:when>
@@ -90,6 +92,8 @@
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">
 											<input type="hidden" class="u_idx" value="${k.u_idx}">
+											<input type="hidden" class="u_id" value="${k.u_id}">
+											<input type="hidden" class="u_name" value="${k.u_name}">
 										</p>
 									</div>
 								</c:otherwise>

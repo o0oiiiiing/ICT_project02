@@ -35,6 +35,7 @@
 			</div>
 			<div class="qa_write__buttons">
 				<input type="hidden" value="${userVO.u_idx}" name="u_idx">
+				<input type="hidden" value="${userVO.u_id}" name="u_id">
 				<input class="review_write__button" type="reset" value="취소">
 				<button type="button" class="review_write__button" onclick="reviewWrite(this.form)">등록</button>
 			</div>

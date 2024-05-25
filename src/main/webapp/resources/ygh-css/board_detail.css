@@ -25,6 +25,7 @@
 #board_detail table th {
 	width: 150px;
 	text-align: center;
+	vertical-align: middle;
 	border: 1px solid lightgray;
 	padding: 5px;
 }
@@ -67,6 +68,7 @@
 
 #comment_box table th, #comment_box3 table th {
 	text-align: center;
+	vertical-align: middle;
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }

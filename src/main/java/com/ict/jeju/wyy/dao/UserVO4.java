@@ -6,8 +6,22 @@ public class UserVO4 {
 	private String c_idx, c_status;
 	private String like_idx, like_active;
 	private String bo_idx;
-	private String like_active_count, review_count;
-
+	private String like_active_count, review_count, report_count,u_report;
+	
+	
+	
+	public String getU_report() {
+		return u_report;
+	}
+	public void setU_report(String u_report) {
+		this.u_report = u_report;
+	}
+	public String getReport_count() {
+		return report_count;
+	}
+	public void setReport_count(String report_count) {
+		this.report_count = report_count;
+	}
 	public String getU_profile_img() {
 		return u_profile_img;
 	}

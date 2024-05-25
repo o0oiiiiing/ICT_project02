@@ -3,10 +3,18 @@ package com.ict.jeju.pdh.dao;
 import java.util.List;
 
 public class ReviewVO {
-	private String re_idx, u_idx, contentsid, re_content, re_grade, re_regdate, u_profile_img, u_name, pic_file;
+	private String re_idx, u_idx, u_id, contentsid, re_content, re_grade, re_regdate, u_profile_img, u_name, pic_file;
 	
 	List<ImagesVO> imageList;
 	
+	public String getU_id() {
+		return u_id;
+	}
+
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
+	}
+
 	public String getPic_file() {
 		return pic_file;
 	}

@@ -230,18 +230,29 @@
 			<version>2.13.1</version> <!-- 사용하고자 하는 버전으로 대체 -->
 		</dependency>
 
-		<!-- socket -->
+		<!-- 웹 소켓 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>5.3.12</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.11.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>5.3.12</version>
 		</dependency>
+		
 		<!-- stomp -->
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
