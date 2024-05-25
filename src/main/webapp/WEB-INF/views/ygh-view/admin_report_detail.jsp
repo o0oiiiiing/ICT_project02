@@ -65,7 +65,9 @@
 </script>
 </head>
 <body>
-	<%@include file="../common/header.jsp"%>
+<%@include file="../common/header.jsp"%>
+<%@include file="../ygh-view/admin_bar.jsp"%>
+
 	<form method="post">
 		<div id="board_detail">
 			<table>
@@ -204,6 +206,10 @@
 						<tr>
 							<th>날짜</th>
 							<td>${k.rep_regdate.substring(0,10)}</td>
+						</tr>
+						<tr>
+							<th>신고처리여부</th>
+							<td style="text-align: left;">${k.active == 1 ? '처리' : '미처리' }</td>
 						</tr>
 						<tr>
 							<th>내용</th>

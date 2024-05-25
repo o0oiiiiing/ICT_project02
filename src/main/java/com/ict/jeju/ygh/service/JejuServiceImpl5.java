@@ -130,6 +130,10 @@ public class JejuServiceImpl5 implements JejuService5 {
 	public int replyInsert(ReplyVO repvo) {
 		return jejuDAO5.replyInsert(repvo);
 	}
+	@Override
+	public int replyInsert2(ReplyVO repvo) {
+		return jejuDAO5.replyInsert2(repvo);
+	}
 
 	// 신고 답글 작성
 	@Override
@@ -145,8 +149,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 	
 	// 신고 답글 수정
 	@Override
-	public int userReport(String m_idx) {
-		return jejuDAO5.userReport(m_idx);
+	public int userReport(String m_idx, String a_name) {
+		return jejuDAO5.userReport(m_idx, a_name);
 	}
 
 	// 신고 답글 삭제

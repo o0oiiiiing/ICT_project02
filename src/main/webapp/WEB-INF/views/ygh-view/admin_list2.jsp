@@ -14,7 +14,6 @@
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link href="<c:url value="/resources/ygh-css/admin_board.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/admin_report.css"/>" rel='stylesheet' />
-<link href="<c:url value="/resources/ygh-css/admin_bar.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -63,7 +62,7 @@ $(document).ready(function() {
 function admin_board_detail_go(bo_idx, cPage) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
-    form.setAttribute("action", "admin_board_detail.do");
+    form.setAttribute("action", "admin_board_detail2.do");
 
     var bo_idxField = document.createElement("input");
     bo_idxField.setAttribute("type", "hidden");
@@ -84,7 +83,7 @@ function admin_board_detail_go(bo_idx, cPage) {
 function admin_report_detail_go(report_idx, cPage2) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
-    form.setAttribute("action", "admin_report_detail.do");
+    form.setAttribute("action", "admin_report_detail2.do");
 
     var report_idxField = document.createElement("input");
     report_idxField.setAttribute("type", "hidden");
@@ -105,41 +104,8 @@ function admin_report_detail_go(report_idx, cPage2) {
 </script>
 </head>
 <body>
-
 <%@include file="../common/header.jsp"%>
-
-	<div id="menubar">
-		<h1>나의 여행(관리자)</h1>
-		<table>
-			<tr>
-				<td><span class="material-symbols-outlined">finance</span><br><a href="dashboard.do">대시보드</a></td>
-				<td><span class="material-symbols-outlined">manage_accounts</span><br><a href="user_list.do">회원관리</a></td>
-				<td><span class="material-symbols-outlined">mark_chat_read</span><br><a href="admin_list2.do">답변</a></td>
-				<td><span class="material-symbols-outlined">mark_chat_unread</span><br><a href="admin_list.do">미답변</a></td>
-				<td><span class="material-symbols-outlined">calendar_add_on</span><br><a href="admin_insert">장소추가</a></td>
-				<c:if test="${adminVO.a_status == '1'}">
-					<td><span class="material-symbols-outlined">person_add</span><br><a href="admin_join.do">관리자 생성</a></td>
-				</c:if>
-			</tr>
-		</table>
-	</div>
-	 
-	
-	<div id="inner_body">
-		<aside class="side_bar js-side_bar">
-			<ul>
-				<li><span class="material-symbols-outlined">finance</span><a href="dashboard.do">대시보드</a></li>
-				<li><span class="material-symbols-outlined">manage_accounts</span><a href="user_list.do">회원관리</a></li>
-				<li><span class="material-symbols-outlined">mark_chat_read</span><a href="admin_list2.do">답변</a></li>
-				<li><span class="material-symbols-outlined">mark_chat_unread</span><a href="admin_list.do">미답변</a></li>
-				<li><span class="material-symbols-outlined">calendar_add_on</span><a href="admin_insert">장소추가</a></li>
-				<c:if test="${adminVO.a_status == '1'}">
-					<li><span class="material-symbols-outlined">person_add</span><a href="admin_join.do">관리자 생성</a></li>
-				</c:if>
-			</ul>
-		</aside>
-	</div>
-	
+<%@include file="../ygh-view/admin_bar.jsp"%>
 	
 	<div class="tab_bar">답변 Q&A</div>
 	<div id="board_t">
@@ -187,7 +153,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 								</c:when>
 								<c:otherwise>
 									<li>
-										<a href="admin_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8249;</a>
+										<a href="admin_list2.do?cPage=${paging.beginBlock - paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -200,7 +166,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 										<li class="now">${k}</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="admin_list.do?cPage=${k}&cPage2=${paging2.nowPage2}">${k}</a></li>
+										<li><a href="admin_list2.do?cPage=${k}&cPage2=${paging2.nowPage2}">${k}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -212,7 +178,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="admin_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8250;</a>
+										href="admin_list2.do?cPage=${paging.beginBlock + paging.pagePerBlock}&cPage2=${paging2.nowPage2}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -270,7 +236,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="admin_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8249;</a>
+											href="admin_list2.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8249;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
@@ -283,7 +249,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 											<li class="now">${k2}</li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="admin_list.do?cPage2=${k2}&cPage=${paging.nowPage}">${k2}</a></li>
+											<li><a href="admin_list2.do?cPage2=${k2}&cPage=${paging.nowPage}">${k2}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -295,7 +261,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="admin_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8250;</a>
+											href="admin_list2.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}&cPage=${paging.nowPage}">&#8250;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>

@@ -231,6 +231,14 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+	public int replyInsert2(ReplyVO repvo) {
+		try {
+			return sqlSessionTemplate.insert("Board_table.reply_insert2", repvo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 
 	// 신고 답글 작성
 	public int replyUpdate(String report_idx) {
@@ -243,9 +251,12 @@ public class JejuDAO5 {
 	}
 
 	// 신고 답글 작성
-	public int userReport(String m_idx) {
+	public int userReport(String m_idx, String a_name) {
 		try {
-			return sqlSessionTemplate.update("Board_table.user_report", m_idx);
+			Map<String, Object> paramMap = new HashMap<>();
+		    paramMap.put("m_idx", m_idx);
+		    paramMap.put("a_name", a_name);
+			return sqlSessionTemplate.update("Board_table.user_report", paramMap);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
