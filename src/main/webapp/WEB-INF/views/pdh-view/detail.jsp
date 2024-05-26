@@ -94,6 +94,7 @@
 	    var writeButton = document.querySelector('.write_button');
 	    var reviewButton = document.querySelector('.write_r_button');
 	    var reportButton = document.querySelectorAll('.report-button');
+	    var deleteButton = document.querySelectorAll('.delete-button');
 	    var qaWriteDiv = document.getElementById('qa_write');
 	    var reviewWriteDiv = document.getElementById('review_write');
 	    var reportWriteDiv = document.getElementById('report_write');
@@ -148,13 +149,9 @@
 	    reportButton.forEach(function(button) {
 	    	button.addEventListener('click', function() {
 		    	// input type의 hidden의 value 바꾸기
-		    	console.log(this)
 				let reIdx = this.nextElementSibling;
-		    	console.log(reIdx)
 		    	let uIdx = reIdx.nextElementSibling;
-		    	console.log(uIdx)
 		    	let uId = uIdx.nextElementSibling;
-		    	console.log(uId)
 		    	let uName = uId.nextElementSibling;
 		    	let reIdx_v = reIdx.value
 		    	let uIdx_v = uIdx.value
@@ -193,6 +190,19 @@
 			        }
 		        })
 		    });
+	    });
+	    
+	    deleteButton.forEach(function(button) {
+	    	button.addEventListener('click', function() {
+	    		let span = this.nextElementSibling;
+	    		let reIdx = span.nextElementSibling.value;
+		    	if (confirm("리뷰를 삭제하시겠습니까?")) {
+					location.href = "removeReview?contentsid=${placeDetail.contentsid}&re_idx=" + reIdx;
+					alert("삭제가 완료됐습니다.")
+				} else {
+					alert("삭제가 취소됐습니다.")
+				}
+	    	})
 	    });
 	});
 
@@ -290,9 +300,7 @@
 	<!-- 리뷰 내용 보여주는 영역 -->
 	<%@include file="../pdh-view/reviewContent.jsp"%>
 	
-	<%-- <!-- Q&A 내용 작성하는 영역 -->
-	<%@include file="../pdh-view/qnaWrite.jsp"%> --%>
-	<!-- Q&A 작성하는 영역 -->
+	<!-- Q&A 내용 작성하는 영역 -->
 	<form id="qa_write" method="post" action="qaWrite">
 		<div class="qa_write__container" style="height: 510px;">
 			<p class="qa_wrtie__title">Q&A 작성</p>

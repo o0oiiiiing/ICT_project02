@@ -430,7 +430,7 @@
 	color: #D9D9D9;
 }
 
-.report-button {
+.report-button, .delete-button {
 	color: #D9D9D9;
 	border: none;
 	font-family: 'NanumSquare';
@@ -438,9 +438,9 @@
 	font-size: 18px;
 }
 
-.report-button:hover {
+.report-button:hover, .delete-button:hover {
 	cursor: pointer;
-	color: pink;
+	color: #FFBB36;
 }
 
 .favorite {

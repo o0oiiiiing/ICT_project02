@@ -159,6 +159,11 @@
 		from Like_table 
 		where u_idx = #{u_idx} AND contentsid = #{contentsid}
 	</select>
+	
+	<delete id="removeReview" parameterType="String">
+		delete from Review_table 
+		where re_idx = #{re_idx}
+	</delete>
 
 </mapper>
 

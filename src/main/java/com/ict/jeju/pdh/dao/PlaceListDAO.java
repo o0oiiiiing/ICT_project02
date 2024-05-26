@@ -200,4 +200,14 @@ public class PlaceListDAO {
 		}
 		return null;
 	}
+	
+	// 자기 자신의 리뷰 삭제하기
+	public int removeReview(String re_idx) {
+		try {
+			return sqlSessionTemplate.delete("place.removeReview", re_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }

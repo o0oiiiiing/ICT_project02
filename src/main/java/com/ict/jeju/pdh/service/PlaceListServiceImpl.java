@@ -126,6 +126,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public WishVO confirmLike(WishVO wishVO) {
 		return placeListDAO.confirmLike(wishVO);
+	}
+	
+	// 자기 자신의 리뷰 삭제하기
+	@Override
+	public int removeReview(String re_idx) {
+		return placeListDAO.removeReview(re_idx);
 	}	
 
 }

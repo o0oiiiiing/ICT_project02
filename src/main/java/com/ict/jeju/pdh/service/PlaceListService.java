@@ -64,4 +64,7 @@ public interface PlaceListService {
 	
 	// 좋아요 여부 확인
 	public WishVO confirmLike(WishVO wishVO);
+	
+	// 자기 자신의 리뷰 삭제하기
+	public int removeReview(String re_idx);
 }

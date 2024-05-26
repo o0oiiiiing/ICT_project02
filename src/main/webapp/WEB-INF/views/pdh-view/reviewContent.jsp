@@ -69,6 +69,13 @@
 									<div class="review-content__text" style="height: 240px;">
 										<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
 										<p class="report">
+											<c:choose>
+												<c:when test="${userVO.u_idx == k.u_idx}">
+													<input class="delete-button" type="button" value="삭제하기">
+													<span style="font-family: 'NanumSquare'; font-size: 18px;">&nbsp;|&nbsp;</span>
+													<input type="hidden" class="re_idx" name="re_idx" value="${k.re_idx}">
+												</c:when>
+											</c:choose>
 											<span class="material-symbols-outlined declaration">notifications</span>
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">
@@ -88,6 +95,13 @@
 												src="resources/upload/${j.pic_file}">
 										</c:forEach>
 										<p class="report">
+											<c:choose>
+												<c:when test="${userVO.u_idx == k.u_idx}">
+													<input class="delete-button" type="button" value="삭제하기">
+													<span style="font-family: 'NanumSquare'; font-size: 18px;">&nbsp;|&nbsp;</span>
+													<input type="hidden" class="re_idx" name="re_idx" value="${k.re_idx}">
+												</c:when>
+											</c:choose>
 											<span class="material-symbols-outlined declaration">notifications</span>
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">

@@ -93,6 +93,8 @@ public class PlaceListController {
 	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session,
 			HttpServletRequest request, WishVO wishVO) {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
+		System.out.println("1");
+		System.out.println(contentsid);
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
 
 		// 상세정보 가져오기
@@ -202,7 +204,7 @@ public class PlaceListController {
 
 		// 리뷰 리스트 가져오기
 		List<ReviewVO> reviewList = placeListService.reviewList(rPagingVO);
-		
+
 		// Like_table에서 좋아요 했는지 확인
 		if (userVO != null) {
 			wishVO.setU_idx(userVO.getU_idx());
@@ -211,13 +213,13 @@ public class PlaceListController {
 			if (confirmLike == null) {
 				System.out.println("null");
 				mv.addObject("check", "0");
-			} else {			
+			} else {
 				System.out.println("not null");
 				mv.addObject("check", "1");
 			}
-			
+
 		}
-		
+
 		if (placeDetail != null) {
 			mv.addObject("placeDetail", placeDetail);
 			mv.addObject("likeNum", likeNum);
@@ -248,7 +250,7 @@ public class PlaceListController {
 		placeListService.qaWrite(qaVO);
 		return new ModelAndView("redirect:detail");
 	}
-	
+
 	// 리뷰 작성하기
 	@PostMapping("reviewWrite")
 	public ModelAndView reviewWrite(HttpServletRequest request, ReviewVO reviewVO, ImagesVO imagesVO,
@@ -280,7 +282,17 @@ public class PlaceListController {
 		}
 		return new ModelAndView("redirect:detail");
 	}
-	
+
+	// 자기 자신의 리뷰 삭제하기
+	@RequestMapping("removeReview")
+	public ModelAndView removeReview(@ModelAttribute("contentsid") String contentsid, String re_idx) {
+		System.out.println("7777"+contentsid);
+		
+		placeListService.removeReview(re_idx);
+		
+		return new ModelAndView("redirect:detail");
+	}
+
 	// 신고 작성하기
 	@PostMapping("reportWrite")
 	public ModelAndView reportWrite(ReportVO reportVO, @ModelAttribute("contentsid") String contentsid) {
@@ -294,7 +306,8 @@ public class PlaceListController {
 
 	// 캘린더 일정 추가하기
 	@RequestMapping("addSchedule")
-	public ModelAndView saveCal(CalendarVO cvo4, HttpServletRequest request, @ModelAttribute("contentsid") String contentsid) {
+	public ModelAndView saveCal(CalendarVO cvo4, HttpServletRequest request,
+			@ModelAttribute("contentsid") String contentsid) {
 		HttpSession session = request.getSession();
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
 		int result = calendarService4.saveCal(cvo4, userVO.getU_idx());
@@ -303,7 +316,7 @@ public class PlaceListController {
 		}
 		return new ModelAndView("wyy-view/error");
 	}
-	
+
 	// 좋아요한 여행지에 추가하기
 	@RequestMapping("addWish")
 	public ModelAndView addWish(@ModelAttribute("contentsid") String contentsid, WishVO wishVO) {
@@ -311,13 +324,13 @@ public class PlaceListController {
 		wishVO.setU_idx(userVO.getU_idx());
 		wishVO.setContentsid(contentsid);
 		int result = placeListService.addWish(wishVO);
-		
+
 		if (result > 0) {
 			return new ModelAndView("redirect:detail");
 		}
 		return new ModelAndView("wyy-view/error");
 	}
-	
+
 	// 좋아요한 여행지에서 제거하기
 	@RequestMapping("removeWish")
 	public ModelAndView removeWish(@ModelAttribute("contentsid") String contentsid, WishVO wishVO) {
@@ -325,7 +338,7 @@ public class PlaceListController {
 		wishVO.setU_idx(userVO.getU_idx());
 		wishVO.setContentsid(contentsid);
 		int result = placeListService.removeWish(wishVO);
-		
+
 		if (result > 0) {
 			return new ModelAndView("redirect:detail");
 		}
