@@ -19,6 +19,16 @@
 		f.action = "admin_list.do";
 		f.submit();
 	}
+	
+	function admin_report_delete(f) {
+		 if (confirm("해당 리뷰를 비공개 처리 하시겠습니까?")) {
+             alert("해당 리뷰가 비공개 처리되었습니다.");
+			f.action = "admin_report_delete.do";
+			f.submit();
+         } else {
+             alert("해당 리뷰 비공개 처리가 취소되었습니다.");
+         }
+	}
 
 	function toggleCommentBox() {
 		let comment_box = document.getElementById("comment_box");
@@ -146,10 +156,12 @@
 		<div id="board_detail_btn">
 			<input type="hidden" value="${revo.report_idx}" name="report_idx">
 			<input type="hidden" value="${cPage2}" name="cPage2"> 
-			<input type="hidden" name="re_idx" value="${ReviewVO.re_idx}">
+			<input type="hidden" name="re_idx" value="${revo.re_idx}">
 			<input type="button" value="목록" onclick="admin_list(this.form)" /> 
 			<input type="button" value="답글" onclick="toggleCommentBox()" /> 
-			<input type="button" value="삭제" onclick="report_delete(this.form)" />
+			<c:if test="${ReviewVO.rep_status == 0}">
+				<input type="button" value="리뷰삭제" onclick="admin_report_delete(this.form)" />
+			</c:if>
 		</div>
 	</form>
 
@@ -180,6 +192,7 @@
 			<input type="hidden" name="cPage2" value="${cPage2}"> 
 			<input type="hidden" name="report_idx" value="${revo.report_idx}">
 			<input type="hidden" name="re_idx" value="${ReviewVO.re_idx}">
+			<input type="hidden" name="contentsid" value="${ReviewVO.contentsid}">
 			<input type="hidden" name="a_name" value="${adminVO.a_name}">
 			<input type="hidden" name="m_idx" value="${revo.m_idx}">
 			<input type="button" value="입력" onclick="report_ans_write_ok(this.form)" />
@@ -238,7 +251,7 @@
 			<c:forEach var="k" items="${rep_list}">
 				<table>
 					<tr>
-						<th colspan="2" style="text-align: left;">답변하기</th>
+						<th colspan="2" style="text-align: left;">답변 수정하기</th>
 					</tr>
 					<tr>
 						<th>내용</th>

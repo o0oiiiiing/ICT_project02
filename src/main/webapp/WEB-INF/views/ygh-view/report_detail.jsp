@@ -12,6 +12,7 @@
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <!-- summer note -->
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/pdh-css/detail.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/report_detail.css"/>" rel='stylesheet' />
 <script type="text/javascript">
 	function report_list(f) {
@@ -32,19 +33,58 @@
 					<th>제목</th>
 					<td>${revo.report_title}</td>
 				</tr>
-
-				<tr>
-					<th>작성자</th>
-					<td>${revo.report_writer}</td>
-				</tr>
-
 				<tr>
 					<th>날짜</th>
 					<td>${revo.report_regdate.substring(0,10)}</td>
 				</tr>
-
 				<tr>
-					<th>내용</th>
+					<th>신고리뷰</th>
+						<td>
+							 <p><a href="detail?contentsid=${ReviewVO.contentsid}">신고 리뷰 페이지 바로가기</a></p>
+							<%-- <p><a href="#" onclick="detail_go('${ReviewVO.contentsid}'">신고 리뷰 페이지 바로가기</a></p> --%>
+							<div class="review-content" style="border: 1px solid lightgray; padding: 10px; margin: 10px 0px 0px;">
+								<div class="review-content__left">
+									<img style="width: 130px; height: 130px; border-radius: 50%;"
+										alt="프로필사진" src="resources/upload/${ReviewVO.u_profile_img}">
+									<p>${ReviewVO.u_name}</p>
+									<p>${ReviewVO.re_regdate.substring(0,10)}</p>
+									<c:choose>
+										<c:when test="${ReviewVO.re_grade == 1}">
+											<span style="color: #FFDF6B;" class="star">★</span>
+											<span style="color: #f0f0f0;" class="star">★★★★</span>
+										</c:when>
+										<c:when test="${ReviewVO.re_grade == 2}">
+											<span style="color: #FFDF6B;" class="star">★★</span>
+											<span style="color: #f0f0f0;" class="star">★★★</span>
+										</c:when>
+										<c:when test="${ReviewVO.re_grade == 3}">
+											<span style="color: #FFDF6B;" class="star">★★★</span>
+											<span style="color: #f0f0f0;" class="star">★★</span>
+										</c:when>
+										<c:when test="${ReviewVO.re_grade == 4}">
+											<span style="color: #FFDF6B;" class="star">★★★★</span>
+											<span style="color: #f0f0f0;" class="star">★</span>
+										</c:when>
+										<c:otherwise>
+											<span style="color: #FFDF6B;" class="star">★★★★★</span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+
+								<div class="review-content__right" style="border-left: 1px solid lightgray; padding: 20px;">
+										<p style="color: black;">${ReviewVO.re_content}</p>
+
+										<div class="images">
+											<img style="width: 150px; height: 150px;" alt="사진"
+												src="resources/upload/${ReviewVO.pic_file}">
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+				<tr>
+					<th>신고내용</th>
 					<td>
 						<textarea rows="10" cols="60" id="report_content" name="report_content">${revo.report_content}</textarea>
 					</td>

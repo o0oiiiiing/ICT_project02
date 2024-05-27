@@ -23,7 +23,7 @@
 	}
 
 	// a링크 postmapping 으로 변경
-	function report_detail_go(report_idx, cPage2) {
+	function report_detail_go(report_idx, cPage2, re_idx) {
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "report_detail.do");
@@ -39,6 +39,12 @@
 		cPage2Field.setAttribute("name", "cPage2");
 		cPage2Field.setAttribute("value", cPage2);
 		form.appendChild(cPage2Field);
+
+		var re_idxField = document.createElement("input");
+		re_idxField.setAttribute("type", "hidden");
+		re_idxField.setAttribute("name", "re_idx");
+		re_idxField.setAttribute("value", re_idx);
+		form.appendChild(re_idxField);
 
 		document.body.appendChild(form);
 		form.submit();
@@ -74,7 +80,7 @@
 								<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 
 								<td style="text-align: left;">
-									<a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
+									<a href="#" onclick="report_detail_go('${k2.report_idx}', '${paging2.nowPage2}', '${k2.re_idx}')">${k2.report_title}</a>
 								</td>
 
 								<td>${k2.report_regdate.substring(0,10)}</td>

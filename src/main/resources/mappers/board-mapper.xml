@@ -155,8 +155,8 @@
 		<selectKey keyProperty="groups" resultType="String" order="BEFORE">
             SELECT (IFNULL(MAX(bo_idx),0)+1) as groups FROM Board_table
         </selectKey>
-		insert into Board_table(u_idx, bo_writer, bo_title, bo_content, bo_pwd, bo_regdate)
-		values(#{u_idx}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate())
+		insert into Board_table(u_idx, bo_writer, bo_title, bo_content, bo_regdate)
+		values(#{u_idx}, #{u_name}, #{bo_title}, #{bo_content}, sysdate())
 	</insert>
 	
 	<!-- Q&A 게시판 수정 (사용자) -->
@@ -167,7 +167,7 @@
 	</update>
 	
 	<!-- Q&A 게시판 삭제 (사용자) -->
-	<delete id="board_delete" parameterType="bovo">
+	<delete id="board_delete" parameterType="String">
 		delete from Board_table where bo_idx = #{bo_idx}
 	</delete>
 
@@ -334,8 +334,13 @@
 		from User_table
 		where u_idx = #{m_idx}
 	</select>
-	
-	
+
+	<update id="report_delete" parameterType="String">
+		update Review_table
+		set rep_status = 1, re_grade = 0
+		where re_idx = #{re_idx}
+	</update>
+
 	
 </mapper>
 

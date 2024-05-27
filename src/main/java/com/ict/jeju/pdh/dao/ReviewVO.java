@@ -3,8 +3,9 @@ package com.ict.jeju.pdh.dao;
 import java.util.List;
 
 public class ReviewVO {
+
 	private String re_idx, u_idx, u_id, contentsid, re_content, re_grade, re_regdate, u_profile_img, u_name, pic_file, rep_status;
-	
+
 	List<ImagesVO> imageList;
 	
 	public String getRep_status() {
