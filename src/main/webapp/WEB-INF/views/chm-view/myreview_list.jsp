@@ -54,16 +54,24 @@
 								<td>${k.re_regdate.substring(0,10)}</td>
 								<c:choose>
 									<c:when test="${k.re_grade == 1}">
-										<td><span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span></td>
+										<td>
+										<span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span>
+										</td>
 									</c:when>
 									<c:when test="${k.re_grade == 2}">
-										<td><span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span></td>
+										<td>
+										<span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span>
+										</td>
 									</c:when>
 									<c:when test="${k.re_grade == 3}">
-										<td><span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span></td>
+										<td>
+										<span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span>
+										</td>
 									</c:when>
 									<c:when test="${k.re_grade == 4}">
-										<td><span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span></td>
+										<td>
+										<span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span>
+										</td>
 									</c:when>
 									<c:otherwise>
 										<td><span style="color: #FFDF6B;">★★★★★</span></td>
