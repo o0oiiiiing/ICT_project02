@@ -18,22 +18,22 @@
 		<div class="review_title__section">
 			<p class="qa_title">
 				<c:choose>
-					<c:when test="${reviewAvg != null}">
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
-							style="color: #FFBB36;">${reviewAvg}</span>
-					</c:when>
-					<c:otherwise>
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
-					</c:otherwise>
-				</c:choose>
+                    <c:when test="${reviewAvg != null and reviewAvg > 0}">
+                            리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
+                            style="color: #FFBB36;">${reviewAvg}</span>
+                    </c:when>
+                    <c:otherwise>
+                            리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
+                            style="color: #FFBB36;">0</span>
+                    </c:otherwise>
+                </c:choose>
 			</p>
 			<input class="write_r_button" type="button" value="리뷰작성">
 		</div>
 		<hr class="hr">
 		<c:choose>
 			<c:when test="${empty reviewList}">
-				<p
-					style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
+				<p style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
 					존재하지 않습니다.</p>
 				<hr class="hr">
 			</c:when>

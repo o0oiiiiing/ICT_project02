@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
@@ -132,6 +133,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public int removeReview(String re_idx) {
 		return placeListDAO.removeReview(re_idx);
+	}
+	
+	// Q&A 답변 작성하기
+	@Override
+	public int commentWrite(CommentVO commentVO) {
+		return placeListDAO.commentWrite(commentVO);
 	}	
 
 }

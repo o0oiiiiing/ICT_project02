@@ -40,7 +40,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${qaList}">
-							<tr onclick="qaDetailOpen(this)">
+							<tr onclick="qaDetailOpen(this, '${k.disclosure}', '${k.u_idx}', '${userVO.u_idx}', '${admin_loginChk}')">
 								<c:choose>
 									<c:when test="${k.disclosure == '0'}">
 										<td style="text-align: center;">공개</td>
@@ -62,6 +62,7 @@
 									</c:otherwise>
 								</c:choose>
 							</tr>
+					
 							<tr style="display: none;" class="qaDetail">
 								<td colspan="5">내용<br>${k.bo_content}</td>
 							</tr>
@@ -73,7 +74,20 @@
 										</tr>
 									</c:forEach>
 								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${admin_loginChk == 'ok'}">
+											<tr style="display: none;" class="comment">
+												<td colspan="5">
+													<input class="comment_button" type="button" value="답변달기">
+													<input type="hidden" class="bo_idx" value="${k.bo_idx}">
+												</td>
+											</tr>
+										</c:when>
+									</c:choose>
+								</c:otherwise>
 							</c:choose>
+								
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -121,17 +135,32 @@
 	</div>
 	
 	<script type="text/javascript">
-		function qaDetailOpen(el) {
- 			var qaDetails = el.nextElementSibling
-			var comments = qaDetails.nextElementSibling
+		function qaDetailOpen(el, disclosure, writer, user, admin) {
+			if (disclosure == '1') {
+				if (user == writer || admin == 'ok') {
+			 	} else {
+					alert("작성자만 확인이 가능합니다.")
+					return;					
+			 	}
+			}
 			
-			if (qaDetails.style.display === "table-row" && comments.style.display === "table-row") {
-		        qaDetails.style.display = "none";
-		        comments.style.display = "none";
-		    } else {
-		        qaDetails.style.display = "table-row";
-		        comments.style.display = "table-row";
-		    }
+		   // Find the next sibling element with the class 'qaDetail'
+		   var qaDetail = el.nextElementSibling;
+		   while (qaDetail && !qaDetail.classList.contains('qaDetail')) {
+		     qaDetail = qaDetail.nextElementSibling;
+		   }
+		
+		   // Toggle the display of the qaDetail element
+		   if (qaDetail) {
+		     qaDetail.style.display = qaDetail.style.display === 'table-row' ? 'none' : 'table-row';
+		   }
+		
+		   // Find all subsequent sibling elements with the class 'comment'
+		   var comment = qaDetail ? qaDetail.nextElementSibling : null;
+		   while (comment && comment.classList.contains('comment')) {
+		     comment.style.display = comment.style.display === 'table-row' ? 'none' : 'table-row';
+		     comment = comment.nextElementSibling;
+		   }
 		}
 	</script>
 </body>

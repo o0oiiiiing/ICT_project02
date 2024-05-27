@@ -40,7 +40,7 @@
 		select count(*)
 		from Review_table r
 		inner join Visitjeju_table v on v.contentsid = r.contentsid
-		where r.contentsid = #{contentsid}
+		where r.contentsid = #{contentsid} and r.rep_status = 0
 	</select>
 	
 	<update id="hitUpdate" parameterType="String">
@@ -56,8 +56,8 @@
 	</select>
 	
 	<insert id="qaWrite" parameterType="QaVO">
-		insert into Board_table(u_idx, contentsid, bo_writer, bo_title, bo_content, bo_pwd, bo_regdate, disclosure) 
-		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, #{bo_pwd}, sysdate(), #{disclosure}) 
+		insert into Board_table(u_idx, contentsid, bo_writer, bo_title, bo_content, bo_regdate, disclosure) 
+		values(#{u_idx}, #{contentsid}, #{u_name}, #{bo_title}, #{bo_content}, sysdate(), #{disclosure}) 
 	</insert>
 	
 	<resultMap type="QaVO" id="qaMap">
@@ -121,7 +121,7 @@
 	<select id="reviewList" parameterType="PagingVO" resultMap="ReviewMap">
 		select * 
 		from Review_table 
-		where contentsid = #{contentsid} 
+		where contentsid = #{contentsid} and rep_status = 0
 		order by re_regdate desc
 		limit #{limit}
 		offset #{offset}
@@ -141,7 +141,7 @@
 	<select id="reviewAvg" parameterType="String" resultType="double">
 		select AVG(re_grade) 
 		from Review_table 
-		where contentsid = #{contentsid} 
+		where contentsid = #{contentsid} and rep_status = 0
 	</select>
 	
 	<insert id="addWish" parameterType="WishVO">
@@ -164,6 +164,11 @@
 		delete from Review_table 
 		where re_idx = #{re_idx}
 	</delete>
+	
+	<insert id="commentWrite" parameterType="CommentVO">
+		insert into Comment_table(bo_idx, com_writer, com_content, com_regdate) 
+		values(#{bo_idx}, #{com_writer}, #{com_content}, sysdate()) 
+	</insert>
 
 </mapper>
 

@@ -3,7 +3,7 @@ package com.ict.jeju.pdh.dao;
 import java.util.List;
 
 public class QaVO {
-	private String bo_idx, u_idx, contentsid, bo_writer, bo_title, bo_content, bo_pwd, bo_hit, active, bo_regdate, disclosure, u_name;
+	private String bo_idx, u_idx, contentsid, bo_writer, bo_title, bo_content, bo_hit, active, bo_regdate, disclosure, u_name;
 	private String offset, limit;
 	List<CommentVO> comments;
 	
@@ -86,14 +86,6 @@ public class QaVO {
 
 	public void setBo_content(String bo_content) {
 		this.bo_content = bo_content;
-	}
-
-	public String getBo_pwd() {
-		return bo_pwd;
-	}
-
-	public void setBo_pwd(String bo_pwd) {
-		this.bo_pwd = bo_pwd;
 	}
 
 	public String getBo_hit() {

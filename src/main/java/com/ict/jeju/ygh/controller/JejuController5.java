@@ -57,6 +57,7 @@ public class JejuController5 {
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
+	
 	private UserVO userVO;
 
 	// 대시보드 이동

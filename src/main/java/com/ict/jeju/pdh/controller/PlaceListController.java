@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
 import com.ict.jeju.pdh.dao.QaPaging;
+import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
@@ -238,16 +239,18 @@ public class PlaceListController {
 		}
 		return null;
 	}
-
+	
+	// Q&A 작성하기
 	@PostMapping("qaWrite")
 	public ModelAndView qaWrite(QaVO qaVO, @ModelAttribute("contentsid") String contentsid) {
-		// 비밀번호 암호화
-		if (qaVO.getBo_pwd() != null) {
-			qaVO.setBo_pwd(passwordEncoder.encode(qaVO.getBo_pwd()));
-		}
-
-		// Q&A 작성 삽입
 		placeListService.qaWrite(qaVO);
+		return new ModelAndView("redirect:detail");
+	}
+	
+	// Q&A 답변 작성하기
+	@PostMapping("commentWrite")
+	public ModelAndView commentWrite(CommentVO commentVO, @ModelAttribute("contentsid") String contentsid) {
+		placeListService.commentWrite(commentVO);
 		return new ModelAndView("redirect:detail");
 	}
 
@@ -286,8 +289,6 @@ public class PlaceListController {
 	// 자기 자신의 리뷰 삭제하기
 	@RequestMapping("removeReview")
 	public ModelAndView removeReview(@ModelAttribute("contentsid") String contentsid, String re_idx) {
-		System.out.println("7777"+contentsid);
-		
 		placeListService.removeReview(re_idx);
 		
 		return new ModelAndView("redirect:detail");

@@ -95,9 +95,11 @@
 	    var reviewButton = document.querySelector('.write_r_button');
 	    var reportButton = document.querySelectorAll('.report-button');
 	    var deleteButton = document.querySelectorAll('.delete-button');
+	    var commentButton = document.querySelectorAll('.comment_button');
 	    var qaWriteDiv = document.getElementById('qa_write');
 	    var reviewWriteDiv = document.getElementById('review_write');
 	    var reportWriteDiv = document.getElementById('report_write');
+	    var commentDiv = document.getElementById('comment_write');
 	    var overlay = document.querySelector(".overlay")
 
 	    writeButton.addEventListener('click', function() {
@@ -163,12 +165,8 @@
 				var mName = document.querySelector('.mName');
 				realReIdx.value = reIdx_v;
 				mIdx.value = uIdx_v;
-				console.log("test", uId_v)
-				console.log("test2", uName_v)
 				mId.value = uId_v;
 				mName.value = uName_v;
-				console.log("test", mName.value)
-				console.log("test2", mId.value)
 		        // 요소의 display를 토글
 		        if ("${userVO}" == "") {
 					alert("로그인 후 이용 가능합니다.")
@@ -204,6 +202,31 @@
 				}
 	    	})
 	    });
+	    
+	    commentButton.forEach(function(button) {
+	    	button.addEventListener('click', function() {
+	    		let boIdx = this.nextElementSibling;
+		    	let boIdx_v = boIdx.value;
+		    	var realBoIdx = document.querySelector('.bo_idx');
+		    	realBoIdx.value = boIdx_v;
+		    	
+		    	if (commentDiv.style.display === 'block') {
+		    		commentDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        } else {
+		        	commentDiv.style.display = 'block';
+		        	overlay.style.display = 'block';
+		        }
+		    	
+		        overlay.addEventListener('click', function() {
+		        	if (commentDiv.style.display === 'block') {
+		        		commentDiv.style.display = 'none';
+			        	overlay.style.display = 'none';
+			        }
+			    })
+	    	})
+	    });	
+	    
 	});
 
 	function goWishList() {
@@ -321,9 +344,6 @@
 										onclick="handleDisclosure()">비공개
 								</div>
 							</td>
-							<td style="width: 449px;">비밀번호 : <input
-								style="width: 200px;" type="password" name="bo_pwd"
-								disabled="disabled" id="passwordInput" required="required"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -344,6 +364,9 @@
 	
 	<!-- 신고 내용 작성하는 영역 -->
 	<%@include file="../pdh-view/reportWrite.jsp"%>
+	
+	<!-- 댓글 내용 작성하는 영역 -->
+	<%@include file="../pdh-view/commentWrite.jsp"%>
 	
 	<!-- 일정 추가하는 영역 -->
 	<%@include file="../pdh-view/addSchedule.jsp"%>
@@ -397,25 +420,7 @@
         // summernote textarea 초기화
        $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
        passwordInput.disabled = true;
-    });
-    
-    // Q&A 공개 비공개
-    function handleDisclosure() {
-	    var disclosureValue = document.querySelector('input[name="disclosure"]:checked').value;
-	    var passwordInput = document.getElementById('passwordInput');
-		console.log(disclosureValue)
-		console.log(passwordInput)
-	    if (disclosureValue === '1') {
-	        // 비밀번호 입력란을 활성화하고, 비밀번호 입력을 강제합니다.
-	        passwordInput.disabled = false;
-	        passwordInput.required = true;
-	    } else {
-	        // 비밀번호 입력란을 비활성화하고, 필수 입력이 아니도록 설정합니다.
-	        passwordInput.disabled = true;
-	        passwordInput.required = false;
-	        passwordInput.value = '';
-	    }
-	}
+    });s
     
     // Q&A 내용 입력안할 시에 alert 뜨기
     function qaWrite(f) {
@@ -477,6 +482,19 @@
 		    }
 		}
 	}
+    
+/*     // Q&A 답변 내용 입력안할 시에 alert 뜨기
+    function commentWrite(f) {
+    	var commentContent = document.getElementById('comment-content').value.trim();
+	    if (!commentContent) {
+	    	alert("내용을 입력해 주세요.");
+            return false;
+	    } else {
+	    	f.action = "commentWrite?contentsid=${placeDetail.contentsid}";
+	    	alert("답변 작성이 완료되었습니다.")
+			f.submit();
+	    }
+	} */
     
     // review 사진 5장으로 제한
     document.getElementById('review_images').addEventListener('change', function(event) {
