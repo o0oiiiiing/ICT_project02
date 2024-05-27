@@ -36,7 +36,7 @@
 				<div><span class="user">${reviewDetail.u_name}</span>님이 작성하신 리뷰</div>
 			</div>
 			<div class="wrapper_buttom">
-				<div class="buttom_image"><img src="/resources/upload/${image}" style="width: 500px; height: 460px;"></div>
+				<div class="buttom_image"><img src="./resources/upload/${image}" style="width: 26vw; height: 42vh;"></div>
 				<div class="buttom_comment">
 					<span class="buttom_title"><a href="detail?contentsid=${reviewDetail.contentsid}" style="color: inherit; text-decoration: none;">${title}</a></span>
 					<c:choose>
@@ -65,9 +65,10 @@
 				<div class="footer_day">작성 날짜 : ${reviewDetail.re_regdate.substring(0,10)}</div>
 			</div>
 		</div>
-				<div id="myreview_detail_btn">
+				<div id="myreview_delete">
 					<input type="hidden" value="${cPage}" name="cPage">
-					<input type="button" value="삭제" onclick="myreview_delete(${reviewDetail.re_idx})" />
+					<input type="button" value="삭제" style="width: 100px; height: 40px; font-weight: bold; font-size: 16px;" 
+					onclick="myreview_delete(${reviewDetail.re_idx})" />
 				</div>
 	</form>
 <%@include file="../common/footer.jsp"%>

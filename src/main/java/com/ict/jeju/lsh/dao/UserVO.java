@@ -9,13 +9,13 @@ public class UserVO {
 
 	private MultipartFile file;
 
-	public String getRe_active() {
-		return re_active;
-	}
-
-	public void setRe_active(String re_active) {
-		this.re_active = re_active;
-	}
+//	public String getRe_active() {
+//		return re_active;
+//	}
+//
+//	public void setRe_active(String re_active) {
+//		this.re_active = re_active;
+//	}
 
 	public MultipartFile getFile() {
 		return file;

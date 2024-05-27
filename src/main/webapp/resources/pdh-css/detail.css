@@ -286,7 +286,7 @@
 	background-color: #D9D9D9;
 }
 
-#qa_write, #review_write, #report_write {
+#qa_write, #review_write, #report_write, #comment_write {
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -340,7 +340,7 @@
 	padding-top: 20px;
 }
 
-.qa_write__button, .review_write__button {
+.qa_write__button, .review_write__button, .comment_write__button {
 	border: none;
 	font-family: 'GmarketSansMedium';
 	width: 100px;
@@ -352,7 +352,9 @@
 	box-sizing: border-box;
 }
 
-.qa_write__button:hover, .qa_write__button:active {
+.qa_write__button:hover, .qa_write__button:active, .review_write__button:hover,
+	.review_write__button:active, .comment_write__button:hover,
+	.comment_write__button:active {
 	background-color: #b9b9b9;
 	color: #868686;
 }
@@ -430,7 +432,7 @@
 	color: #D9D9D9;
 }
 
-.report-button {
+.report-button, .delete-button {
 	color: #D9D9D9;
 	border: none;
 	font-family: 'NanumSquare';
@@ -438,9 +440,9 @@
 	font-size: 18px;
 }
 
-.report-button:hover {
+.report-button:hover, .delete-button:hover {
 	cursor: pointer;
-	color: pink;
+	color: #FFBB36;
 }
 
 .favorite {
