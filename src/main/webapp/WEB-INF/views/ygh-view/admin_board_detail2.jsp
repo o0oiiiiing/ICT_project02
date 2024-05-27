@@ -21,9 +21,14 @@ function admin_list2(f) {
 	f.submit();
 }
 
-function board_ans_write_ok2(f) {
-	f.action = "board_ans_write_ok2.do";
-	f.submit();
+function admin_board_delete2(f) {
+	 if (confirm("해당 Q&A를 삭제 하시겠습니까?")) {
+         alert("해당 Q&A가 삭제 되었습니다.");
+		f.action = "admin_board_delete2.do";
+		f.submit();
+     } else {
+         alert("해당 Q&A 삭제가 취소되었습니다.");
+     }
 }
 
 function toggleCommentBox() {
@@ -85,7 +90,18 @@ function comment_update_ok2(f) {
 					<th>날짜</th>
 					<td>${bovo.bo_regdate.substring(0,10)}</td>
 				</tr>
-
+				<c:choose>
+					<c:when test="${empty bovo.contentsid}"></c:when>
+					<c:otherwise>
+						<tr>
+							<th>문의 장소</th>
+							<td>
+								<p><a href="detail?contentsid=${bovo.contentsid}">장소 상세페이지 바로가기</a></p>
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				
 				<tr>
 					<th>내용</th>
 					<td><textarea rows="10" cols="60" id="bo_content"
@@ -99,34 +115,7 @@ function comment_update_ok2(f) {
 		<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
 		<input type="hidden" value="${cPage}" name="cPage"> 
 		<input type="button" value="목록" onclick="admin_list2(this.form)" /> 
-		<input type="button" value="답글" onclick="toggleCommentBox()" /> 
-		<input type="button" value="삭제" onclick="admin_board_delete(this.form)" />
-	</div>
-</form>
-
-<br>
-<br>
-<br>
-
-<%-- 답글 입력 --%>
-<form method="post">
-	<div id="comment_box" style="display: none;" >
-		<table>
-			<tr>
-				<th colspan="2" style="text-align: left;">답변하기</th>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea rows="10" cols="100" name="com_content"></textarea>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div id="comment_btn" style="display: none;">
-		<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
-		<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
-		<input type="hidden" name="cPage" value="${cPage}">
-		<input type="button" value="입력" onclick="board_ans_write_ok2(this.form)" />
+		<input type="button" value="삭제" onclick="admin_board_delete2(this.form)" />
 	</div>
 </form>
 

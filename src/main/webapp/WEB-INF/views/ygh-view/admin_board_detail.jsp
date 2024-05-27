@@ -21,6 +21,16 @@ function admin_list(f) {
 	f.submit();
 }
 
+function admin_board_delete(f) {
+	if (confirm("해당 Q&A를 삭제 하시겠습니까?")) {
+        alert("해당 Q&A가 삭제 되었습니다.");
+		f.action = "admin_board_delete.do";
+		f.submit();
+    } else {
+        alert("해당 Q&A 삭제가 취소되었습니다.");
+    }
+}
+
 function board_ans_write_ok(f) {
 	f.action = "board_ans_write_ok.do";
 	f.submit();
@@ -85,7 +95,18 @@ function comment_update_ok(f) {
 					<th>날짜</th>
 					<td>${bovo.bo_regdate.substring(0,10)}</td>
 				</tr>
-
+				<c:choose>
+					<c:when test="${empty bovo.contentsid}"></c:when>
+					<c:otherwise>
+						<tr>
+							<th>문의 장소</th>
+							<td>
+								<p><a href="detail?contentsid=${bovo.contentsid}">장소 상세페이지 바로가기</a></p>
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				
 				<tr>
 					<th>내용</th>
 					<td><textarea rows="10" cols="60" id="bo_content"

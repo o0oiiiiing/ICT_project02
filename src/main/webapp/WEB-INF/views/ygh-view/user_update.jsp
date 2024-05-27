@@ -17,9 +17,10 @@
 	$(document).ready(function() {
 		let pwdchk = "${pwdchk}";
 		if (pwdchk == 'fail') {
-			alert("비밀번호 틀림");
-			return;
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
 		}
+		
 	});
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -89,12 +90,19 @@
 		}
 		f.action = "user_update_ok.do?u_profile_img=${userVO.u_profile_img}";
 		f.submit();
+		
 	}
 	
 	// 비밀번호변경
 	function repwd_go() {
 		location.href = "repwd_go.do";
 	}
+	
+	let msg = "${msg}";
+    if (msg !== "") {
+        alert(msg);
+    }
+    
 </script>
 <style type="text/css">
 </style>
@@ -111,7 +119,7 @@
 						<tr>
 							<th style="vertical-align: top; padding-top: 10px;">프로필</th>
 							<td style="display: flex; align-items: center;">
-								<img id="profile-img" src="/resources/upload/${userVO.u_profile_img}" style="width: 100px; height: 100px; margin-right: 10px;"> 
+								<img id="profile-img" src="resources/upload/${userVO.u_profile_img}" style="width: 100px; height: 100px; margin-right: 10px;"> 
 								<div style="flex-direction: column;">
 						            <input type="file" name="file" id="file" onchange="previewImage(event)" style="width: 200px; border:none;">
 						            <input type="hidden" name="old_f_name" id="old_f_name" value="${userVO.u_profile_img}">
