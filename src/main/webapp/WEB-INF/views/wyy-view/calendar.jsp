@@ -36,7 +36,7 @@ body {
 				/* right : 'dayGridMonth' */
 				/* ,timeGridWeek,timeGridDay */
 			},
-			// 오늘날짜로 출력 (풀캘린더는 2024-04-24 이런형식으로 해야함.)
+			// 오늘날짜 중심
 			initialDate : new Date().toISOString().split('T')[0],
 			navLinks : true,
 			selectable : true,
@@ -48,7 +48,8 @@ body {
 					$.ajax({
 						url : "calDelete",
 						data : {
-							// extendedProps -> 풀캘린더에서  사용자 정의로 추가하고 싶은 속성이나 데이터가 있을 경우 씀
+							// extendedProps -> 풀캘린더에서 사용자 정의로 
+							// 추가하고 싶은 속성이나 데이터가 있을 경우 쓴다.
 							c_idx : arg.event.extendedProps.c_idx
 						},
 						method : "POST",
@@ -87,7 +88,7 @@ body {
 						console.log(data);
 						var events = data.map(function(item) {
 							var endDate = new Date(item.c_end);
-						    // 종료일에 1초 추가(풀캘린더는 00:00:00 시간은 해당 날짜로 안쳐줌..)
+						    // 종료일에 1초 추가(풀캘린더는 00:00:00 시간은 해당 날짜로 안친다.)
 						    endDate.setSeconds(endDate.getSeconds() + 1);
 							return {
 								title : item.c_title,

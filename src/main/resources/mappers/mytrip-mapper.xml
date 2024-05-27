@@ -35,7 +35,7 @@
    		where u_idx=#{u_idx}
    	</select>
     <!-- 나의여행 유저 리스트 -->
-    <select id="userList" resultType="uvo4" parameterType="map">
+    <select id="userList" resultType="userVO" parameterType="map">
     	select u.*,
        		(select count(*) from Like_table where u_idx=#{u_idx}) as like_active_count,
        		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count,

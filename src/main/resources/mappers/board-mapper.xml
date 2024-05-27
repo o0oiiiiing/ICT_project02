@@ -286,7 +286,7 @@
 	</select>
 	
 	<!-- 나의 리뷰 count -->
-	<select id="myreview_count" resultType="uvo4">
+	<select id="myreview_count" resultType="userVO">
     	select u.*,
        		(select count(*) from Like_table where u_idx=#{u_idx}) as like_active_count,
        		(select count(*) from Review_table where u_idx=#{u_idx}) as review_count

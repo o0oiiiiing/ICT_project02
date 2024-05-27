@@ -1,12 +1,8 @@
 package com.ict.jeju.ygh.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,25 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
-import com.ict.jeju.lsh.service.MailService;
-import com.ict.jeju.pdh.dao.ImagesVO;
-import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.service.PlaceListService;
 import com.ict.jeju.wyy.dao.AdminVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
@@ -938,21 +926,36 @@ public class JejuController5 {
 				paging.setEndBlock(paging.getTotalPage());
 			}
 
-			// DB
-			List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
-					myvo.getU_idx());
-
-			// user review count 가져오기 위함
-			List<UserVO4> review_count = jejuService5.myreviewCount(myvo.getU_idx());
-
-			// contentsid 와 vi_title 가져와서 표시하기 - 최현민
-			String contentsid = "";
-			String title = "";
-			for (MyreviewVO k : myreview_list) {
-				contentsid = k.getContentsid();
-				title = jejuService5.myreviewtitle(contentsid);
-				k.setVi_title(title);
-			}
+		// DB
+ 		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
+ 		
+ 		// user review count 가져오기 위함
+ 		List<UserVO> review_count = jejuService5.myreviewCount(myvo.getU_idx());
+ 		
+ 		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
+ 		String contentsid = "";
+ 		String title = "";
+ 		
+ 		for (MyreviewVO k : myreview_list) {
+ 			contentsid = k.getContentsid();
+ 			title = jejuService5.myreviewtitle(contentsid);
+ 			k.setVi_title(title);
+ 		}
+ 		
+ 		if (myreview_list != null && review_count != null) {
+ 			mv.addObject("myreview_list", myreview_list);
+ 			mv.addObject("paging", paging);
+ 			mv.addObject("review_count" , review_count);
+ 			return mv;
+ 		}
+ 		return new ModelAndView("ygh-view/error");
+ 	}
+	
+	// 나의 리뷰 디테일 페이지
+		@RequestMapping("myreview_detail.do")
+		public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
+			ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
+			MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
 			
 			if (myreview_list != null && review_count != null) {
 				mv.addObject("myreview_list", myreview_list);

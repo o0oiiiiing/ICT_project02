@@ -1,11 +1,8 @@
 	package com.ict.jeju.wyy.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.jeju.common.MyTripPaging;
-import com.ict.jeju.common.Paging;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO;
 import com.ict.jeju.wyy.dao.LikeVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO;
 import com.ict.jeju.wyy.service.MytripService;
 
@@ -85,7 +80,7 @@ public class JejuController {
 					paging.setEndBlock(paging.getTotalPage());
 				}	
 		List<LikeVO> like_list = calendarService4.myTripLike(paging.getOffset(), paging.getNumPerPage(),userVO.getU_idx());
-		List<UserVO4> u_list = calendarService4.myTripUser(userVO.getU_idx());
+		List<UserVO> u_list = calendarService4.myTripUser(userVO.getU_idx());
 		if (like_list != null && u_list != null) {
 			mv.addObject("like_list", like_list);
 			mv.addObject("u_name", userVO.getU_name());
@@ -108,17 +103,10 @@ public class JejuController {
 	         return new ModelAndView("wyy-view/error");
 	}
 	
-	
 	// 캘린더 화면 이동
 	@RequestMapping("calendar")
 	public ModelAndView getPlanner() {
 		return new ModelAndView("wyy-view/calendar");
-	}
-	
-	// 캘린더 일정 추가 
-	@RequestMapping("calendar_add")
-	public ModelAndView calendar_add(@RequestParam("contentsid") String contentsid) {
-		return new ModelAndView("wyy-view/calendar_add");
 	}
 	
 	// 관리자 일정 추가 페이지 이동

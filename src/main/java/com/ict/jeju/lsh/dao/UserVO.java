@@ -5,9 +5,75 @@ import org.springframework.web.multipart.MultipartFile;
 public class UserVO {
 	private String u_idx, u_id, u_pwd, u_name, u_birth, u_email, u_phone, u_postcode, u_detail_addr, u_detail_addr2,
 			u_gender, u_addr, u_state, u_regdate, active, u_report, step, u_del, out_regdate, u_restore, re_regdate,
-			u_profile_img, join_date, user_count, inactiveUsers, activeUsers, out_admin, re_admin, a_name, old_f_name, bo_idx, report_idx, re_active;
-
+			u_profile_img, join_date, user_count, inactiveUsers, activeUsers, out_admin, re_admin, a_name, old_f_name, bo_idx, report_idx;
 	private MultipartFile file;
+	private String c_idx, c_status;
+	private String like_idx, like_active;
+	private String like_active_count, review_count;
+	
+	public String getC_idx() {
+		return c_idx;
+	}
+
+	public void setC_idx(String c_idx) {
+		this.c_idx = c_idx;
+	}
+
+	public String getC_status() {
+		return c_status;
+	}
+
+	public void setC_status(String c_status) {
+		this.c_status = c_status;
+	}
+
+	public String getLike_idx() {
+		return like_idx;
+	}
+
+	public void setLike_idx(String like_idx) {
+		this.like_idx = like_idx;
+	}
+
+	public String getLike_active() {
+		return like_active;
+	}
+
+	public void setLike_active(String like_active) {
+		this.like_active = like_active;
+	}
+
+	public String getLike_active_count() {
+		return like_active_count;
+	}
+
+	public void setLike_active_count(String like_active_count) {
+		this.like_active_count = like_active_count;
+	}
+
+	public String getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(String review_count) {
+		this.review_count = review_count;
+	}
+
+	public String getBo_idx() {
+		return bo_idx;
+	}
+
+	public void setBo_idx(String bo_idx) {
+		this.bo_idx = bo_idx;
+	}
+
+	public String getReport_idx() {
+		return report_idx;
+	}
+
+	public void setReport_idx(String report_idx) {
+		this.report_idx = report_idx;
+	}
 
 //	public String getRe_active() {
 //		return re_active;

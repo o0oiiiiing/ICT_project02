@@ -35,7 +35,6 @@
 		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO" alias="cvo" />
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>
     	<typeAlias type="com.ict.jeju.wyy.dao.VisitJejuVO" alias="vivo" />
-    	<typeAlias type="com.ict.jeju.wyy.dao.UserVO4" alias="uvo4" />
     	<typeAlias type="com.ict.jeju.wyy.dao.AdminVO" alias="adminVO" />
     	
 	</typeAliases>

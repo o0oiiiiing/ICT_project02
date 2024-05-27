@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ict.jeju.wyy.dao.MytripDAO;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO;
 import com.ict.jeju.wyy.dao.LikeVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO;
 
 
@@ -37,7 +37,7 @@ public class MytripServiceImpl implements MytripService{
 	
 	// 나의 여행 유저 리스트
 	@Override
-	public List<UserVO4> myTripUser(String u_idx) {
+	public List<UserVO> myTripUser(String u_idx) {
 		return mdao.myTripUser(u_idx);
 	}
 

@@ -32,7 +32,6 @@ public class AjaxController {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
 		List<VisitJejuVO> vi_list = calendarService4.myTripMap(userVO.getU_idx());
 		if(vi_list != null) {
-			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(vi_list);
 			return jsonString;
@@ -47,7 +46,6 @@ public class AjaxController {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
 		List<VisitJejuVO> vi_list = calendarService4.myTripMapLike(userVO.getU_idx());
 		if(vi_list != null) {
-			// pom.xml 에서 gson 추가
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(vi_list);
 			return jsonString;

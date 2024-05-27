@@ -2,11 +2,10 @@ package com.ict.jeju.wyy.service;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.CalendarVO;
 import com.ict.jeju.wyy.dao.LikeVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.wyy.dao.VisitJejuVO;
 
 public interface MytripService {
@@ -21,7 +20,7 @@ public interface MytripService {
 	public List<LikeVO> myTripLike(int offset, int limit,String u_idx);
 	
 	// 나의 여행 유저 리스트
-	public List<UserVO4> myTripUser(String u_idx);
+	public List<UserVO> myTripUser(String u_idx);
 	
 	// 캘린더 지도 전체보기
 	public List<VisitJejuVO> myTripMap(String u_idx);

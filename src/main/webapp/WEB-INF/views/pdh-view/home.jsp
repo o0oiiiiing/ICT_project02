@@ -259,12 +259,13 @@ $(document).ready(function() {
             }
 
             // 변수가 없을경우 팝업 출력 
-            if (!popup2) { popUpAction('popup2'); }
+            if (!popup2) {
+            	popUpAction('popup2'); 
+            }
 
         });
 
         // 쿠키 가져오기 
-
         function getCookie(name) {
             var nameOfCookie = name + "=";
             var x = 0; while (x <= document.cookie.length) {
@@ -281,10 +282,9 @@ $(document).ready(function() {
         }
 
      // 24시간 기준 쿠키 설정하기 
-     // expiredays 후의 클릭한 시간까지 쿠키 설정 
      function setCookie24(name, value, expiredays) {
          var todayDate = new Date();
-         var expireDate = new Date(todayDate.getTime() + (expiredays * 24 * 60 * 60 * 1000)); // 현재 시간에 expiredays 일수를 더해 만료일을 계산
+         var expireDate = new Date(todayDate.getTime() + (expiredays * 24 * 60 * 60 * 1000)); 
          document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expireDate.toGMTString() + ";";
      }
 
