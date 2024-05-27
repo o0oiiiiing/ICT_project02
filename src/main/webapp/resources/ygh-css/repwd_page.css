@@ -21,16 +21,18 @@
 }
 
 #repwd_box {
-    margin-bottom: 20px;
+	width: calc(100% - 10px);
 }
 
+
 #repwd_box input[type="password"] {
-    width: calc(100% - 20px);
+    width: calc(50% - 10px);
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 #msg {
@@ -59,7 +61,8 @@
 
 @media (max-width: 600px) {
     #repwd_wrap input[type="submit"],
-    #repwd_wrap input[type="button"] {
+    #repwd_wrap input[type="button"],
+    #repwd_box input[type="password"] {
         width: 100%;
         margin: 10px 0;
     }

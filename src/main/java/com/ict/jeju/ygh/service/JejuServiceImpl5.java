@@ -173,8 +173,8 @@ public class JejuServiceImpl5 implements JejuService5 {
 
 	// Q&A 게시판 삭제 (사용자)
 	@Override
-	public int boardDelete(BoardVO bovo) {
-		return jejuDAO5.boardDelete(bovo);
+	public int boardDelete(String bo_idx) {
+		return jejuDAO5.boardDelete(bo_idx);
 	}
 
 	// 신고 게시판 작성 (사용자)
@@ -326,7 +326,10 @@ public class JejuServiceImpl5 implements JejuService5 {
 		return jejuDAO5.userStatus(m_idx);
 	}
 
-	
+	@Override
+	public int reportDelete(String re_idx) {
+		return jejuDAO5.reportDelete(re_idx);
+	}
 
 	
 

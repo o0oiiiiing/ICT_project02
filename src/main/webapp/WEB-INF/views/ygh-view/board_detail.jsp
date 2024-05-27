@@ -14,7 +14,7 @@
 <link href="<c:url value="/resources/common-css/summernote-lite.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/ygh-css/board_detail.css"/>" rel='stylesheet' />
 <script type="text/javascript">
-	function board_list(f) {
+		function board_list(f) {
 		f.action="board_list.do";
 		f.submit();
 	}
@@ -25,6 +25,7 @@
 	}
 	
 	function board_delete(f) {
+		alert("해당 게시글이 삭제되었습니다.");
 		f.action="board_delete.do";
 		f.submit();
 	}
@@ -42,11 +43,17 @@
 						<th>제목</th>
 						<td>${bovo.bo_title}</td>
 					</tr>
-
-					<tr>
-						<th>장소</th>
-						<td><a href="detail?contentsid=${bovo.contentsid}">작성페이지 바로가기</a></td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty bovo.contentsid}"></c:when>
+						<c:otherwise>
+							<tr>
+								<th>장소</th>
+								<td>
+									<a href="detail?contentsid=${bovo.contentsid}">작성페이지 바로가기</a>
+								</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
 
 					<tr>
 						<th>날짜</th>

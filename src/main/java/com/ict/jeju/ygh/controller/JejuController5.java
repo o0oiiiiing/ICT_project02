@@ -311,17 +311,6 @@ public class JejuController5 {
 		return mv;
 	}
 
-	// Q&A 답글 작성
-	@PostMapping("board_ans_write_ok2.do")
-	public ModelAndView commentInsert2(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx,
-			@ModelAttribute("cPage") String cPage, AdminVO adminVO) {
-		ModelAndView mv = new ModelAndView("redirect:admin_board_detail2.do");
-		int result = jejuService5.commentInsert(comvo);
-		int result2 = jejuService5.commentUpdate(bo_idx);
-
-		return mv;
-	}
-
 	// Q&A 답글 수정 가져오기
 	@RequestMapping("comment_update.do")
 	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx, AdminVO adminVO) {
@@ -385,7 +374,8 @@ public class JejuController5 {
 	// 신고 답글 작성
 	@PostMapping("report_ans_write_ok.do")
 	public ModelAndView replyInsert(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx,
-			@ModelAttribute("cPage2") String cPage2, String report, String re_idx, String m_idx, String a_name) {
+			@ModelAttribute("cPage2") String cPage2, String report, String re_idx, String m_idx, String a_name,
+			@ModelAttribute("contentsid") String contentsid) {
 		ModelAndView mv = new ModelAndView("redirect:admin_report_detail.do");
 		try {
 			if (report.equals("reportOk")) {
@@ -402,33 +392,6 @@ public class JejuController5 {
 				mailService.reportEmail(uvo.getU_email());
 			}
 
-			int result2 = jejuService5.replyUpdate(report_idx);
-			mv.addObject("re_idx", re_idx);
-			return mv;
-		} catch (Exception e) {
-			System.out.println("con mail err : " + e);
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 신고 답글 작성
-	@PostMapping("report_ans_write_ok2.do")
-	public ModelAndView replyInsert2(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx,
-			@ModelAttribute("cPage2") String cPage2, String report, String re_idx, String m_idx, String a_name) {
-		ModelAndView mv = new ModelAndView("redirect:admin_report_detail2.do");
-		try {
-			if (report.equals("reportOk")) {
-				// 신고누적3 사용자 탈퇴
-				int result3 = jejuService5.userReport(m_idx, a_name);
-			}
-			// 사용자 정보 (신고누적 메일 보내기)
-			UserVO uvo = jejuService5.userStatus(m_idx);
-			int res = Integer.parseInt(uvo.getU_report());
-			if (res == 3) {
-				mailService.reportEmail(uvo.getU_email());
-			}
-
-			int result = jejuService5.replyInsert(repvo);
 			int result2 = jejuService5.replyUpdate(report_idx);
 			mv.addObject("re_idx", re_idx);
 			return mv;
@@ -618,35 +581,11 @@ public class JejuController5 {
 	// 사용자 Q&A 삭제
 	@PostMapping("board_delete.do")
 	public ModelAndView boardDelete(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx) {
-		ModelAndView mv = new ModelAndView("ygh-view/board_delete");
-		BoardVO bovo = jejuService5.boardDetail(bo_idx);
-		if (bovo != null) {
-			mv.addObject("bovo", bovo);
+		ModelAndView mv = new ModelAndView("redirect:board_list.do");
+		int result = jejuService5.boardDelete(bo_idx);
+		if (result > 0) {
+			mv.addObject("msg", "해당 게시글이 삭제되었습니다.");
 			return mv;
-		}
-		return new ModelAndView("ygh-view/error");
-	}
-
-	// 사용자 Q&A 삭제
-	@PostMapping("board_delete_ok.do")
-	public ModelAndView boardDeleteOk(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
-			BoardVO bovo) {
-		ModelAndView mv = new ModelAndView();
-
-		BoardVO bovo2 = jejuService5.boardDetail(bovo.getBo_idx());
-		String dpwd = bovo2.getBo_pwd();
-
-		if (!passwordEncoder.matches(bovo.getBo_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/board_delete");
-			mv.addObject("pwdchk", "fail");
-			mv.addObject("bovo", bovo);
-			return mv;
-		} else {
-			int result = jejuService5.boardDelete(bovo);
-			if (result > 0) {
-				mv.setViewName("redirect:board_list.do");
-				return mv;
-			}
 		}
 		return new ModelAndView("ygh-view/error");
 	}
@@ -700,7 +639,7 @@ public class JejuController5 {
 
 	// 사용자 신고 상세보기
 	@RequestMapping("report_detail.do")
-	public ModelAndView reportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx) {
+	public ModelAndView reportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx, String re_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/report_detail");
 		// 상세보기
 		ReportVO revo = jejuService5.reportDetail(report_idx);
@@ -708,8 +647,11 @@ public class JejuController5 {
 		if (revo != null) {
 			// 댓글 가져오기
 			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
+			// 트랜잭션 사용 (리뷰, 이미지 테이블)
+			ReviewVO ReviewVO = jejuService5.reviewDetail(re_idx);
 			mv.addObject("rep_list", rep_list);
 			mv.addObject("revo", revo);
+			mv.addObject("ReviewVO", ReviewVO);
 			return mv;
 		}
 		return new ModelAndView("ygh-view/error");
@@ -755,17 +697,18 @@ public class JejuController5 {
 	// 회원정보수정
 	@PostMapping("user_update_ok.do")
 	public ModelAndView userUpdate(UserVO userVO, HttpSession session, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("redirect:user_update.do");
+		ModelAndView mv = new ModelAndView("ygh-view/user_update");
+		// 세션 로그인 정보로 비밀번호 확인
 		UserVO uvo = (UserVO) session.getAttribute("userVO");
 		String dpwd = uvo.getU_pwd();
 
 		if (!passwordEncoder.matches(userVO.getU_pwd(), dpwd)) {
-			mv.setViewName("ygh-view/user_update");
 			mv.addObject("pwdchk", "fail");
 			mv.addObject("userVO", userVO);
 			return mv;
 		} else {
 			try {
+				// 프로필 이미지 변경
 				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
 				MultipartFile file = userVO.getFile();
 				if (file.isEmpty()) {
@@ -782,6 +725,7 @@ public class JejuController5 {
 				int result = jejuService5.userUpdate(userVO);
 				if (result > 0) {
 					mv.addObject("userVO", userVO);
+					mv.addObject("msg", "회원 정보가 수정되었습니다.");
 					return mv;
 				}
 			} catch (Exception e) {
@@ -794,7 +738,7 @@ public class JejuController5 {
 	// 비밀번호 변경
 	@PostMapping("repwd_go.do")
 	public ModelAndView getRePwd(HttpSession session, String re_pwd, String re_pwd2, UserVO userVO) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("ygh-view/user_update");
 
 		// 세션에 저장된 user 정보
 		UserVO uvo = (UserVO) session.getAttribute("userVO");
@@ -816,7 +760,6 @@ public class JejuController5 {
 			if (result > 0) {
 				mv.addObject("userVO", uvo);
 				mv.addObject("msg", "비밀번호가 변경되었습니다.");
-				mv.setViewName("redirect:myTripPlan");
 				return mv;
 			}
 			return new ModelAndView("ygh-view/error");
@@ -1048,4 +991,58 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
+	// 관리자 Q&A 게시판 삭제
+	@PostMapping("admin_board_delete.do")
+	public ModelAndView adminBoardDelete(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
+			AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView("redirect:admin_list.do");
+		int result = jejuService5.boardDelete(bo_idx);
+		if (result > 0) {
+			mv.addObject("bo_idx", bo_idx);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 관리자 Q&A 게시판 삭제
+	@PostMapping("admin_board_delete2.do")
+	public ModelAndView adminBoardDelete2(@ModelAttribute("cPage") String cPage,
+			@ModelAttribute("bo_idx") String bo_idx, AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView("redirect:admin_list2.do");
+		int result = jejuService5.boardDelete(bo_idx);
+		if (result > 0) {
+			mv.addObject("bo_idx", bo_idx);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+
+	// 관리자 리뷰 삭제
+	@PostMapping("admin_report_delete.do")
+	public ModelAndView adminReportDelete(@ModelAttribute("cPage2") String cPage2,
+			@ModelAttribute("report_idx") String report_idx, AdminVO adminVO, @ModelAttribute("re_idx") String re_idx) {
+		ModelAndView mv = new ModelAndView("redirect:admin_report_detail.do");
+		int result = jejuService5.reportDelete(re_idx);
+		if (result > 0) {
+			mv.addObject("report_idx", report_idx);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	
+	// 관리자 리뷰 삭제
+	@PostMapping("admin_report_delete2.do")
+	public ModelAndView adminReportDelete2(@ModelAttribute("cPage2") String cPage2,
+			@ModelAttribute("report_idx") String report_idx, AdminVO adminVO, @ModelAttribute("re_idx") String re_idx) {
+		ModelAndView mv = new ModelAndView("redirect:admin_report_detail2.do");
+		int result = jejuService5.reportDelete(re_idx);
+		if (result > 0) {
+			mv.addObject("report_idx", report_idx);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+	
 }
