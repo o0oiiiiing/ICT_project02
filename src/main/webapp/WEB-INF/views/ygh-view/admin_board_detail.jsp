@@ -60,8 +60,8 @@ function comment_update_ok(f) {
 	f.action = "comment_update_ok.do";
 	f.submit();
 }
-</script>
 
+</script>
 <body>
 <%@include file="../common/header.jsp"%>
 <%@include file="../ygh-view/admin_bar.jsp"%>

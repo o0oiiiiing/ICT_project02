@@ -17,7 +17,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ict.jeju.lsh.dao.SignDAO;
-import com.ict.jeju.lsh.dao.SseVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 
@@ -26,31 +25,37 @@ public class SignServiceImpl implements SignService {
 	@Autowired
 	private SignDAO signDAO;
 	
+	// 로그인
 	@Override
 	public UserVO getLoginOK(UserVO userVO) {
 		return signDAO.getLoginOK(userVO);
 	}
 	
+	// 회원가입
 	@Override
 	public int getJoinOK(UserVO userVO) {
 		return signDAO.getJoinOK(userVO);
 	}
 	
+	// 아이디 중복확인
 	@Override
 	public String getIdDoubleChk(String u_id) {
 		return signDAO.getIdDoubleChk(u_id);
 	}
 	
+	// 비밀번호 이메일 전송 및 비밀번호 수정
 	@Override
 	public int getChgPwd(UserVO userVO) {
 		return signDAO.getChgPwd(userVO);
 	}
 	
+	// 아이디찾기
 	@Override
 	public List<UserVO> getFindIdChk(UserVO userVO) {
 		return signDAO.getFindIdChk(userVO);
 	}
 	
+	// 카카오 api
 	@Override
 	public String getAccessToken(String code) {
 		String access_token = "";
@@ -131,6 +136,7 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 	
+	// 네이버 api
 	@Override
 	public String getNaverToken(String code, String state) {
 		String access_token = "";
@@ -212,6 +218,7 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 	
+	// 관리자 계정들
 	@Override
 	public AdminVO getAdminLoginOK(AdminVO adminVO) {
 		return signDAO.getAdminLoginOK(adminVO);

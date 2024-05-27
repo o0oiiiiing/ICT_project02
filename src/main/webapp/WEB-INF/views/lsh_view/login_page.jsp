@@ -169,7 +169,6 @@
 						<a href="admin_login.do">관리자로그인</a>
 					</div>
 				</form>
-						<a href="notification.do">모다알</a>
 			</div>
 		</section>
 		<%@include file="../common/footer.jsp" %>

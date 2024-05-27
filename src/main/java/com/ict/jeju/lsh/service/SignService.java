@@ -2,7 +2,6 @@ package com.ict.jeju.lsh.service;
 
 import java.util.List;
 
-import com.ict.jeju.lsh.dao.SseVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 

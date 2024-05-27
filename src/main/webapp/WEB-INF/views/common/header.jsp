@@ -28,7 +28,6 @@
 		}
 	}
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<header class="header">
@@ -51,7 +50,6 @@
 			</c:if>
 		</ul>
 		
-		
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
@@ -67,6 +65,14 @@
 						</form>
 					</li>
 					<li>${userVO.u_name}님 환영합니다.</li>
+					<li>
+						<div id="myModal" class="modal">
+						    <div class="modal-content">
+						        <span class="close">&times;</span>
+						        <p id="messageContent"></p>
+						    </div>
+						</div>
+					</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>

@@ -1005,38 +1005,27 @@ public class JejuController5 {
 		String contentsid = "";
 		String title = "";
 
-		for (MyreviewVO k : myreview_list) {
-			contentsid = k.getContentsid();
-			title = jejuService5.myreviewtitle(contentsid);
-			k.setVi_title(title);
-		}
-		
-	// 나의 리뷰 삭제
-		@RequestMapping("myreview_delete.do")
-		public ModelAndView myreviewDelete(@ModelAttribute("re_idx") String re_idx) {
-			ModelAndView mv = new ModelAndView("redirect:myreview_list.do");
-			int result = jejuService5.myreview_Delete(re_idx);
-			if (result > 0) {
-				return mv;
-			}
-			return new ModelAndView("ygh-view/error");
-		}	
-
 		if (myreview_list != null && review_count != null) {
 			mv.addObject("myreview_list", myreview_list);
 			mv.addObject("paging", paging);
 			mv.addObject("review_count", review_count);
 			return mv;
 		}
+	
+		for (MyreviewVO k : myreview_list) {
+			contentsid = k.getContentsid();
+			title = jejuService5.myreviewtitle(contentsid);
+			k.setVi_title(title);
+		}
 		return new ModelAndView("ygh-view/error");
 	}
-
+	
 	// 나의 리뷰 디테일 페이지
 	@RequestMapping("myreview_detail.do")
 	public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
 		ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
 		MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
-
+		
 		if (reviewDetail != null) {
 			String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
 			String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
@@ -1047,5 +1036,16 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
+	
+	// 나의 리뷰 삭제
+			@RequestMapping("myreview_delete.do")
+			public ModelAndView myreviewDelete(@ModelAttribute("re_idx") String re_idx) {
+				ModelAndView mv = new ModelAndView("redirect:myreview_list.do");
+				int result = jejuService5.myreview_Delete(re_idx);
+				if (result > 0) {
+					return mv;
+				}
+				return new ModelAndView("ygh-view/error");
+			}	
 
 }

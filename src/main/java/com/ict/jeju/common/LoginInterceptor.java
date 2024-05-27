@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 public class LoginInterceptor implements AsyncHandlerInterceptor{
 	
@@ -29,5 +28,5 @@ public class LoginInterceptor implements AsyncHandlerInterceptor{
 		}
 		return true;
 	}
-
+	
 }
