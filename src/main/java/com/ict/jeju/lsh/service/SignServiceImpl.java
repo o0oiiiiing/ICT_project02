@@ -17,6 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ict.jeju.lsh.dao.SignDAO;
+import com.ict.jeju.lsh.dao.SseVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.wyy.dao.AdminVO;
 
@@ -225,6 +226,8 @@ public class SignServiceImpl implements SignService {
 	public String getAdminIdChk(String a_id) {
 		return signDAO.getAdminIdChk(a_id);
 	}
+	
+	
 	
 	
 }

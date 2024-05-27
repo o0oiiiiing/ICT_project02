@@ -28,6 +28,8 @@
 				<input type="hidden" value="${userVO.u_name}" name="report_writer">
 				<input type="hidden" value="" name="re_idx" class="reIdx">
 				<input type="hidden" value="" name="m_idx" class="mIdx">
+				<input type="hidden" value="" name="m_id" class="mId">
+				<input type="hidden" value="" name="m_name" class="mName">
 				<input class="review_write__button" type="reset" value="취소">
 				<button type="button" class="review_write__button" onclick="reportWrite(this.form)">등록</button>
 			</div>

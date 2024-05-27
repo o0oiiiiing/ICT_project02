@@ -1,7 +1,15 @@
 package com.ict.jeju.ygh.dao;
 
 public class ReplyVO {
-	private String rep_idx, rep_title, rep_content, rep_regdate, rep_status, rep_writer, report_idx, a_name;
+	private String rep_idx, rep_title, rep_content, rep_regdate, rep_status, rep_writer, report_idx, a_name, active;
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
 
 	public String getA_name() {
 		return a_name;

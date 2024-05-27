@@ -30,4 +30,19 @@ public class MailService {
 		}
 	}
 	
+	public void reportEmail(String toMail) {
+		try {
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("[Jeju_travel | 계정 신고 관련 안내 메일입니다.]");
+			sendMail.setText(""
+					 + "<p>Jeju_travel 안내 메일입니다.</p><br>"
+			         + "<p>해당 회원은 신고 누적 3회로 계정 탈퇴 처리되었습니다.</p>");
+			sendMail.setFrom("lsh31739@naver.com", "Jeju_travel");
+			sendMail.setTo(toMail);
+			sendMail.send();
+		} catch (Exception e) {
+			System.out.println("mail send err : "+e);
+		}
+	}
+	
 }

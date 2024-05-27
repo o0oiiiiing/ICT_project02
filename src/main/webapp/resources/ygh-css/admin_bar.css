@@ -1,8 +1,19 @@
 #menubar table {
-	width: 500px;
+	width: 900px;
 	margin: 10px auto 50px;
+	  border-collapse: collapse;
 }
 
+#menubar td {
+    text-align: center;
+    padding: 10px 20px; 
+}
+
+#menubar a {
+    text-decoration: none; 
+    color: black;
+    font-weight: bold;
+}
 #menubar>h1 {
 	width: 1200px;
 	font-size: 30px;
@@ -69,4 +80,6 @@
 .side_bar ul li a {
     color: black;
     text-decoration: none;
+    padding-bottom: 5px;
 }
+

@@ -31,6 +31,7 @@
     	<typeAlias type="com.ict.jeju.chm.dao.CategoryVO" alias="caVO" />
     	
 	    <typeAlias type="com.ict.jeju.lsh.dao.UserVO" alias="userVO"/>
+	    <typeAlias type="com.ict.jeju.lsh.dao.SseVO" alias="sseVO"/>
 	    
 		<typeAlias type="com.ict.jeju.wyy.dao.CalendarVO" alias="cvo" />
 		<typeAlias type="com.ict.jeju.wyy.dao.LikeVO" alias="lvo"/>

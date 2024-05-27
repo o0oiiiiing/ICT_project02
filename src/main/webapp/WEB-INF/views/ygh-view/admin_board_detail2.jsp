@@ -16,13 +16,13 @@
 <link href="<c:url value="/resources/ygh-css/board_detail.css"/>"
 	rel='stylesheet' />
 <script type="text/javascript">
-function admin_list(f) {
-	f.action = "admin_list.do";
+function admin_list2(f) {
+	f.action = "admin_list2.do";
 	f.submit();
 }
 
-function board_ans_write_ok(f) {
-	f.action = "board_ans_write_ok.do";
+function board_ans_write_ok2(f) {
+	f.action = "board_ans_write_ok2.do";
 	f.submit();
 }
 
@@ -39,7 +39,7 @@ function toggleCommentBox() {
 }
 
 // 답글수정 버튼 클릭 시
-function comment_update(f) {
+function comment_update2(f) {
 	let comment_box3 = document.getElementById("comment_box3");
 	let comment_btn3 = document.getElementById("comment_btn3");
 	let comment_box = document.getElementById("comment_box");
@@ -53,11 +53,11 @@ function comment_update(f) {
 		comment_box3.style.display = "none";
 		comment_btn3.style.display = "none";
 	}
-	f.action = "comment_update.do";
+	f.action = "comment_update2.do";
 }
 
-function comment_update_ok(f) {
-	f.action = "comment_update_ok.do";
+function comment_update_ok2(f) {
+	f.action = "comment_update_ok2.do";
 	f.submit();
 }
 </script>
@@ -98,7 +98,7 @@ function comment_update_ok(f) {
 	<div id="board_detail_btn">
 		<input type="hidden" value="${bovo.bo_idx}" name="bo_idx"> 
 		<input type="hidden" value="${cPage}" name="cPage"> 
-		<input type="button" value="목록" onclick="admin_list(this.form)" /> 
+		<input type="button" value="목록" onclick="admin_list2(this.form)" /> 
 		<input type="button" value="답글" onclick="toggleCommentBox()" /> 
 		<input type="button" value="삭제" onclick="admin_board_delete(this.form)" />
 	</div>
@@ -126,7 +126,7 @@ function comment_update_ok(f) {
 		<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
 		<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
 		<input type="hidden" name="cPage" value="${cPage}">
-		<input type="button" value="입력" onclick="board_ans_write_ok(this.form)" />
+		<input type="button" value="입력" onclick="board_ans_write_ok2(this.form)" />
 	</div>
 </form>
 
@@ -158,7 +158,7 @@ function comment_update_ok(f) {
 				</table>
 			</div>
 			<div id="comment_btn">
-				<input type="button" value="답글수정" onclick="comment_update(this.form)"> 
+				<input type="button" value="답글수정" onclick="comment_update2(this.form)"> 
 				<input type="hidden" name="com_idx" value="${k.com_idx}"> 
 				<input type="hidden" name="bo_idx" value="${k.bo_idx}">
 				<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
@@ -191,7 +191,7 @@ function comment_update_ok(f) {
 		<input type="hidden" name="bo_idx" value="${bovo.bo_idx}"> 
 		<input type="hidden" name="a_name" value="${adminVO.a_name}"> 
 		<input type="hidden" name="cPage" value="${cPage}">
-		<input type="button" value="수정" onclick="comment_update_ok(this.form)" />
+		<input type="button" value="수정" onclick="comment_update_ok2(this.form)" />
 	</div>
 </form>
 

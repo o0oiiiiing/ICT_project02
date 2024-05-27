@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
@@ -47,13 +50,15 @@ public class JejuController5 {
 	@Autowired
 	private PlaceListService placeListService;
 	@Autowired
+	private MailService mailService;
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
 	private UserVO userVO;
-	
+
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
 	public ModelAndView index() {
@@ -240,13 +245,48 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
+	// 관리자 Q&A 상세보기
+	@RequestMapping("admin_board_detail2.do")
+	public ModelAndView adminBoardDetail2(@ModelAttribute("cPage") String cPage, String bo_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail2");
+		// 상세보기
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
+
+		if (bovo != null) {
+			// 댓글 가져오기
+			List<CommentVO> com_list = jejuService5.commentList(bo_idx);
+			mv.addObject("com_list", com_list);
+			mv.addObject("bovo", bovo);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
 	// 관리자 신고 상세보기
 	@RequestMapping("admin_report_detail.do")
 	public ModelAndView adminReportDetail(@ModelAttribute("cPage2") String cPage2, String report_idx, String re_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail");
 		ReportVO revo = jejuService5.reportDetail(report_idx);
-		
-		
+
+		if (revo != null) {
+			// 댓글 가져오기
+			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
+			// 트랜잭션 사용 (리뷰, 이미지 테이블)
+			ReviewVO ReviewVO = jejuService5.reviewDetail(re_idx);
+			mv.addObject("rep_list", rep_list);
+			mv.addObject("revo", revo);
+			mv.addObject("ReviewVO", ReviewVO);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 관리자 신고 상세보기
+	@RequestMapping("admin_report_detail2.do")
+	public ModelAndView adminReportDetail2(@ModelAttribute("cPage2") String cPage2, String report_idx, String re_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail2");
+		ReportVO revo = jejuService5.reportDetail(report_idx);
+
 		if (revo != null) {
 			// 댓글 가져오기
 			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
@@ -270,11 +310,39 @@ public class JejuController5 {
 
 		return mv;
 	}
-	
+
+	// Q&A 답글 작성
+	@PostMapping("board_ans_write_ok2.do")
+	public ModelAndView commentInsert2(CommentVO comvo, @ModelAttribute("bo_idx") String bo_idx,
+			@ModelAttribute("cPage") String cPage, AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView("redirect:admin_board_detail2.do");
+		int result = jejuService5.commentInsert(comvo);
+		int result2 = jejuService5.commentUpdate(bo_idx);
+
+		return mv;
+	}
+
 	// Q&A 답글 수정 가져오기
 	@RequestMapping("comment_update.do")
 	public ModelAndView comment_update_ok(@ModelAttribute("cPage") String cPage, String bo_idx, AdminVO adminVO) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail");
+		// 상세보기
+		BoardVO bovo = jejuService5.boardDetail(bo_idx);
+
+		if (bovo != null) {
+			// 댓글 가져오기
+			List<CommentVO> com_list = jejuService5.commentList(bo_idx);
+			mv.addObject("com_list", com_list);
+			mv.addObject("bovo", bovo);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// Q&A 답글 수정 가져오기
+	@RequestMapping("comment_update2.do")
+	public ModelAndView comment_update_ok2(@ModelAttribute("cPage") String cPage, String bo_idx, AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_board_detail2");
 		// 상세보기
 		BoardVO bovo = jejuService5.boardDetail(bo_idx);
 
@@ -301,26 +369,98 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
+	// Q&A 답글 수정
+	@PostMapping("comment_update_ok2.do")
+	public ModelAndView commentUpdateOk2(@ModelAttribute("cPage") String cPage, @ModelAttribute("bo_idx") String bo_idx,
+			CommentVO comvo, AdminVO adminVO) {
+		ModelAndView mv = new ModelAndView();
+		int result = jejuService5.commentUpdateOk(comvo);
+		if (result > 0) {
+			mv.setViewName("redirect:admin_board_detail2.do");
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
 	// 신고 답글 작성
 	@PostMapping("report_ans_write_ok.do")
 	public ModelAndView replyInsert(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx,
-			@ModelAttribute("cPage2") String cPage2, AdminVO adminVO, String report) {
+			@ModelAttribute("cPage2") String cPage2, String report, String re_idx, String m_idx, String a_name) {
 		ModelAndView mv = new ModelAndView("redirect:admin_report_detail.do");
-		
-		if (report.equals("reportOk")) {
-			int result3 = jejuService5.userReport(repvo);
-		}
-		
-		int result = jejuService5.replyInsert(repvo);
-		int result2 = jejuService5.replyUpdate(report_idx);
+		try {
+			if (report.equals("reportOk")) {
+				// 신고누적3 사용자 탈퇴
+				int result3 = jejuService5.userReport(m_idx, a_name);
+				int result = jejuService5.replyInsert(repvo);
+			} else {
+				int result = jejuService5.replyInsert2(repvo);
+			}
+			// 사용자 정보 (신고누적 메일 보내기)
+			UserVO uvo = jejuService5.userStatus(m_idx);
+			int res = Integer.parseInt(uvo.getU_report());
+			if (res == 3) {
+				mailService.reportEmail(uvo.getU_email());
+			}
 
-		return mv;
+			int result2 = jejuService5.replyUpdate(report_idx);
+			mv.addObject("re_idx", re_idx);
+			return mv;
+		} catch (Exception e) {
+			System.out.println("con mail err : " + e);
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 신고 답글 작성
+	@PostMapping("report_ans_write_ok2.do")
+	public ModelAndView replyInsert2(ReplyVO repvo, @ModelAttribute("report_idx") String report_idx,
+			@ModelAttribute("cPage2") String cPage2, String report, String re_idx, String m_idx, String a_name) {
+		ModelAndView mv = new ModelAndView("redirect:admin_report_detail2.do");
+		try {
+			if (report.equals("reportOk")) {
+				// 신고누적3 사용자 탈퇴
+				int result3 = jejuService5.userReport(m_idx, a_name);
+			}
+			// 사용자 정보 (신고누적 메일 보내기)
+			UserVO uvo = jejuService5.userStatus(m_idx);
+			int res = Integer.parseInt(uvo.getU_report());
+			if (res == 3) {
+				mailService.reportEmail(uvo.getU_email());
+			}
+
+			int result = jejuService5.replyInsert(repvo);
+			int result2 = jejuService5.replyUpdate(report_idx);
+			mv.addObject("re_idx", re_idx);
+			return mv;
+		} catch (Exception e) {
+			System.out.println("con mail err : " + e);
+		}
+		return new ModelAndView("ygh-view/error");
 	}
 
 	// 신고 답글 수정 가져오기
 	@RequestMapping("reply_update.do")
-	public ModelAndView reply_update_ok(@ModelAttribute("cPage2") String cPage2, String report_idx, AdminVO adminVO) {
+	public ModelAndView reply_update_ok(@ModelAttribute("cPage2") String cPage2, String report_idx, AdminVO adminVO,
+			String re_idx) {
 		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail");
+		// 상세보기
+		ReportVO revo = jejuService5.reportDetail(report_idx);
+
+		if (revo != null) {
+			// 댓글 가져오기
+			List<ReplyVO> rep_list = jejuService5.replyList(report_idx);
+			mv.addObject("rep_list", rep_list);
+			mv.addObject("revo", revo);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 신고 답글 수정 가져오기
+	@RequestMapping("reply_update2.do")
+	public ModelAndView reply_update_ok2(@ModelAttribute("cPage2") String cPage2, String report_idx, AdminVO adminVO,
+			String re_idx) {
+		ModelAndView mv = new ModelAndView("ygh-view/admin_report_detail2");
 		// 상세보기
 		ReportVO revo = jejuService5.reportDetail(report_idx);
 
@@ -337,11 +477,26 @@ public class JejuController5 {
 	// 신고 답글 수정
 	@PostMapping("reply_update_ok.do")
 	public ModelAndView replyUpdateOk(@ModelAttribute("cPage2") String cPage2,
-			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo, AdminVO adminVO) {
+			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo, AdminVO adminVO, String re_idx) {
 		ModelAndView mv = new ModelAndView();
 		int result = jejuService5.replyUpdateOk(repvo);
 		if (result > 0) {
 			mv.setViewName("redirect:admin_report_detail.do");
+			mv.addObject("re_idx", re_idx);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 신고 답글 수정
+	@PostMapping("reply_update_ok2.do")
+	public ModelAndView replyUpdateOk2(@ModelAttribute("cPage2") String cPage2,
+			@ModelAttribute("report_idx") String report_idx, ReplyVO repvo, AdminVO adminVO, String re_idx) {
+		ModelAndView mv = new ModelAndView();
+		int result = jejuService5.replyUpdateOk(repvo);
+		if (result > 0) {
+			mv.setViewName("redirect:admin_report_detail2.do");
+			mv.addObject("re_idx", re_idx);
 			return mv;
 		}
 		return new ModelAndView("ygh-view/error");
@@ -636,8 +791,6 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-
-
 	// 비밀번호 변경
 	@PostMapping("repwd_go.do")
 	public ModelAndView getRePwd(HttpSession session, String re_pwd, String re_pwd2, UserVO userVO) {
@@ -842,45 +995,20 @@ public class JejuController5 {
 		}
 
 		// DB
- 		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(), myvo.getU_idx());
- 		
- 		// user review count 가져오기 위함
- 		List<UserVO4> review_count = jejuService5.myreviewCount(myvo.getU_idx());
- 		
- 		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
- 		String contentsid = "";
- 		String title = "";
- 		
- 		for (MyreviewVO k : myreview_list) {
- 			contentsid = k.getContentsid();
- 			title = jejuService5.myreviewtitle(contentsid);
- 			k.setVi_title(title);
- 		}
- 		
- 		if (myreview_list != null && review_count != null) {
- 			mv.addObject("myreview_list", myreview_list);
- 			mv.addObject("paging", paging);
- 			mv.addObject("review_count" , review_count);
- 			return mv;
- 		}
- 		return new ModelAndView("ygh-view/error");
- 	}
-	
-	// 나의 리뷰 디테일 페이지
-		@RequestMapping("myreview_detail.do")
-		public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
-			ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
-			MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
-			
-			if (reviewDetail != null) {
-				String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
-				String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
-				mv.addObject("title", title);
-				mv.addObject("reviewDetail", reviewDetail);
-				mv.addObject("image", image);
-				return mv;
-			}
-			return new ModelAndView("ygh-view/error");
+		List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
+				myvo.getU_idx());
+
+		// user review count 가져오기 위함
+		List<UserVO4> review_count = jejuService5.myreviewCount(myvo.getU_idx());
+
+		// contentsid 와 vi_title 가져와서 표시하기 - 최현민
+		String contentsid = "";
+		String title = "";
+
+		for (MyreviewVO k : myreview_list) {
+			contentsid = k.getContentsid();
+			title = jejuService5.myreviewtitle(contentsid);
+			k.setVi_title(title);
 		}
 			
 	// 나의 리뷰 삭제
@@ -893,5 +1021,31 @@ public class JejuController5 {
 			}
 			return new ModelAndView("ygh-view/error");
 		}	
+
+		if (myreview_list != null && review_count != null) {
+			mv.addObject("myreview_list", myreview_list);
+			mv.addObject("paging", paging);
+			mv.addObject("review_count", review_count);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
+
+	// 나의 리뷰 디테일 페이지
+	@RequestMapping("myreview_detail.do")
+	public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
+		ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
+		MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
+
+		if (reviewDetail != null) {
+			String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
+			String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
+			mv.addObject("title", title);
+			mv.addObject("reviewDetail", reviewDetail);
+			mv.addObject("image", image);
+			return mv;
+		}
+		return new ModelAndView("ygh-view/error");
+	}
 
 }

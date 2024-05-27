@@ -269,6 +269,10 @@
 	color: lightgray;
 }
 
+.re_active-row{
+	color: #FF6347;
+}
+
 /* 모달 스타일 */
 .modal {
 	display: none;

@@ -28,7 +28,7 @@
 		}
 	}
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<header class="header">
@@ -50,7 +50,8 @@
 				<li class="nav_list"><a href="admin_list.do" class="a_tag">관리자 게시판</a></li> 
 			</c:if>
 		</ul>
-
+		
+		
 		<c:choose>
 			<c:when test="${loginChk == 'ok'}">
 				<ul class="nav-list__right" style="width: 600px;">
