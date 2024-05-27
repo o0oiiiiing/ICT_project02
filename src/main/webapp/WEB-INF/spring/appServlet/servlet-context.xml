@@ -43,5 +43,17 @@
 		</interceptor>
 	</interceptors>
 	
+	<!-- 
+	<beans:bean id="echoHandler" class="com.ict.jeju.lsh.service.EchoHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:handshake-interceptors>
+	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+	      </websocket:handshake-interceptors>
+	      <websocket:sockjs />
+	 </websocket:handlers>
+	 -->
+	
 	<context:component-scan base-package="com.ict" />
 </beans:beans>

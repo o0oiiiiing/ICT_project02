@@ -569,7 +569,6 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
-		
 
 	public UserVO userStatus(String m_idx) {
 		try {

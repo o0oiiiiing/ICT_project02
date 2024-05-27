@@ -152,6 +152,7 @@
 				f.submit();
 			} 
 			
+			// 엔터키 활성화
 			document.addEventListener('keypress', function(e) {
 			    if (e.keyCode === 13) {
 			        if (document.activeElement.tagName === 'INPUT') {

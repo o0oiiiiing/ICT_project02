@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +119,7 @@ public class SignController {
 			session.setAttribute("admin_loginChk", "ok");
 			session.setAttribute("adminVO", adminVO2);
 			mv.addObject("adminVO", adminVO2);
-			mv.setViewName("redirect:home");
+			mv.setViewName("redirect:dashboard.do");
 			return mv;
 		}
 		return null;
@@ -226,7 +228,8 @@ public class SignController {
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		try {
 			// DB 정보와 입력 정보 비교
-			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && userVO2.getU_email().equals(userVO.getU_email())) {
+			if (userVO2 != null && userVO2.getU_id().equals(userVO.getU_id()) && 
+					userVO2.getU_email().equals(userVO.getU_email())) {
 				Random random = new Random();
 				String randomNum = String.valueOf(random.nextInt(1000000) % 1000000);
 				if (randomNum.length() < 6) {

@@ -121,13 +121,10 @@
 </script>
 <style type="text/css">
 .admin_join_page {
-	padding: 8% 0 0;
+	padding: 2% 0 0;
 	margin: auto;
 	width: 100%;
 	height: 600px;
-	background-image: url('resources/lsh_images/jeju_island.jpg');
-	background-position: center;
-	background-size: cover;
 }
 
 .admin_join_container {

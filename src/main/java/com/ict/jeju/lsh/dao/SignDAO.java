@@ -14,6 +14,7 @@ public class SignDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 로그인
 	public UserVO getLoginOK(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.selectOne("user.login", userVO);
@@ -23,6 +24,7 @@ public class SignDAO {
 		return null;
 	}
 	
+	// 회원가입
 	public int getJoinOK(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.insert("user.join", userVO);
@@ -32,6 +34,7 @@ public class SignDAO {
 		return -1;
 	}
 	
+	// 아이디 중복확인
 	public String getIdDoubleChk(String u_id) {
 		try {
 			int res = sqlSessionTemplate.selectOne("user.id_chk", u_id);
@@ -45,6 +48,7 @@ public class SignDAO {
 		return null;
 	}
 	
+	// 비밀번호확인
 	public int getChgPwd(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.update("user.chgpwd", userVO);
@@ -54,6 +58,7 @@ public class SignDAO {
 		return -1;
 	}
 	
+	// 아이디찾기
 	public List<UserVO> getFindIdChk(UserVO userVO) {
 		try {
 			return sqlSessionTemplate.selectList("user.find_id", userVO);
@@ -62,7 +67,8 @@ public class SignDAO {
 		}
 		return null;
 	}
-
+	
+	// 카카오 api
 	public UserVO kakao_find(Map<String, Object> map) {
 		try {
 			return sqlSessionTemplate.selectOne("user.kakao_find", map);
@@ -72,6 +78,7 @@ public class SignDAO {
 		return null;
 	}
 	
+	// 카카오 api
 	public int kakao_join(Map<String, Object> map) {
 		try {
 			return sqlSessionTemplate.insert("user.kakao_join", map);
@@ -81,6 +88,7 @@ public class SignDAO {
 		return -1;
 	}
 	
+	// 네이버 api
 	public UserVO naver_find(Map<String, Object> map) {
 		try {
 			return sqlSessionTemplate.selectOne("user.naver_find", map);
@@ -89,7 +97,7 @@ public class SignDAO {
 		}
 		return null;
 	}
-	
+	// 네이버 api
 	public int naver_join(Map<String, Object> map) {
 		try {
 			return sqlSessionTemplate.insert("user.naver_join", map);
@@ -109,7 +117,6 @@ public class SignDAO {
 		return null;
 	}
 	
-	
 	// 관리자 권한부여
 	public int getAdminJoinOK(AdminVO adminVO) {
 		try {
@@ -120,7 +127,7 @@ public class SignDAO {
 		return -1;
 	}
 	
-	// 관리자 중복 체크
+	// 관리자 중복 확인
 	public String getAdminIdChk(String a_id) {
 		try {
 			int res = sqlSessionTemplate.selectOne("admin.admin_idChk", a_id);

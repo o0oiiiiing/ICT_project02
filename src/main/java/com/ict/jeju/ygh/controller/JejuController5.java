@@ -948,7 +948,6 @@ public class JejuController5 {
 			// contentsid 와 vi_title 가져와서 표시하기 - 최현민
 			String contentsid = "";
 			String title = "";
-
 			for (MyreviewVO k : myreview_list) {
 				contentsid = k.getContentsid();
 				title = jejuService5.myreviewtitle(contentsid);
@@ -1016,9 +1015,14 @@ public class JejuController5 {
 			mv.addObject("bo_idx", bo_idx);
 			return mv;
 		}
+	
+		for (MyreviewVO k : myreview_list) {
+			contentsid = k.getContentsid();
+			title = jejuService5.myreviewtitle(contentsid);
+			k.setVi_title(title);
+		}
 		return new ModelAndView("ygh-view/error");
 	}
-
 
 	// 관리자 리뷰 삭제
 	@PostMapping("admin_report_delete.do")
@@ -1032,6 +1036,17 @@ public class JejuController5 {
 		}
 		return new ModelAndView("ygh-view/error");
 	}
+	
+	// 나의 리뷰 삭제
+			@RequestMapping("myreview_delete.do")
+			public ModelAndView myreviewDelete(@ModelAttribute("re_idx") String re_idx) {
+				ModelAndView mv = new ModelAndView("redirect:myreview_list.do");
+				int result = jejuService5.myreview_Delete(re_idx);
+				if (result > 0) {
+					return mv;
+				}
+				return new ModelAndView("ygh-view/error");
+			}	
 
 	
 	// 관리자 리뷰 삭제
