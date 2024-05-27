@@ -18,22 +18,22 @@
 		<div class="review_title__section">
 			<p class="qa_title">
 				<c:choose>
-					<c:when test="${reviewAvg != null}">
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
-							style="color: #FFBB36;">${reviewAvg}</span>
-					</c:when>
-					<c:otherwise>
-							리뷰 <span style="color: #FFBB36;">(${reviewNum})</span>
-					</c:otherwise>
-				</c:choose>
+                    <c:when test="${reviewAvg != null and reviewAvg > 0}">
+                            리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
+                            style="color: #FFBB36;">${reviewAvg}</span>
+                    </c:when>
+                    <c:otherwise>
+                            리뷰 <span style="color: #FFBB36;">(${reviewNum})</span> | 총 평점 : <span
+                            style="color: #FFBB36;">0</span>
+                    </c:otherwise>
+                </c:choose>
 			</p>
 			<input class="write_r_button" type="button" value="리뷰작성">
 		</div>
 		<hr class="hr">
 		<c:choose>
 			<c:when test="${empty reviewList}">
-				<p
-					style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
+				<p style="text-align: center; font-family: 'NanumSquare'; font-size: 18px;">리뷰가
 					존재하지 않습니다.</p>
 				<hr class="hr">
 			</c:when>
@@ -69,6 +69,13 @@
 									<div class="review-content__text" style="height: 240px;">
 										<div style="letter-spacing: 1px; line-height: 20px;">${k.re_content}</div>
 										<p class="report">
+											<c:choose>
+												<c:when test="${userVO.u_idx == k.u_idx}">
+													<input class="delete-button" type="button" value="삭제하기">
+													<span style="font-family: 'NanumSquare'; font-size: 18px;">&nbsp;|&nbsp;</span>
+													<input type="hidden" class="re_idx" name="re_idx" value="${k.re_idx}">
+												</c:when>
+											</c:choose>
 											<span class="material-symbols-outlined declaration">notifications</span>
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">
@@ -88,6 +95,13 @@
 												src="resources/upload/${j.pic_file}">
 										</c:forEach>
 										<p class="report">
+											<c:choose>
+												<c:when test="${userVO.u_idx == k.u_idx}">
+													<input class="delete-button" type="button" value="삭제하기">
+													<span style="font-family: 'NanumSquare'; font-size: 18px;">&nbsp;|&nbsp;</span>
+													<input type="hidden" class="re_idx" name="re_idx" value="${k.re_idx}">
+												</c:when>
+											</c:choose>
 											<span class="material-symbols-outlined declaration">notifications</span>
 											<input class="report-button" type="button" value="신고하기">
 											<input type="hidden" class="re_idx" value="${k.re_idx}">
