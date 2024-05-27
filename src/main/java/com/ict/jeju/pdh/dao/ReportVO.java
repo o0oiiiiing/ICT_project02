@@ -3,6 +3,23 @@ package com.ict.jeju.pdh.dao;
 public class ReportVO {
 	private String report_idx, rep_idx, u_idx, re_idx, m_idx, report_title, report_content, active, report_writer,
 			report_regdate, step;
+	private String m_name, m_id;
+
+	public String getM_name() {
+		return m_name;
+	}
+
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 
 	public String getReport_idx() {
 		return report_idx;

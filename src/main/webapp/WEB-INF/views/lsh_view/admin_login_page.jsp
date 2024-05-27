@@ -22,6 +22,16 @@
 				f.action="admin_login_ok.do";
 				f.submit();
 			}
+			
+			// 엔터키 활성화
+			document.addEventListener('keypress', function(e) {
+			    if (e.keyCode === 13) {
+			        if (document.activeElement.tagName === 'INPUT') {
+			        	admin_login_ok(document.activeElement.form);
+			        }
+			    }
+			});
+			
 			// 경고창
 			let msg = "${msg}";
 			if (msg !== "") {

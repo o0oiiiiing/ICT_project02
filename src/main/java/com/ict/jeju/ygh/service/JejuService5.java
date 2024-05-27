@@ -149,6 +149,9 @@ public interface JejuService5 {
 	
 	// 나의 리뷰 re_idx 가져와서 image 값 가져오기 (detail)
 	public String myreviewimage(String re_idx);
+	
+	// 나의 리뷰 삭제
+	public int myreview_Delete(String re_idx);
 
 	// 회원현황
 	public List<UserVO> userTotal();

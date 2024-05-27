@@ -293,6 +293,7 @@
 			<div class="myTrip_profile_content">
 					<p>${k.u_name} 님</p>
 					<p>나의 리뷰 <a href="myreview_list.do?">${k.review_count}</a></p>
+					<p>신고 누적 ${k.u_report}</p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
 					<!-- 경화 -->

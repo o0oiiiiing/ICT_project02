@@ -13,6 +13,13 @@ public class ReviewVO {
 
 	public void setRep_status(String rep_status) {
 		this.rep_status = rep_status;
+	
+	public String getU_id() {
+		return u_id;
+	}
+
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
 	}
 
 	public String getPic_file() {
