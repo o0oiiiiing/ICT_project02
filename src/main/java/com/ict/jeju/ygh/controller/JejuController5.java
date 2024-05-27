@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.jeju.common.Paging;
 import com.ict.jeju.common.Paging2;
 import com.ict.jeju.lsh.dao.UserVO;
+import com.ict.jeju.lsh.service.MailService;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.service.PlaceListService;
 import com.ict.jeju.wyy.dao.AdminVO;
@@ -950,21 +951,6 @@ public class JejuController5 {
  		}
  		return new ModelAndView("ygh-view/error");
  	}
-	
-	// 나의 리뷰 디테일 페이지
-		@RequestMapping("myreview_detail.do")
-		public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
-			ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
-			MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
-			
-			if (myreview_list != null && review_count != null) {
-				mv.addObject("myreview_list", myreview_list);
-				mv.addObject("paging", paging);
-				mv.addObject("review_count", review_count);
-				return mv;
-			}
-			return new ModelAndView("ygh-view/error");
-		}
 		
 		// 나의 리뷰 디테일 페이지
 			@RequestMapping("myreview_detail.do")

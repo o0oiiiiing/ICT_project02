@@ -87,22 +87,6 @@ public class UserVO {
 		return file;
 	}
 
-	public String getBo_idx() {
-		return bo_idx;
-	}
-
-	public void setBo_idx(String bo_idx) {
-		this.bo_idx = bo_idx;
-	}
-
-	public String getReport_idx() {
-		return report_idx;
-	}
-
-	public void setReport_idx(String report_idx) {
-		this.report_idx = report_idx;
-	}
-
 	public String getOld_f_name() {
 		return old_f_name;
 	}
