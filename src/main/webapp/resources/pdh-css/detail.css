@@ -233,6 +233,11 @@
 	padding-right: 30px;
 }
 
+.expand_icon:hover {
+	color: #D9D9D9;
+	cursor: pointer;
+}
+
 #map {
 	width: 90%;
 	height: 500px;
@@ -447,4 +452,9 @@
 
 .favorite {
 	cursor: pointer;
+}
+
+.review:hover {
+	cursor: pointer;
+	color: #D9D9D9;
 }

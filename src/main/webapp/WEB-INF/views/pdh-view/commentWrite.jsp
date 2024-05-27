@@ -17,7 +17,7 @@
 					placeholder="내용을 입력해주세요."></textarea>
 			</div>
 			<div class="qa_write__buttons">
-				<input type="hidden" value="" name="bo_idx" class="boIdx">
+				<input type="hidden" class="boIdx" value="" name="bo_idx">
 				<input type="hidden" value="${adminVO.a_name}" name="com_writer">
 				<input class="comment_write__button" type="reset" value="취소">
 				<button type="button" class="comment_write__button" onclick="commentWrite(this.form)">등록</button>
