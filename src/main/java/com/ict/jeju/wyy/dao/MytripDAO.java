@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.jeju.lsh.dao.UserVO;
+
 @Repository
 public class MytripDAO {
 
@@ -59,7 +61,7 @@ public class MytripDAO {
 	}
 
 	// 나의 여행 유저 리스트
-	public List<UserVO4> myTripUser(String u_idx) {
+	public List<UserVO> myTripUser(String u_idx) {
 		try {
 			return sqlSessionTemplate.selectList("mytrip.userList", u_idx);
 		} catch (Exception e) {

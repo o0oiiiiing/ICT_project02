@@ -12,11 +12,9 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 
 @Repository
 public class JejuDAO5 {
@@ -469,7 +467,7 @@ public class JejuDAO5 {
 	}
 
 	// 나의 리뷰 count
-	public List<UserVO4> myreviewCount(String u_idx) {
+	public List<UserVO> myreviewCount(String u_idx) {
 		try {
 			return sqlSessionTemplate.selectList("Board_table.myreview_count", u_idx);
 		} catch (Exception e) {

@@ -3,11 +3,9 @@ package com.ict.jeju.ygh.service;
 import java.util.List;
 import java.util.Map;
 
-import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
@@ -135,7 +133,7 @@ public interface JejuService5 {
 	public String myreviewtitle(String contentsid);
 
 	// 나의 리뷰 카운터
-	public List<UserVO4> myreviewCount(String u_idx);
+	public List<UserVO> myreviewCount(String u_idx);
 
 	// 나의 리뷰 페이징 카운트
 	public int getTotalCount10(String u_idx);

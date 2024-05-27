@@ -111,7 +111,7 @@
 						<tr>
 							<th style="vertical-align: top; padding-top: 10px;">프로필</th>
 							<td style="display: flex; align-items: center;">
-								<img id="profile-img" src="/resources/upload/${userVO.u_profile_img}" style="width: 100px; height: 100px; margin-right: 10px;"> 
+								<img id="profile-img" src="resources/upload/${userVO.u_profile_img}" style="width: 100px; height: 100px; margin-right: 10px;"> 
 								<div style="flex-direction: column;">
 						            <input type="file" name="file" id="file" onchange="previewImage(event)" style="width: 200px; border:none;">
 						            <input type="hidden" name="old_f_name" id="old_f_name" value="${userVO.u_profile_img}">

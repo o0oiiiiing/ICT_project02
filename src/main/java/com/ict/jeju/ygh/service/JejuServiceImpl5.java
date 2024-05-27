@@ -6,11 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ict.jeju.chm.dao.CategoryVO;
 import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.wyy.dao.AdminVO;
-import com.ict.jeju.wyy.dao.UserVO4;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.JejuDAO5;
@@ -265,7 +263,7 @@ public class JejuServiceImpl5 implements JejuService5 {
 	
 	// 나의 리뷰 count
 	@Override
-	public List<UserVO4> myreviewCount(String u_idx) {
+	public List<UserVO> myreviewCount(String u_idx) {
 		return jejuDAO5.myreviewCount(u_idx);
 	}
 	

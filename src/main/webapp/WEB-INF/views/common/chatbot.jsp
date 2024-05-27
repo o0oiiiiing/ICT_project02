@@ -101,7 +101,6 @@
     </style>
 <script type="text/javascript">
 // 이전 질문 및 답변을 저장해 놓을 빈 배열 객체
-// 이전 질문과 답변을 저장해놓고 gpt에 물어봐야 더 정확한 답변이 옵니다.
 let gpt_token = [];
 
 // open api에서 제공 받은 각자의 API_KEY를 저장해놓은 변수
@@ -157,7 +156,6 @@ $(document).ready(function() {
 	    // 메시지가 비어있으면 리턴
 	    if (message.length === 0) return;
 	    // 사용자 메시지 화면에 추가
-	    // addMessage('${u_name}', message);
 	    addMessage('사용자', message);
 	    $("#user-input input").val("");
 	    test = { role: "user", content: message }

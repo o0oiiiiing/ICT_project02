@@ -58,7 +58,7 @@
         	data: {like_idx: like_idx },
         	dataType: "text",
         	success: function(data) {
-            	alert('관심상품에서 해제되었습니다.');
+            	alert('좋아요한 여행지에서 해제되었습니다.');
             	$(element).closest('.likeTrip_content').remove();
             	myTripLike();
         	},
@@ -169,14 +169,14 @@
 			            var mapContainer = document.getElementById('map');
 			            
 			            var mapOption = { 
-			            	// 지도의 중심좌표 -> 한라산으로 지정(제일 가운데인듯)
+			            	// 지도의 중심좌표 -> 한라산으로 지정
 			                center: new kakao.maps.LatLng(33.36132, 126.54195), 
 			                level: 10 // 지도의 확대 레벨
 			            };
 	
 			            var map = new kakao.maps.Map(mapContainer, mapOption);
 			         	
-			            // 카테고리별로 좌표이미지 설정(나중에 원하는 이미지 넣고싶으면 링크 수정하면 됨.)
+			            // 카테고리별로 좌표이미지 설정
 			            var markerImages = {
 			            		'관광지': 'https://cdn-icons-png.flaticon.com/512/3420/3420238.png',	// 관광지
 			            		'쇼핑': 'https://cdn-icons-png.flaticon.com/512/3081/3081648.png',	// 쇼핑
@@ -244,9 +244,7 @@
 
 			                // 인포윈도우를 마커 위에 표시
 			                infowindow.open(map, marker);
-
-			                // 지도 중심을 마커 위치로 이동하기
-			           		// map.setCenter(markerPosition);
+			                
 			            });
 			        }
 			    });
@@ -288,11 +286,12 @@
 		</div>
 		<div class="myTrip_profile">
 				<c:forEach var="k" items="${u_list}" varStatus="vs">
-					<img src="/resources/upload/${k.u_profile_img}" width="150px"
+					<img src="resources/upload/${k.u_profile_img}" width="150px"
 						height="150px" style="margin: auto 30px;" class="profile-image">
 			<div class="myTrip_profile_content">
 					<p>${k.u_name} 님</p>
 					<p>나의 리뷰 <a href="myreview_list.do?">${k.review_count}</a></p>
+					<p>신고 누적 ${k.u_report}</p>
 					<p>좋아요한 여행지 ${k.like_active_count}</p>
 					<button type="button" class="mytripPlan_userUpdate" onclick="mytripPlan_userUpdate(${k.u_idx})">정보수정</button>
 					<!-- 경화 -->
