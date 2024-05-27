@@ -902,77 +902,96 @@ public class JejuController5 {
 		return new ModelAndView("ygh-view/error");
 	}
 
-	/*
-	 * // 나의 리뷰
-	 * 
-	 * @RequestMapping("myreview_list.do") public ModelAndView
-	 * myreviewlist(HttpServletRequest request, HttpSession session) { ModelAndView
-	 * mv = new ModelAndView("chm-view/myreview_list"); UserVO myvo = (UserVO)
-	 * session.getAttribute("userVO");
-	 * 
-	 * // 페이징 int count10 = jejuService5.getTotalCount10(myvo.getU_idx());
-	 * paging.setTotalRecord(count10);
-	 * 
-	 * if (paging.getTotalRecord() <= paging.getNumPerPage()) {
-	 * paging.setTotalPage(1); } else { paging.setTotalPage(paging.getTotalRecord()
-	 * / paging.getNumPerPage()); if (paging.getTotalRecord() %
-	 * paging.getNumPerPage() != 0) { paging.setTotalPage(paging.getTotalPage() +
-	 * 1); } }
-	 * 
-	 * String cPage = request.getParameter("cPage"); if (cPage == null) {
-	 * paging.setNowPage(1); } else { paging.setNowPage(Integer.parseInt(cPage)); }
-	 * 
-	 * paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
-	 * 
-	 * paging.setBeginBlock( (int) ((paging.getNowPage() - 1) /
-	 * paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
-	 * paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
-	 * 
-	 * if (paging.getEndBlock() > paging.getTotalPage()) {
-	 * paging.setEndBlock(paging.getTotalPage()); }
-	 * 
-	 * // DB List<MyreviewVO> myreview_list =
-	 * jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
-	 * myvo.getU_idx());
-	 * 
-	 * // user review count 가져오기 위함 List<UserVO4> review_count =
-	 * jejuService5.myreviewCount(myvo.getU_idx());
-	 * 
-	 * // contentsid 와 vi_title 가져와서 표시하기 - 최현민 String contentsid = ""; String title
-	 * = "";
-	 * 
-	 * for (MyreviewVO k : myreview_list) { contentsid = k.getContentsid(); title =
-	 * jejuService5.myreviewtitle(contentsid); k.setVi_title(title); } }
-	 * 
-	 * // 나의 리뷰 삭제
-	 * 
-	 * @RequestMapping("myreview_delete.do") public ModelAndView
-	 * myreviewDelete(@ModelAttribute("re_idx") String re_idx) { ModelAndView mv =
-	 * new ModelAndView("redirect:myreview_list.do"); int result =
-	 * jejuService5.myreview_Delete(re_idx); if (result > 0) { return mv; }
-	 * 
-	 * if (myreview_list != null && review_count != null) {
-	 * mv.addObject("myreview_list", myreview_list); mv.addObject("paging", paging);
-	 * mv.addObject("review_count", review_count); return mv; } return new
-	 * ModelAndView("ygh-view/error"); }
-	 */
+	// 나의 리뷰
+		@RequestMapping("myreview_list.do")
+		public ModelAndView myreviewlist(HttpServletRequest request, HttpSession session) {
+			ModelAndView mv = new ModelAndView("chm-view/myreview_list");
+			UserVO myvo = (UserVO) session.getAttribute("userVO");
 
-	// 나의 리뷰 디테일 페이지
-	@RequestMapping("myreview_detail.do")
-	public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
-		ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
-		MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
+			// 페이징
+			int count10 = jejuService5.getTotalCount10(myvo.getU_idx());
+			paging.setTotalRecord(count10);
 
-		if (reviewDetail != null) {
-			String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
-			String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
-			mv.addObject("title", title);
-			mv.addObject("reviewDetail", reviewDetail);
-			mv.addObject("image", image);
-			return mv;
+			if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+				paging.setTotalPage(1);
+			} else {
+				paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+				if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+					paging.setTotalPage(paging.getTotalPage() + 1);
+				}
+			}
+
+			String cPage = request.getParameter("cPage");
+			if (cPage == null) {
+				paging.setNowPage(1);
+			} else {
+				paging.setNowPage(Integer.parseInt(cPage));
+			}
+
+			paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+
+			paging.setBeginBlock(
+					(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+			paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+
+			if (paging.getEndBlock() > paging.getTotalPage()) {
+				paging.setEndBlock(paging.getTotalPage());
+			}
+
+			// DB
+			List<MyreviewVO> myreview_list = jejuService5.myreviewlist(paging.getOffset(), paging.getNumPerPage(),
+					myvo.getU_idx());
+
+			// user review count 가져오기 위함
+			List<UserVO4> review_count = jejuService5.myreviewCount(myvo.getU_idx());
+
+			// contentsid 와 vi_title 가져와서 표시하기 - 최현민
+			String contentsid = "";
+			String title = "";
+
+			for (MyreviewVO k : myreview_list) {
+				contentsid = k.getContentsid();
+				title = jejuService5.myreviewtitle(contentsid);
+				k.setVi_title(title);
+			}
+			
+			if (myreview_list != null && review_count != null) {
+				mv.addObject("myreview_list", myreview_list);
+				mv.addObject("paging", paging);
+				mv.addObject("review_count", review_count);
+				return mv;
+			}
+			return new ModelAndView("ygh-view/error");
 		}
-		return new ModelAndView("ygh-view/error");
-	}
+		
+		// 나의 리뷰 디테일 페이지
+			@RequestMapping("myreview_detail.do")
+			public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
+				ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
+				MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
+
+				if (reviewDetail != null) {
+					String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
+					String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
+					
+					mv.addObject("title", title);
+					mv.addObject("reviewDetail", reviewDetail);
+					mv.addObject("image", image);
+					return mv;
+				}
+				return new ModelAndView("ygh-view/error");
+			}
+			
+		// 나의 리뷰 삭제
+			@RequestMapping("myreview_delete.do")
+			public ModelAndView myreviewDelete(@ModelAttribute("re_idx") String re_idx) {
+				ModelAndView mv = new ModelAndView("redirect:myreview_list.do");
+				int result = jejuService5.myreview_Delete(re_idx);
+				if (result > 0) {
+					return mv;
+				}
+				return new ModelAndView("ygh-view/error");
+			}
 
 	// 관리자 Q&A 게시판 삭제
 	@PostMapping("admin_board_delete.do")
