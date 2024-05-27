@@ -58,7 +58,7 @@ $(document).ready(function() {
     });
 });
 
-//a링크 postmapping 으로 변경
+/* //a링크 postmapping 으로 변경
 function admin_board_detail_go(bo_idx, cPage) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -99,7 +99,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 
     document.body.appendChild(form);
     form.submit();
-}
+} */
 
 </script>
 </head>
@@ -133,7 +133,7 @@ function admin_report_detail_go(report_idx, cPage2) {
 								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage2 + vs.index)}</td>
 								<td style="text-align: left;">
 									<c:forEach begin="1" end="${k.step}">&nbsp;[Re]</c:forEach>
-									<a href="#" onclick="admin_board_detail_go('${k.bo_idx}', '${paging.nowPage}')">${k.bo_title}</a>
+									<a href="admin_board_detail2.do?bo_idx=${k.bo_idx}&cPage=${paging.nowPage}">${k.bo_title}</a>
 								</td>
 								<td>${k.bo_writer}</td>
 								<td>${k.bo_regdate.substring(0,10)}</td>
@@ -215,8 +215,8 @@ function admin_report_detail_go(report_idx, cPage2) {
 									<td>${paging2.totalRecord - ((paging2.nowPage2 -1) * paging2.numPerPage2 + vs.index)}</td>
 									<td style="text-align: left;">
 										<c:forEach begin="1" end="${k2.step}">&nbsp;[Re]</c:forEach> 
-										<%-- <a href="admin_report_detail.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}">${k2.report_title}</a> --%>
-										<a href="#" onclick="admin_report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a>
+										<a href="admin_report_detail2.do?report_idx=${k2.report_idx}&cPage2=${paging2.nowPage2}&re_idx=${k2.re_idx}">${k2.report_title}</a>
+										<%-- <a href="#" onclick="admin_report_detail_go('${k2.report_idx}', '${paging2.nowPage2}')">${k2.report_title}</a> --%>
 									</td>
 									<td>${k2.report_writer}</td>
 									<td>${k2.report_regdate.substring(0,10)}</td>

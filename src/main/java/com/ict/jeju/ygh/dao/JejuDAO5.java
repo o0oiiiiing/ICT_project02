@@ -304,9 +304,9 @@ public class JejuDAO5 {
 	}
 
 	// Q&A 게시판 삭제 (사용자)
-	public int boardDelete(BoardVO bovo) {
+	public int boardDelete(String bo_idx) {
 		try {
-			return sqlSessionTemplate.delete("Board_table.board_delete", bovo);
+			return sqlSessionTemplate.delete("Board_table.board_delete", bo_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -566,6 +566,15 @@ public class JejuDAO5 {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	public int reportDelete(String re_idx) {
+		try {
+			return sqlSessionTemplate.delete("Board_table.report_delete", re_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 }

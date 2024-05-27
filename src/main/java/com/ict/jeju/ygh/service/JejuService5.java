@@ -88,7 +88,7 @@ public interface JejuService5 {
 	public int boardUpdate(BoardVO bovo);
 
 	// Q&A 게시판 삭제 (사용자)
-	public int boardDelete(BoardVO bovo);
+	public int boardDelete(String bo_idx);
 
 	// 신고 게시판 작성 (사용자)
 	public int reportWriteOk(ReportVO revo);
@@ -157,5 +157,8 @@ public interface JejuService5 {
 	public List<UserVO> joinUser();
 	
 	public UserVO userStatus(String m_idx);
+	
+	// 관리자 신고 리뷰 삭제
+	public int reportDelete(String re_idx);
 
 }

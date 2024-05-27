@@ -19,6 +19,16 @@
 		f.action = "admin_list2.do";
 		f.submit();
 	}
+	
+	function admin_report_delete2(f) {
+		 if (confirm("해당 리뷰를 비공개 처리 하시겠습니까?")) {
+             alert("해당 리뷰가 비공개 처리되었습니다.");
+			f.action = "admin_report_delete2.do";
+			f.submit();
+         } else {
+             alert("해당 리뷰 비공개 처리가 취소되었습니다.");
+         }
+	}
 
 	function toggleCommentBox() {
 		let comment_box = document.getElementById("comment_box");
@@ -57,11 +67,6 @@
 		f.submit();
 	}
 
-	//필터
-	function report_ans_write_ok2(f) {
-		f.action = "report_ans_write_ok2.do";
-		f.submit()
-	}
 </script>
 </head>
 <body>
@@ -148,8 +153,9 @@
 			<input type="hidden" value="${cPage2}" name="cPage2"> 
 			<input type="hidden" name="re_idx" value="${ReviewVO.re_idx}">
 			<input type="button" value="목록" onclick="admin_list2(this.form)" /> 
-			<input type="button" value="답글" onclick="toggleCommentBox()" /> 
-			<input type="button" value="삭제" onclick="report_delete(this.form)" />
+			<c:if test="${ReviewVO.rep_status == 0}">
+				<input type="button" value="리뷰삭제" onclick="admin_report_delete2(this.form)" />
+			</c:if>
 		</div>
 	</form>
 
@@ -157,38 +163,6 @@
 	<br>
 	<br>
 
-	<%-- 답글 입력 --%>
-	<form method="post">
-		<div id="comment_box" style="display: none;">
-			<table>
-				<tr>
-					<th colspan="2" style="text-align: left;">답변하기</th>
-				</tr>
-				<tr>
-					<th>신고처리여부</th>
-					<td style="text-align: left;">
-					<label><input type="radio" id="reportOk" name="report" value="reportOk">처리</label> 
-					<label><input type="radio" id="reportNo" name="report" value="reportNo">미처리</label></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea rows="10" cols="60" name="rep_content"></textarea></td>
-				</tr>
-			</table>
-		</div>
-		<div id="comment_btn" style="display: none;">
-			<input type="hidden" name="cPage2" value="${cPage2}"> 
-			<input type="hidden" name="report_idx" value="${revo.report_idx}">
-			<input type="hidden" name="re_idx" value="${ReviewVO.re_idx}">
-			<input type="hidden" name="a_name" value="${adminVO.a_name}">
-			<input type="hidden" name="m_idx" value="${revo.m_idx}">
-			<input type="button" value="입력" onclick="report_ans_write_ok2(this.form)" />
-		</div>
-	</form>
-
-	<br>
-	<br>
-	<br>
 
 	<%-- 답글 출력 --%>
 	<div style="display: table; margin: 0 auto;">
@@ -209,7 +183,7 @@
 						</tr>
 						<tr>
 							<th>신고처리여부</th>
-							<td style="text-align: left;"></td>
+							<td style="text-align: left;">${k.active == 1 ? '처리' : '미처리' }</td>
 						</tr>
 						<tr>
 							<th>내용</th>
@@ -238,13 +212,11 @@
 			<c:forEach var="k" items="${rep_list}">
 				<table>
 					<tr>
-						<th colspan="2" style="text-align: left;">답변하기</th>
+						<th colspan="2" style="text-align: left;">답변 수정하기</th>
 					</tr>
 					<tr>
 						<th>신고처리여부</th>
-						<td style="text-align: left;">
-						<label><input type="radio" id="reportOk" name="report" value="reportOk">처리</label> 
-						<label><input type="radio" id="reportNo" name="report" value="reportNo">미처리</label></td>
+						<td style="text-align: left;">${k.active == 1 ? '처리' : '미처리' }</td>
 					</tr>
 					<tr>
 						<th>내용</th>
