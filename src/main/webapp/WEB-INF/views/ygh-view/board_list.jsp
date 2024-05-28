@@ -100,12 +100,12 @@
 							<ol class="paging">
 								<!-- 이전 버튼 -->
 								<c:choose>
-									<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
+									<c:when test="${paging.beginBlock <= paging.pagePerBlock2}">
 										<li class="disable">&#8249;</li>
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="board_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
+											href="board_list.do?cPage=${paging.beginBlock - paging.pagePerBlock2}">&#8249;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
@@ -130,7 +130,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="board_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
+											href="board_list.do?cPage=${paging.beginBlock + paging.pagePerBlock2}">&#8250;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>

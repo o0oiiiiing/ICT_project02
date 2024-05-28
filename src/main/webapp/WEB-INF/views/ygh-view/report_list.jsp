@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>신고 게시판</title>
+<title>REPORT | Jeju_travel</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico"
 	type="image/x-icon">
@@ -105,12 +105,12 @@
 						<ol class="paging">
 							<!-- 이전 버튼 -->
 							<c:choose>
-								<c:when test="${paging2.beginBlock <= paging2.pagePerBlock}">
+								<c:when test="${paging2.beginBlock <= paging2.pagePerBlock2}">
 									<li class="disable">&#8249;</li>
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="report_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock}">&#8249;</a>
+										href="report_list.do?cPage2=${paging2.beginBlock - paging2.pagePerBlock2}">&#8249;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>
@@ -135,7 +135,7 @@
 								</c:when>
 								<c:otherwise>
 									<li><a
-										href="report_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock}">&#8250;</a>
+										href="report_list.do?cPage2=${paging2.beginBlock + paging2.pagePerBlock2}">&#8250;</a>
 									</li>
 								</c:otherwise>
 							</c:choose>

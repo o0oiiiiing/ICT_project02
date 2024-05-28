@@ -11,7 +11,8 @@ public class Paging2 {
 	private int numPerPage = 10;
 	private int numPerPage2 = 5;
 	// 한 블록당 3개
-	private int pagePerBlock = 3;
+	private int pagePerBlock = 5;
+	private int pagePerBlock2 = 5;
 	// DB의 게시물의 수
 	private int totalRecord = 0;
 	// 게시물의 수를 이용해서 전체 페이지의 수
@@ -27,6 +28,14 @@ public class Paging2 {
 	private int endBlock = 0;
 
 	private int offset = 0;
+
+	public int getPagePerBlock2() {
+		return pagePerBlock2;
+	}
+
+	public void setPagePerBlock2(int pagePerBlock2) {
+		this.pagePerBlock2 = pagePerBlock2;
+	}
 
 	public int getNumPerPage2() {
 		return numPerPage2;

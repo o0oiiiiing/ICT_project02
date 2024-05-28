@@ -62,6 +62,10 @@ function comment_update2(f) {
 }
 
 function comment_update_ok2(f) {
+	if (f.com_content.value === '') {
+		alert("내용을 입력하세요.");
+		return false;
+	}
 	f.action = "comment_update_ok2.do";
 	f.submit();
 }
@@ -104,8 +108,8 @@ function comment_update_ok2(f) {
 				
 				<tr>
 					<th>내용</th>
-					<td><textarea rows="10" cols="60" id="bo_content"
-							name="bo_content" readonly style="margin: 5px;">${bovo.bo_content}</textarea>
+					<td><textarea rows="10" cols="60" id="bo_content" readonly 
+							name="bo_content" style="margin: 5px;">${bovo.bo_content}</textarea>
 					</td>
 				</tr>
 			</tbody>
@@ -142,7 +146,7 @@ function comment_update_ok2(f) {
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>${k.com_content}</td>
+						<td><pre style="margin: 10px 0px;"><c:out value="${k.com_content}" /></pre></td>
 					</tr>
 				</table>
 			</div>
@@ -170,7 +174,7 @@ function comment_update_ok2(f) {
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="10" cols="100" name="com_content">${k.com_content}</textarea>
+				<td><textarea rows="10" cols="100" name="com_content" >${k.com_content}</textarea>
 				</td>
 			</tr>
 		</table>

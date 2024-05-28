@@ -9,7 +9,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>관리자 대시보드</title>
+<title>ADMIN | Jeju_travel</title>
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- 파비콘 -->
@@ -42,7 +42,7 @@
 				<h1 id="lastUpdated"></h1>
 			</div>
 
-			<div class="row ">
+			<div class="row">
 				<div class="col-lg-6">
 					<div class="card mb-4">
 						<div class="card-header">

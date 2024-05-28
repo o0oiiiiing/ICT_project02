@@ -111,7 +111,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${k.com_content}</td>
+							<td><pre style="margin: 10px 0px;"><c:out value="${k.com_content}" /></pre></td>
 						</tr>
 					</table>
 				</div>
