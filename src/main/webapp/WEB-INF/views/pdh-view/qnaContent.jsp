@@ -20,7 +20,9 @@
 				<p class="qa_title">
 					Q&A <span style="color: #FFBB36;">(${qaNum})</span>
 				</p>
-				<input class="write_button" type="button" value="질문작성">
+				<c:if test="${userVO != null}">
+					<input class="write_button" type="button" value="질문작성">
+				</c:if>
 			</div>
 			<table class="qa_table">
 				<thead>

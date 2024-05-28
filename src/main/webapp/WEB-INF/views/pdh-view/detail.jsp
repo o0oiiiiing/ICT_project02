@@ -316,37 +316,45 @@
 
 	<table class="icons">
 		<tbody>
-			<tr class="icons-section">
-				<td class="border-right"><span
-					class="material-symbols-outlined icon favorite" onclick="goWishList()">favorite</span></td>
-				<td class="border-right"><span
-					class="material-symbols-outlined icon">calendar_today</span></td>
-				<td class="border-right"><span
-					class="material-symbols-outlined icon review" onclick="goReview('goReview')">edit</span></td>
-				<td class="border-right"><span
-					class="material-symbols-outlined icon">mouse</span></td>
-				<td class="no-border-right"><span
-					class="material-symbols-outlined icon">link</span></td>
-			</tr>
-			<tr class="icons-section">
-				<td class="icons-detail border-right">좋아요</td>
-				<td class="icons-detail border-right">일정 추가</td>
-				<td class="icons-detail border-right">리뷰</td>
-				<td class="icons-detail border-right">조회수</td>
-				<td class="icons-detail no-border-right">링크 복사</td>
-			</tr>
-			<tr class="icons-section">
-				<td class="icons-number border-right"><fmt:formatNumber
-						value="${likeNum}" pattern="#,##0" /></td>
-				<td class="border-right"><input class="icons-button"
-					type="button" value="추가하기" onclick="openModal('${placeDetail.contentsid}')"></td>
-				<td class="icons-number border-right"><fmt:formatNumber
-						value="${reviewNum}" pattern="#,##0" /></td>
-				<td class="icons-number border-right"><fmt:formatNumber
-						value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
-				<td class="no-border-right"><input class="icons-button"
-					type="button" value="복사하기" onclick="copyLink()"></td>
-			</tr>
+		<c:choose>
+			<c:when test="${adminVO != null}">
+				<span>@@@@@여기에 들어갈거 아무거나 추가하거나 그냥 공백으로 냅둬도됨
+					쓸거없으면 지워야됨 잘 보이겠지만 화면단에 글씨 나와있음@@@@@</span>
+			</c:when>
+			<c:otherwise>
+				<tr class="icons-section">
+					<td class="border-right"><span
+						class="material-symbols-outlined icon favorite" onclick="goWishList()">favorite</span></td>
+					<td class="border-right"><span
+						class="material-symbols-outlined icon">calendar_today</span></td>
+					<td class="border-right"><span
+						class="material-symbols-outlined icon review" onclick="goReview('goReview')">edit</span></td>
+					<td class="border-right"><span
+						class="material-symbols-outlined icon">mouse</span></td>
+					<td class="no-border-right"><span
+						class="material-symbols-outlined icon">link</span></td>
+				</tr>
+				<tr class="icons-section">
+					<td class="icons-detail border-right">좋아요</td>
+					<td class="icons-detail border-right">일정 추가</td>
+					<td class="icons-detail border-right">리뷰</td>
+					<td class="icons-detail border-right">조회수</td>
+					<td class="icons-detail no-border-right">링크 복사</td>
+				</tr>
+				<tr class="icons-section">
+					<td class="icons-number border-right"><fmt:formatNumber
+							value="${likeNum}" pattern="#,##0" /></td>
+					<td class="border-right"><input class="icons-button"
+						type="button" value="추가하기" onclick="openModal('${placeDetail.contentsid}')"></td>
+					<td class="icons-number border-right"><fmt:formatNumber
+							value="${reviewNum}" pattern="#,##0" /></td>
+					<td class="icons-number border-right"><fmt:formatNumber
+							value="${placeDetail.vi_hit}" pattern="#,##0" /></td>
+					<td class="no-border-right"><input class="icons-button"
+						type="button" value="복사하기" onclick="copyLink()"></td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
 		</tbody>
 	</table>
 	<script type="text/javascript">
@@ -402,9 +410,9 @@
 				<textarea id="summernote" name="bo_content" maxlength="1000"></textarea>
 			</div>
 			<div class="qa_write__buttons">
-				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> <input
-					type="hidden" value="${userVO.u_name}" name="u_name"> <input
-					class="qa_write__button" type="reset" value="취소">
+				<input type="hidden" value="${userVO.u_idx}" name="u_idx"> 
+				<input type="hidden" value="${userVO.u_name}" name="u_name"> 
+				<input class="qa_write__button" type="reset" value="취소">
 				<button type="button" class="qa_write__button"
 					onclick="qaWrite(this.form)">등록</button>
 			</div>
