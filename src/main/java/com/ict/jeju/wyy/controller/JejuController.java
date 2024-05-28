@@ -25,9 +25,6 @@ public class JejuController {
 	private MytripService calendarService4;
 	
 	@Autowired
-	private HttpSession session;
-	
-	@Autowired
 	private MyTripPaging paging;
 	
 	// 나의여행일정 추가한 리스트 / 좋아요한 리스트
