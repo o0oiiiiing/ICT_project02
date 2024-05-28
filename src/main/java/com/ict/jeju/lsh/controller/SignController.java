@@ -84,6 +84,20 @@ public class SignController {
 			return mv;
 		}
 		
+		if (userVO2.getActive().equals("1")) {
+			session.setAttribute("loginChk", "fail");
+			mv.addObject("msg", "이미 탈퇴한 회원입니다.");
+			mv.setViewName("lsh_view/login_page");
+			return mv;
+		}
+		
+		if (userVO2.getRe_active().equals("1")) {
+			session.setAttribute("loginChk", "fail");
+			mv.addObject("msg", "신고 누적으로 인하여 탈퇴되었습니다.");
+			mv.setViewName("lsh_view/login_page");
+			return mv;
+		}
+		
 	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), 
 	    		userVO2.getU_pwd()) && userVO2.getActive().equals("0")) {
 	        session.setAttribute("loginChk", "ok");
@@ -92,12 +106,7 @@ public class SignController {
 	        mv.setViewName("redirect:home");
 	        return mv;
 	    }
-	    if (userVO2.getActive().equals("1")) {
-			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "이미 탈퇴한 회원입니다.");
-			mv.setViewName("lsh_view/login_page");
-			return mv;
-		}
+	    
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 	    mv.setViewName("lsh_view/login_page");

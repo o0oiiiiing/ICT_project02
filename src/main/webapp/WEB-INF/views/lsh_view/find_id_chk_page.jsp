@@ -21,6 +21,7 @@
 			  	background-image: url('resources/lsh_images/jeju_island.jpg');
 			  	background-position: center;
 			  	background-size: cover;
+			  	font-family: 'NanumSquare';
 			}
 		</style>
 	</head>
@@ -47,7 +48,7 @@
 				
 				<div class="findID_chk_box">
 					<a href="login_go.do" >Login &nbsp;&nbsp; | </a>
-					<a href="findpwd_go.do" >find your Password</a>
+					<a href="findpwd_go.do" >Find your Password</a>
 				</div>
 			</div>
 		</section>

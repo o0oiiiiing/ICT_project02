@@ -47,6 +47,7 @@
 			  	background-image: url('resources/lsh_images/jeju_island.jpg');
 			  	background-position: center;
 			  	background-size: cover;
+			  	font-family: 'NanumSquare';
 			}
 			.login_container {
 				position: relative;
@@ -125,7 +126,6 @@
 				text-decoration: none;
 				color: #6c6c6c;
 			}
-			
 			.login_find {
 				margin: o auto;
 				margin-top: 15px;
@@ -153,8 +153,8 @@
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do" >find your ID &nbsp;&nbsp; | </a>
-						<a href="findpwd_go.do" >&nbsp;&nbsp;find your Password</a>
+						<a href="findID_go.do" >Find your ID &nbsp;&nbsp; | </a>
+						<a href="findpwd_go.do" >&nbsp;&nbsp;Find your Password</a>
 					</div>
 					
 					<div class="login_sns">
@@ -166,7 +166,7 @@
 						</a>
 					</div>
 					<div class="login_find">
-						<a href="admin_login.do">관리자로그인</a>
+						<a href="admin_login.do">ADMIN Login</a>
 					</div>
 				</form>
 			</div>

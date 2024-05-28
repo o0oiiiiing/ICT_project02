@@ -125,6 +125,7 @@
 	margin: auto;
 	width: 100%;
 	height: 600px;
+	font-family: 'NanumSquare';
 }
 
 .admin_join_container {
