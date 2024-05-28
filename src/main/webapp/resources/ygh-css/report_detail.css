@@ -112,3 +112,7 @@
 	padding: 4px 10px;
 	border: 1px solid lightgray;
 }
+
+#report_detail p {
+	margin: 15px 0px;
+}

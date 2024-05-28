@@ -484,8 +484,8 @@ public class JejuController5 {
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
 
 		paging.setBeginBlock(
-				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
-		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock2()) * paging.getPagePerBlock2() + 1);
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock2() - 1);
 
 		if (paging.getEndBlock() > paging.getTotalPage()) {
 			paging.setEndBlock(paging.getTotalPage());
@@ -609,8 +609,8 @@ public class JejuController5 {
 		paging2.setOffset(paging2.getNumPerPage() * (paging2.getNowPage2() - 1));
 
 		paging2.setBeginBlock(
-				(int) ((paging2.getNowPage2() - 1) / paging2.getPagePerBlock()) * paging2.getPagePerBlock() + 1);
-		paging2.setEndBlock(paging2.getBeginBlock() + paging2.getPagePerBlock() - 1);
+				(int) ((paging2.getNowPage2() - 1) / paging2.getPagePerBlock2()) * paging2.getPagePerBlock2() + 1);
+		paging2.setEndBlock(paging2.getBeginBlock() + paging2.getPagePerBlock2() - 1);
 
 		if (paging2.getEndBlock() > paging2.getTotalPage()) {
 			paging2.setEndBlock(paging2.getTotalPage());
@@ -793,8 +793,8 @@ public class JejuController5 {
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
 
 		paging.setBeginBlock(
-				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
-		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock3()) * paging.getPagePerBlock3() + 1);
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock3() - 1);
 
 		if (paging.getEndBlock() > paging.getTotalPage()) {
 			paging.setEndBlock(paging.getTotalPage());

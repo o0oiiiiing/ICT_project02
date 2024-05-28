@@ -67,6 +67,8 @@
         	}
     	});
 	};
+	
+	
 
 	
 </script>
@@ -271,6 +273,15 @@
 		function report_list() {
 			location.href="report_list.do"
 		}
+		
+		// 날씨
+		$(document).ready(function() {
+		    $(".weather_image").click(function() {
+		        $(".weather_modal").toggle();  
+		    });
+		    
+		});
+		
 </script>
 <title>MY TRIP | Jeju_travel</title>
 </head>
@@ -373,6 +384,13 @@
 		<div class="chatbot_modal" >
 			<%@include file="../common/chatbot.jsp"%>
 		</div> 
+		
+	<!-- 날씨 -->
+	<img src="resources/common-image/weather.png" id="weather_image" class="weather_image">
+	<div class="weather_modal">
+		<%@include file="../ygh-view/weather.jsp"%>
+	</div>
+	
 		<%@include file="../common/footer.jsp"%>
 		<div>
 		<button id="scrollToTopButton">

@@ -63,6 +63,10 @@
 	}
 
 	function reply_update_ok2(f) {
+		if (f.rep_content.value === '') {
+			alert("내용을 입력하세요.");
+			return false;
+		}
 		f.action = "reply_update_ok2.do";
 		f.submit();
 	}
@@ -88,7 +92,7 @@
 					</tr>
 					<tr>
 						<th>신고받은자</th>
-						<td>${revo.m_idx}</td>
+						<td>${revo.m_id}</td>
 					</tr>
 					<tr>
 						<th>날짜</th>
@@ -99,6 +103,9 @@
 						<th>신고리뷰</th>
 						<td>
 							<p><a href="detail?contentsid=${ReviewVO.contentsid}">신고 리뷰 페이지 바로가기</a></p>
+							<p style="color: red">
+								<c:if test="${ReviewVO.rep_status == 1}">비공개 처리된 리뷰입니다.</c:if>
+							</p>
 							<div class="review-content" style="border: 1px solid lightgray; padding: 10px; margin: 10px 0px 0px;">
 								<div class="review-content__left">
 									<img style="width: 130px; height: 130px; border-radius: 50%;"
@@ -132,8 +139,12 @@
 										<p style="color: black;">${ReviewVO.re_content}</p>
 
 										<div class="images">
-											<img style="width: 150px; height: 150px;" alt="사진"
-												src="resources/upload/${ReviewVO.pic_file}">
+										<c:choose>
+											<c:when test="${empty ReviewVO.pic_file}"></c:when>
+											<c:otherwise>
+												<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${ReviewVO.pic_file}">
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -154,7 +165,7 @@
 			<input type="hidden" name="re_idx" value="${ReviewVO.re_idx}">
 			<input type="button" value="목록" onclick="admin_list2(this.form)" /> 
 			<c:if test="${ReviewVO.rep_status == 0}">
-				<input type="button" value="리뷰삭제" onclick="admin_report_delete2(this.form)" />
+				<input type="button" value="리뷰비공개" onclick="admin_report_delete2(this.form)" />
 			</c:if>
 		</div>
 	</form>
@@ -187,7 +198,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${k.rep_content}</td>
+							<td><pre style="margin: 10px 0px;"><c:out value="${k.rep_content}" /></pre></td>
 						</tr>
 					</table>
 				</div>
@@ -220,7 +231,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="10" cols="100" name="rep_content">${k.rep_content}</textarea>
+						<td><textarea rows="10" cols="100" name="rep_content" >${k.rep_content}</textarea>
 						</td>
 					</tr>
 				</table>

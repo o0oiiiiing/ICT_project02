@@ -61,14 +61,23 @@
 		}
 		f.action = "reply_update.do";
 	}
-
+	
+	// 답글 수정
 	function reply_update_ok(f) {
+		if (f.rep_content.value === '') {
+			alert("내용을 입력하세요.");
+			return false;
+		}
 		f.action = "reply_update_ok.do";
 		f.submit();
 	}
 
-	//필터
+	// 답글 등록
 	function report_ans_write_ok(f) {
+		if (f.rep_content.value === '') {
+			alert("내용을 입력하세요.");
+			return false;
+		}
 		f.action = "report_ans_write_ok.do";
 		f.submit()
 	}
@@ -93,7 +102,7 @@
 					</tr>
 					<tr>
 						<th>신고받은자</th>
-						<td>${revo.m_idx}</td>
+						<td>${revo.m_id}</td>
 					</tr>
 					<tr>
 						<th>날짜</th>
@@ -104,6 +113,9 @@
 						<th>신고리뷰</th>
 						<td>
 							<p><a href="detail?contentsid=${ReviewVO.contentsid}">신고 리뷰 페이지 바로가기</a></p>
+							<p style="color: red">
+								<c:if test="${ReviewVO.rep_status == 1}">비공개 처리된 리뷰입니다.</c:if>
+							</p>
 							<div class="review-content" style="border: 1px solid lightgray; padding: 10px; margin: 10px 0px 0px;">
 								<div class="review-content__left">
 									<img style="width: 130px; height: 130px; border-radius: 50%;"
@@ -137,8 +149,12 @@
 										<p style="color: black;">${ReviewVO.re_content}</p>
 
 										<div class="images">
-											<img style="width: 150px; height: 150px;" alt="사진"
-												src="resources/upload/${ReviewVO.pic_file}">
+										<c:choose>
+											<c:when test="${empty ReviewVO.pic_file}"></c:when>
+											<c:otherwise>
+												<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${ReviewVO.pic_file}">
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -160,7 +176,7 @@
 			<input type="button" value="목록" onclick="admin_list(this.form)" /> 
 			<input type="button" value="답글" onclick="toggleCommentBox()" /> 
 			<c:if test="${ReviewVO.rep_status == 0}">
-				<input type="button" value="리뷰삭제" onclick="admin_report_delete(this.form)" />
+				<input type="button" value="리뷰비공개" onclick="admin_report_delete(this.form)" />
 			</c:if>
 		</div>
 	</form>
@@ -180,11 +196,11 @@
 					<th>신고처리여부</th>
 					<td style="text-align: left;">
 					<label><input type="radio" id="reportOk" name="report" value="reportOk">처리</label> 
-					<label><input type="radio" id="reportNo" name="report" value="reportNo">미처리</label></td>
+					<label><input type="radio" id="reportNo" name="report" value="reportNo" checked>미처리</label></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td><textarea rows="10" cols="60" name="rep_content"></textarea></td>
+					<td><textarea rows="10" cols="60" name="rep_content" ></textarea></td>
 				</tr>
 			</table>
 		</div>
@@ -226,7 +242,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${k.rep_content}</td>
+							<td><pre style="margin: 10px 0px;"><c:out value="${k.rep_content}" /></pre></td>
 						</tr>
 					</table>
 				</div>
@@ -255,7 +271,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea rows="10" cols="100" name="rep_content">${k.rep_content}</textarea>
+						<td><textarea rows="10" cols="100" name="rep_content" >${k.rep_content}</textarea>
 						</td>
 					</tr>
 				</table>

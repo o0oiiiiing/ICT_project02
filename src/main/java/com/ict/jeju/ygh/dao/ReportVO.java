@@ -2,7 +2,15 @@ package com.ict.jeju.ygh.dao;
 
 public class ReportVO {
 	private String report_idx, rep_idx, u_idx, re_idx, m_idx, report_title, report_content, report_writer, active,
-			report_regdate, u_name, step;
+			report_regdate, u_name, step, m_id;
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 
 	public String getStep() {
 		return step;

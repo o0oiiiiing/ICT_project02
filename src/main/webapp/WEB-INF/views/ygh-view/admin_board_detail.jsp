@@ -32,6 +32,10 @@ function admin_board_delete(f) {
 }
 
 function board_ans_write_ok(f) {
+	if (f.com_content.value === '') {
+		alert("내용을 입력하세요.");
+		return false;
+	}
 	f.action = "board_ans_write_ok.do";
 	f.submit();
 }
@@ -67,6 +71,10 @@ function comment_update(f) {
 }
 
 function comment_update_ok(f) {
+	if (f.com_content.value === '') {
+		alert("내용을 입력하세요.");
+		return false;
+	}
 	f.action = "comment_update_ok.do";
 	f.submit();
 }
@@ -138,7 +146,7 @@ function comment_update_ok(f) {
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="10" cols="100" name="com_content"></textarea>
+				<td><textarea rows="10" cols="100" name="com_content" ></textarea>
 				</td>
 			</tr>
 		</table>
@@ -174,7 +182,7 @@ function comment_update_ok(f) {
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>${k.com_content}</td>
+						<td><pre style="margin: 10px 0px;"><c:out value="${k.com_content}" /></pre></td>
 					</tr>
 				</table>
 			</div>
@@ -202,7 +210,7 @@ function comment_update_ok(f) {
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="10" cols="100" name="com_content">${k.com_content}</textarea>
+				<td><textarea rows="10" cols="100" name="com_content" >${k.com_content}</textarea>
 				</td>
 			</tr>
 		</table>

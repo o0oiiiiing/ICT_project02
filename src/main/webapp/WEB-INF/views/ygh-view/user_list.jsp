@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원관리</title>
+<title>ADMIN | Jeju_travel</title>
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- 파비콘 -->
@@ -209,12 +209,12 @@
 							<ol class="paging">
 								<!-- 이전 버튼 -->
 								<c:choose>
-									<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
+									<c:when test="${paging.beginBlock <= paging.pagePerBlock3}">
 										<li class="disable">&#8249;</li>
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="user_list.do?cPage=${paging.beginBlock - paging.pagePerBlock}">&#8249;</a>
+											href="user_list.do?cPage=${paging.beginBlock - paging.pagePerBlock3}">&#8249;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
@@ -239,7 +239,7 @@
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="user_list.do?cPage=${paging.beginBlock + paging.pagePerBlock}">&#8250;</a>
+											href="user_list.do?cPage=${paging.beginBlock + paging.pagePerBlock3}">&#8250;</a>
 										</li>
 									</c:otherwise>
 								</c:choose>

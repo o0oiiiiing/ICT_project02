@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>신고 게시판 목록</title>
+<title>REPORT | Jeju_travel</title>
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
@@ -41,7 +41,9 @@
 					<th>신고리뷰</th>
 						<td>
 							 <p><a href="detail?contentsid=${ReviewVO.contentsid}">신고 리뷰 페이지 바로가기</a></p>
-							<%-- <p><a href="#" onclick="detail_go('${ReviewVO.contentsid}'">신고 리뷰 페이지 바로가기</a></p> --%>
+							 <p style="color: red">
+								<c:if test="${ReviewVO.rep_status == 1}">비공개 처리된 리뷰입니다.</c:if>
+							</p>
 							<div class="review-content" style="border: 1px solid lightgray; padding: 10px; margin: 10px 0px 0px;">
 								<div class="review-content__left">
 									<img style="width: 130px; height: 130px; border-radius: 50%;"
@@ -74,9 +76,13 @@
 								<div class="review-content__right" style="border-left: 1px solid lightgray; padding: 20px;">
 										<p style="color: black;">${ReviewVO.re_content}</p>
 
-										<div class="images">
-											<img style="width: 150px; height: 150px;" alt="사진"
-												src="resources/upload/${ReviewVO.pic_file}">
+									<div class="images">
+										<c:choose>
+											<c:when test="${empty ReviewVO.pic_file}"></c:when>
+											<c:otherwise>
+												<img style="width: 150px; height: 150px;" alt="사진" src="resources/upload/${ReviewVO.pic_file}">
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -121,7 +127,7 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${k.rep_content}</td>
+							<td><pre style="margin: 10px 0px;"><c:out value="${k.rep_content}" /></pre></td>
 						</tr>
 					</table>
 				</div>

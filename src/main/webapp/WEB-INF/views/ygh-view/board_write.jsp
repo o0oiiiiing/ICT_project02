@@ -20,6 +20,10 @@
 	}
 
 	function board_write_ok(f) {
+		if (f.bo_title.value === '' || f.bo_content.value === '') {
+			alert("내용을 입력하세요.");
+			return false;
+		}
 		f.action = "board_write_ok.do";
 		f.submit();
 	}

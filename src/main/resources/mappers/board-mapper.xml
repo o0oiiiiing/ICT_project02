@@ -134,7 +134,10 @@
         re_active = case when u_report = 3 then 1 else active end,
         u_del = case when u_report = 3 then '신고 누적 3회' else u_del end,
         out_regdate = case when u_report = 3 then sysdate() else out_regdate end,
-        out_admin = case when u_report = 3 then #{a_name} else out_admin end
+        out_admin = case when u_report = 3 then #{a_name} else out_admin end,
+        u_restore = case when u_report = 3 then null else u_restore end,
+        re_regdate = case when u_report = 3 then null else re_regdate end,
+        re_admin = case when u_report = 3 then null else re_admin end
 		where u_idx = #{m_idx}
 	</update>
 	
@@ -259,7 +262,7 @@
 	<!-- 회원관리 복구 -->
 	<update id="user_Restore" parameterType="userVO">
 		update User_table
-		set active = 0, u_restore = #{u_restore}, re_regdate = sysdate(), u_del = #{u_del}, out_regdate = #{out_regdate}, re_admin = #{a_name}, out_admin = null
+		set active = 0, u_restore = #{u_restore}, re_regdate = sysdate(), u_del = #{u_del}, out_regdate = #{out_regdate}, re_admin = #{a_name}, out_admin = null, u_report = 0, re_active = 0
 		where u_idx = #{u_idx}
 	</update>
 	
