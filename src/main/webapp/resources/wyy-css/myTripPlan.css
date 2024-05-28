@@ -184,3 +184,67 @@
 .modal--close:hover {
   background-color: #999;
 }
+
+/* 반응형 웹 추가 */
+@media (max-width: 1200px) {
+    .myTripDetail, .likeTripDetail {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .myTripPlan {
+        width: 90%;
+    }
+    .myTrip_profile {
+        width: 90%;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .myTrip_profile_content {
+        padding: 20px;
+    }
+    .myTripPlan_title {
+        font-size: 20px;
+    }
+    .myTripLikeTrip {
+        font-size: 18px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .detail_likeTrip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .paging_mytrip {
+        margin: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .myTripPlan {
+        width: 100%;
+    }
+    .myTrip_profile {
+        width: 100%;
+        padding: 10px;
+    }
+    .myTrip_profile_content {
+        padding: 10px;
+    }
+    .myTripPlan_title {
+        font-size: 16px;
+    }
+    .myTripLikeTrip {
+        font-size: 16px;
+    }
+    .detail_likeTrip {
+        grid-template-columns: 1fr;
+    }
+    .paging_mytrip {
+        margin: 20px;
+        font-size: 14px;
+    }
+}
