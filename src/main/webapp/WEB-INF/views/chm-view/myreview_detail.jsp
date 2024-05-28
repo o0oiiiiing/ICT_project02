@@ -35,8 +35,17 @@
 			<div class="wrapper_head">
 				<div><span class="user">${reviewDetail.u_name}</span>님이 작성하신 리뷰</div>
 			</div>
-			<div class="wrapper_buttom">
-				<div class="buttom_image"><img src="./resources/upload/${image}" style="width: 26vw; height: 42vh;"></div>
+			<div class="wrapper_buttom">	
+				<div class="buttom_image">
+					<c:choose>
+						<c:when test="${empty image}">
+							<div class="no_image_box">등록하신 이미지가 없습니다.</div>
+						</c:when>
+						<c:otherwise>	
+							<img src="./resources/upload/${image}" style="width: 26vw; height: 42vh;">
+						</c:otherwise>	
+					</c:choose>
+				</div>
 				<div class="buttom_comment">
 					<span class="buttom_title"><a href="detail?contentsid=${reviewDetail.contentsid}" style="color: inherit; text-decoration: none;">${title}</a></span>
 					<c:choose>

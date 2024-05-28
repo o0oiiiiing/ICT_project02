@@ -42,6 +42,14 @@
     justify-content: center;
 }
 
+.no_image_box{
+	width: 26vw; 
+	height: 42vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .buttom_comment {
     width: 100%;
     height: auto;

@@ -173,6 +173,8 @@ ol li {
 }
 .not_found{
 	margin-right: 10vw;
+	display: flex;
+	flex-direction: row;
 }
 
 .keyword {
