@@ -142,7 +142,7 @@ public class PlaceListDAO {
 	}
 
 	// 신고하기
-	public int reportWrite(ReportVO reportVO) {
+	public int reportWrite(DeclarationVO reportVO) {
 		try {
 			return sqlSessionTemplate.insert("place.reportWrite", reportVO);
 		} catch (Exception e) {
@@ -162,7 +162,7 @@ public class PlaceListDAO {
 	}
 
 	// 신고 당한 사람 신고 수 늘리기
-	public int reportSu(ReportVO reportVO) {
+	public int reportSu(DeclarationVO reportVO) {
 		try {
 			return sqlSessionTemplate.update("place.reportSu", reportVO);
 		} catch (Exception e) {

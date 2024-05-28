@@ -137,7 +137,8 @@
         out_admin = case when u_report = 3 then #{a_name} else out_admin end,
         u_restore = case when u_report = 3 then null else u_restore end,
         re_regdate = case when u_report = 3 then null else re_regdate end,
-        re_admin = case when u_report = 3 then null else re_admin end
+        re_admin = case when u_report = 3 then null else re_admin end,
+        active = case when u_report = 3 then 1 else active end
 		where u_idx = #{m_idx}
 	</update>
 	

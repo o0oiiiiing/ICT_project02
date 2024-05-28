@@ -24,7 +24,7 @@
 		<typeAlias type="com.ict.jeju.pdh.dao.PagingVO" alias="PagingVO" />
 		<typeAlias type="com.ict.jeju.pdh.dao.ReviewVO" alias="ReviewVO" />
 		<typeAlias type="com.ict.jeju.pdh.dao.ImagesVO" alias="ImagesVO" />
-		<typeAlias type="com.ict.jeju.pdh.dao.ReportVO" alias="ReportVO" />
+		<typeAlias type="com.ict.jeju.pdh.dao.DeclarationVO" alias="DeclarationVO" />
 		<typeAlias type="com.ict.jeju.pdh.dao.WishVO" alias="WishVO" />
 		<typeAlias type="com.ict.jeju.pdh.dao.CommentVO" alias="CommentVO" />
 		

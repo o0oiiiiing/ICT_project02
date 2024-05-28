@@ -17,6 +17,7 @@
 <!-- css 적용 -->
 <link rel="stylesheet" href="resources/common-css/header.css" />
 <link rel="stylesheet" href="resources/common-css/reset.css" />
+<link rel="stylesheet" href="resources/common-css/chatbot.css" />
 
 <script type="text/javascript">
 	// 아이콘 눌렀을 때 텍스트박스 글 지우기
@@ -65,14 +66,6 @@
 						</form>
 					</li>
 					<li>${userVO.u_name}님 환영합니다.</li>
-					<li>
-						<div id="myModal" class="modal">
-						    <div class="modal-content">
-						        <span class="close">&times;</span>
-						        <p id="messageContent"></p>
-						    </div>
-						</div>
-					</li>
 					<li>|</li>
 					<li><a href="logout_go.do" class="a_tag">로그아웃</a></li>
 				</ul>
