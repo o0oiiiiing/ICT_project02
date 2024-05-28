@@ -159,10 +159,10 @@
 					
 					<div class="login_sns">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
-							<img src="resources/lsh_images/kakao_login.png" class="login_sns_btn" />
+							<img src="resources/lsh_images/kakao_login3.png" class="login_sns_btn" />
 						</a>
 						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=J3r3NWMEm1CJS2vNYtQm&state=STATE_STRING&redirect_uri=http://localhost:8090/naver_login.do">
-							<img src="resources/lsh_images/naver_login.png" class="login_sns_btn" />
+							<img src="resources/lsh_images/naver_login2.png" class="login_sns_btn" style="border-radius: 5px;"/>
 						</a>
 					</div>
 					<div class="login_find">
