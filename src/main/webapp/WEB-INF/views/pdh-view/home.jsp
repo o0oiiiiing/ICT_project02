@@ -98,39 +98,39 @@ $(document).ready(function() {
     </div>
 </main>
 	
-<script>
- const sliderWrap = document.querySelector(".slider__wrap");
- const sliderImg = sliderWrap.querySelector(".slider__img");             // 보여지는 영역
- const sliderInner = sliderWrap.querySelector(".slider__inner");         // 움직이는 영역
- const slider = sliderWrap.querySelectorAll(".slider");
-
- let currentIndex = 0;                                                   // 현재 보이는 이미지
- let sliderCount = slider.length;                                        // 이미지 갯수
- let sliderInterval = 5000;                                              // 이미지 변경 간격 시간
- let sliderWidth = slider[0].clientWidth;                                // 이미지 가로값 구하기
- let sliderClone = sliderInner.firstElementChild.cloneNode(true);        // 첫 번째 이미지 복사
-</script>
- <!-- GSAP -->
+<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 <script>
-    sliderInner.appendChild(sliderClone);
+ const sliderWrap = document.querySelector(".slider__wrap");
+ const sliderImg = sliderWrap.querySelector(".slider__img");     // 보여지는 영역
+ const sliderInner = sliderWrap.querySelector(".slider__inner"); // 움직이는 영역
+ const slider = sliderWrap.querySelectorAll(".slider");
 
-    function sliderEffect() {
-        currentIndex++;
+ let currentIndex = 0;                                            // 현재 보이는 이미지
+ let sliderCount = slider.length;                                 // 이미지 갯수
+ let sliderInterval = 5000;                                       // 이미지 변경 간격 시간
+ let sliderWidth = slider[0].clientWidth;                         // 이미지 가로값 구하기
+ let sliderClone = sliderInner.firstElementChild.cloneNode(true); // 첫 번째 이미지 복사
 
-        gsap.to(".slider__inner", {
-            x: -sliderWidth * currentIndex,
-            duration: 1.0,
-            onComplete: function() {
-                if (currentIndex == sliderCount) {
-                    currentIndex = 0;
-                    gsap.set(".slider__inner", { x: 0 }); // 슬라이더가 마지막 이미지로 이동할 때, 첫 번째 이미지로 자연스럽게 이동
-                }
-            }
-        });
-    }
+ sliderInner.appendChild(sliderClone);
 
-    setInterval(sliderEffect, sliderInterval);
+ function sliderEffect() {
+     currentIndex++;
+
+     gsap.to(".slider__inner", {
+         x: -sliderWidth * currentIndex,
+         duration: 1.0,
+         onComplete: function() {
+             if (currentIndex == sliderCount) {
+                 currentIndex = 0;
+             	 // 슬라이더가 마지막 이미지로 이동할 때, 첫 번째 이미지로 자연스럽게 이동
+                 gsap.set(".slider__inner", { x: 0 });
+             }
+         }
+     });
+ }
+
+ setInterval(sliderEffect, sliderInterval);
 </script>
  
 
@@ -252,32 +252,30 @@ $(document).ready(function() {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="k" items="${popularList}">
-							<li class="place"><a
-								href="detail?contentsid=${k.contentsid}"> <img alt="장소"
-									src="${k.vi_image}">
+							<li class="place">
+								<a href="detail?contentsid=${k.contentsid}">
+									<img alt="장소" src="${k.vi_image}">
 									<p style="font-weight: bold;">${k.vi_title}</p>
-										<c:choose>
-											<c:when test="${k.vi_value == '관광지'}">
-												<p>관광지</p>
-											</c:when>
-											<c:when test="${k.vi_value == '쇼핑'}">
-												<p>쇼핑</p>
-											</c:when>
-											<c:when test="${k.vi_value == '숙박'}">
-												<p>숙박</p>
-											</c:when>
-											<c:when test="${k.vi_value == '음식점'}">
-												<p>음식점</p>
-											</c:when>
-											<c:otherwise>
-												<p>축제/행사</p>
-											</c:otherwise>
-										</c:choose>
-									<p>
-										조회수 :
-										<fmt:formatNumber value="${k.vi_hit}" pattern="#,##0" />
-									</p>
-							</a></li>
+									<c:choose>
+										<c:when test="${k.vi_value == '관광지'}">
+											<p>관광지</p>
+										</c:when>
+										<c:when test="${k.vi_value == '쇼핑'}">
+											<p>쇼핑</p>
+										</c:when>
+										<c:when test="${k.vi_value == '숙박'}">
+											<p>숙박</p>
+										</c:when>
+										<c:when test="${k.vi_value == '음식점'}">
+											<p>음식점</p>
+										</c:when>
+										<c:otherwise>
+											<p>축제/행사</p>
+										</c:otherwise>
+									</c:choose>
+									<p>조회수 : <fmt:formatNumber value="${k.vi_hit}" pattern="#,##0" /></p>
+								</a>
+							</li>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

@@ -317,12 +317,14 @@
 	<table class="icons">
 		<tbody>
 			<tr class="icons-section">
-				<td class="border-right"><span
-					class="material-symbols-outlined icon favorite" onclick="goWishList()">favorite</span></td>
+				<td class="border-right">
+					<span class="material-symbols-outlined icon favorite" onclick="goWishList()">favorite</span>
+				</td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">calendar_today</span></td>
-				<td class="border-right"><span
-					class="material-symbols-outlined icon review" onclick="goReview('goReview')">edit</span></td>
+				<td class="border-right">
+					<span class="material-symbols-outlined icon review" onclick="goReview('goReview')">edit</span>
+				</td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">mouse</span></td>
 				<td class="no-border-right"><span
