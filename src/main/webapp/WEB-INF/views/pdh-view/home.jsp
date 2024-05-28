@@ -53,10 +53,87 @@ $(document).ready(function() {
 
 </script>
 
+<style type="text/css">
+/* slider__wrap */
+   .slider__wrap {
+       width: 100%;
+       height: 500px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       z-index: -1;
+   }
+   .slider__img { /* 이미지가 보이는 영역 */
+       position: relative;
+       width: 100%;
+       height: 500px;
+       overflow: hidden;
+   }
+   .slider__inner { /* 이미지 움직이는 영역 */
+       display: flex;
+       flex-wrap: wrap;
+       width: 7680px;  /* 총 이미지가 4800px */
+       height: 500px;
+   }
+   .slider { /* 개별적인 이미지 */
+       position: relative;
+       width: 1920px;
+       height: 500px;
+   }
+
+</style>
+
 </head>
 
 <body>
-	<img class="main_image" src="resources/pdh-image/main01.jpg">
+<main id="main">
+    <div class="slider__wrap">
+        <div class="slider__img">
+            <div class="slider__inner">
+                <div class="slider s1"><img class="main_image" src="resources/pdh-image/main01.png"></div>
+                <div class="slider s2"><img class="main_image" src="resources/pdh-image/main02.png"></div>
+                <div class="slider s3"><img class="main_image" src="resources/pdh-image/main03.png"></div>
+            </div>
+        </div>
+    </div>
+</main>
+	
+<script>
+ const sliderWrap = document.querySelector(".slider__wrap");
+ const sliderImg = sliderWrap.querySelector(".slider__img");             // 보여지는 영역
+ const sliderInner = sliderWrap.querySelector(".slider__inner");         // 움직이는 영역
+ const slider = sliderWrap.querySelectorAll(".slider");
+
+ let currentIndex = 0;                                                   // 현재 보이는 이미지
+ let sliderCount = slider.length;                                        // 이미지 갯수
+ let sliderInterval = 5000;                                              // 이미지 변경 간격 시간
+ let sliderWidth = slider[0].clientWidth;                                // 이미지 가로값 구하기
+ let sliderClone = sliderInner.firstElementChild.cloneNode(true);        // 첫 번째 이미지 복사
+</script>
+ <!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script>
+    sliderInner.appendChild(sliderClone);
+
+    function sliderEffect() {
+        currentIndex++;
+
+        gsap.to(".slider__inner", {
+            x: -sliderWidth * currentIndex,
+            duration: 1.0,
+            onComplete: function() {
+                if (currentIndex == sliderCount) {
+                    currentIndex = 0;
+                    gsap.set(".slider__inner", { x: 0 }); // 슬라이더가 마지막 이미지로 이동할 때, 첫 번째 이미지로 자연스럽게 이동
+                }
+            }
+        });
+    }
+
+    setInterval(sliderEffect, sliderInterval);
+</script>
+ 
+
 	<header class="header">
 		<ul class="nav">
 			<li>

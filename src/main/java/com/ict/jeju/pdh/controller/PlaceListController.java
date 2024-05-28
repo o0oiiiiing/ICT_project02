@@ -94,8 +94,6 @@ public class PlaceListController {
 	public ModelAndView detail(@RequestParam("contentsid") String contentsid, HttpSession session,
 			HttpServletRequest request, WishVO wishVO) {
 		UserVO userVO = (UserVO) session.getAttribute("userVO");
-		System.out.println("1");
-		System.out.println(contentsid);
 		ModelAndView mv = new ModelAndView("pdh-view/detail");
 
 		// 상세정보 가져오기
@@ -250,6 +248,7 @@ public class PlaceListController {
 	// Q&A 답변 작성하기
 	@PostMapping("commentWrite")
 	public ModelAndView commentWrite(CommentVO commentVO, @ModelAttribute("contentsid") String contentsid) {
+		System.out.println(commentVO.getBo_idx());
 		placeListService.commentWrite(commentVO);
 		return new ModelAndView("redirect:detail");
 	}

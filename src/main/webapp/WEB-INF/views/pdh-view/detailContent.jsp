@@ -12,9 +12,9 @@
 <div class="detail-section">
 		<div class="detail-section__bar">
 			<p class="detail-title">상세정보</p>
-			<span class="material-symbols-outlined expand_icon">expand_more</span>
+			<span id="detailOpenIcon" class="material-symbols-outlined expand_icon" onclick="detailOpen('detailDiv', 'detailOpenIcon')">keyboard_arrow_up</span>
 		</div>
-		<div>
+		<div id="detailDiv">
 			<div id="map"></div>
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>

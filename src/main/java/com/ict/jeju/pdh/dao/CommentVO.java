@@ -1,23 +1,7 @@
 package com.ict.jeju.pdh.dao;
 
 public class CommentVO {
-	private String com_idx, bo_idx, com_writer, com_content, com_regdate, u_idx, u_id;
-
-	public String getU_id() {
-		return u_id;
-	}
-
-	public void setU_id(String u_id) {
-		this.u_id = u_id;
-	}
-
-	public String getU_idx() {
-		return u_idx;
-	}
-
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
-	}
+	private String com_idx, bo_idx, com_writer, com_content, com_regdate;
 
 	public String getCom_idx() {
 		return com_idx;

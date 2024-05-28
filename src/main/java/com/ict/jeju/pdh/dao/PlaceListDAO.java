@@ -214,7 +214,7 @@ public class PlaceListDAO {
 	// Q&A 답변 작성하기
 	public int commentWrite(CommentVO commentVO) {
 		try {
-			return sqlSessionTemplate.insert("place.reviewWrite", commentVO);
+			return sqlSessionTemplate.insert("place.commentWrite", commentVO);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

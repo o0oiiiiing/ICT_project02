@@ -72,6 +72,7 @@
 		$(".modal").show();
 		$("#contentsid").val(contentsid);
 	}
+	
 	function closeModal() {
 		$(".modal").hide();
 	}

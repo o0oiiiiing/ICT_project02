@@ -60,6 +60,49 @@
     });
 </script>
 <script type="text/javascript">
+	// 상세정보, Q&A, 리뷰 접었다 펼치기
+	function detailOpen(detailDiv, detailOpenIcon) {
+		var div = document.getElementById(detailDiv);
+		 var icon = document.getElementById(detailOpenIcon);
+        if (div.style.display === "none" || div.style.display === "") {
+            div.style.display = "block";
+            icon.innerHTML = "keyboard_arrow_up";
+        } else {
+            div.style.display = "none";
+            icon.innerHTML = "keyboard_arrow_down";
+        }
+	}
+	
+	function qnaOpen(qnaDiv, qnaOpenIcon) {
+		var div = document.getElementById(qnaDiv);
+		var icon = document.getElementById(qnaOpenIcon);
+        if (div.style.display === "none" || div.style.display === "") {
+            div.style.display = "block";
+            icon.innerHTML = "keyboard_arrow_up";
+        } else {
+            div.style.display = "none";
+            icon.innerHTML = "keyboard_arrow_down";
+        }
+	}
+	
+	function reviewOpen(reviewDiv, reviewOpenIcon) {
+		var div = document.getElementById(reviewDiv);
+		var icon = document.getElementById(reviewOpenIcon);
+        if (div.style.display === "none" || div.style.display === "") {
+            div.style.display = "block";
+            icon.innerHTML = "keyboard_arrow_up";
+        } else {
+            div.style.display = "none";
+            icon.innerHTML = "keyboard_arrow_down";
+        }
+	}
+	
+	// 아이콘 누르면 리뷰 영역으로 이동
+	function goReview(goReview) {
+		var div = document.getElementById(goReview);
+		div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
 	// 링크 복사하기 버튼
 	function copyLink() {
 		var url = '';
@@ -207,7 +250,7 @@
 	    	button.addEventListener('click', function() {
 	    		let boIdx = this.nextElementSibling;
 		    	let boIdx_v = boIdx.value;
-		    	var realBoIdx = document.querySelector('.bo_idx');
+		    	var realBoIdx = document.querySelector('.boIdx');
 		    	realBoIdx.value = boIdx_v;
 		    	
 		    	if (commentDiv.style.display === 'block') {
@@ -271,7 +314,7 @@
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">calendar_today</span></td>
 				<td class="border-right"><span
-					class="material-symbols-outlined icon">edit</span></td>
+					class="material-symbols-outlined icon review" onclick="goReview('goReview')">edit</span></td>
 				<td class="border-right"><span
 					class="material-symbols-outlined icon">mouse</span></td>
 				<td class="no-border-right"><span
@@ -316,10 +359,10 @@
 
 	<!-- 상세정보 보여주는 영역 -->
 	<%@include file="../pdh-view/detailContent.jsp"%>
-		
+	
 	<!-- Q&A 내용 보여주는 영역 -->
 	<%@include file="../pdh-view/qnaContent.jsp"%>
-	
+		
 	<!-- 리뷰 내용 보여주는 영역 -->
 	<%@include file="../pdh-view/reviewContent.jsp"%>
 	
@@ -359,6 +402,7 @@
 			</div>
 		</div>
 	</form>
+	
 	<!-- 리뷰 내용 작성하는 영역 -->
 	<%@include file="../pdh-view/reviewWrite.jsp"%>
 	
@@ -414,12 +458,10 @@
 	// summernote 내용 초기화
 	var resetButton = document.querySelector('#qa_write input[type="reset"]');
     var summernoteTextarea = document.querySelector('#summernote');
-    var passwordInput = document.getElementById('passwordInput');
-	
+
     resetButton.addEventListener('click', function() {
         // summernote textarea 초기화
        $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
-       passwordInput.disabled = true;
     });
     
     // Q&A 내용 입력안할 시에 alert 뜨기
@@ -482,19 +524,6 @@
 		    }
 		}
 	}
-    
-/*     // Q&A 답변 내용 입력안할 시에 alert 뜨기
-    function commentWrite(f) {
-    	var commentContent = document.getElementById('comment-content').value.trim();
-	    if (!commentContent) {
-	    	alert("내용을 입력해 주세요.");
-            return false;
-	    } else {
-	    	f.action = "commentWrite?contentsid=${placeDetail.contentsid}";
-	    	alert("답변 작성이 완료되었습니다.")
-			f.submit();
-	    }
-	} */
     
     // review 사진 5장으로 제한
     document.getElementById('review_images').addEventListener('change', function(event) {
