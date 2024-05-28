@@ -1,6 +1,6 @@
 package com.ict.jeju.pdh.dao;
 
-public class ReportVO {
+public class DeclarationVO {
 	private String report_idx, rep_idx, u_idx, re_idx, m_idx, report_title, report_content, active, report_writer,
 			report_regdate, step;
 	private String m_name, m_id;

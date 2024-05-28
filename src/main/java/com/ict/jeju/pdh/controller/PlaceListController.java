@@ -29,7 +29,7 @@ import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
-import com.ict.jeju.pdh.dao.ReportVO;
+import com.ict.jeju.pdh.dao.DeclarationVO;
 import com.ict.jeju.pdh.dao.ReviewPaging;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.dao.WishVO;
@@ -49,8 +49,6 @@ public class PlaceListController {
 	private QaPaging qaPaging;
 	@Autowired
 	private ReviewPaging rPaging;
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
 
 	@RequestMapping("/")
 	public String rootRedirect() {
@@ -295,7 +293,7 @@ public class PlaceListController {
 
 	// 신고 작성하기
 	@PostMapping("reportWrite")
-	public ModelAndView reportWrite(ReportVO reportVO, @ModelAttribute("contentsid") String contentsid) {
+	public ModelAndView reportWrite(DeclarationVO reportVO, @ModelAttribute("contentsid") String contentsid) {
 		System.out.println(reportVO.getM_name());
 		System.out.println(reportVO.getM_id());
 		// 신고 작성 삽입

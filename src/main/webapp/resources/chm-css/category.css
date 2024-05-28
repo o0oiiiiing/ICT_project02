@@ -92,6 +92,9 @@
   margin-bottom: 2vw;
   cursor: pointer;
 }
+.category_box p{
+	font-family: 'NanumSquare';
+}
 
 .category_box.collapsed {
   margin-top: -20px;
@@ -139,6 +142,7 @@
   padding-top: 1vh;
   align-items : center;
   justify-content: center;
+
 }
 
 ol{
@@ -151,6 +155,11 @@ ol{
 
 ol li {
     margin: 0 1.3vw;
+  
+}
+ol li a {
+	  text-decoration: none;
+	  color : black;
 }
 
 .footer_right{

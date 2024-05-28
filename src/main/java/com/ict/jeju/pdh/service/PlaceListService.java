@@ -7,7 +7,7 @@ import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
-import com.ict.jeju.pdh.dao.ReportVO;
+import com.ict.jeju.pdh.dao.DeclarationVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.dao.WishVO;
 
@@ -52,7 +52,7 @@ public interface PlaceListService {
 	public List<ReviewVO> reviewList(PagingVO rPagingVO);
 	
 	// 신고하기
-	public int reportWrite(ReportVO reportVO);
+	public int reportWrite(DeclarationVO reportVO);
 	
 	// 평균 별점 가져오기
 	public double reviewAvg(String contentsid);

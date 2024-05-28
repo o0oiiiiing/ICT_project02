@@ -12,6 +12,10 @@
 <!-- 파비콘 -->
 <link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 <link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<!-- 폰트 적용 -->
+<link
+	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="resources/chm-css/category.css?after">
 <link rel="stylesheet" href="resources/chm-css/map.css?after">
 <link rel="stylesheet" href="resources/common-css/reset.css?after">
@@ -30,6 +34,13 @@
 				f.submit();
 			}
 		
+		// 챗봇
+		$(document).ready(function() {
+		    $(".chatbot_image").click(function() {
+		        $(".chatbot_modal").toggle();  
+		    });
+		    
+		});
 	</script>
 </head>
 <body>
@@ -238,6 +249,12 @@
 
 	</div>
 	</form>
+	
+	<img src="resources/common-image/chatbot.png" id="chatbot_image" class="chatbot_image">
+	<div class="chatbot_modal">
+		<%@include file="../common/chatbot.jsp"%>
+	</div>
+	
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

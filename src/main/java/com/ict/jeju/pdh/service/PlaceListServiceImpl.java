@@ -11,7 +11,7 @@ import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
 import com.ict.jeju.pdh.dao.QaVO;
-import com.ict.jeju.pdh.dao.ReportVO;
+import com.ict.jeju.pdh.dao.DeclarationVO;
 import com.ict.jeju.pdh.dao.ReviewVO;
 import com.ict.jeju.pdh.dao.WishVO;
 
@@ -101,7 +101,7 @@ public class PlaceListServiceImpl implements PlaceListService {
 	
 	// 신고하기
 	@Override
-	public int reportWrite(ReportVO reportVO) {
+	public int reportWrite(DeclarationVO reportVO) {
 		return placeListDAO.reportWrite(reportVO);
 	}
 	
