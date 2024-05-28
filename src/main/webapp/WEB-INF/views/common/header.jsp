@@ -106,9 +106,9 @@
 									<div class="search-bar">
 										<span class="material-symbols-outlined icon">search</span> <input
 											class="search-field" type="text" name="keyword" value=""
-											placeholder="검색어를 입력해주세요." /> <span
+											placeholder="검색어를 입력해주세요."/> <span
 											class="material-symbols-outlined delete-icon"
-											onclick="clearInput()">close</span>
+											onclick="clearInput()" >close</span>
 									</div>
 								</form>
 							</li>
