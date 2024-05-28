@@ -33,7 +33,7 @@
 	<form method="post">
 		<div class="wrapper">
 			<div class="wrapper_head">
-				<div><span class="user">${reviewDetail.u_name}</span>님이 작성하신 리뷰</div>
+				<div style="font-family: 'GmarketSansMedium';"><span class="user">${reviewDetail.u_name}</span>님이 작성하신 리뷰</div>
 			</div>
 			<div class="wrapper_buttom">	
 				<div class="buttom_image">
@@ -50,24 +50,24 @@
 					<span class="buttom_title"><a href="detail?contentsid=${reviewDetail.contentsid}" style="color: inherit; text-decoration: none;">${title}</a></span>
 					<c:choose>
 					<c:when test="${reviewDetail.re_grade == 1}">
-						<span class="buttom_star">별점 : <span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span></span>
+						<span class="buttom_star" >별점 : <span style="color: #FFDF6B;" class="star">★</span><span style="color: #f0f0f0;" class="star">★★★★</span></span>
 					</c:when>
 					<c:when test="${reviewDetail.re_grade == 2}">
-						<span class="buttom_star">별점 : <span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span></span>
+						<span class="buttom_star" >별점 : <span style="color: #FFDF6B;" class="star">★★</span><span style="color: #f0f0f0;" class="star">★★★</span></span>
 					</c:when>
 					<c:when test="${reviewDetail.re_grade == 3}">
-						<span class="buttom_star">별점 : <span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span></span>
+						<span class="buttom_star" >별점 : <span style="color: #FFDF6B;" class="star">★★★</span><span style="color: #f0f0f0;" class="star">★★</span></span>
 					</c:when>
 					<c:when test="${reviewDetail.re_grade == 4}">
-						<span class="buttom_star">별점 : <span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span></span>
+						<span class="buttom_star" >별점 : <span style="color: #FFDF6B;" class="star">★★★★</span><span style="color: #f0f0f0;" class="star">★</span></span>
 					</c:when>
 					<c:otherwise>
-						<span class="buttom_star">별점 : <span style="color: #FFDF6B;">★★★★★</span></span>
+						<span class="buttom_star" >별점 : <span style="color: #FFDF6B;">★★★★★</span></span>
 					</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="buttom_content">
-					<div style="font-family: monospace; font-size: 18px; font-weight: bold;">${reviewDetail.re_content}</div>
+					<div style="font-family: 'NanumSquare'; font-size: 18px; font-weight: bold;">${reviewDetail.re_content}</div>
 				</div>
 			</div>
 			<div class="wrapper_footer">
@@ -76,7 +76,7 @@
 		</div>
 				<div id="myreview_delete">
 					<input type="hidden" value="${cPage}" name="cPage">
-					<input type="button" value="삭제" style="width: 100px; height: 40px; font-weight: bold; font-size: 16px;" 
+					<input type="button" value="삭제" style="width: 100px; height: 40px; font-weight: bold; font-size: 16px; font-family: 'GmarketSansMedium';" 
 					onclick="myreview_delete(${reviewDetail.re_idx})" />
 				</div>
 	</form>

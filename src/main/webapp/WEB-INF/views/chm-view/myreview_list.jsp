@@ -8,12 +8,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MY REVIEW | Jeju_travel</title>
-<link href="<c:url value="/resources/ygh-css/board_list.css"/>" rel='stylesheet' />
+<link rel="shortcut icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
+<link href="<c:url value="/resources/chm-css/myreview_list.css"/>" rel='stylesheet' />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 <%@include file="../common/header.jsp"%>
+	<div class="myreview_box">
 	<div id="board_t">
 		<div id="board_h">
 			<c:forEach var="k" items="${review_count}" varStatus="vs">
@@ -24,17 +27,16 @@
 		<form method="post">
 		<table>
 			<thead>
-				<tr>
+				<tr class="table_head">
 					<th class="subject">카테고리</th>
-					<th class="writer">리뷰 제목</th>
+					<th class="writer">리뷰 내용</th>
 					<th class="reg">날짜</th>
 					<th class="grade">별점</th>				
 			</tr>
 			</thead>
-			<tbody>
+			<tbody class="table_body">
 				<c:choose>
 					<c:when test="${empty myreview_list}">
-					 
 						<tr>
 							<td colspan="6"><h3>내가 작성한 리뷰가 존재하지 않습니다.</h3></td>
 						</tr>
@@ -83,10 +85,10 @@
 					</c:otherwise>
 				</c:choose>
 			</tbody>
-			<tfoot>
+			<tfoot class="table_foot">
 				<tr>
-					<td colspan="5">
-						<ol class="paging">
+					<td colspan="5" >
+						<ol class="paging" style="margin-top:3vh;">
 							<!-- 이전 버튼 -->
 							<c:choose>
 								<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
@@ -128,6 +130,7 @@
 			</tfoot>
 		</table>
 		</form>
+	</div>
 	</div>
 	
 <%@include file="../common/footer.jsp"%>	
