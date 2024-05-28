@@ -288,7 +288,7 @@
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
-					type="button" value="추가하기" onclick="openModal(${placeDetail.contentsid})"></td>
+					type="button" value="추가하기" onclick="openModal('${placeDetail.contentsid}')"></td>
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${reviewNum}" pattern="#,##0" /></td>
 				<td class="icons-number border-right"><fmt:formatNumber
@@ -415,12 +415,12 @@
 	var resetButton = document.querySelector('#qa_write input[type="reset"]');
     var summernoteTextarea = document.querySelector('#summernote');
     var passwordInput = document.getElementById('passwordInput');
-
+	
     resetButton.addEventListener('click', function() {
         // summernote textarea 초기화
        $('#summernote').summernote('code', ''); // Summernote를 초기화하는 부분
        passwordInput.disabled = true;
-    });s
+    });
     
     // Q&A 내용 입력안할 시에 alert 뜨기
     function qaWrite(f) {
