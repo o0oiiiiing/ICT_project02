@@ -331,7 +331,7 @@
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${likeNum}" pattern="#,##0" /></td>
 				<td class="border-right"><input class="icons-button"
-					type="button" value="추가하기" onclick="openModal(${placeDetail.contentsid})"></td>
+					type="button" value="추가하기" onclick="openModal('${placeDetail.contentsid}')"></td>
 				<td class="icons-number border-right"><fmt:formatNumber
 						value="${reviewNum}" pattern="#,##0" /></td>
 				<td class="icons-number border-right"><fmt:formatNumber
