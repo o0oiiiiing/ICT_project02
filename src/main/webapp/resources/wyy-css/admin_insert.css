@@ -104,12 +104,48 @@
 	background-color: gray;
 }
 
-@media ( max-width : 768px) {
-	.name_category p, .input_category p {
-		flex-direction: column;
+/* 반응형 웹 추가 */
+@media (max-width: 768px) {
+	.admin_result {
+		margin: 40px auto;
+		padding: 15px;
+	}
+	.admin_result h3 {
+		margin: 20px 0;
+		font-size: 24px;
+	}
+	.name_category, .input_category {
 		width: 100%;
+		text-align: left;
+		display: block;
 	}
 	.name_category p, .input_category p {
 		width: 100%;
+		line-height: 1.5;
+		text-align: left;
+	}
+	.admin_input {
+		width: 100%;
+	}
+	#contents_idchk, #contentsid {
+		width: 100%;
+	}
+	.join_btn, #input_button, #input_submit {
+		font-size: 14px;
+		padding: 8px;
+	}
+}
+
+@media (max-width: 480px) {
+	.admin_result {
+		margin: 20px auto;
+		padding: 10px;
+	}
+	.admin_result h3 {
+		font-size: 20px;
+	}
+	.join_btn, #input_button, #input_submit {
+		font-size: 12px;
+		padding: 6px;
 	}
 }
