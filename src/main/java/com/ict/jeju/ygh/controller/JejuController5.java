@@ -37,8 +37,6 @@ public class JejuController5 {
 	@Autowired
 	private JejuService5 jejuService5;
 	@Autowired
-	private PlaceListService placeListService;
-	@Autowired
 	private MailService mailService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -46,8 +44,6 @@ public class JejuController5 {
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
-	
-	private UserVO userVO;
 
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
