@@ -120,11 +120,10 @@
 	</resultMap>
 	
 	<select id="reviewList" parameterType="PagingVO" resultMap="ReviewMap">
-		select r.*, u.u_profile_img
-	    from Review_table r
-	    join User_table u on r.u_idx = u.u_idx
-	    where r.contentsid = #{contentsid} and r.rep_status = 0
-	    order by r.re_regdate desc
+		select *
+	    from Review_table
+	    where contentsid = #{contentsid} and rep_status = 0
+	    order by re_regdate desc
 	    limit #{limit}
 	    offset #{offset}
 	</select>
