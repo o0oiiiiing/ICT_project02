@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.jeju.pdh.dao.PlaceListDAO;
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
@@ -139,6 +140,12 @@ public class PlaceListServiceImpl implements PlaceListService {
 	@Override
 	public int commentWrite(CommentVO commentVO) {
 		return placeListDAO.commentWrite(commentVO);
+	}
+	
+	// 리뷰 작성한 사람의 정보를 가져오기
+	@Override
+	public UserVO reviewWriter(String u_idx) {
+		return placeListDAO.reviewWriter(u_idx);
 	}	
 
 }

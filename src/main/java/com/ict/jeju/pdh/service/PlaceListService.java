@@ -3,6 +3,7 @@ package com.ict.jeju.pdh.service;
 import java.util.List;
 
 import com.ict.jeju.pdh.dao.PlaceListVO;
+import com.ict.jeju.lsh.dao.UserVO;
 import com.ict.jeju.pdh.dao.CommentVO;
 import com.ict.jeju.pdh.dao.ImagesVO;
 import com.ict.jeju.pdh.dao.PagingVO;
@@ -71,4 +72,7 @@ public interface PlaceListService {
 
 	// Q&A 답변 작성하기
 	public int commentWrite(CommentVO commentVO);
+	
+	// 리뷰 작성한 사람의 정보를 가져오기
+	public UserVO reviewWriter(String u_idx);
 }

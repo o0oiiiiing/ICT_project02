@@ -90,8 +90,8 @@
 	</select>
 	
 	<insert id="reviewWrite" parameterType="ReviewVO">
-		insert into Review_table(u_idx, u_id, contentsid, u_profile_img, u_name, re_content, re_grade, re_regdate) 
-		values(#{u_idx}, #{u_id}, #{contentsid}, #{u_profile_img}, #{u_name}, #{re_content}, #{re_grade}, sysdate()) 
+		insert into Review_table(u_idx, u_name, u_id, u_profile_img, contentsid, re_content, re_grade, re_regdate) 
+		values(#{u_idx}, #{u_name}, #{u_id}, #{u_profile_img}, #{contentsid}, #{re_content}, #{re_grade}, sysdate()) 
 	</insert>
 	
 	<insert id="imageInsert" parameterType="ImagesVO">
@@ -107,6 +107,7 @@
 		<result column="u_idx" property="u_idx"/>
 		<result column="u_id" property="u_id"/>
 		<result column="u_name" property="u_name"/>
+		<result column="u_profile_img" property="u_profile_img"/>
 		<result column="contentsid" property="contentsid"/>
 		<result column="re_content" property="re_content"/>
 		<result column="re_grade" property="re_grade"/>
@@ -119,18 +120,25 @@
 	</resultMap>
 	
 	<select id="reviewList" parameterType="PagingVO" resultMap="ReviewMap">
-		select * 
-		from Review_table 
-		where contentsid = #{contentsid} and rep_status = 0
-		order by re_regdate desc
-		limit #{limit}
-		offset #{offset}
+		select r.*, u.u_profile_img
+	    from Review_table r
+	    join User_table u on r.u_idx = u.u_idx
+	    where r.contentsid = #{contentsid} and r.rep_status = 0
+	    order by r.re_regdate desc
+	    limit #{limit}
+	    offset #{offset}
 	</select>
 	
 	<select id="imageList" parameterType="String" resultType="ImagesVO">
 		select * 
 		from Picture_table
 		where re_idx = #{re_idx}
+	</select>
+	
+	<select id="reviewWriter" parameterType="String" resultType="userVO">
+		select u_id, u_profile_img, u_name 
+		from User_table 
+		where u_idx = #{u_idx}
 	</select>
 	
 	<insert id="reportWrite" parameterType="DeclarationVO">
