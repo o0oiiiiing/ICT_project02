@@ -121,13 +121,12 @@
 				color: #6c6c6c;
 			}
 			
-			.login_find a {
+			.login_find a, span {
 				margin: 15px 0 0 0;
 				text-decoration: none;
 				color: #6c6c6c;
 			}
 			.login_find {
-				margin: o auto;
 				margin-top: 15px;
 			}
 		</style>
@@ -153,8 +152,8 @@
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do" >Find your ID &nbsp;&nbsp; | </a>
-						<a href="findpwd_go.do" >&nbsp;&nbsp;Find your Password</a>
+						<a href="findID_go.do" >Find your ID &nbsp;</a><span>/</span>
+						<a href="findpwd_go.do" >&nbsp;Find your Password</a>
 					</div>
 					
 					<div class="login_sns">

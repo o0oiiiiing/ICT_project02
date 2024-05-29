@@ -47,8 +47,8 @@
 				</c:choose>
 				
 				<div class="findID_chk_box">
-					<a href="login_go.do" >Login &nbsp;&nbsp; | </a>
-					<a href="findpwd_go.do" >Find your Password</a>
+					<a href="login_go.do" >Login &nbsp;</a><span>/</span>
+					<a href="findpwd_go.do" >&nbsp;Find your Password</a>
 				</div>
 			</div>
 		</section>

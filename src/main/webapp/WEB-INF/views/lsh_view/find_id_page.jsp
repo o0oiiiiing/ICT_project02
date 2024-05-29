@@ -93,8 +93,8 @@
 					</div>
 					
 					<div class="find_id_link_box">
-						<a href="login_go.do" >Login &nbsp; | </a> 
-						<a href="findpwd_go.do" >Find your Password</a>
+						<a href="login_go.do" >Login &nbsp;</a><span>/</span>
+						<a href="findpwd_go.do" >&nbsp;Find your Password</a>
 					</div>
 				</form>
 			</div>
