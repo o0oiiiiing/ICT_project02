@@ -43,6 +43,15 @@
     justify-content: center;
 }
 
+.image_button_box{
+	width: 3vw;
+	height: auto;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .no_image_box{
 	box-sizing: border-box;
 	width: 26vw; 

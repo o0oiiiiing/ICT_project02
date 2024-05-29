@@ -498,13 +498,22 @@ public class JejuDAO5 {
 		}
 		
 		// 나의 리뷰 contentsid ( re_idx 를 이용해서 image 값 가져오기위함)(detail)
-			public String myreviewimage(String re_idx) {
+//			public String myreviewimage(String re_idx) {
+//				try {
+//					return sqlSessionTemplate.selectOne("Board_table.myreview_image", re_idx);
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//					return null;
+//			}
+			
+			public List<MyreviewVO> myreview_image(String re_idx) {
 				try {
-					return sqlSessionTemplate.selectOne("Board_table.myreview_image", re_idx);
+					return sqlSessionTemplate.selectList("Board_table.myreview_image",re_idx);
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-					return null;
+				return null;
 			}
 
 	// 나의 리뷰 페이징 카운트
@@ -585,5 +594,7 @@ public class JejuDAO5 {
 		}
 		return -1;
 	}
+
+	
 
 }

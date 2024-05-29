@@ -283,7 +283,12 @@
 	</select>
 	
 	<!-- 나의 리뷰 이미지 가져오기 -->
-	<select id="myreview_image" parameterType="String" resultType="String">
+	<!-- <select id="myreview_image" parameterType="String" resultType="String">
+		SELECT pic_file
+		FROM Picture_table 
+		where re_idx = #{re_idx}
+	</select> -->
+	<select id="myreview_image" parameterType="String" resultType="myvo">
 		SELECT pic_file
 		FROM Picture_table 
 		where re_idx = #{re_idx}

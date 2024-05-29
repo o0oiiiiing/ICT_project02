@@ -28,6 +28,7 @@ import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
+import com.ict.jeju.ygh.dao.PictureVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 import com.ict.jeju.ygh.service.JejuService5;
@@ -37,8 +38,6 @@ public class JejuController5 {
 	@Autowired
 	private JejuService5 jejuService5;
 	@Autowired
-	private PlaceListService placeListService;
-	@Autowired
 	private MailService mailService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -46,8 +45,6 @@ public class JejuController5 {
 	private Paging paging;
 	@Autowired
 	private Paging2 paging2;
-	
-	private UserVO userVO;
 
 	// 대시보드 이동
 	@GetMapping("dashboard.do")
@@ -957,19 +954,21 @@ public class JejuController5 {
 			public ModelAndView myreview_detail(HttpServletRequest request, HttpSession session, String re_idx) {
 				ModelAndView mv = new ModelAndView("chm-view/myreview_detail");
 				MyreviewVO reviewDetail = jejuService5.myreview_detail(re_idx);
-
+				
 				if (reviewDetail != null) {
 					String title = jejuService5.myreviewtitle(reviewDetail.getContentsid());
-					String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
+					// String image = jejuService5.myreviewimage(reviewDetail.getRe_idx());
+					List<MyreviewVO> review_image = jejuService5.myreview_image(reviewDetail.getRe_idx());
 					
 					mv.addObject("title", title);
 					mv.addObject("reviewDetail", reviewDetail);
-					mv.addObject("image", image);
+					mv.addObject("review_image", review_image);
+					
+					// mv.addObject("image", image);
 					return mv;
 				}
 				return new ModelAndView("ygh-view/error");
 			}
-			
 
 	// 관리자 Q&A 게시판 삭제
 	@PostMapping("admin_board_delete.do")

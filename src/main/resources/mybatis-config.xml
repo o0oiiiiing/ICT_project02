@@ -15,6 +15,7 @@
 	<typeAliases>
 		<typeAlias type="com.ict.jeju.ygh.dao.BoardVO" alias="bovo"/>
 		<typeAlias type="com.ict.jeju.ygh.dao.MyreviewVO" alias="myvo"/>
+		<typeAlias type="com.ict.jeju.ygh.dao.PictureVO" alias="pivo"/>
 		<typeAlias type="com.ict.jeju.ygh.dao.ReportVO" alias="revo"/>
     	<typeAlias type="com.ict.jeju.ygh.dao.CommentVO" alias="comvo"/>
     	<typeAlias type="com.ict.jeju.ygh.dao.ReplyVO" alias="repvo"/>
