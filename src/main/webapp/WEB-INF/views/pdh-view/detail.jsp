@@ -139,7 +139,7 @@
 	    });
 	    
 	});
-	
+	console.log("qqqqq");
 	// q&a영역, review영역, 신고영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
@@ -152,13 +152,13 @@
 	    var reportWriteDiv = document.getElementById('report_write');
 	    var commentDiv = document.getElementById('comment_write');
 	    var overlay = document.querySelector(".overlay")
-
+		console.log("fffff");
 	    writeButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if ("${userVO}" == "") {
+	        if ("${userVO}" == "" || "${adminVO}" == "") {
 				alert("로그인 후 이용 가능합니다.")
 				location.href="login_go.do"
-				return 
+				return;
 			} else {
 		        if (qaWriteDiv.style.display === 'block') {
 		        	qaWriteDiv.style.display = 'none';
@@ -175,10 +175,9 @@
 		        }
 	        })
 	    });
-	    
 	    reviewButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if ("${userVO}" == "") {
+	        if ("${userVO}" == "" || "${adminVO}" == "") {
 				alert("로그인 후 이용 가능합니다.")
 				location.href="login_go.do"
 				return 
@@ -282,7 +281,7 @@
 
 	function goWishList() {
 		var wish = document.querySelector('.favorite');
-		if ("${userVO}" == "") {
+		if ("${userVO}" == "" || "${adminVO}" == "") {
 			alert("로그인 후 이용 가능합니다.")
 			location.href = "login_go.do"
 		} else {
