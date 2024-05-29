@@ -1,10 +1,7 @@
 @charset "UTF-8";
 
-* {
-    box-sizing: border-box;
-}
-
 .wrapper {
+	box-sizing: border-box;
     margin: 0 auto;
     width: 100%;
     max-width: 1000px;
@@ -17,6 +14,7 @@
 }
 
 .wrapper_head {
+	box-sizing: border-box;
     width: 100%;
     height: 50px;
     border-bottom: 1px solid black;
@@ -24,16 +22,19 @@
 }
 
 .user {
+	box-sizing: border-box;
     font-size: 32px;
     font-weight: bold;
 }
 
 .wrapper_buttom {
+	box-sizing: border-box;
     width: 100%;
     height: auto;
 }
 
 .buttom_image {
+	box-sizing: border-box;
     width: 100%;
     height: auto;
     max-height: 500px;
@@ -42,15 +43,27 @@
     justify-content: center;
 }
 
-.no_image_box{
-	width: 26vw; 
-	height: 42vh;
+.image_button_box{
+	width: 3vw;
+	height: auto;
+	
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
+.no_image_box{
+	box-sizing: border-box;
+	width: 26vw; 
+	height: 42vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'GmarketSansMedium';
+}
+
 .buttom_comment {
+	box-sizing: border-box;
     width: 100%;
     height: auto;
     display: flex;
@@ -60,36 +73,45 @@
 }
 
 .buttom_title { 
+	box-sizing: border-box;
     font-size: 32px;
     font-weight: bold;    
 }
 
 .buttom_star {
+	box-sizing: border-box;
     margin-top: 10px;
+    font-family: 'GmarketSansMedium';
 }
 
 .buttom_content {
-    border: 1px solid gray;
+	box-sizing: border-box;
+    border: 1px solid gray; border-radius: 1vh;
     width: 100%;
     min-height: 300px;
     height: auto;
     padding: 10px;
+    margin-top : 1vh;
     box-sizing: border-box; 
     overflow: auto; 
 }
 
 .wrapper_footer {
+	box-sizing: border-box;
     width: 100%;
     height: 50px;
     padding: 10px 0px 0px 0px;
 }
 
 .footer_day {
+	box-sizing: border-box;
     width: 100%;
     height: 50px;
+    font-family: 'GmarketSansMedium';
 }
 
 #myreview_delete {
+	box-sizing: border-box;
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -117,7 +139,7 @@
 
     .buttom_comment {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start;   
     }
 
     .buttom_image {
@@ -148,6 +170,7 @@
     }
 
     .wrapper_footer {
+    	box-sizing: border-box;
         height: auto;
         padding: 10px 5px;
     }

@@ -9,6 +9,7 @@ import com.ict.jeju.wyy.dao.AdminVO;
 import com.ict.jeju.ygh.dao.BoardVO;
 import com.ict.jeju.ygh.dao.CommentVO;
 import com.ict.jeju.ygh.dao.MyreviewVO;
+import com.ict.jeju.ygh.dao.PictureVO;
 import com.ict.jeju.ygh.dao.ReplyVO;
 import com.ict.jeju.ygh.dao.ReportVO;
 
@@ -146,7 +147,9 @@ public interface JejuService5 {
 	public String myreviewtitle2(String contentsid);
 	
 	// 나의 리뷰 re_idx 가져와서 image 값 가져오기 (detail)
-	public String myreviewimage(String re_idx);
+	// public String myreviewimage(String re_idx);
+	
+	public List<MyreviewVO> myreview_image(String re_idx);
 	
 	// 나의 리뷰 삭제
 	public int myreview_Delete(String re_idx);

@@ -63,53 +63,47 @@
 		
 		<!-- DB에서 가져와서 c:foreach 반복문 돌릴 관광지 카테고리 보여주는 구간  -->
 		<div class="wrapper_bottom">
-			<div class="wrapper_left">
-				<c:choose>
-					<c:when test="${empty searchList}">
+			<c:choose>
+				<c:when test="${empty searchList}">
+					<div class="wrapper_bottom_LR">
 						<div class="not_search">
 							<img src="resources/chm-css/images/not_search.png" class="not_found">
 							<div class="not_search_box"><span class="keyword">"${keyword}"</span><span>에 대한 검색 결과가 없습니다.</span></div>
 							<input type="hidden" value="0" class="search">
 						</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="k" items="${searchList}">
-					<div class="category_box" onclick="toggleCollapse(this)" class="category_box">
-						<img src='${k.vi_image}' class="category_img">
-						<p class="category_id">${k.vi_value}</p>
-						<p class="category_title">${k.vi_title}</p>
-						<p class="category_hits">조회수 : ${k.vi_hit}</p>
-						<!-- 해당 카테고리에 관한 위도 / 경도 값 가져오기 -->
-						<input type="hidden" value="${k.vi_latitude}" class="wdo">
-						<input type="hidden" value="${k.vi_longitude}" class="gdo">
-						<input type="hidden" value="${k.vi_title}" class="vt">
-						<input type="hidden" value="${k.vi_image}" class="vi">
-						<input type="hidden" value="${k.vi_roadaddress}" class="va"> 
-						<input type="hidden" value="${k.vi_phoneno}" class="vn"> 
-						<input type="hidden" value="${k.contentsid}" class="contentsid">
-						<input type="hidden" value="${k.vi_hit}" class="vi_hit">
-						<input type="hidden" value="${k.vi_value}" class="vi_value">
-						<input type="hidden" value="${keyword}" class="keyword">
-						<input type="hidden" value="0" class="chk">
-						<input type="hidden" value="1" class="search">
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="wrapper_left">
+							<c:forEach var="k" items="${searchList}">
+						<div class="category_box" onclick="toggleCollapse(this)" class="category_box">
+							<img src='${k.vi_image}' class="category_img">
+							<p class="category_id">${k.vi_value}</p>
+							<p class="category_title">${k.vi_title}</p>
+							<p class="category_hits">조회수 : ${k.vi_hit}</p>
+							<!-- 해당 카테고리에 관한 위도 / 경도 값 가져오기 -->
+							<input type="hidden" value="${k.vi_latitude}" class="wdo">
+							<input type="hidden" value="${k.vi_longitude}" class="gdo">
+							<input type="hidden" value="${k.vi_title}" class="vt">
+							<input type="hidden" value="${k.vi_image}" class="vi">
+							<input type="hidden" value="${k.vi_roadaddress}" class="va"> 
+							<input type="hidden" value="${k.vi_phoneno}" class="vn"> 
+							<input type="hidden" value="${k.contentsid}" class="contentsid">
+							<input type="hidden" value="${k.vi_hit}" class="vi_hit">
+							<input type="hidden" value="${k.vi_value}" class="vi_value">
+							<input type="hidden" value="${keyword}" class="keyword">
+							<input type="hidden" value="0" class="chk">
+							<input type="hidden" value="1" class="search">
 					</div>
 				</c:forEach>
-					</c:otherwise>
-				</c:choose>
 			</div>
-			<!-- 5c981699760a3bdf28409228b0baa4e5 -->
 			<!-- 지도 -->
 			<div class="wrapper_right">
-				<c:choose>
-					<c:when test="${empty searchList}">
-						<div></div>
-					</c:when>
-					<c:otherwise>
-						<div id="map" style="width: 40.9vw; height: 60.5vh;"></div>
-						<div id="clickLatlng"></div>
-					</c:otherwise>
-				</c:choose>
+				<div id="map" style="width: 40.9vw; height: 60.5vh;"></div>
+				<div id="clickLatlng"></div>
 			</div>
+			</c:otherwise>
+			</c:choose>
 		</div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
 <script>
@@ -226,7 +220,12 @@
 	
 	
 </script>
-		<div class="wrapper_footer">
+		<c:choose>
+			<c:when test="${empty searchList}">
+				<div></div>
+			</c:when>
+			<c:otherwise>
+				<div class="wrapper_footer">
 			<!-- 페이징 시작.. -->
 			<div class="footer_left">
 				<tr>
@@ -273,7 +272,8 @@
 			</div>
 			<div class="footer_right"></div>
 		</div>
-
+			</c:otherwise>
+		</c:choose>
 	</div>
 	</form>
 	<%@ include file="../common/footer.jsp"%>
