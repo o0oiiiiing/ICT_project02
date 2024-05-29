@@ -36,12 +36,11 @@
 }
 
 .find_id_link_box {
-	margin: o auto;
 	margin-top: 15px;
 }
 
-.find_id_link_box a {
-	margin: 15px 0 0 15px;
+.find_id_link_box a, span {
+	margin: 15px 0 0 0;
 	text-decoration: none;
 	color: #6c6c6c;
 }
