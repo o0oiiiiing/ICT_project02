@@ -47,6 +47,7 @@
 			  	background-image: url('resources/lsh_images/jeju_island.jpg');
 			  	background-position: center;
 			  	background-size: cover;
+			  	font-family: 'NanumSquare';
 			}
 			.login_container {
 				position: relative;
@@ -125,7 +126,6 @@
 				text-decoration: none;
 				color: #6c6c6c;
 			}
-			
 			.login_find {
 				margin: o auto;
 				margin-top: 15px;
@@ -153,20 +153,20 @@
 					</div>
 					
 					<div class="login_find">
-						<a href="findID_go.do" >find your ID &nbsp;&nbsp; | </a>
-						<a href="findpwd_go.do" >&nbsp;&nbsp;find your Password</a>
+						<a href="findID_go.do" >Find your ID &nbsp;&nbsp; | </a>
+						<a href="findpwd_go.do" >&nbsp;&nbsp;Find your Password</a>
 					</div>
 					
 					<div class="login_sns">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=b3c8cdc497ebc0c70d13c3383ee0f676&redirect_uri=http://localhost:8090/kakao_login.do&response_type=code">
-							<img src="resources/lsh_images/kakao_login.png" class="login_sns_btn" />
+							<img src="resources/lsh_images/kakao_login3.png" class="login_sns_btn" />
 						</a>
 						<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=J3r3NWMEm1CJS2vNYtQm&state=STATE_STRING&redirect_uri=http://localhost:8090/naver_login.do">
-							<img src="resources/lsh_images/naver_login.png" class="login_sns_btn" />
+							<img src="resources/lsh_images/naver_login2.png" class="login_sns_btn" style="border-radius: 5px;"/>
 						</a>
 					</div>
 					<div class="login_find">
-						<a href="admin_login.do">관리자로그인</a>
+						<a href="admin_login.do">ADMIN Login</a>
 					</div>
 				</form>
 			</div>

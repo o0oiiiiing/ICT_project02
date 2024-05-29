@@ -29,7 +29,9 @@
 	                    </c:otherwise>
 	                </c:choose>
 				</p>
-				<input class="write_r_button" type="button" value="리뷰작성">
+				<c:if test="${userVO != null}">
+					<input class="write_r_button" type="button" value="리뷰작성">
+				</c:if>
 			</div>
 			<hr class="hr">
 			<c:choose>

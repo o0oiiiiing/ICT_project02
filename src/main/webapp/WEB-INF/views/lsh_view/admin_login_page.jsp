@@ -50,6 +50,7 @@
 			  	background-image: url('resources/lsh_images/jeju_island.jpg');
 			  	background-position: center;
 			  	background-size: cover;
+			  	font-family: 'NanumSquare';
 			}
 			.admin_login_box {
 				position: relative;

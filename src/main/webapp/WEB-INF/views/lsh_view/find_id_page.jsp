@@ -53,6 +53,7 @@
 			  	background-image: url('resources/lsh_images/jeju_island.jpg');
 			  	background-position: center;
 			  	background-size: cover;
+			  	font-family: 'NanumSquare';
 			}
 			.find_id_container {
 				position: relative;
@@ -93,7 +94,7 @@
 					
 					<div class="find_id_link_box">
 						<a href="login_go.do" >Login &nbsp; | </a> 
-						<a href="findpwd_go.do" >find your Password</a>
+						<a href="findpwd_go.do" >Find your Password</a>
 					</div>
 				</form>
 			</div>

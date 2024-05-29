@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +81,18 @@ public class SignController {
 			mv.setViewName("lsh_view/login_page");
 			return mv;
 		}
-		
+		if (userVO2.getActive().equals("1")) {
+			session.setAttribute("loginChk", "fail");
+			mv.addObject("msg", "이미 탈퇴한 회원입니다.");
+			mv.setViewName("lsh_view/login_page");
+			return mv;
+		}
+		if (userVO2.getRe_active().equals("1")) {
+			session.setAttribute("loginChk", "fail");
+			mv.addObject("msg", "신고 누적으로 인하여 탈퇴되었습니다.");
+			mv.setViewName("lsh_view/login_page");
+			return mv;
+		}
 	    if (userVO2 != null && passwordEncoder.matches(userVO.getU_pwd(), 
 	    		userVO2.getU_pwd()) && userVO2.getActive().equals("0")) {
 	        session.setAttribute("loginChk", "ok");
@@ -92,12 +101,6 @@ public class SignController {
 	        mv.setViewName("redirect:home");
 	        return mv;
 	    }
-	    if (userVO2.getActive().equals("1")) {
-			session.setAttribute("loginChk", "fail");
-			mv.addObject("msg", "이미 탈퇴한 회원입니다.");
-			mv.setViewName("lsh_view/login_page");
-			return mv;
-		}
 	    session.setAttribute("loginChk", "fail");
 	    mv.addObject("msg", "입력하신 정보를 확인해주세요.");
 	    mv.setViewName("lsh_view/login_page");
@@ -223,7 +226,7 @@ public class SignController {
   
 	// 비밀번호 찾기 이메일 인증번호 발송 및 DB업데이트
 	@PostMapping("find_pwd_go.do")
-	public ModelAndView SendMailOK(UserVO userVO) {
+	public ModelAndView sendMailOK(UserVO userVO) {
 		ModelAndView mv = new ModelAndView();
 		UserVO userVO2 = signService.getLoginOK(userVO);
 		try {
