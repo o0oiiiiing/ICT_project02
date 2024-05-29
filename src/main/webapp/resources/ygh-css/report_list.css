@@ -12,6 +12,12 @@
 	padding: 5px;
 }
 
+#report_t {
+    height: 450px;
+    margin: 5% 10%;
+}
+
+
 #report_t table {
 	width: 800px;
 	margin: 15px auto 50px;
@@ -51,12 +57,14 @@
 	text-align: center;
 	border-top: 1px solid black;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #report_t table td {
 	text-align: center;
 	border-top: 1px solid lightgray;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #report_t .no {
