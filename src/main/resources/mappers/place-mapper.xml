@@ -90,8 +90,8 @@
 	</select>
 	
 	<insert id="reviewWrite" parameterType="ReviewVO">
-		insert into Review_table(u_idx, u_name, u_id, u_profile_img, contentsid, re_content, re_grade, re_regdate) 
-		values(#{u_idx}, #{u_name}, #{u_id}, #{u_profile_img}, #{contentsid}, #{re_content}, #{re_grade}, sysdate()) 
+		insert into Review_table(u_idx, contentsid, re_content, re_grade, re_regdate) 
+		values(#{u_idx}, #{contentsid}, #{re_content}, #{re_grade}, sysdate()) 
 	</insert>
 	
 	<insert id="imageInsert" parameterType="ImagesVO">
@@ -120,12 +120,13 @@
 	</resultMap>
 	
 	<select id="reviewList" parameterType="PagingVO" resultMap="ReviewMap">
-		select *
-	    from Review_table
-	    where contentsid = #{contentsid} and rep_status = 0
-	    order by re_regdate desc
-	    limit #{limit}
-	    offset #{offset}
+		select r.*, u.u_profile_img, u.u_name, u.u_id
+	    from Review_table r
+	    join User_table u on r.u_idx = u.u_idx
+	    where r.contentsid = #{contentsid} and r.rep_status = 0
+	    order by re_regdate desc 
+	    limit #{limit} 
+	    offset #{offset} 
 	</select>
 	
 	<select id="imageList" parameterType="String" resultType="ImagesVO">
