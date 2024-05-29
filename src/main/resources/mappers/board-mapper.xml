@@ -194,10 +194,7 @@
 		update User_table
 		set u_phone=#{u_phone}, u_email=#{u_email}, u_postcode=#{u_postcode}, u_addr=#{u_addr}, 
 		 u_detail_addr=#{u_detail_addr}, u_detail_addr2=#{u_detail_addr2}, u_profile_img=#{u_profile_img}
-		where u_idx = #{u_idx};
-		update Review_table 
-	    set u_profile_img=#{u_profile_img} 
-	    where u_idx = #{u_idx}; 
+		where u_idx = #{u_idx}
 	</update>
 	
 	<!-- 비밀번호변경 -->

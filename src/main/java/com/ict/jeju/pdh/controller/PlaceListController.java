@@ -201,7 +201,7 @@ public class PlaceListController {
 
 		// 리뷰 리스트 가져오기
 		List<ReviewVO> reviewList = placeListService.reviewList(rPagingVO);
-
+		
 		// Like_table에서 좋아요 했는지 확인
 		if (userVO != null) {
 			wishVO.setU_idx(userVO.getU_idx());
@@ -255,9 +255,6 @@ public class PlaceListController {
 	@PostMapping("reviewWrite")
 	public ModelAndView reviewWrite(HttpServletRequest request, ReviewVO reviewVO, ImagesVO imagesVO,
 			@ModelAttribute("contentsid") String contentsid, HttpSession session) {
-		UserVO userVO = (UserVO) session.getAttribute("userVO");
-		reviewVO.setU_profile_img(userVO.getU_profile_img());
-		reviewVO.setU_name(userVO.getU_name());
 		// review 작성 삽입
 		placeListService.reviewWrite(reviewVO);
 		MultipartFile[] images = imagesVO.getImages();
