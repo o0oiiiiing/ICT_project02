@@ -12,10 +12,10 @@
 	<div class="detail-section">
 		<div class="detail-section__bar">
 			<p class="detail-title">Q&A</p>
-			<span id="qnaOpenIcon" class="material-symbols-outlined expand_icon" onclick="qnaOpen('qnaDiv', 'qnaOpenIcon')">keyboard_arrow_down</span>
+			<span id="qnaOpenIcon" class="material-symbols-outlined expand_icon" onclick="qnaOpen('qnaDiv', 'qnaOpenIcon')">keyboard_arrow_up</span>
 		</div>
 		<!-- 내용 -->
-		<div id="qnaDiv" style="display: none;">
+		<div id="qnaDiv">
 			<div class="qa_title__section">
 				<p class="qa_title">
 					Q&A <span style="color: #FFBB36;">(${qaNum})</span>

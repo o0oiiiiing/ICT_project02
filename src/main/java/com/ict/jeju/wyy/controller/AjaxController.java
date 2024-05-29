@@ -20,9 +20,6 @@ import com.ict.jeju.wyy.service.MytripService;
 public class AjaxController {
 	
 	@Autowired
-	HttpSession session;
-	
-	@Autowired
 	private MytripService calendarService4;
 	
 	// 캘린더 지도 정보

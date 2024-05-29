@@ -12,15 +12,20 @@
 	padding: 5px;
 }
 
+#board_t {
+    height: 450px;
+    margin: 5% 10%;
+}
+
 #board_t table {
-	width: 800px;
+	width: 60%;
 	margin: 15px auto 50px;
 	border-collapse: collapse;
 	font-size: 14px;
 }
 
 #board_h {
-	width: 800px;
+	width: 60%;
 	margin: auto;
 	display: flex;
 	justify-content: space-between; /* 요소 사이의 간격을 최대한으로 벌림 */
@@ -51,12 +56,14 @@
 	text-align: center;
 	border-top: 1px solid black;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #board_t table td {
 	text-align: center;
 	border-top: 1px solid lightgray;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #board_t .no {

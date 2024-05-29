@@ -1,22 +1,12 @@
-.tab_bar {
-	background-color: lightgray;
-	width: 1200px;
-	margin: 0 auto;
-	font-size: 20px;
-	font-weight: bold;
-	border-radius: 20px;
-	padding: 5px;
-}
-
 #user_t table {
-	width: 1200px;
+	width: 70%;
 	margin: 15px auto 50px;
 	border-collapse: collapse;
 	font-size: 14px;
 }
 
 #user_h {
-	width: 1200px;
+	width: 70%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -24,6 +14,7 @@
 }
 
 #user_h h1 {
+	width: 70%;
 	margin: 0px;
 	font-size: 20px;
 	font-family: 'GmarketSansMedium';
@@ -37,11 +28,12 @@
 
 .filters label, .filters button {
 	margin-left: 10px;
+	width: 80%;
 }
 
 .filters button {
 	font-family: 'GmarketSansMedium';
-	width: 40px;
+	width: 20%;
 	height: 27px;
 	color: black;
 	border-radius: 50px;
@@ -59,20 +51,9 @@
 	font-size: 20px;
 	margin: 0 auto;
 }
-
-/* #user_h button {
-	border: none;
-	background-color: #D9D9D9;
-	border: 1px solid black;
-	border-bottom: 0px solid black;
-	border-collapse: collapse;
-	cursor: pointer;
-	width: 100px;
-	height: 30px;
-	border-top-left-radius: 10px; 
-	border-top-right-radius: 10px;
-	font-family: 'GmarketSansMedium';
-} */
+#user_t{
+	width: 100%;
+}
 #user_t a {
 	text-decoration: none;
 }
@@ -109,7 +90,7 @@
 }
 
 #user_t .report {
-	width: 10%
+	width: 15%
 }
 
 #user_t .del {
@@ -309,9 +290,3 @@
 	cursor: pointer;
 }
 
-@media ( max-width : 600px) {
-	#user_t {
-		width: 100%;
-		margin: 10px 0;
-	}
-}

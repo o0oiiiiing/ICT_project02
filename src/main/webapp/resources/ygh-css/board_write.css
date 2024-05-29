@@ -41,12 +41,12 @@
 #board_write_btn {
 	width: 800px;
 	text-align: center;
-	margin: 10px auto;
+	margin: 10px auto 90px;
 }
 
 #board_write_btn input[type="button"], input[type="reset"] {
 	display: inline-block;
-	width: 80px;
+	width: 90px;
 	margin: 0 5px;
 	height: 35px;
 	font-size: 15px;

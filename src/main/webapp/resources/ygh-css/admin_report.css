@@ -1,6 +1,6 @@
 .tab_bar2 {
 	background-color: lightgray;
-	width: 800px;
+	width: 60%;
 	margin: 0 auto;
 	font-size: 20px;
 	font-weight: bold;
@@ -13,7 +13,7 @@
 }
 
 #report_t table {
-	width: 800px;
+	width: 60%;
 	margin: 0 auto;
 	margin-top: 20px;
 	border-collapse: collapse;
@@ -31,12 +31,14 @@
 	text-align: center;
 	border-top: 1px solid black;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #report_t table td {
 	text-align: center;
 	border-top: 1px solid lightgray;
 	padding: 4px 10px;
+	height: 20px;
 }
 
 #report_t .no {

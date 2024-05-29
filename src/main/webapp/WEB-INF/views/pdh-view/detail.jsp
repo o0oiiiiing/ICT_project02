@@ -316,10 +316,9 @@
 
 	<table class="icons">
 		<tbody>
+
 		<c:choose>
 			<c:when test="${adminVO != null}">
-				<span>@@@@@여기에 들어갈거 아무거나 추가하거나 그냥 공백으로 냅둬도됨
-					쓸거없으면 지워야됨 잘 보이겠지만 화면단에 글씨 나와있음@@@@@</span>
 			</c:when>
 			<c:otherwise>
 				<tr class="icons-section">

@@ -637,7 +637,7 @@ progress {
 
 .container-comment{
 	text-align: left;
-    width: 1350px;
+    width: 80%;
     padding: 10px 0px 5px 0px;
     margin: 0px auto;
 }
@@ -671,8 +671,8 @@ progress {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: width: calc(100% - 20px);
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 .row > * {
   flex-shrink: 0;

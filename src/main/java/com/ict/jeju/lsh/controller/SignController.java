@@ -130,7 +130,7 @@ public class SignController {
 	
 	// 카카오 로그인
 	@RequestMapping("kakao_login.do")
-	public String KakaoLogin(String code, HttpSession session, UserVO userVO) {
+	public String kakaoLogin(String code, HttpSession session, UserVO userVO) {
 		String access_token = signService.getAccessToken(code);
 		UserVO userVO2 = signService.getKakaoInfo(access_token);
 		session.setAttribute("loginChk", "ok");
@@ -140,7 +140,7 @@ public class SignController {
 	
 	// 네이버 로그인
 	@RequestMapping("naver_login.do")
-	public String NaverLogin(String code, String state, HttpSession session, UserVO userVO) {
+	public String naverLogin(String code, String state, HttpSession session, UserVO userVO) {
 		String access_token = signService.getNaverToken(code, state);
 		UserVO userVO2 = signService.getNaverInfo(access_token);
 		session.setAttribute("loginChk", "ok");

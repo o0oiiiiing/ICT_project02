@@ -12,10 +12,10 @@
 	<div class="detail-section">
 		<div id="goReview" class="detail-section__bar">
 			<p class="detail-title">리뷰</p>
-			<span id="reviewOpenIcon" class="material-symbols-outlined expand_icon" onclick="reviewOpen('reviewDiv', 'reviewOpenIcon')">keyboard_arrow_down</span>
+			<span id="reviewOpenIcon" class="material-symbols-outlined expand_icon" onclick="reviewOpen('reviewDiv', 'reviewOpenIcon')">keyboard_arrow_up</span>
 		</div>
 		<!-- 내용 -->
-		<div id="reviewDiv" style="display: none;">
+		<div id="reviewDiv">
 			<div class="review_title__section">
 				<p class="qa_title">
 					<c:choose>

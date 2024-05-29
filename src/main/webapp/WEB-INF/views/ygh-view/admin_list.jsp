@@ -20,7 +20,7 @@
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
 	let tabState = sessionStorage.getItem('tabState');
-    if (tabState != 'show') {
+    if (tabState === 'show') {
         $("#board_t").show();
     } else {
         $("#board_t").hide();
@@ -42,7 +42,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
 	let tabState2 = sessionStorage.getItem('tabState2');
-    if (tabState2 != 'show') {
+    if (tabState2 === 'show') {
         $("#report_t").show();
     } else {
         $("#report_t").hide();
