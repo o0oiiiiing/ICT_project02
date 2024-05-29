@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.jeju.lsh.dao.UserVO;
+
 @Repository
 public class PlaceListDAO {
 
@@ -219,5 +221,15 @@ public class PlaceListDAO {
 			System.out.println(e);
 		}
 		return -1;
+	}
+
+	
+	public UserVO reviewWriter(String u_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("place.reviewWriter", u_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 }
