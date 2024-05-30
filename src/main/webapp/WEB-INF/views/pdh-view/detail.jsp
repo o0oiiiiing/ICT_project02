@@ -367,11 +367,11 @@
 					<tbody>
 						<tr>
 							<td>제목</td>
-							<td colspan="2"><input style="width: 420px;" type="text"
+							<td colspan="2"><input style="width: 420px; border: none;" type="text"
 								name="bo_title" required></td>
 						</tr>
 						<tr>
-							<td style="width: 149px; text-align: center;">
+							<td colspan="2" style="width: 173px; text-align: center;">
 								<div style="display: inline-block; margin-right: 7px;">
 									<input type="radio" name="disclosure" value="0"
 										onclick="handleDisclosure()" checked="checked">공개 <input
@@ -583,13 +583,14 @@
 	$('#summernote').summernote({
 		height : 200, // 에디터 높이
 		width: 600,
-		minHeight : null, // 최소 높이
-		maxHeight : null, // 최대 높이
+		minHeight : 200, // 최소 높이
+		maxHeight : 200, // 최대 높이
+		minWidth : 598,
+		maxWidth : 598,
 		focus : true, // 에디터 로딩후 포커스를 맞출지 여부
 		lang : "ko-KR", // 한글 설정
 		placeholder : '최대 1000자까지 쓸 수 있습니다', //placeholder 설정
 		toolbar: [
-			['fontname', ['fontname']],
 			['fontsize', ['fontsize']],
 			['color', ['color']],
 			['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],

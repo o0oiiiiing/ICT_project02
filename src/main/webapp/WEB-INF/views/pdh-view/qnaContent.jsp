@@ -72,13 +72,13 @@
 								</tr>
 						
 								<tr style="display: none;" class="qaDetail">
-									<td colspan="5">내용<br>${k.bo_content}</td>
+									<td colspan="5" style="padding-left: 20px;">내용<br>${k.bo_content}</td>
 								</tr>
 								<c:choose>
 									<c:when test="${not empty k.comments}">
 										<c:forEach var="j" items="${k.comments}">
 											<tr style="display: none;" class="comment">
-												<td colspan="5">ㄴ 답변 : ${j.com_content}</td>
+												<td colspan="5" style="padding-left: 20px;"><span style="color: #FFBB36;">ㄴ</span> 답변 : ${j.com_content}</td>
 											</tr>
 										</c:forEach>
 									</c:when>
