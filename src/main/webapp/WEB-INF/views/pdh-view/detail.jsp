@@ -139,7 +139,7 @@
 	    });
 	    
 	});
-	console.log("qqqqq");
+	
 	// q&a영역, review영역, 신고영역 버튼 클릭할 때 보이게 하기
 	document.addEventListener('DOMContentLoaded', function() {
 	    var writeButton = document.querySelector('.write_button');
@@ -152,22 +152,15 @@
 	    var reportWriteDiv = document.getElementById('report_write');
 	    var commentDiv = document.getElementById('comment_write');
 	    var overlay = document.querySelector(".overlay")
-		console.log("fffff");
 	    writeButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if ("${userVO}" == "" || "${adminVO}" == "") {
-				alert("로그인 후 이용 가능합니다.")
-				location.href="login_go.do"
-				return;
-			} else {
-		        if (qaWriteDiv.style.display === 'block') {
-		        	qaWriteDiv.style.display = 'none';
-		        	overlay.style.display = 'none';
-		        } else {
-		        	qaWriteDiv.style.display = 'block';
-		        	overlay.style.display = 'block';
-		        }
-			}
+	        if (qaWriteDiv.style.display === 'block') {
+	        	qaWriteDiv.style.display = 'none';
+	        	overlay.style.display = 'none';
+	        } else {
+	        	qaWriteDiv.style.display = 'block';
+	        	overlay.style.display = 'block';
+	        }
 	        overlay.addEventListener('click', function() {
 	        	if (qaWriteDiv.style.display === 'block') {
 		        	qaWriteDiv.style.display = 'none';
@@ -177,19 +170,13 @@
 	    });
 	    reviewButton.addEventListener('click', function() {
 	        // 요소의 display를 토글
-	        if ("${userVO}" == "" || "${adminVO}" == "") {
-				alert("로그인 후 이용 가능합니다.")
-				location.href="login_go.do"
-				return 
-			} else {
-		        if (reviewWriteDiv.style.display === 'block') {
-		        	reviewWriteDiv.style.display = 'none';
-		        	overlay.style.display = 'none';
-		        } else {
-		        	reviewWriteDiv.style.display = 'block';
-		        	overlay.style.display = 'block';
-		        }
-			}
+	        if (reviewWriteDiv.style.display === 'block') {
+	        	reviewWriteDiv.style.display = 'none';
+	        	overlay.style.display = 'none';
+	        } else {
+	        	reviewWriteDiv.style.display = 'block';
+	        	overlay.style.display = 'block';
+	        }
 	        overlay.addEventListener('click', function() {
 	        	if (reviewWriteDiv.style.display === 'block') {
 	        		reviewWriteDiv.style.display = 'none';
@@ -218,19 +205,13 @@
 				mId.value = uId_v;
 				mName.value = uName_v;
 		        // 요소의 display를 토글
-		        if ("${userVO}" == "") {
-					alert("로그인 후 이용 가능합니다.")
-					location.href="login_go.do"
-					return 
-				} else {
-			        if (reportWriteDiv.style.display === 'block') {
-			        	reportWriteDiv.style.display = 'none';
-			        	overlay.style.display = 'none';
-			        } else {
-			        	reportWriteDiv.style.display = 'block';
-			        	overlay.style.display = 'block';
-			        }
-				}
+		        if (reportWriteDiv.style.display === 'block') {
+		        	reportWriteDiv.style.display = 'none';
+		        	overlay.style.display = 'none';
+		        } else {
+		        	reportWriteDiv.style.display = 'block';
+		        	overlay.style.display = 'block';
+		        }
 		        overlay.addEventListener('click', function() {
 		        	if (reportWriteDiv.style.display === 'block') {
 		        		reportWriteDiv.style.display = 'none';
@@ -281,25 +262,20 @@
 
 	function goWishList() {
 		var wish = document.querySelector('.favorite');
-		if ("${userVO}" == "" || "${adminVO}" == "") {
-			alert("로그인 후 이용 가능합니다.")
-			location.href = "login_go.do"
-		} else {
-			// 스타일이 이미 적용되어 있는지 확인
-	        if (wish.style.fontVariationSettings === '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400') {
-	            // 이미 스타일이 적용되어 있다면 다른 스타일로 변경 또는 제거
-	            /* wish.style.fontVariationSettings = ''; */
-	            console.log("${placeDetail.contentsid}")
-	            alert("좋아요한 여행지에서 제거되었습니다.");
-	            location.href = "removeWish?contentsid=${placeDetail.contentsid}";
-	        } else {
-	            // 스타일이 적용되어 있지 않다면 스타일 적용
-	            /* wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400'; */
-	            console.log("${placeDetail.contentsid}")
-	            alert("좋아요한 여행지에 추가되었습니다.");
-	            location.href = "addWish?contentsid=${placeDetail.contentsid}";
-	        }
-		}
+		// 스타일이 이미 적용되어 있는지 확인
+        if (wish.style.fontVariationSettings === '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400') {
+            // 이미 스타일이 적용되어 있다면 다른 스타일로 변경 또는 제거
+            /* wish.style.fontVariationSettings = ''; */
+            console.log("${placeDetail.contentsid}")
+            alert("좋아요한 여행지에서 제거되었습니다.");
+            location.href = "removeWish?contentsid=${placeDetail.contentsid}";
+        } else {
+            // 스타일이 적용되어 있지 않다면 스타일 적용
+            /* wish.style.fontVariationSettings = '"FILL" 1, "GRAD" 0, "opsz" 24, "wght" 400'; */
+            console.log("${placeDetail.contentsid}")
+            alert("좋아요한 여행지에 추가되었습니다.");
+            location.href = "addWish?contentsid=${placeDetail.contentsid}";
+        }
 	}
 	
 	

@@ -115,6 +115,7 @@
 .category_img{
   width: 14.2vw; 
   height: 14.2vw; 
+  object-fit: cover;
 }
 
 .category_id{ 
