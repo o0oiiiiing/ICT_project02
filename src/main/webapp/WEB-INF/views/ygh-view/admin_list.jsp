@@ -20,10 +20,10 @@
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
 	let tabState = sessionStorage.getItem('tabState');
-    if (tabState === 'show') {
-        $("#board_t").show();
-    } else {
+    if (tabState === 'hide') {
         $("#board_t").hide();
+    } else {
+        $("#board_t").show(); // 기본 상태를 show로 설정
     }
     
     $(".tab_bar").click(function() {
@@ -42,10 +42,10 @@ $(document).ready(function() {
 $(document).ready(function() {
 	// 첫 번째 로드 시 저장된 탭 상태가 있는지 확인
 	let tabState2 = sessionStorage.getItem('tabState2');
-    if (tabState2 === 'show') {
-        $("#report_t").show();
-    } else {
+    if (tabState2 === 'hide') {
         $("#report_t").hide();
+    } else {
+        $("#report_t").show(); // 기본 상태를 show로 설정
     }
     
     $(".tab_bar2").click(function() {
@@ -59,6 +59,7 @@ $(document).ready(function() {
 		}
     });
 });
+
 
 /* //a링크 postmapping 으로 변경
 function admin_board_detail_go(bo_idx, cPage) {
