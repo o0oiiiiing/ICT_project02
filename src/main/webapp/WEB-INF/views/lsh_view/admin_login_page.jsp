@@ -16,7 +16,7 @@
 		<script type="text/javascript">
 			function admin_login_ok(f) {
 				if (f.a_id.value === '' || f.a_pwd.value === '') {
-					alert("다시 입력하세요");
+					alert("입력한 정보를 확인해주세요.");
 					return;
 				}
 				f.action="admin_login_ok.do";

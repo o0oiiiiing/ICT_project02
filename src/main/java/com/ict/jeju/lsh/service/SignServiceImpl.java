@@ -234,9 +234,5 @@ public class SignServiceImpl implements SignService {
 		return signDAO.getAdminIdChk(a_id);
 	}
 	
-	
-	
-	
 }
-
 

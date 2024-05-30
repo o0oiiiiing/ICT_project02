@@ -30,7 +30,7 @@
 			dataType : "text",
 			success : function(data) {
 				if (data === '1') {
-					alert("사용 가능");
+					alert("사용 가능한 아이디입니다.");
 					adminChk = true;
 				} else if (data === '0') {
 					alert("이미 사용중인 아이디입니다.");
@@ -52,14 +52,22 @@
 
 		let ok = "green";
 		let no = "red";
+		
+		document.getElementById('a_pwd').addEventListener('input', pwdchk_go);
 		if (a_pwd.value.length < 6) {
 			msg.style.color = no;
+			msg.style.fontSize = "12px";
+	        msg.style.fontWeight = "bold";
 			msg.innerHTML = "비밀번호는 6자리 이상으로 입력하세요.";
-		} else if (a_pwd.value == a_pwdchk.value) {
+		} else if (a_pwd.value === a_pwdchk.value && a_pwdchk.value !== '') {
 			msg.style.color = ok;
+			msg.style.fontSize = "12px";
+	        msg.style.fontWeight = "bold";
 			msg.innerHTML = "비밀번호가 일치합니다."
 		} else {
 			msg.style.color = no;
+			msg.style.fontSize = "12px";
+	        msg.style.fontWeight = "bold";
 			msg.innerHTML = "비밀번호가 일치하지 않습니다."
 		}
 	}
@@ -106,6 +114,9 @@
 		let basic = "lightgray";
 		let empty = "#b6dedc";
 		if (a_id === '') {
+			a_idchk.style.background = basic;
+			a_idchk.disabled = true;
+		} else if (a_id.length < 4) {
 			a_idchk.style.background = basic;
 			a_idchk.disabled = true;
 		} else {

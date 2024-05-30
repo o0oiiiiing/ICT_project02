@@ -165,6 +165,8 @@
 			function chk_disabled() {
 				let u_id = document.getElementById('u_id').value;
 				let u_idchk = document.getElementById('u_idchk');
+				let id_msg = document.getElementById('id_msg');
+				let no = "red";
 				
 			    // 공백제거
 			    let cid = u_id.replace(/\s/g, '');
@@ -173,16 +175,24 @@
 				
 				let empty = "#b6dedc";
 				let basic = "lightgray";
+				
 				if (cid === '') {
+					id_msg.innerHTML = "";
 			        u_idchk.style.background = basic;
 			        u_idchk.disabled = true;
 			    } else if (cid.length < 4) {
+			    	id_msg.style.color = no;
+			    	id_msg.style.fontSize = "12px";
+			    	id_msg.style.fontWeight = "bold";
+			    	id_msg.innerHTML = "아이디는 영문자와 숫자로 작성해야하며, 최소 4자 이상이어야 합니다.";
 			        u_idchk.style.background = basic;
 			        u_idchk.disabled = true;
 			    } else {
+			    	id_msg.innerHTML = "";
 			        u_idchk.style.background = empty;
 			        u_idchk.disabled = false;
 			    }
+				
 			}
 			
 			// 중복확인 버튼 활성화 및 비활성화
@@ -269,7 +279,8 @@
 						<div class="join_box">
 							<ul>
 								<li>
-									<input type="text"  id="u_id" name="u_id" required placeholder="ID" />
+									<input type="text"  id="u_id" name="u_id" required oninput="id_check_go()" placeholder="ID" />
+										<div id="id_msg" style="margin-bottom: 15px;"></div>
 									<input type="button" class="join_btn" id="u_idchk"  value="중복 확인" onclick="id_doublechk()" disabled />
 								</li>
 								<li>
