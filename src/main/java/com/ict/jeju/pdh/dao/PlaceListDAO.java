@@ -222,14 +222,14 @@ public class PlaceListDAO {
 		}
 		return -1;
 	}
-
 	
-	public UserVO reviewWriter(String u_idx) {
+	// Q&A 답변 여부 변경
+	public int commentActive(String bo_idx) {
 		try {
-			return sqlSessionTemplate.selectOne("place.reviewWriter", u_idx);
+			return sqlSessionTemplate.update("place.commentActive", bo_idx);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return null;
+		return -1;
 	}
 }

@@ -201,7 +201,7 @@ public class PlaceListController {
 
 		// 리뷰 리스트 가져오기
 		List<ReviewVO> reviewList = placeListService.reviewList(rPagingVO);
-		
+
 		// Like_table에서 좋아요 했는지 확인
 		if (userVO != null) {
 			wishVO.setU_idx(userVO.getU_idx());
@@ -235,19 +235,22 @@ public class PlaceListController {
 		}
 		return null;
 	}
-	
+
 	// Q&A 작성하기
 	@PostMapping("qaWrite")
 	public ModelAndView qaWrite(QaVO qaVO, @ModelAttribute("contentsid") String contentsid) {
 		placeListService.qaWrite(qaVO);
 		return new ModelAndView("redirect:detail");
 	}
-	
+
 	// Q&A 답변 작성하기
 	@PostMapping("commentWrite")
-	public ModelAndView commentWrite(CommentVO commentVO, @ModelAttribute("contentsid") String contentsid) {
-		System.out.println(commentVO.getBo_idx());
+	public ModelAndView commentWrite(CommentVO commentVO, @ModelAttribute("contentsid") String contentsid,
+			String bo_idx) {
 		placeListService.commentWrite(commentVO);
+		System.out.println(bo_idx);
+		System.out.println(commentVO.getBo_idx());
+		placeListService.commentActive(bo_idx);
 		return new ModelAndView("redirect:detail");
 	}
 
@@ -284,7 +287,7 @@ public class PlaceListController {
 	@RequestMapping("removeReview")
 	public ModelAndView removeReview(@ModelAttribute("contentsid") String contentsid, String re_idx) {
 		placeListService.removeReview(re_idx);
-		
+
 		return new ModelAndView("redirect:detail");
 	}
 
