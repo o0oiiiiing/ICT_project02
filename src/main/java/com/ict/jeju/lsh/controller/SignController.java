@@ -118,14 +118,18 @@ public class SignController {
 			mv.setViewName("lsh_view/admin_login_page");
 			return mv;
 		}
-		if (adminVO2 != null && passwordEncoder.matches(adminVO.getA_pwd(), adminVO2.getA_pwd())) {
+		if (adminVO2 != null && passwordEncoder.matches(adminVO.getA_pwd(), 
+				adminVO2.getA_pwd())) {
 			session.setAttribute("admin_loginChk", "ok");
 			session.setAttribute("adminVO", adminVO2);
 			mv.addObject("adminVO", adminVO2);
 			mv.setViewName("redirect:dashboard.do");
 			return mv;
 		}
-		return null;
+		session.setAttribute("admin_loginChk", "fail");
+		mv.addObject("msg", "입력하신 정보를 확인해주세요.");
+		mv.setViewName("lsh_view/admin_login_page");
+		return mv;
 	}
 	
 	// 카카오 로그인

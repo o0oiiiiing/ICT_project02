@@ -30,8 +30,8 @@
     </select>
     
     <insert id="kakao_join" parameterType="Map">
-    	INSERT INTO User_table(u_id, u_name, u_email, u_state, u_regdate)
-    	 VALUES(#{nickname}, #{nickname}, #{email}, 'SNS_카카오', sysdate())
+    	INSERT INTO User_table(u_id, u_name, u_email, u_state, u_regdate, u_profile_img)
+    	 VALUES(#{nickname}, #{nickname}, #{email}, 'SNS_카카오', sysdate(), 'profile.jpg')
     </insert>
     
     <select id="naver_find" parameterType="Map" resultType="userVO">
@@ -40,7 +40,7 @@
     </select>
     
     <insert id="naver_join" parameterType="Map">
-    	INSERT INTO User_table(u_id, u_name, u_email, u_state, u_regdate)
-    	 VALUES(#{nickname}, #{name}, #{email}, 'SNS_네이버', sysdate())
+    	INSERT INTO User_table(u_id, u_name, u_email, u_state, u_regdate, u_profile_img)
+    	 VALUES(#{nickname}, #{name}, #{email}, 'SNS_네이버', sysdate(), 'profile.jpg')
     </insert>
 </mapper>
