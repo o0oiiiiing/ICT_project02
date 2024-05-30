@@ -69,7 +69,8 @@ body {
 					});
 				}
 			},
-			editable : true,
+			// 드래그 막기
+			editable : false,
 			dayMaxEvents : true,
 			// 화면에 일정이름+일정내용 출력
 			eventContent: function(arg) {

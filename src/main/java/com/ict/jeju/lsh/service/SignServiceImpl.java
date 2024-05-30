@@ -71,7 +71,7 @@ public class SignServiceImpl implements SignService {
 			StringBuffer sb = new StringBuffer();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=b3c8cdc497ebc0c70d13c3383ee0f676");
-			sb.append("&redirect_uri=http://localhost:8090/kakao_login.do");
+			sb.append("&redirect_uri=http://192.168.0.19:8090/kakao_login.do");
 			sb.append("&code="+code);
 			bw.write(sb.toString());
 			bw.flush();
