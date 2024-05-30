@@ -142,10 +142,10 @@ public class PlaceListServiceImpl implements PlaceListService {
 		return placeListDAO.commentWrite(commentVO);
 	}
 	
-	// 리뷰 작성한 사람의 정보를 가져오기
+	// Q&A 답변 여부 변경
 	@Override
-	public UserVO reviewWriter(String u_idx) {
-		return placeListDAO.reviewWriter(u_idx);
+	public int commentActive(String bo_idx) {
+		return placeListDAO.commentActive(bo_idx);
 	}	
 
 }

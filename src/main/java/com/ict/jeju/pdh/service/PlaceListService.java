@@ -72,7 +72,7 @@ public interface PlaceListService {
 
 	// Q&A 답변 작성하기
 	public int commentWrite(CommentVO commentVO);
-	
-	// 리뷰 작성한 사람의 정보를 가져오기
-	public UserVO reviewWriter(String u_idx);
+
+	// Q&A 답변 여부 변경
+	public int commentActive(String bo_idx);
 }

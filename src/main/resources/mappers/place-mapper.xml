@@ -135,12 +135,6 @@
 		where re_idx = #{re_idx}
 	</select>
 	
-	<select id="reviewWriter" parameterType="String" resultType="userVO">
-		select u_id, u_profile_img, u_name 
-		from User_table 
-		where u_idx = #{u_idx}
-	</select>
-	
 	<insert id="reportWrite" parameterType="DeclarationVO">
 		insert into Report_table(u_idx, re_idx, m_idx, m_id, m_name, report_title, report_content, report_writer, report_regdate) 
 		values(#{u_idx}, #{re_idx}, #{m_idx}, #{m_id}, #{m_name}, #{report_title}, #{report_content}, #{report_writer}, sysdate()) 
@@ -178,8 +172,14 @@
 	
 	<insert id="commentWrite" parameterType="CommentVO">
 		insert into Comment_table(bo_idx, com_writer, com_content, com_regdate) 
-		values(#{bo_idx}, #{com_writer}, #{com_content}, sysdate()) 
+		values(#{bo_idx}, #{com_writer}, #{com_content}, sysdate());
 	</insert>
+	
+	<update id="commentActive" parameterType="String">
+		update Board_table 
+		set active = 1 
+		where bo_idx = #{bo_idx}
+	</update>
 
 </mapper>
 
