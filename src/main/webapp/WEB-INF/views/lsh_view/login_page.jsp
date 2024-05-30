@@ -54,7 +54,7 @@
 			  	z-index: 1;
 			  	background: white;
 			  	max-width: 360px;
-			  	max-height: 450px;
+			  	max-height: 460px;
 			  	margin: 0 auto 150px;
 			  	padding: 45px;
 			  	text-align: center;
