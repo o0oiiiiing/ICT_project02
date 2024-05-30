@@ -56,7 +56,7 @@
 <form method="post">
 	<div class="wrapper">
 		<div class="wrapper_head">
-			<div style="font-family: 'GmarketSansMedium';"><span class="user">${reviewDetail.u_name}</span>님이 작성하신 리뷰</div>
+			<div style="font-family: 'GmarketSansMedium';"><span class="user">${userVO.u_name}</span>님이 작성하신 리뷰</div>
 		</div>
 		<div class="wrapper_buttom">	
 			<div class="buttom_image">
