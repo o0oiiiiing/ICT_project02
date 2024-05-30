@@ -164,7 +164,7 @@
 							+ '        </div>'
 							+ '        <div class="body">'
 							+ '            <div class="img">'
-							+ '				<img src="'
+							+ '				<img class="nav_img" src="'
 							+				vi
 							+				'" class="img2">'
 							+ '           </div>'
