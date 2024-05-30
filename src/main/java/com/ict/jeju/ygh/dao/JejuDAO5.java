@@ -175,10 +175,13 @@ public class JejuDAO5 {
 			
 			// 두번째 결과 imgDetailVO 에 담기
 			ReviewVO imgDetailVO = sqlSessionTemplate.selectOne("Board_table.image_detail", re_idx);
+			// ReviewVO reviewUserVO = sqlSessionTemplate.selectOne("Board_table.review_user", re_idx);
 			
 			// ReviewVO 에 imgDetailVO 결과 넣기
 			if (imgDetailVO != null) {
 				ReviewVO.setPic_file(imgDetailVO.getPic_file());
+				// ReviewVO.setU_name(reviewUserVO.getU_name());
+				// ReviewVO.setU_profile_img(reviewUserVO.getU_profile_img());
 			}
 			
 			transactionManager.commit(status);

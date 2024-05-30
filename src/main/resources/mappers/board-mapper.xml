@@ -103,12 +103,14 @@
 	
 	<!-- 신고 리뷰 가져오기 -->
 	<select id="review_detail" resultType="ReviewVO" parameterType="String">
-		select * from Review_table where re_idx = #{re_idx}
+		select r.*, u.u_profile_img, u.u_name, u.u_id 
+		from Review_table r
+		join User_table u on r.u_idx = u.u_idx
+		where r.re_idx = #{re_idx}
 	</select>
 	<select id="image_detail" resultType="ReviewVO" parameterType="String">
 		select * from Picture_table where re_idx = #{re_idx}
 	</select>
-	
 	
 	<!-- 신고 답글 작성 -->
 	<insert id="reply_insert" parameterType="repvo">
