@@ -69,8 +69,13 @@
 <script type="text/javascript">
 	//모달창 열고닫기
 	function openModal(contentsid) {
-		$(".modal").show();
-		$("#contentsid").val(contentsid);
+		if("${userVO}" == ""){
+			alert("로그인 후 이용 가능합니다.")
+			location.href = "login_go.do"
+		} else {
+			$(".modal").show();
+			$("#contentsid").val(contentsid);
+		}
 	}
 	
 	function closeModal() {
