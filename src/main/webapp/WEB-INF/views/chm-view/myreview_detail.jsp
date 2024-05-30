@@ -75,7 +75,7 @@
 							</c:otherwise>
 						</c:choose>
 						<c:forEach var="k" items="${review_image}">
-							<img src="resources/upload/${k.pic_file}" style="width: 26vw; height: 42vh; display: none;">
+							<img src="resources/upload/${k.pic_file}" style="width: 499.2px; height: 453.6px; display: none; object-fit: cover; ">
 						</c:forEach>
 						<c:choose>
 							<c:when test="${fn:length(review_image) > 1}">
