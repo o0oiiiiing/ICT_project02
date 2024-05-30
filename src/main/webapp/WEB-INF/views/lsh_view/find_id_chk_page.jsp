@@ -12,6 +12,11 @@
 		<link rel="icon" href="resources/common-image/favicon.ico" type="image/x-icon">
 		<link href="resources/common-css/reset.css" rel="stylesheet" />
 		<link href="resources/lsh_css/find_id_chk.css" rel="stylesheet" />
+		<script type="text/javascript">
+			function back() {
+				window.history.back();
+			}
+		</script>
 		<style type="text/css">
 			.findID_chk_page {
 				padding: 8% 0 0;
@@ -22,6 +27,20 @@
 			  	background-position: center;
 			  	background-size: cover;
 			  	font-family: 'NanumSquare';
+			}
+			.find_id_chk_btn{
+				text-transform: uppercase;
+			  	outline: 0;
+			  	width: 100%;
+			  	border: 0;
+			  	padding: 15px;
+			  	color: #6c6c6c;
+			  	font-size: 14px;
+			  	-webkit-transition: all 0.3 ease;
+			  	transition: all 0.3 ease;
+			  	cursor: pointer;
+			  	margin-top: 20px;
+			  	border-radius: 10px;
 			}
 		</style>
 	</head>
@@ -45,6 +64,8 @@
 			        	</c:forEach>
 			        </c:otherwise>
 				</c:choose>
+				
+				<input type="button" class="find_id_chk_btn" onclick="back()" value="Cancel" />
 				
 				<div class="findID_chk_box">
 					<a href="login_go.do" >Login &nbsp;</a><span>/</span>
