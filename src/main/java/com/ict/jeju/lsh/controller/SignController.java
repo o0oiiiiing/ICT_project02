@@ -174,7 +174,7 @@ public class SignController {
 	@PostMapping("join_ok.do")
 	public ModelAndView getJoinOK(UserVO userVO, HttpServletRequest request) {
 		try {
-			ModelAndView mv = new ModelAndView("redirect:home");
+			ModelAndView mv = new ModelAndView("redirect:login_go.do");
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
 			MultipartFile user_profile = userVO.getUser_profile();
 			if (user_profile.isEmpty()) {
