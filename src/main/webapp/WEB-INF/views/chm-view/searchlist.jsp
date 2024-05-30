@@ -105,7 +105,7 @@
 			</c:otherwise>
 			</c:choose>
 		</div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c981699760a3bdf28409228b0baa4e5"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b1dad637e1ccb6b94f973b276b012bd"></script>
 <script>
 
 		var search = document.querySelector('.search').value;
