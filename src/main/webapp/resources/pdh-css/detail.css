@@ -418,6 +418,7 @@
 
 .review-content__right img {
 	margin: 10px 10px 0 0;
+	object-fit: cover;
 }
 
 .report {
