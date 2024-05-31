@@ -14,7 +14,7 @@
 		<div class="qa_write__container" style="height: 430px;">
 			<p class="qa_wrtie__title">신고하기</p>
 			<div class="qa_write__content">
-				<p>
+				<p style="margin-left: 23px;">
 					제목 : <input type="text" name="report_title" id="report_title" placeholder="제목을 입력해주세요.">
 				</p>
 				<br>
