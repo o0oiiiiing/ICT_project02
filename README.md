@@ -7,7 +7,7 @@
 
 ### 팀 구성원
 팀장 : 원유영<br>
-팀원 : 박다현, 유경화, 최현민, 이성훈<br>
+팀원 : 박다현, 유경화, 최현민, 이성훈<br><br>
 ![팀 구성원](https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png)
 
 
