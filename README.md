@@ -5,18 +5,18 @@
 <br>
 
 ## 개발기간
-2024년 4월 22일 ~ 2024년 5월 31일
+2024년 4월 22일 ~ 2024년 5월 31일<br><br>
 
 ## 팀 구성원
 팀장 : 원유영<br>
 팀원 : 박다현, 유경화, 최현민, 이성훈<br><br>
-![팀 구성원](https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png)
+![팀 구성원](https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png)<br><br>
 
 ## 개발 환경
-![개발 환경](https://github.com/o0oiiiiing/ICT_project02/blob/main/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD.png)
+![개발 환경](https://github.com/o0oiiiiing/ICT_project02/blob/main/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD.png)<br><br>
 
 ## ERD
-![ERD](https://github.com/o0oiiiiing/ICT_project02/blob/main/ERD.png)
+![ERD](https://github.com/o0oiiiiing/ICT_project02/blob/main/ERD.png)<br><br>
 
 ## 기능 소개
 <table>
