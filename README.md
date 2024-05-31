@@ -15,6 +15,7 @@
 ### 개발 환경
 
 ### ERD
+![ERD](https://github.com/o0oiiiiing/ICT_project02/blob/main/ERD.png)
 
 ### 기능 소개
 <table>
