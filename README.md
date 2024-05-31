@@ -6,9 +6,9 @@
 2024년 4월 22일 ~ 2024년 5월 31일
 
 ### 팀 구성원
-팀장 : 유원영<br>
+팀장 : 원유영<br>
 팀원 : 박다현, 유경화, 최현민, 이성훈<br>
-https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png
+![팀 구성원](https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png)
 
 
 ### 개발 환경
