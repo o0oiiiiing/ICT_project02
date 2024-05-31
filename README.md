@@ -13,6 +13,7 @@
 ![팀 구성원](https://github.com/o0oiiiiing/ICT_project02/blob/main/%ED%8C%80%20%EA%B5%AC%EC%84%B1%EC%9B%90.png)
 
 ### 개발 환경
+![개발 환경](https://github.com/o0oiiiiing/ICT_project02/blob/main/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD.png)
 
 ### ERD
 ![ERD](https://github.com/o0oiiiiing/ICT_project02/blob/main/ERD.png)
